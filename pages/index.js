@@ -250,3 +250,7 @@ export default function Index() {
 <Dashboard />
 </Layout> */
 }
+
+// https://github.com/flatlogic/sofia-react-template
+// https://github.com/themesberg/volt-react-dashboard
+// https://github.com/DesignRevision/shards-dashboard-react
