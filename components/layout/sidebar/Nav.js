@@ -1,7 +1,13 @@
 import {
   ArrowNarrowLeftIcon,
   ArrowNarrowRightIcon,
-  CollectionIcon, DuplicateIcon, FilmIcon
+  CollectionIcon,
+  DuplicateIcon,
+  FilmIcon,
+  ViewBoardsIcon,
+  TemplateIcon,
+  ArchiveIcon,
+  AdjustmentsIcon,
 } from "@heroicons/react/solid";
 import React, { useEffect, useState } from "react";
 import NavItem from "./NavItem";
@@ -22,20 +28,20 @@ const Nav = ({ sidebarOutsideClick }) => {
     setSubMenuToggleStatus(!subMenuToggleStatus);
   };
 
-   //if menu has chile menu then  use seperate array
-   const childMenu = [
+  //if menu has chile menu then  use seperate array
+  const childMenu = [
     {
-      subMenuTitle: "child One",
-      linkHref: "/"
+      subMenuTitle: "Menu one",
+      linkHref: "/services",
     },
     {
-      subMenuTitle: "child Two",
-      linkHref: "/"
+      subMenuTitle: "Menu Two",
+      linkHref: "/services/category",
     },
     {
-      subMenuTitle: "child Three",
-      linkHref: "/"
-    }
+      subMenuTitle: "Menu Three",
+      linkHref: "/",
+    },
   ];
 
   useEffect(() => {
@@ -60,38 +66,86 @@ const Nav = ({ sidebarOutsideClick }) => {
             />
           )}
         </div>
+        {/* test start */}
 
         <NavItem
-          hrefLink='/category'
+          hrefLink="/dashboard"
+          sidebarStatus={sidebarStatus}
+          menuTitle="Dashboard"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          <ViewBoardsIcon className="h-7" />
+        </NavItem>
+        <NavItem
+          hrefLink="/services/category"
           sidebarStatus={sidebarStatus}
           menuTitle="Category"
           subMenu={false}
           subMenuArray={null}
         >
-          <CollectionIcon className="h-10" />
-        </NavItem> 
-
+          <CollectionIcon className="h-7" />
+        </NavItem>
         <NavItem
-          hrefLink='/sub-category'
+          hrefLink="/services/sub-category"
           sidebarStatus={sidebarStatus}
           menuTitle="Sub-Category"
           subMenu={false}
           subMenuArray={null}
         >
-          <DuplicateIcon className="h-10" />
-        </NavItem> 
+          <DuplicateIcon className="h-7" />
+        </NavItem>
+        <NavItem
+          hrefLink="/services/therapist-service"
+          sidebarStatus={sidebarStatus}
+          menuTitle="Therapist-Service"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          {" "}
+          <ArchiveIcon className="h-7" />
+        </NavItem>
+        <NavItem
+          hrefLink="/services/therapist-doctor"
+          sidebarStatus={sidebarStatus}
+          menuTitle="Therapist-Doctor"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          <AdjustmentsIcon className="h-7" />
+        </NavItem>
+        {/* test end */}
+
+        <NavItem
+          hrefLink="/category"
+          sidebarStatus={sidebarStatus}
+          menuTitle="Category"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          <CollectionIcon className="h-7" />
+        </NavItem>
+
+        <NavItem
+          hrefLink="/sub-category"
+          sidebarStatus={sidebarStatus}
+          menuTitle="Sub-Category"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          <DuplicateIcon className="h-7" />
+        </NavItem>
 
         {/* this menu has child Menu     */}
         <NavItem
-          hrefLink='#'
+          hrefLink="#"
           sidebarStatus={sidebarStatus}
           menuTitle="Chiled Menu"
           subMenu={true}
           subMenuArray={childMenu}
         >
-          <FilmIcon className="h-10" />
-        </NavItem> 
-       
+          <FilmIcon className="h-7" />
+        </NavItem>
       </nav>
     </>
   );
