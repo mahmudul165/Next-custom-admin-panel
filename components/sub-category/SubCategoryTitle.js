@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SubCategoryModal from "../common/SubCategoryModal";
 const SubCategoryTitle = () => {
-  const [Submodal, setSubModal] = useState(false);
+  const [submodal, setSubModal] = useState(false);
   return (
     <>
       <div className="mr-6">
@@ -31,7 +31,7 @@ const SubCategoryTitle = () => {
           Create new Sub Category
         </button>
         {/* <Modal modal={modal} setModal={setModal} /> */}
-        <SubCategoryModal Submodal={Submodal} setSubModal={setSubModal} />
+        <SubCategoryModal submodal={submodal} setSubModal={setSubModal} />
       </div>
     </>
   );

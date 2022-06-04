@@ -9,32 +9,32 @@ import useAuth from "/hook/useAuth";
 import CategoryForm from "../category/CategoryForm";
 import SubCategoryForm from "../sub-category/SubCategoryForm";
 
-const SubCategoryModal = ({ Submodal, setSubModal }) => {
-  const { postData } = useAuth();
+const SubCategoryModal = ({ submodal, setSubModal }) => {
+  //   const { postData } = useAuth();
 
-  const [selectedImage, setSelectedImage] = useState();
+  //   const [selectedImage, setSelectedImage] = useState();
 
-  const imageChange = (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setSelectedImage(e.target.files);
-    }
-  };
+  //   const imageChange = (e) => {
+  //     if (e.target.files && e.target.files.length > 0) {
+  //       setSelectedImage(e.target.files);
+  //     }
+  //   };
 
-  const removeSelectedImage = () => {
-    setSelectedImage();
-  };
+  //   const removeSelectedImage = () => {
+  //     setSelectedImage();
+  //   };
 
-  useEffect(() => {
-    if (!Submodal) {
-      setSelectedImage();
-    }
-  }, [Submodal]);
+  //   useEffect(() => {
+  //     if (!submodal) {
+  //       setSelectedImage();
+  //     }
+  //   }, [submodal]);
   //console.log('modal modal', modal)
   return (
     <>
       <PureModal
         //header={<div className="bg-purple-600 p-2 font-bold text-lg text-center text-white">Category</div>}
-        isOpen={Submodal}
+        isOpen={submodal}
         width="800px"
         onClose={() => {
           setSubModal(false);
