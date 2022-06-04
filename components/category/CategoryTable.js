@@ -54,23 +54,6 @@ const CategoryTable = () => {
     },
   ];
 
-  // {
-  //   "id": 2,
-  //   "service_category_name": "service 2 updated",
-
-  //   "remarks": "Checking update",
-  //   "status": "A",
-  //   "create_by": "1",
-  //   "create_date": "2022-05-31 10:45:30",
-  //   "modified_by": "1",
-  //   "modified_date": "2022-05-31 10:46:49"
-  //   },
-
-  // const data = [
-  //   { id: "01", name: "Jack", remarks: "my category 1", status: "Active" },
-  //   { id: "02", name: "Rose", remarks: "my category 2", status: "Inactive" },
-  // ];
-
   //Pagination
   const [activePage, setActivePage] = useState(15);
   const handlePageChange = (pageNumber) => {

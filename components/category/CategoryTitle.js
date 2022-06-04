@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Modal from "../common/Modal";
+import CategoryForm from "./CategoryForm";
 
 const CategoryTitle = () => {
   const [modal, setModal] = useState(false);

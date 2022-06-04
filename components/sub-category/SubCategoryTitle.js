@@ -1,19 +1,18 @@
 import React, { useState } from "react";
-import Modal from "../common/Modal";
-
+import SubCategoryModal from "../common/SubCategoryModal";
 const SubCategoryTitle = () => {
-  const [modal, setModal] = useState(false);
+  const [Submodal, setSubModal] = useState(false);
   return (
     <>
       <div className="mr-6">
-        <h1 className="text-4xl font-semibold mb-2">Category</h1>
+        <h1 className="text-4xl font-semibold mb-2">Sub Category</h1>
         <h2 className="text-gray-600 ml-0.5">List, view and edit</h2>
       </div>
 
       <div className="flex flex-wrap items-start justify-end -mb-3">
         <button
           className="inline-flex px-5 py-3 text-white bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 rounded-md ml-6 mb-3"
-          onClick={() => setModal(true)}
+          onClick={() => setSubModal(true)}
         >
           <svg
             aria-hidden="true"
@@ -29,9 +28,10 @@ const SubCategoryTitle = () => {
               d="M12 6v6m0 0v6m0-6h6m-6 0H6"
             />
           </svg>
-          Create new Category
+          Create new Sub Category
         </button>
-        <Modal modal={modal} setModal={setModal} />
+        {/* <Modal modal={modal} setModal={setModal} /> */}
+        <SubCategoryModal Submodal={Submodal} setSubModal={setSubModal} />
       </div>
     </>
   );
