@@ -61,7 +61,7 @@ const Nav = ({ sidebarOutsideClick }) => {
             />
           ) : (
             <ArrowNarrowRightIcon
-              className="inline-block h-12 cursor-pointer"
+              className="inline-block h-7 cursor-pointer"
               onClick={sidebarOpen}
             />
           )}
@@ -75,7 +75,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenu={false}
           subMenuArray={null}
         >
-          <ViewBoardsIcon className="h-7" />
+          <ViewBoardsIcon className="h-6" />
         </NavItem>
         <NavItem
           hrefLink="/services/category"
@@ -84,7 +84,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenu={false}
           subMenuArray={null}
         >
-          <CollectionIcon className="h-7" />
+          <CollectionIcon className="h-6" />
         </NavItem>
         <NavItem
           hrefLink="/services/sub-category"
@@ -93,7 +93,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenu={false}
           subMenuArray={null}
         >
-          <DuplicateIcon className="h-7" />
+          <DuplicateIcon className="h-6" />
         </NavItem>
         <NavItem
           hrefLink="/services/therapist-service"
@@ -103,7 +103,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenuArray={null}
         >
           {" "}
-          <ArchiveIcon className="h-7" />
+          <ArchiveIcon className="h-6" />
         </NavItem>
         <NavItem
           hrefLink="/services/therapist-doctor"
@@ -112,7 +112,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenu={false}
           subMenuArray={null}
         >
-          <AdjustmentsIcon className="h-7" />
+          <AdjustmentsIcon className="h-6" />
         </NavItem>
         {/* test end */}
 
@@ -123,7 +123,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenu={false}
           subMenuArray={null}
         >
-          <CollectionIcon className="h-7" />
+          <CollectionIcon className="h-6" />
         </NavItem>
 
         <NavItem
@@ -133,7 +133,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenu={false}
           subMenuArray={null}
         >
-          <DuplicateIcon className="h-7" />
+          <DuplicateIcon className="h-6" />
         </NavItem>
 
         {/* this menu has child Menu     */}
@@ -144,7 +144,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenu={true}
           subMenuArray={childMenu}
         >
-          <FilmIcon className="h-7" />
+          <FilmIcon className="h-6" />
         </NavItem>
       </nav>
     </>
