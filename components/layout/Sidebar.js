@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import OutsideClick from "../../utils/outsideClick";
-import Logo from "./sidebar/logo";
-import Nav from "./sidebar/Nav";
-import SettingButton from "./sidebar/SettingButton";
+import Logo from "/components/layout/sidebar/Logo";
+import Nav from "/components/layout/sidebar/Nav";
+import SettingButton from "/components/layout/sidebar/SettingButton";
 
 const Sidebar = ({ mobileNavsidebar }) => {
   const sidebarRef = useRef(null);
