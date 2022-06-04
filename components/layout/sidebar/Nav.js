@@ -116,7 +116,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         </NavItem>
         {/* test end */}
 
-        <NavItem
+        {/* <NavItem
           hrefLink="/category"
           sidebarStatus={sidebarStatus}
           menuTitle="Category"
@@ -124,7 +124,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenuArray={null}
         >
           <CollectionIcon className="h-6" />
-        </NavItem>
+        </NavItem> */}
 
         <NavItem
           hrefLink="/sub-category"
