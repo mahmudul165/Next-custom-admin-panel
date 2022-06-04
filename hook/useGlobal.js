@@ -6,6 +6,7 @@ const useGlobal = () => {
   const postData = (url, data) => {
     axios.post(url, data).then((response) => {
       console.log(response);
+      alert("you are completed category field");
     });
   };
 
