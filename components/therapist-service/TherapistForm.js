@@ -31,6 +31,9 @@ function SubCategoryForm() {
       )}
       type="submit"
     >
+      <h2 className="my-6 text-center text-3xl font-extrabold text-teal-500">
+        Therapist-Service
+      </h2>
       <div className="md:flex md:items-center mb-6">
         <div className="md:w-1/3">
           <label
@@ -204,7 +207,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
         <div className="md:w-1/3"></div>
         <div className="md:w-2/3">
           <button
-            className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+            className="shadow bg-teal-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
             type="submit"
           >
             Save

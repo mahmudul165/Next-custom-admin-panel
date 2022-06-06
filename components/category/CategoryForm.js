@@ -23,8 +23,6 @@ const CategoryForm = ({ modal, setModal }) => {
 
   return (
     <>
-      {" "}
-      <h2>Category</h2>
       <form
         className="w-full     m-auto max-w-sm my-3 p-2 bg-white border-0   "
         onSubmit={handleSubmit((d) =>
@@ -32,6 +30,10 @@ const CategoryForm = ({ modal, setModal }) => {
         )}
         type="submit"
       >
+        {" "}
+        <h2 className="my-6 text-center text-3xl font-extrabold text-teal-500">
+          Category
+        </h2>
         <div className="md:flex md:items-center mb-6 p-2">
           <div className="md:w-1/3">
             <label
@@ -127,16 +129,16 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             </select>
           </div>
         </div>
-
         <div className="md:flex md:items-center">
           <div className="md:w-1/3"></div>
           <div className="md:w-2/3">
             <button
-              className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+              className="shadow bg-teal-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
               type="submit"
             >
               Save
             </button>
+            {/* className="my-6 text-center text-3xl font-extrabold bg-teal-500"  */}
           </div>
         </div>
       </form>
