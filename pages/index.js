@@ -14,7 +14,11 @@ export default function Index() {
       {/* inside of container */}
       <main className="p-6 sm:p-10 space-y-6">
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
-          <Card name="Create New Tickets" number="6" />
+          <Card
+            name="Create New Tickets"
+            number="6"
+            style={{ backgroundColor: "#576DBF" }}
+          />
           <Card name="Missing Info Group" number="6" />
           <Card name="All Tickets" number="6" />
           <Card name="New Tickets" number="6" />
@@ -37,7 +41,7 @@ export default function Index() {
           <Card name="All Tickets" number="6" />
           <Card name="New Tickets" number="6" />
         </section>
-        <section className="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-6">
+        {/* <section className="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-6">
           <div className="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg">
             <div className="px-6 py-5 font-semibold border-b border-gray-100">
               The number of applied and left students per month
@@ -123,7 +127,6 @@ export default function Index() {
                   />
                 </svg>
               </button>
-              {/* <!-- Refer here for full dropdown menu code: https://tailwindui.com/components/application-ui/elements/dropdowns --> */}
             </div>
             <div className="overflow-y-auto" style={{ maxHeight: "24rem" }}>
               <ul className="p-6 space-y-6">
@@ -220,27 +223,7 @@ export default function Index() {
               </div>
             </div>
           </div>
-        </section>
-        <section className="text-right font-semibold text-gray-500">
-          <a href="#" className="text-purple-600 hover:underline">
-            Recreated on Codepen
-          </a>{" "}
-          with{" "}
-          <a
-            href="https://tailwindcss.com/"
-            className="text-teal-400 hover:underline"
-          >
-            Tailwind CSS
-          </a>{" "}
-          by Azri Kahar,{" "}
-          <a
-            href="https://dribbble.com/shots/10711741-Free-UI-Kit-for-Figma-Online-Courses-Dashboard"
-            className="text-purple-600 hover:underline"
-          >
-            original design
-          </a>{" "}
-          made by Chili Labs
-        </section>
+        </section> */}
       </main>
     </>
   );

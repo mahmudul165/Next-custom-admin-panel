@@ -24,7 +24,7 @@ const Modal = ({ modal, setModal }) => {
   return (
     <>
       <PureModal
-        //header={<div className="bg-purple-600 p-2 font-bold text-lg text-center text-white">Category</div>}
+        //header={<div className="bg-teal-500 p-2 font-bold text-lg text-center text-white">Category</div>}
         isOpen={modal}
         width="800px"
         onClose={() => {
@@ -34,7 +34,6 @@ const Modal = ({ modal, setModal }) => {
       >
         <CategoryForm />
       </PureModal>
-      ;
     </>
   );
 };

@@ -23,6 +23,8 @@ const CategoryForm = ({ modal, setModal }) => {
 
   return (
     <>
+      {" "}
+      <h2>Category</h2>
       <form
         className="w-full     m-auto max-w-sm my-3 p-2 bg-white border-0   "
         onSubmit={handleSubmit((d) =>

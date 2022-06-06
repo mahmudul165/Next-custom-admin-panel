@@ -1,9 +1,35 @@
 import Table from "rc-table";
 import React, { useState } from "react";
 import Pagination from "react-js-pagination";
+
 import useSWR from "swr";
+import styled from "styled-components";
 
 const SubCategoryTable = () => {
+  const BodyRow = styled.tr`
+    & th {
+      color: rgb(148 163 184);
+
+      background: rgb(20 184 166);
+    }
+
+    & td {
+      color: rgb(15 23 42);
+      transition: all 0.3s;
+    }
+
+    &:hover td {
+      background: rgb(20 184 166);
+      color: white;
+      transform: scale(1.01);
+    }
+  `;
+
+  const components = {
+    body: {
+      row: BodyRow,
+    },
+  };
   //   "id": 1,
   // "service_subcategory_name": "service 2 updated",
   // "status": "A",
@@ -27,7 +53,7 @@ const SubCategoryTable = () => {
       dataIndex: "id",
       key: "id",
       width: 400,
-      className: "text-white bg-gray-800 p-2 border-r-2 border-b-2",
+      className: "    p-2 border-r-2 border-b-2",
       rowClassName: "bg-black-ripon",
     },
     {
@@ -35,7 +61,7 @@ const SubCategoryTable = () => {
       dataIndex: "therapist_service_name",
       key: "therapist_service_name",
       width: 400,
-      className: "text-white bg-gray-800 p-2 border-r-2 border-b-2",
+      className: "    p-2 border-r-2 border-b-2",
       rowClassName: "bg-black-ripon",
     },
     {
@@ -43,14 +69,14 @@ const SubCategoryTable = () => {
       dataIndex: "service_category_id",
       key: "service_category_id",
       width: 400,
-      className: "text-white bg-gray-600 p-2 border-r-2 border-b-2",
+      className: "   p-2 border-r-2 border-b-2",
     },
     {
       title: "Sub_Category_Id",
       dataIndex: "service_subcategory_id",
       key: "service_subcategory_id",
       width: 400,
-      className: "text-white bg-gray-800 p-2 border-r-2 border-b-2",
+      className: "    p-2 border-r-2 border-b-2",
       rowClassName: "bg-black-ripon",
     },
 
@@ -59,21 +85,21 @@ const SubCategoryTable = () => {
       dataIndex: "status",
       key: "status",
       width: 400,
-      className: "text-white bg-gray-800 p-2 border-r-2 border-b-2",
+      className: "    p-2 border-r-2 border-b-2",
     },
     {
       title: "Remarks",
       dataIndex: "remarks",
       key: "remarks",
       width: 400,
-      className: "text-white bg-gray-800 p-2 border-r-2 border-b-2",
+      className: "    p-2 border-r-2 border-b-2",
     },
 
     {
       title: "Operations",
       dataIndex: "",
       key: "operations",
-      className: "text-white bg-gray-600 p-2 border-b-2",
+      className: "   p-2 border-b-2",
       render: () => (
         <>
           <a href="#">View</a> | <a href="#">Edit</a> | <a href="#">Delete</a>
@@ -83,7 +109,7 @@ const SubCategoryTable = () => {
   ];
 
   //Pagination
-  const [activePage, setActivePage] = useState(15);
+  const [activePage, setActivePage] = useState(10);
   const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);
   };
@@ -92,16 +118,19 @@ const SubCategoryTable = () => {
     <>
       {data ? (
         <>
+          {console.log(data.length)}
+
           <Table
             columns={columns}
             data={data}
             rowKey="id"
-            className="bg-purple-700 p-4 w-full text-center rc-table-custom font-semibold "
+            components={components}
+            className="table rounded-lg p-4 w-full text-center rc-table-custom font-semibold border-collapse border border-slate-400 "
           />
           <Pagination
             activePage={activePage}
             itemsCountPerPage={10}
-            totalItemsCount={450}
+            totalItemsCount={data.length}
             pageRangeDisplayed={5}
             onChange={handlePageChange}
             nextPageText={"Next"}

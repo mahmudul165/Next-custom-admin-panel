@@ -2,8 +2,32 @@ import Table from "rc-table";
 import React, { useState } from "react";
 import Pagination from "react-js-pagination";
 import useSWR from "swr";
-
+import styled from "styled-components";
 const CategoryTable = () => {
+  const BodyRow = styled.tr`
+    & th {
+      color: rgb(148 163 184);
+
+      background: rgb(20 184 166);
+    }
+
+    & td {
+      color: rgb(15 23 42);
+      transition: all 0.3s;
+    }
+
+    &:hover td {
+      background: rgb(20 184 166);
+      color: white;
+      transform: scale(1.01);
+    }
+  `;
+
+  const components = {
+    body: {
+      row: BodyRow,
+    },
+  };
   //const [first, setfirst] = useState(second)
   const { data, error } = useSWR(
     "https://misiapi.lamptechs.com/api/service",
@@ -17,7 +41,7 @@ const CategoryTable = () => {
       dataIndex: "id",
       key: "id",
       width: 400,
-      className: "text-white bg-gray-800 p-2 border-r-2 border-b-2",
+      className: "  p-2 border-r-2 border-b-2",
       rowClassName: "bg-black-ripon",
     },
     {
@@ -25,27 +49,27 @@ const CategoryTable = () => {
       dataIndex: "service_category_name",
       key: "service_category_name",
       width: 400,
-      className: "text-white bg-gray-600 p-2 border-r-2 border-b-2",
+      className: "    p-2 border-r-2 border-b-2",
     },
     {
       title: "Remarks",
       dataIndex: "remarks",
       key: "remarks",
       width: 400,
-      className: "text-white bg-gray-800 p-2 border-r-2 border-b-2",
+      className: "  p-2 border-r-2 border-b-2",
     },
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
       width: 400,
-      className: "text-white bg-gray-800 p-2 border-r-2 border-b-2",
+      className: "      p-2 border-r-2 border-b-2",
     },
     {
       title: "Operations",
       dataIndex: "",
       key: "operations",
-      className: "text-white bg-gray-600 p-2 border-b-2",
+      className: "  p-2 border-b-2",
       render: () => (
         <>
           <a href="#">View</a> | <a href="#">Edit</a> | <a href="#">Delete</a>
@@ -69,7 +93,8 @@ const CategoryTable = () => {
             columns={columns}
             data={data}
             rowKey="id"
-            className="bg-purple-700 p-4 w-full text-center rc-table-custom font-semibold "
+            components={components}
+            className="table rounded-lg p-4 w-full text-center rc-table-custom font-semibold border-collapse border border-slate-400 "
           />
           <Pagination
             activePage={activePage}

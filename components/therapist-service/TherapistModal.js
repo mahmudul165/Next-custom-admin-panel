@@ -7,7 +7,7 @@ const TherapistModal = ({ submodal, setSubModal }) => {
   return (
     <>
       <PureModal
-        //header={<div className="bg-purple-600 p-2 font-bold text-lg text-center text-white">Category</div>}
+        //header={<div className="bg-teal-500 p-2 font-bold text-lg text-center text-white">Category</div>}
         isOpen={submodal}
         width="800px"
         onClose={() => {
@@ -17,7 +17,6 @@ const TherapistModal = ({ submodal, setSubModal }) => {
       >
         <TherapistForm />
       </PureModal>
-      ;
     </>
   );
 };

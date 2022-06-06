@@ -1,8 +1,11 @@
 import React from "react";
 
-function Card({ name, number }) {
+function Card({ name, number, bgColor }) {
   return (
-    <div className="flex items-center p-3 bg-white shadow rounded-lg">
+    <div
+      className="flex items-center p-3 bg-teal-500 shadow rounded-lg"
+      style={{ backgroundColor: bgColor }}
+    >
       {/* <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
         <svg
           aria-hidden="true"
@@ -20,8 +23,8 @@ function Card({ name, number }) {
         </svg>
       </div> */}
       <div>
-        <span className="block text-2xl font-bold">{number}</span>
-        <span className="block text-gray-800">{name}</span>
+        <span className="block text-2xl font-bold text-white">{number}</span>
+        <span className="block text-gray-800   text-xl font-bold">{name}</span>
       </div>
     </div>
   );
