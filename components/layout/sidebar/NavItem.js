@@ -26,7 +26,7 @@ const NavItem = ({
     <>
       <Link href={hrefLink}>
         <span
-          className="inline-flex items-center justify-between py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg px-3 cursor-pointer relative group"
+          className="inline-flex items-center justify-between py-3 hover:text-gray-400 hover:bg-stone-200 focus:text-gray-400 focus:bg-gray-700 rounded-lg px-3 cursor-pointer relative group"
           onClick={subMenuToggle}
         >
           {children}
@@ -36,7 +36,7 @@ const NavItem = ({
           <span
             className={`${
               sidebarStatus ? "hidden" : "hidden group-hover:block"
-            } absolute left-0 -bottom-5 bg-yellow-500 text-white p-1 text-xs`}
+            } absolute left-0 -bottom-5 bg-emerald-300 text-white   text-xs`}
           >
             {menuTitle}
           </span>

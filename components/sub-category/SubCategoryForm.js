@@ -26,7 +26,7 @@ function SubCategoryForm() {
   return (
     <>
       <form
-        className="w-full max-w-sm my-3 p-2 card m-auto"
+        className="w-full max-w-sm my-3 p-2   m-auto"
         onSubmit={handleSubmit((d) =>
           postData("https://misiapi.lamptechs.com/api/subservice/store", d)
         )}
