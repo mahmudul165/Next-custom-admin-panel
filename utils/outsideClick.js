@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 export default function OutsideClick(ref) {
-
   const [isClicked, setIsClicked] = useState();
 
   //console.log("outside Ref", isClicked)
@@ -19,6 +18,6 @@ export default function OutsideClick(ref) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [ref]);
-  
+
   return isClicked;
 }

@@ -40,16 +40,16 @@ const SubCategoryTable = () => {
     // { fetcher: async (url) => await axios.get(url).then((res) => res.data) }
   );
   const columns = [
+    // {
+    //   title: "Sub_Category_Id",
+    //   dataIndex: "id",
+    //   key: "id",
+    //   width: 400,
+    //   className: "    p-2 border-r-2 border-b-2",
+    //   rowClassName: "bg-black-ripon",
+    // },
     {
-      title: "Sub_Category_Id",
-      dataIndex: "id",
-      key: "id",
-      width: 400,
-      className: "    p-2 border-r-2 border-b-2",
-      rowClassName: "bg-black-ripon",
-    },
-    {
-      title: "Category_Id",
+      title: "Category_Name",
       dataIndex: "service_category_id",
       key: "service_category_id",
       width: 400,

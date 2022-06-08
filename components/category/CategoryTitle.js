@@ -8,7 +8,6 @@ const CategoryTitle = () => {
     <>
       <div className="mr-6">
         <h1 className="text-4xl font-semibold mb-2">Category</h1>
-        <h2 className="text-gray-600 ml-0.5">List, view and edit</h2>
       </div>
 
       <div className="flex flex-wrap items-start justify-end -mb-3">

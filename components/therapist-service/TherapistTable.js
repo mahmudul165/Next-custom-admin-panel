@@ -49,10 +49,10 @@ const SubCategoryTable = () => {
   //  service_subcategory_id
   const columns = [
     {
-      title: "Therapist_Id",
+      title: "#",
       dataIndex: "id",
       key: "id",
-      width: 400,
+      width: 80,
       className: "    p-2 border-r-2 border-b-2",
       rowClassName: "bg-black-ripon",
     },
@@ -64,21 +64,21 @@ const SubCategoryTable = () => {
       className: "    p-2 border-r-2 border-b-2",
       rowClassName: "bg-black-ripon",
     },
-    {
-      title: "Category_Id",
-      dataIndex: "service_category_id",
-      key: "service_category_id",
-      width: 400,
-      className: "   p-2 border-r-2 border-b-2",
-    },
-    {
-      title: "Sub_Category_Id",
-      dataIndex: "service_subcategory_id",
-      key: "service_subcategory_id",
-      width: 400,
-      className: "    p-2 border-r-2 border-b-2",
-      rowClassName: "bg-black-ripon",
-    },
+    // {
+    //   title: "Category_Id",
+    //   dataIndex: "service_category_id",
+    //   key: "service_category_id",
+    //   width: 400,
+    //   className: "   p-2 border-r-2 border-b-2",
+    // },
+    // {
+    //   title: "Sub_Category_Id",
+    //   dataIndex: "service_subcategory_id",
+    //   key: "service_subcategory_id",
+    //   width: 400,
+    //   className: "    p-2 border-r-2 border-b-2",
+    //   rowClassName: "bg-black-ripon",
+    // },
 
     {
       title: "Status",

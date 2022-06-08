@@ -9,17 +9,17 @@ function PaitentForm() {
       <form className="w-full m-auto    ">
         <div className="mb-6 ">
           <h2 className="mt-3 text-center text-3xl font-extrabold text-teal-500">
-            Create New Patient
+            Create new patient
           </h2>
           <div className="d-flex    m-3 p-3  ">
             {/* first portion of the form */}
             <div className=" m-3 p-3 ">
-              {" "}
-              <div className="relative">
+              {/* Picture */}
+              <div className="relative  ">
                 <input
-                  type="text"
+                  type="file"
                   id="floating_outlined"
-                  className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   placeholder="  "
                   required
                 />
@@ -30,324 +30,283 @@ function PaitentForm() {
                   Picture
                 </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Picture
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="form-control
-            block            
-            font-normal
-          text-gray-700
-          bg-white bg-clip-padding
-            border border-solid border-gray-300
-            rounded
-            transition
-            ease-in-out
-            m-0
-          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    id="formFileSm"
-                    type="file"
-                  />
-                </div>
+
+              {/* Patient Source */}
+              <div className="relative my-3">
+                {/* <input
+                  type="text"
+                  id="floating_outlined"
+                  className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                /> */}
+                <select
+                  className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  // className="form-select appearance-none
+                  //   block
+                  //   px-2.5
+                  //   py-2
+                  //   pb-2
+                  //   w-full
+                  //   text-base
+                  //   font-normal
+                  //   text-gray-700
+                  //   bg-white bg-clip-padding bg-no-repeat
+                  //   border border-solid border-gray-300
+                  //   rounded
+                  //   transition
+                  //   ease-in-out
+                  //   m-0
+                  //  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  //             aria-label="Default select example"
+                >
+                  <option selected>Select patient source</option>
+                  <option value="male">ZD</option>
+                  <option value="female">Own</option>
+                  <option value="others">Others</option>
+                </select>
+                <label
+                  htmlFor="floating_outlined"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Patient source
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Patient Source
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <select
-                    className="form-select appearance-none
-           block
-           w-full
-           px-3
-           py-1.5
-           text-base
-           font-normal
-         text-gray-700
-         bg-white bg-clip-padding bg-no-repeat
-           border border-solid border-gray-300
-           rounded
-           transition
-           ease-in-out
-           m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    aria-label="Default select example"
-                  >
-                    <option selected>Select patient source</option>
-                    <option value="male">ZD</option>
-                    <option value="female">Own</option>
-                    <option value="others">Others</option>
-                  </select>
-                </div>
+
+              {/* Name  */}
+              <div className="relative  my-3">
+                <input
+                  type="text"
+                  id="name"
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                />
+                <label
+                  htmlFor="name"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Name
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Name
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-full-name"
-                    type="text"
-                    placeholder="Jane Doe"
-                  />
-                </div>
+
+              {/* Email */}
+              <div className="relative my-3">
+                <input
+                  type="email"
+                  id="email"
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                />
+                <label
+                  htmlFor="email"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Email
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Email Address
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-full-name"
-                    type="email"
-                    placeholder="someone@gmail.com"
-                  />
-                </div>
+
+              {/* Phonhe Number */}
+              <div className="relative my-3">
+                <input
+                  type="tel"
+                  id="phone"
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                />
+                <label
+                  htmlFor="phone"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Phone number
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Phone Number
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-full-name"
-                    type="text"
-                    placeholder="12345678"
-                  />
-                </div>
+
+              {/* Residential Address */}
+              <div className="relative my-3">
+                {/* <input
+                  type="text-area"
+                  id="floating_outlined"
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                /> */}
+                <textarea
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  id="inline-full-name"
+                  type="text"
+                  placeholder="  "
+                />
+                <label
+                  htmlFor="inline-full-name"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Residential address
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Residential Address
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <textarea
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-6 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-full-name"
-                    type="text"
-                    placeholder=""
-                  />
-                </div>
+
+              {/* BSN Number */}
+              <div className="relative my-3">
+                <input
+                  type="text"
+                  id="BSN_Number"
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                />
+                <label
+                  htmlFor="BSN_Number"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  BSN number
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    BSN Number
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-full-name"
-                    type="text"
-                    placeholder="12345678"
-                  />
-                </div>
+
+              {/* DOB Number */}
+              <div className="relative my-3">
+                <input
+                  type="text"
+                  id="DOB_Number"
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                />
+                <label
+                  htmlFor="DOB_Number"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  DOB number
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    DOB Number
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-full-name"
-                    type="text"
-                    placeholder="12345678"
-                  />
-                </div>
+
+              {/* Insurance Number */}
+              <div className="relative my-3">
+                <input
+                  type="text"
+                  id="Insurance"
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                />
+                <label
+                  htmlFor="Insurance"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Insurance number
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Insurance Number
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-full-name"
-                    type="text"
-                    placeholder="12345678"
-                  />
-                </div>
+
+              {/* Emergency Number */}
+              <div className="relative my-3">
+                <input
+                  type="tel"
+                  id="emergency_number"
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                />
+                <label
+                  htmlFor="emergency_number"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Emergency contact
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Emergency Contact
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-full-name"
-                    type="text"
-                    placeholder="12345678"
-                  />
-                </div>
+
+              {/* Age */}
+              <div className="relative my-3">
+                <input
+                  type="number"
+                  id="age"
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                />
+                <label
+                  htmlFor="age"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Age
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Age
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-full-name"
-                    type="number"
-                    placeholder="12"
-                  />
-                </div>
-              </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Sex
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <select
-                    className="form-select appearance-none
-           block
-           w-full
-           px-3
-           py-1.5
-           text-base
-           font-normal
-         text-gray-700
-         bg-white bg-clip-padding bg-no-repeat
-           border border-solid border-gray-300
-           rounded
-           transition
-           ease-in-out
-           m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    aria-label="Default select example"
-                  >
-                    <option selected>Select Sex</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="others">Others</option>
-                  </select>
-                </div>
-              </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Marital Status
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <select
-                    className="form-select appearance-none
-           block
-           w-full
-           px-3
-           py-1.5
-           text-base
-           font-normal
-         text-gray-700
-         bg-white bg-clip-padding bg-no-repeat
-           border border-solid border-gray-300
-           rounded
-           transition
-           ease-in-out
-           m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    aria-label="Default select example"
-                  >
-                    <option selected>Select Status</option>
-                    <option value="">Single</option>
-                    <option value="">Married</option>
-                    <option value="">Divorced</option>
-                    <option value="">Engaged</option>
-                  </select>
-                </div>
+
+              {/* Sex */}
+              <div className="relative my-3">
+                {/* <input
+                  type="text"
+                  id="floating_outlined"
+                  className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                /> */}
+                <select className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
+                  <option selected>Select sex</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="others">Others</option>
+                </select>
+                <label
+                  htmlFor="Sex"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Sex
+                </label>
               </div>
             </div>
 
             {/* 2nd portion of form */}
             <div className=" m-3 p-3 ">
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Medical History
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <textarea
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-6 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-full-name"
-                    type="text"
-                    placeholder=""
-                  />
-                </div>
+              {/* Marital Status */}
+              <div className="relative ">
+                {/* <input
+                  type="text"
+                  id="floating_outlined"
+                  className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                /> */}
+                <select className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
+                  <option selected>Select status</option>
+                  <option value="">Single</option>
+                  <option value="">Married</option>
+                  <option value="">Divorced</option>
+                  <option value="">Engaged</option>
+                </select>
+                <label
+                  htmlFor="floating_outlined"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Marital status
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
+              {/* Medical History */}
+              <div className="relative my-3">
+                {/* <input
+                  type="text-area"
+                  id="floating_outlined"
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                />  */}
+                <textarea
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  id="textarea"
+                  type="text"
+                  placeholder="  "
+                />
+                <label
+                  htmlFor="textarea"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Medical history
+                </label>
+              </div>
+
+              {/* Date Of Birth */}
+
+              {/* <div className="md:flex md:items-center mb-6">
                 <div className="md:w-1/3">
                   <label
                     className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
@@ -356,23 +315,15 @@ function PaitentForm() {
                     Date Of Birth
                   </label>
                 </div>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg
-                      className="w-5 h-5 text-gray-500 dark:text-gray-400"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
-                  </div>
+                <textarea
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  id="textarea"
+                  type="text"
+                  placeholder="  "
+                />
+              </div> */}
 
-                  <DatePicker
+              {/* <DatePicker
                     selected={startDate}
                     onChange={(Date) => setStartDate(Date)}
                   >
@@ -381,201 +332,177 @@ function PaitentForm() {
                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Select date"
                     />
-                  </DatePicker>
-                </div>
+                  </DatePicker> */}
+
+              {/* Blood Group */}
+              <div className="relative my-3">
+                {/* <input
+                  type="text"
+                  id="floating_outlined"
+                  className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                /> */}
+                <select className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
+                  <option selected>Select blood group</option>
+                  <option value="a+">A+</option>
+                  <option value="a-">A-</option>
+                  <option value="b+">B+</option>
+                  <option value="b-">B-</option>
+                  <option value="ab+">AB+</option>
+                  <option value="o+">O+</option>
+                  <option value="o-">O-</option>
+                </select>
+                <label
+                  htmlFor="floating_outlined"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Blood group
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Blood Group
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-full-name"
-                    type="text"
-                    placeholder="O+"
-                  />
-                </div>
+
+              {/* Occupation */}
+              <div className="relative my-3">
+                <input
+                  type="text"
+                  id="Occupation"
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                />
+                <label
+                  htmlFor="Occupation"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Occupation
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Occupation
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-full-name"
-                    type="text"
-                    placeholder="Sofware Developer"
-                  />
-                </div>
+
+              {/* State/City */}
+              <div className="relative my-3">
+                <input
+                  type="text"
+                  id="state_city"
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                />
+                <label
+                  htmlFor="state_city"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  State/City
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    State/City
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-full-name"
-                    type="text"
-                    placeholder="MCU"
-                  />
-                </div>
+
+              {/* Nationality */}
+              <div className="relative my-3">
+                <input
+                  type="text"
+                  id="nationality"
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                />
+                <label
+                  htmlFor="nationality"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Nationality
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Nationality
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-full-name"
-                    type="text"
-                    placeholder="12345678"
-                  />
-                </div>
+
+              {/* Attach File */}
+              <div className="relative">
+                <input
+                  type="file"
+                  id="attach_file"
+                  className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                />
+                <label
+                  htmlFor="attach_file"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Attach file
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Attach File
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="form-control
-            block
-            
-          text-gray-700
-          bg-white bg-clip-padding
-            border border-solid border-gray-300
-            rounded
-            transition
-            ease-in-out
-            m-0
-          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    id="formFileSm"
-                    type="file"
-                  />
-                </div>
+
+              {/* Assign To */}
+              <div className="relative my-3">
+                {/* <input
+                  type="text"
+                  id="floating_outlined"
+                  className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                /> */}
+                <select className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
+                  <option selected>Select assign to</option>
+                  <option value="own">Own</option>
+                  <option value="pass">Pass</option>
+                </select>
+                <label
+                  htmlFor="floating_outlined"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Assign to
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Assign To
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <select
-                    className="form-select appearance-none
-           block
-           w-full
-           px-3
-           py-1.5
-           text-base
-           font-normal
-         text-gray-700
-         bg-white bg-clip-padding bg-no-repeat
-           border border-solid border-gray-300
-           rounded
-           transition
-           ease-in-out
-           m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    aria-label="Default select example"
-                  >
-                    <option selected>Select assign to</option>
-                    <option value="own">Own</option>
-                    <option value="pass">Pass</option>
-                  </select>
-                </div>
+
+              {/* Pass Department */}
+              <div className="relative my-3">
+                {/* <input
+                  type="text"
+                  id="floating_outlined"
+                  className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                /> */}
+                <select className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
+                  <option selected>Select pass department</option>
+                  <option value="">Screener</option>
+                  <option value="">PiB</option>
+                  <option value="">PiT</option>
+                  <option value="">Heraanmelding</option>
+                </select>
+                <label
+                  htmlFor="floating_outlined"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Pass department
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Pass department
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <select
-                    className="form-select appearance-none
-           block
-           w-full
-           px-3
-           py-1.5
-           text-base
-           font-normal
-         text-gray-700
-         bg-white bg-clip-padding bg-no-repeat
-           border border-solid border-gray-300
-           rounded
-           transition
-           ease-in-out
-           m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    aria-label="Default select example"
-                  >
-                    <option selected>Select pass department</option>
-                    <option value="">Screener</option>
-                    <option value="">PiB</option>
-                    <option value="">PiT</option>
-                    <option value="">Heraanmelding</option>
-                  </select>
-                </div>
+
+              {/* Call Strike */}
+              <div className="relative">
+                {/* <input
+                  type="text-area"
+                  id="floating_outlined"
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                />  */}
+                <textarea
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  id="area-text"
+                  type="text"
+                  placeholder="  "
+                />
+                <label
+                  htmlFor="area-text"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Call strike
+                </label>
               </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    Call strike
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <textarea
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-6 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                    id="inline-full-name"
-                    type="text"
-                    placeholder=""
-                  />
-                </div>
-              </div>
+
               <div className="md:flex md:items-center">
                 <div className="md:w-1/3"></div>
                 <div className="md:w-2/3">
                   <button
-                    className="shadow bg-teal-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                    className="shadow mt-6 bg-teal-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                     type="submit"
                   >
                     Save

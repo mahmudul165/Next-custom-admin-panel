@@ -37,10 +37,10 @@ const CategoryTable = () => {
   console.log("first,", data);
   const columns = [
     {
-      title: "Id",
+      title: "#",
       dataIndex: "id",
       key: "id",
-      width: 400,
+      width: 80,
       className: "  p-2 border-r-2 border-b-2",
       rowClassName: "bg-black-ripon",
     },
