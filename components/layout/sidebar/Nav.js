@@ -68,6 +68,7 @@ const Nav = ({ sidebarOutsideClick }) => {
             />
           )}
         </div>
+
         {/* test start */}
 
         <NavItem
