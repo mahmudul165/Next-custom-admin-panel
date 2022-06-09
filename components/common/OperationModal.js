@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PureModal from "react-pure-modal";
 import "react-pure-modal/dist/react-pure-modal.min.css";
-import CategoryForm from "../category/CategoryForm";
 
-const Modal = ({ modal, setModal }) => {
+const OperationModal = ({ modal, setModal, children }) => {
   const [selectedImage, setSelectedImage] = useState();
   const imageChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -19,10 +18,10 @@ const Modal = ({ modal, setModal }) => {
       setSelectedImage();
     }
   }, [modal]);
-
   return (
     <>
       <PureModal
+        scrollable={true}
         isOpen={modal}
         width="800px"
         onClose={() => {
@@ -30,10 +29,10 @@ const Modal = ({ modal, setModal }) => {
           return true;
         }}
       >
-        <CategoryForm />
+        {children}
       </PureModal>
     </>
   );
 };
 
-export default Modal;
+export default OperationModal;

@@ -109,7 +109,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           <ArchiveIcon className=" h-5" />
         </NavItem>
         <NavItem
-          hrefLink="/create-new-patient"
+          hrefLink="/patient/create-new-patient"
           sidebarStatus={sidebarStatus}
           menuTitle="Patient List"
           subMenu={false}

@@ -1,11 +1,14 @@
 import Table from "rc-table";
 import React, { useState } from "react";
 import Pagination from "react-js-pagination";
-
 import useSWR from "swr";
 import styled from "styled-components";
+import OperationModal from "../common/OperationModal";
+import PaitentForm from "./PatientForm";
+import Link from "next/link";
 
 const PatientTable = () => {
+  const [modal, setModal] = useState(false);
   const BodyRow = styled.tr`
     & th {
       color: rgb(148 163 184);
@@ -99,10 +102,22 @@ const PatientTable = () => {
       title: "Operations",
       dataIndex: "",
       key: "operations",
-      className: "   p-2 border-b-2",
+      className: "p-2 border-b-2",
       render: () => (
         <>
-          <a href="#">View</a> | <a href="#">Edit</a> | <a href="#">Delete</a>
+          {/* <a href="#">View</a> | <a href="#">Edit</a> | <a href="#">Delete</a> */}
+          <>
+            {/* <a href="#" onClick={() => setModal(true)}>
+              edit
+            </a>
+            <OperationModal modal={modal} setModal={setModal}>
+              {<PaitentForm />}
+            </OperationModal> */}
+            <Link href="/patient/edit">
+              <a className="me-2">Edit</a>
+            </Link>
+          </>
+          | <a href="#">Delete</a>
         </>
       ),
     },
