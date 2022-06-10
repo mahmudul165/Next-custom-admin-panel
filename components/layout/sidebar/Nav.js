@@ -15,16 +15,16 @@ import React, { useEffect, useState } from "react";
 import NavItem from "./NavItem";
 
 const Nav = ({ sidebarOutsideClick }) => {
-  const [sidebarStatus, setSidebarStatus] = useState(true);
+  //const [sidebarStatus, setSidebarStatus] = useState(true);
   const [subMenuToggleStatus, setSubMenuToggleStatus] = useState(false);
 
-  const sidebarClose = () => {
-    setSidebarStatus(false);
-  };
+  // const sidebarClose = () => {
+  //   setSidebarStatus(false);
+  // };
 
-  const sidebarOpen = () => {
-    setSidebarStatus(true);
-  };
+  // const sidebarOpen = () => {
+  //   setSidebarStatus(true);
+  // };
 
   const subMenuToggle = () => {
     setSubMenuToggleStatus(!subMenuToggleStatus);
@@ -46,16 +46,16 @@ const Nav = ({ sidebarOutsideClick }) => {
     },
   ];
 
-  useEffect(() => {
-    if (sidebarOutsideClick) {
-      setSidebarStatus(false);
-    }
-  }, [sidebarOutsideClick]);
+  // useEffect(() => {
+  //   if (sidebarOutsideClick) {
+  //     setSidebarStatus(false);
+  //   }
+  // }, [sidebarOutsideClick]);
   //console.log("sidebar Nav", sidebarOutsideClick)
   return (
     <>
       <nav className="flex flex-col mx-2 my-6 space-y-4 w-44">
-        <div className="inline-flex items-center justify-center ">
+        {/* <div className="inline-flex items-center justify-center ">
           {sidebarStatus ? (
             <ArrowNarrowLeftIcon
               className="inline-block h-12 cursor-pointer"
@@ -67,13 +67,13 @@ const Nav = ({ sidebarOutsideClick }) => {
               onClick={sidebarOpen}
             />
           )}
-        </div>
+        </div> */}
 
         {/* test start */}
 
         <NavItem
           hrefLink="/dashboard"
-          sidebarStatus={sidebarStatus}
+          // sidebarStatus={sidebarStatus}
           menuTitle="Dashboard"
           subMenu={false}
           subMenuArray={null}
@@ -82,7 +82,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         </NavItem>
         <NavItem
           hrefLink="/services/category"
-          sidebarStatus={sidebarStatus}
+          // sidebarStatus={sidebarStatus}
           menuTitle="Category"
           subMenu={false}
           subMenuArray={null}
@@ -91,7 +91,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         </NavItem>
         <NavItem
           hrefLink="/services/sub-category"
-          sidebarStatus={sidebarStatus}
+          // sidebarStatus={sidebarStatus}
           menuTitle="Sub-Category"
           subMenu={false}
           subMenuArray={null}
@@ -100,7 +100,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         </NavItem>
         <NavItem
           hrefLink="/services/therapist-service"
-          sidebarStatus={sidebarStatus}
+          // sidebarStatus={sidebarStatus}
           menuTitle="Therapist-Service"
           subMenu={false}
           subMenuArray={null}
@@ -110,7 +110,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         </NavItem>
         <NavItem
           hrefLink="/patient/create-new-patient"
-          sidebarStatus={sidebarStatus}
+          // sidebarStatus={sidebarStatus}
           menuTitle="Patient List"
           subMenu={false}
           subMenuArray={null}
@@ -119,7 +119,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         </NavItem>
         <NavItem
           hrefLink="/all-ticket"
-          sidebarStatus={sidebarStatus}
+          // sidebarStatus={sidebarStatus}
           menuTitle="All Ticket"
           subMenu={false}
           subMenuArray={null}
@@ -128,7 +128,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         </NavItem>
         <NavItem
           hrefLink="/services/therapist-doctor"
-          sidebarStatus={sidebarStatus}
+          // sidebarStatus={sidebarStatus}
           menuTitle="Therapist-Doctor"
           subMenu={false}
           subMenuArray={null}
@@ -140,7 +140,7 @@ const Nav = ({ sidebarOutsideClick }) => {
 
         {/* <NavItem
           hrefLink="/category"
-          sidebarStatus={sidebarStatus}
+         // sidebarStatus={sidebarStatus}
           menuTitle="Category"
           subMenu={false}
           subMenuArray={null}
@@ -150,7 +150,7 @@ const Nav = ({ sidebarOutsideClick }) => {
 
         {/* <NavItem
           hrefLink="/sub-category"
-          sidebarStatus={sidebarStatus}
+         // sidebarStatus={sidebarStatus}
           menuTitle="Sub-Category"
           subMenu={false}
           subMenuArray={null}
@@ -161,7 +161,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         {/* this menu has child Menu     */}
         <NavItem
           hrefLink="#"
-          sidebarStatus={sidebarStatus}
+          // sidebarStatus={sidebarStatus}
           menuTitle="Chiled Menu"
           subMenu={true}
           subMenuArray={childMenu}

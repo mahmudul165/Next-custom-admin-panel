@@ -30,16 +30,16 @@ const NavItem = ({
           onClick={subMenuToggle}
         >
           {children}
-          <span className={`${sidebarStatus ? "text-sm  ml-2" : "sr-only"}`}>
+          <span className={`${!sidebarStatus ? "text-sm  ml-2" : "sr-only"}`}>
             {menuTitle}
           </span>
-          <span
+          {/* <span
             className={`${
-              sidebarStatus ? "hidden" : "hidden group-hover:block"
+              !sidebarStatus ? "hidden" : "hidden group-hover:block"
             } absolute left-0 -bottom-5 bg-emerald-300 text-white   text-xs`}
           >
             {menuTitle}
-          </span>
+          </span> */}
         </span>
       </Link>
 
