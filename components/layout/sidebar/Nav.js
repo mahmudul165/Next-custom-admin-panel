@@ -15,7 +15,7 @@ import React, { useEffect, useState } from "react";
 import NavItem from "./NavItem";
 
 const Nav = ({ sidebarOutsideClick }) => {
-  const [sidebarStatus, setSidebarStatus] = useState(false);
+  const [sidebarStatus, setSidebarStatus] = useState(true);
   const [subMenuToggleStatus, setSubMenuToggleStatus] = useState(false);
 
   const sidebarClose = () => {
@@ -54,7 +54,7 @@ const Nav = ({ sidebarOutsideClick }) => {
   //console.log("sidebar Nav", sidebarOutsideClick)
   return (
     <>
-      <nav className="flex flex-col mx-4 my-6 space-y-4">
+      <nav className="flex flex-col mx-2 my-6 space-y-4 w-44">
         <div className="inline-flex items-center justify-center ">
           {sidebarStatus ? (
             <ArrowNarrowLeftIcon
