@@ -15,7 +15,7 @@ function PForm() {
             {/* first portion of the form */}
             <div className=" m-3 p-3 ">
               {/* Picture */}
-              <div className="relative  ">
+              {/* <div className="relative  ">
                 <input
                   type="file"
                   id="floating_outlined"
@@ -28,6 +28,39 @@ function PForm() {
                   className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                 >
                   Picture
+                </label>
+              </div> */}
+              <div className="flex justify-center items-center w-full  ">
+                <label
+                  htmlFor="dropzone-file"
+                  className="flex flex-col justify-center items-center w-full h-40 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                >
+                  <div className="flex flex-col justify-center items-center pt-5 pb-6">
+                    <svg
+                      className="mb-3 w-10 h-10 text-gray-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round "
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                      ></path>
+                    </svg>
+                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                      <span className="font-semibold">
+                        Click to upload Picture
+                      </span>{" "}
+                      or drag and drop
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      SVG, PNG, JPG or GIF (MAX. 500x500px)
+                    </p>
+                  </div>
+                  <input id="dropzone-file" type="file" className="hidden" />
                 </label>
               </div>
               {/* Patient Source */}
@@ -262,9 +295,9 @@ function PForm() {
                 </div>
               </div>
               {/* Marital status and occupation */}
-              <div className="grid  gap-4">
+              <div className="grid   grid-cols-2  gap-4">
                 {/* Marital status*/}
-                <div id="marital-status" className="col-start-1 relative my-3">
+                <div id="marital-status" className="  relative my-3">
                   <select className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
                     <option selected>Select status</option>
                     <option value="">Single</option>
@@ -280,7 +313,7 @@ function PForm() {
                   </label>
                 </div>
                 {/* occupation */}
-                <div className="col-start-2 relative my-3">
+                <div className="  relative my-3">
                   <input
                     type="text"
                     id="Occupation"
@@ -297,9 +330,9 @@ function PForm() {
                 </div>
               </div>
               {/* sex and blood */}
-              <div className="grid  gap-4">
+              <div className="grid gap-4 grid-cols-2">
                 {/* sex  */}
-                <div className="col-start-1 relative  my-3">
+                <div className=" relative  my-3">
                   <select className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
                     <option selected>Select sex</option>
                     <option value="male">Male</option>
@@ -314,7 +347,7 @@ function PForm() {
                   </label>
                 </div>
                 {/* blood  */}
-                <div className="col-start-2  relative  my-3">
+                <div className=" relative  my-3">
                   {" "}
                   <select className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
                     <option selected>Select blood group</option>
@@ -358,9 +391,9 @@ function PForm() {
                 </label>
               </div>
               {/* select file  and attach file  */}
-              <div className="grid  gap-4">
+              <div className="grid   grid-cols-2  gap-4">
                 {/* select file type3 */}
-                <div className="col-start-1 relative  my-3">
+                <div className="  relative  my-3">
                   <select
                     id="file-type"
                     className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
@@ -378,7 +411,7 @@ function PForm() {
                   </label>
                 </div>
                 {/*attach file  */}
-                <div className="col-start-2 relative my-3 ">
+                <div className=" relative my-3 ">
                   <input
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
