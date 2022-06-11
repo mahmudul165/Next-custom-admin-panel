@@ -1,12 +1,14 @@
 import Table from "rc-table";
 import React, { useState } from "react";
 import Pagination from "react-js-pagination";
-
 import useSWR from "swr";
 import styled from "styled-components";
 import OperationModal from "../common/OperationModal";
 import Thform from "./Thform";
 import Link from "next/link";
+// react query
+import { useQuery } from "react-query";
+import axios from "axios";
 
 const SubCategoryTable = () => {
   const [modal, setModal] = useState(false);
@@ -39,11 +41,18 @@ const SubCategoryTable = () => {
   // "status": "A",
   // "remarks": "Checking update",
   // "service_category_id": "1"
-  const { data, error } = useSWR(
-    "https://misiapi.lamptechs.com/api/therapistService",
-    { fetcher: async (url) => await fetch(url).then((res) => res.json()) }
-    // { fetcher: async (url) => await axios.get(url).then((res) => res.data) }
+
+  // const getData = async (url) => {
+  //   await axios.get(url).then((res) => res.data);
+  // };
+  const { isLoading, isFetching, status, data, error } = useQuery(
+    "repoData",
+    () =>
+      axios
+        .get("https://misiapi.lamptechs.com/api/therapistService")
+        .then((res) => res.data)
   );
+  console.log(" result", data, status, isLoading, isFetching);
 
   //   id
   //   therapist_service_name
@@ -157,7 +166,14 @@ const SubCategoryTable = () => {
           />
         </>
       ) : (
-        <h1>table empty</h1>
+        <div className="flex justify-center items-center">
+          <div
+            className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+            role="status"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
       )}
     </>
   );

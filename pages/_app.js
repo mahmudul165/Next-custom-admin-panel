@@ -18,7 +18,12 @@ import Meta from "/components/seo/Meta";
 import AuthProvider from "/contexts/AuthProvider";
 import { AnimatePresence } from "framer-motion";
 import Layout from "/components/layout/Layout";
+
+// react query startup
+import { QueryClient, QueryClientProvider } from "react-query";
+
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
+  const queryClient = new QueryClient();
   if (Component.getLayout) {
     return Component.getLayout(<Component {...pageProps} />);
   }
@@ -47,13 +52,15 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       />
 
       <SessionProvider session={session}>
-        <AuthProvider>
-          <Layout>
-            <AnimatePresence exitBeforeEnter>
-              <Component {...pageProps} />
-            </AnimatePresence>
-          </Layout>
-        </AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
+            <Layout>
+              <AnimatePresence exitBeforeEnter>
+                <Component {...pageProps} />
+              </AnimatePresence>
+            </Layout>
+          </AuthProvider>
+        </QueryClientProvider>
       </SessionProvider>
     </>
   );
