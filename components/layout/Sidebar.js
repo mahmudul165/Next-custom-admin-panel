@@ -19,7 +19,7 @@ const Sidebar = ({ mobileNavsidebar }) => {
     >
       <Logo />
       {/* bg-gray-800 */}
-      <div className="flex-grow flex flex-col justify-between text-gray-500  bg-white">
+      <div className="flex-grow flex flex-col justify-between bg-gray-600  text-white">
         <Nav sidebarOutsideClick={sidebarOutsideClick} />
         {/* <SettingButton /> */}
       </div>

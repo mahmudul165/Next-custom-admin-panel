@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import OperationModal from "../../components/common/OperationModal";
-import Thform from "../../components/therapist-service/Thform";
-import TherapistService from "../../components/therapist-service/TherapistService";
+import TherapistListService from "../../components/therapist-List/TherapistListService";
+
 function CreatePaitent() {
   const [modal, setModal] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   return (
     <>
       <>
-        <TherapistService />
+        <TherapistListService />
         {/* <a href="#" onClick={() => setModal(true)}>
           edit
         </a>

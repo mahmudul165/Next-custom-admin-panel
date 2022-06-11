@@ -16,7 +16,7 @@ const Layout = ({ children, title = "Sample Title" }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex bg-gray-100 min-h-screen relative">
+      <div className="flex bg-white min-h-screen relative">
         <Sidebar mobileNavsidebar={mobileNavsidebar} />
 
         <div className="flex-grow text-gray-800">
