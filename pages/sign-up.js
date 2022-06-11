@@ -80,7 +80,7 @@ function SignUp() {
               href="#"
               className="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500"
             >
-              Lost Password?
+              Last Password?
             </a>
           </div>
           <Link href={`/`}>
