@@ -10,7 +10,7 @@ function PForm() {
         <div className=" px-6">
           <div className=" card d-flex    m-3 p-3  justify-center ">
             <h2 className="mt-3 text-center text-3xl font-extrabold text-teal-500">
-              Edit Your profile
+              Edit your profile
             </h2>
             {/* first portion of the form */}
             <div className=" m-3 p-3 ">

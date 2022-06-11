@@ -1,12 +1,12 @@
 import React from "react";
 
 function Card({ name, number, bgColor }) {
+  console.log("first bg", bgColor);
   return (
-    <div
-      className="flex items-center p-3 bg-teal-500 shadow rounded-lg"
-      style={{ backgroundColor: bgColor }}
-    >
-      {/* <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
+    <>
+      {bgColor ? (
+        <div className={`flex items-center p-3   shadow rounded-lg ${bgColor}`}>
+          {/* <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
         <svg
           aria-hidden="true"
           fill="none"
@@ -22,11 +22,17 @@ function Card({ name, number, bgColor }) {
           />
         </svg>
       </div> */}
-      <div>
-        <span className="block text-2xl font-bold text-white">{number}</span>
-        <span className="block text-gray-800   text-xl font-bold">{name}</span>
-      </div>
-    </div>
+          <div>
+            <span className="block text-2xl font-bold text-white">
+              {number}
+            </span>
+            <span className="block text-white   text-xl font-bold">{name}</span>
+          </div>
+        </div>
+      ) : (
+        <>empty</>
+      )}
+    </>
   );
 }
 

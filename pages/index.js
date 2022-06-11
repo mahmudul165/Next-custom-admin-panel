@@ -17,29 +17,89 @@ export default function Index() {
           <Card
             name="Create New Tickets"
             number="6"
-            style={{ backgroundColor: "#576DBF" }}
+            bgColor="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
           />
-          <Card name="Missing Info Group" number="6" />
-          <Card name="All Tickets" number="6" />
-          <Card name="New Tickets" number="6" />
+          <Card
+            name="Missing Info Group"
+            number="6"
+            bgColor="bg-gradient-to-r from-cyan-500 to-blue-500"
+          />
+          <Card
+            name="All Tickets"
+            number="6"
+            bgColor="bg-gradient-to-b from-green-300 via-teal-500 to-teal-500"
+          />
+          <Card
+            name="New Tickets"
+            number="6"
+            bgColor="bg-gradient-to-r from-red-200 via-red-300 to-yellow-200"
+          />
         </section>
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
-          <Card name="Screener" number="6" />
-          <Card name="PiT Group" number="6" />
-          <Card name="PiB Group" number="6" />
-          <Card name="Heraanmelding" number="6" />
+          <Card
+            name="Screener"
+            number="6"
+            bgColor="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100"
+          />
+          <Card
+            name="PiT Group"
+            number="6"
+            bgColor="bg-gradient-to-b from-sky-400 to-sky-200"
+          />
+          <Card
+            name="PiB Group"
+            number="6"
+            bgColor="bg-gradient-to-r from-indigo-300 to-purple-400"
+          />
+          <Card
+            name="Heraanmelding"
+            number="6"
+            bgColor="bg-gradient-to-r from-cyan-200 to-cyan-400"
+          />
         </section>
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
-          <Card name="  Waiting For Yes Approval" number="6" />
-          <Card name=" Waiting For No Approval" number="6" />
-          <Card name=" Scheduling Group" number="6" />
-          <Card name=" Therapist Group" number="6" />
+          <Card
+            name="Create New Tickets"
+            number="6"
+            bgColor="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+          />
+          <Card
+            name="Missing Info Group"
+            number="6"
+            bgColor="bg-gradient-to-r from-cyan-500 to-blue-500"
+          />
+          <Card
+            name="All Tickets"
+            number="6"
+            bgColor="bg-gradient-to-b from-green-300 via-teal-500 to-teal-500"
+          />
+          <Card
+            name="New Tickets"
+            number="6"
+            bgColor="bg-gradient-to-r from-red-200 via-red-300 to-yellow-200"
+          />
         </section>
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
-          <Card name="Create New Tickets" number="6" />
-          <Card name="Missing Info Group" number="6" />
-          <Card name="All Tickets" number="6" />
-          <Card name="New Tickets" number="6" />
+          <Card
+            name="Screener"
+            number="6"
+            bgColor="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100"
+          />
+          <Card
+            name="PiT Group"
+            number="6"
+            bgColor="bg-gradient-to-b from-sky-400 to-sky-200"
+          />
+          <Card
+            name="PiB Group"
+            number="6"
+            bgColor="bg-gradient-to-r from-indigo-300 to-purple-400"
+          />
+          <Card
+            name="Heraanmelding"
+            number="6"
+            bgColor="bg-gradient-to-r from-cyan-200 to-cyan-400"
+          />
         </section>
         {/* <section className="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-6">
           <div className="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg">
