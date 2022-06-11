@@ -12,14 +12,14 @@ const Sidebar = ({ mobileNavsidebar }) => {
   //console.log("sidebar Ref sidebarOutsideClick", sidebarOutsideClick)
   return (
     <aside
-      className={`${
+      className={` bg-gray-600 ${
         mobileNavsidebar ? "block" : "hidden"
       } sm:flex sm:flex-col z-50`}
       ref={sidebarRef}
     >
       <Logo />
       {/* bg-gray-800 */}
-      <div className="flex-grow flex flex-col justify-between bg-gray-600  text-white">
+      <div className="flex-grow flex flex-col justify-between     text-white">
         <Nav sidebarOutsideClick={sidebarOutsideClick} />
         {/* <SettingButton /> */}
       </div>

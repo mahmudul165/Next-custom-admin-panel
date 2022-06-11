@@ -27,7 +27,7 @@ const Layout = ({ children, title = "Sample Title" }) => {
           {children}
         </div>
 
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </Fragment>
   );
