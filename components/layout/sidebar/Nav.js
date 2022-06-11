@@ -10,6 +10,7 @@ import {
   AdjustmentsIcon,
   BadgeCheckIcon,
   TicketIcon,
+  CursorClickIcon,
 } from "@heroicons/react/solid";
 import React, { useEffect, useState } from "react";
 import NavItem from "./NavItem";
@@ -111,11 +112,20 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="/patient/create-new-patient"
           // sidebarStatus={sidebarStatus}
-          menuTitle="Patient List"
+          menuTitle="Patient list"
           subMenu={false}
           subMenuArray={null}
         >
           <BadgeCheckIcon className=" h-5" />
+        </NavItem>
+        <NavItem
+          hrefLink="/therapist/create-new-therapist"
+          // sidebarStatus={sidebarStatus}
+          menuTitle="Therapist list"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          <CursorClickIcon className=" h-5" />
         </NavItem>
         <NavItem
           hrefLink="/all-ticket"

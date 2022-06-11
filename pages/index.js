@@ -17,7 +17,7 @@ export default function Index() {
           <Card
             name="Create New Tickets"
             number="6"
-            bgColor="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+            bgColor="bg-gradient-to-r from-blue-500 via-blue-450 to-gray-600"
           />
           <Card
             name="Missing Info Group"
@@ -32,14 +32,14 @@ export default function Index() {
           <Card
             name="New Tickets"
             number="6"
-            bgColor="bg-gradient-to-r from-red-200 via-red-300 to-yellow-200"
+            bgColor="bg-gradient-to-r from-pink-400 via-pink-300 to-pink-100"
           />
         </section>
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           <Card
             name="Screener"
             number="6"
-            bgColor="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100"
+            bgColor="bg-gradient-to-r from-indigo-500 via-purple-400 to-pink-400"
           />
           <Card
             name="PiT Group"
@@ -61,7 +61,7 @@ export default function Index() {
           <Card
             name="Create New Tickets"
             number="6"
-            bgColor="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+            bgColor="bg-gradient-to-r from-blue-500 via-blue-450 to-gray-600"
           />
           <Card
             name="Missing Info Group"
@@ -76,14 +76,14 @@ export default function Index() {
           <Card
             name="New Tickets"
             number="6"
-            bgColor="bg-gradient-to-r from-red-200 via-red-300 to-yellow-200"
+            bgColor="bg-gradient-to-r from-pink-400 via-pink-300 to-pink-100"
           />
         </section>
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           <Card
             name="Screener"
             number="6"
-            bgColor="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100"
+            bgColor="bg-gradient-to-r from-indigo-500 via-purple-400 to-pink-400"
           />
           <Card
             name="PiT Group"

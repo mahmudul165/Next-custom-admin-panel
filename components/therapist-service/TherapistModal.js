@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import PureModal from "react-pure-modal";
 import "react-pure-modal/dist/react-pure-modal.min.css";
-import TherapistForm from "../therapist-service/TherapistForm";
+import TherapistForm from "../therapist-service/Thform";
 const TherapistModal = ({ submodal, setSubModal }) => {
   return (
     <>
