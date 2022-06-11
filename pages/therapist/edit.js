@@ -1,9 +1,10 @@
 import React from "react";
-import PatientForm from "/components/CreatePatient/PForm";
+import Thform from "../../components/therapist-service/Thform";
+
 function edit() {
   return (
     <>
-      <PatientForm className="m-auto" />
+      <Thform className="m-auto" />
     </>
   );
 }

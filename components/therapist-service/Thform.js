@@ -2,34 +2,18 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-function Thform() {
+function ThForm() {
   const [startDate, setStartDate] = useState(new Date());
   return (
     <>
-      <form className="w-10/12 m-auto    ">
-        <div className="  ">
+      <form className="w-10/12 m-auto  p-5  ">
+        <div className=" px-6">
           <div className=" card d-flex    m-3 p-3  justify-center ">
-            <h2 className="my-3 text-center text-3xl font-extrabold text-teal-500">
+            <h2 className="mt-3 text-center text-3xl font-extrabold text-teal-500">
               Create new therapist
             </h2>
             {/* first portion of the form */}
-            <div className="  ">
-              {/* Picture */}
-              {/* <div className="relative  ">
-                <input
-                  type="file"
-                  id="floating_outlined"
-                  className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  placeholder="  "
-                  required
-                />
-                <label
-                  htmlFor="floating_outlined"
-                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                >
-                  Picture
-                </label>
-              </div> */}
+            <div className=" m-3 p-3 ">
               <div className="flex justify-center items-center w-full  ">
                 <label
                   htmlFor="dropzone-file"
@@ -64,34 +48,8 @@ function Thform() {
                 </label>
               </div>
               {/* Patient Source */}
-              <div className="relative my-3">
-                {/* <input
-                  type="text"
-                  id="floating_outlined"
-                  className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  placeholder="  "
-                  required
-                /> */}
-                <select
-                  className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  // className="form-select appearance-none
-                  //   block
-                  //   px-2.5
-                  //   py-2
-                  //   pb-2
-                  //   w-full
-                  //   text-base
-                  //   font-normal
-                  //   text-gray-700
-                  //   bg-white bg-clip-padding bg-no-repeat
-                  //   border border-solid border-gray-300
-                  //   rounded
-                  //   transition
-                  //   ease-in-out
-                  //   m-0
-                  //  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  //             aria-label="Default select example"
-                >
+              {/* <div className="relative my-3">
+                <select className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
                   <option selected>Select patient source</option>
                   <option value="male">ZD</option>
                   <option value="female">Own</option>
@@ -103,7 +61,7 @@ function Thform() {
                 >
                   Patient source
                 </label>
-              </div>
+              </div> */}
 
               {/* name */}
               <div className="grid  gap-4">
@@ -295,40 +253,23 @@ function Thform() {
                 </div>
               </div>
               {/* Marital status and occupation */}
-              <div className="grid   grid-cols-2  gap-4">
-                {/* Marital status*/}
-                <div id="marital-status" className="  relative my-3">
-                  <select className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
-                    <option selected>Select status</option>
-                    <option value="">Single</option>
-                    <option value="">Married</option>
-                    <option value="">Divorced</option>
-                    <option value="">Engaged</option>
-                  </select>
-                  <label
-                    htmlFor="marital-status"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Marital status
-                  </label>
-                </div>
-                {/* occupation */}
-                <div className="  relative my-3">
-                  <input
-                    type="text"
-                    id="Occupation"
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                    required
-                  />
-                  <label
-                    htmlFor="Occupation"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Occupation
-                  </label>
-                </div>
+
+              <div id="language" className="  relative my-3">
+                <select className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
+                  <option selected>Select Language</option>
+                  <option value="">Dutch</option>
+                  <option value="">English</option>
+                  <option value="">Hindi</option>
+                  <option value="">Others</option>
+                </select>
+                <label
+                  htmlFor="language"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Language
+                </label>
               </div>
+
               {/* sex and blood */}
               <div className="grid gap-4 grid-cols-2">
                 {/* sex  */}
@@ -481,4 +422,4 @@ function Thform() {
   );
 }
 
-export default Thform;
+export default ThForm;

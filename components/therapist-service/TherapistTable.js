@@ -4,8 +4,12 @@ import Pagination from "react-js-pagination";
 
 import useSWR from "swr";
 import styled from "styled-components";
+import OperationModal from "../common/OperationModal";
+import Thform from "./Thform";
+import Link from "next/link";
 
 const SubCategoryTable = () => {
+  const [modal, setModal] = useState(false);
   const BodyRow = styled.tr`
     & th {
       color: rgb(148 163 184);
@@ -102,7 +106,17 @@ const SubCategoryTable = () => {
       className: "   p-2 border-b-2",
       render: () => (
         <>
-          <a href="#">View</a> | <a href="#">Edit</a> | <a href="#">Delete</a>
+          {" "}
+          <Link href="/therapist/edit">
+            <a className="me-2">Edit</a>
+          </Link>
+          {/* <a href="#" onClick={() => setModal(true)}>
+            edit
+          </a>
+          <OperationModal modal={modal} setModal={setModal}>
+            {<Thform />}
+          </OperationModal>{" "} */}
+          | <a href="#">Delete</a>
         </>
       ),
     },
