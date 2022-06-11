@@ -27,7 +27,7 @@ const PatientTitle = () => {
               d="M12 6v6m0 0v6m0-6h6m-6 0H6"
             />
           </svg>
-          Create new Sub Category
+          Create new sub category
         </button>
         {/* <Modal modal={modal} setModal={setModal} /> */}
         <PatientModal submodal={submodal} setSubModal={setSubModal} />

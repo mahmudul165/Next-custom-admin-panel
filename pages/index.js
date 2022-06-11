@@ -15,7 +15,7 @@ export default function Index() {
       <main className="p-6 sm:p-10 space-y-6">
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           <Card
-            name="Create New Tickets"
+            name="Create New tickets"
             number="6"
             bgColor="bg-gradient-to-r from-blue-500 via-blue-450 to-gray-600"
           />
@@ -59,7 +59,7 @@ export default function Index() {
         </section>
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           <Card
-            name="Create New Tickets"
+            name="Create New tickets"
             number="6"
             bgColor="bg-gradient-to-r from-blue-500 via-blue-450 to-gray-600"
           />

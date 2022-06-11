@@ -1,17 +1,29 @@
+// import {
+//   ArrowNarrowLeftIcon,
+//   ArrowNarrowRightIcon,
+//   CollectionIcon,
+//   DuplicateIcon,
+//   FilmIcon,
+//   ViewBoardsIcon,
+//   TemplateIcon,
+//   ArchiveIcon,
+//   HiViewListIcon,
+//   BadgeCheckIcon,
+//   TicketIcon,
+//   CursorClickIcon,
+// } from "@heroicons/react/solid";
+import { HiOutlineTicket, HiAdjustments, HiOutlineMenu } from "react-icons/hi";
 import {
-  ArrowNarrowLeftIcon,
-  ArrowNarrowRightIcon,
-  CollectionIcon,
-  DuplicateIcon,
-  FilmIcon,
-  ViewBoardsIcon,
-  TemplateIcon,
-  ArchiveIcon,
-  AdjustmentsIcon,
-  BadgeCheckIcon,
-  TicketIcon,
-  CursorClickIcon,
-} from "@heroicons/react/solid";
+  MdOutlineDashboard,
+  MdOutlineCategory,
+  MdCategory,
+  MdList,
+} from "react-icons/md";
+
+import { BiCategoryAlt } from "react-icons/bi";
+import { RiPsychotherapyLine } from "react-icons/ri";
+TbPhysotherapist;
+import { TbPhysotherapist } from "react-icons/tb";
 import React, { useEffect, useState } from "react";
 import NavItem from "./NavItem";
 
@@ -79,7 +91,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenu={false}
           subMenuArray={null}
         >
-          <ViewBoardsIcon className=" h-5" />
+          <MdOutlineDashboard className="h-5" />
         </NavItem>
         <NavItem
           hrefLink="/services/category"
@@ -88,7 +100,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenu={false}
           subMenuArray={null}
         >
-          <CollectionIcon className=" h-5" />
+          <MdCategory className=" h-6" />
         </NavItem>
         <NavItem
           hrefLink="/services/sub-category"
@@ -97,7 +109,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenu={false}
           subMenuArray={null}
         >
-          <DuplicateIcon className=" h-5" />
+          <BiCategoryAlt className=" h-6" />
         </NavItem>
         <NavItem
           hrefLink="/services/therapist-service"
@@ -107,25 +119,25 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenuArray={null}
         >
           {" "}
-          <ArchiveIcon className=" h-5" />
+          <RiPsychotherapyLine className=" h-6" />
         </NavItem>
         <NavItem
-          hrefLink="/patient/create-new-patient"
+          hrefLink="/patient"
           // sidebarStatus={sidebarStatus}
           menuTitle="Patient list"
           subMenu={false}
           subMenuArray={null}
         >
-          <BadgeCheckIcon className=" h-5" />
+          <MdList className=" h-6" />
         </NavItem>
         <NavItem
-          hrefLink="/therapist/create-new-therapist"
+          hrefLink="/therapist"
           // sidebarStatus={sidebarStatus}
           menuTitle="Therapist list"
           subMenu={false}
           subMenuArray={null}
         >
-          <CursorClickIcon className=" h-5" />
+          <TbPhysotherapist className=" h-6" />
         </NavItem>
         <NavItem
           hrefLink="/all-ticket"
@@ -134,7 +146,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenu={false}
           subMenuArray={null}
         >
-          <TicketIcon className=" h-5" />
+          <HiOutlineTicket className=" h-6" />
         </NavItem>
         <NavItem
           hrefLink="/services/therapist-doctor"
@@ -143,7 +155,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenu={false}
           subMenuArray={null}
         >
-          <AdjustmentsIcon className=" h-5" />
+          <HiAdjustments className=" h-6" />
         </NavItem>
 
         {/* test end */}
@@ -176,7 +188,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenu={true}
           subMenuArray={childMenu}
         >
-          <FilmIcon className=" h-5" />
+          <HiOutlineMenu className=" h-6" />
         </NavItem>
       </nav>
     </>

@@ -8,7 +8,7 @@ const SubCategory = () => {
       <div className="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
         <PageTherapistComponentTitle
           title="Therapist "
-          buttonTitle="Create new Therapist"
+          buttonTitle="Create new therapist"
         />
       </div>
 

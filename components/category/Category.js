@@ -8,7 +8,7 @@ const Category = () => {
       <div className="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
         <PageComponentTitle
           title="Category"
-          buttonTitle="Create new Category"
+          buttonTitle="Create new category"
         />
       </div>
 
