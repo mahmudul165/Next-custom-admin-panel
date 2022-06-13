@@ -1,11 +1,12 @@
 import React from "react";
 import Link from "next/link";
+import Card from "../components/dashboard/Card";
 function dashboard() {
   return (
     <>
-      <main className="p-6 sm:p-10 space-y-6">
+      {/* <main className="p-6 sm:p-10 space-y-6">
         <div className="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between"></div>
-        {/* first row */}
+       
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           <div className="flex items-center p-8 bg-white shadow rounded-lg">
             <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
@@ -101,7 +102,7 @@ function dashboard() {
             </div>
           </div>
         </section>
-        {/* second row */}
+        
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           <div className="flex items-center p-8 bg-white shadow rounded-lg">
             <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
@@ -197,7 +198,7 @@ function dashboard() {
             </div>
           </div>
         </section>
-        {/* third row */}
+      
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           <div className="flex items-center p-8 bg-white shadow rounded-lg">
             <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
@@ -293,7 +294,7 @@ function dashboard() {
             </div>
           </div>
         </section>
-        {/* 4th row */}
+       
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           <div className="flex items-center p-8 bg-white shadow rounded-lg">
             <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
@@ -389,7 +390,100 @@ function dashboard() {
             </div>
           </div>
         </section>
-      </main>
+      </main> */}
+      <>
+        {/* inside of container */}
+        <main className="p-6 sm:p-10 space-y-6">
+          <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+            <Card
+              name="Create New Patient"
+              number="6"
+              bgColor="bg-gradient-to-r from-blue-500 via-blue-450 to-gray-600"
+            />
+            <Card
+              name="Create New Tickets"
+              number="6"
+              bgColor="bg-gradient-to-r from-cyan-500 to-blue-500"
+            />
+            <Card
+              name="All Tickets"
+              number="6"
+              bgColor="bg-gradient-to-b from-green-300 via-teal-500 to-teal-500"
+            />
+            <Card
+              name="All Patients"
+              number="6"
+              bgColor="bg-gradient-to-r from-pink-400 via-pink-300 to-pink-100"
+            />
+          </section>
+          <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+            <Card
+              name="Missing-Info Lists"
+              number="6"
+              bgColor="bg-gradient-to-r from-indigo-500 via-purple-400 to-pink-400"
+            />
+            <Card
+              name="Screener Group"
+              number="6"
+              bgColor="bg-gradient-to-b from-sky-400 to-sky-200"
+            />
+            <Card
+              name="Waiting for 'YES' Approval"
+              number="6"
+              bgColor="bg-gradient-to-r from-indigo-300 to-purple-400"
+            />
+            <Card
+              name="Waiting for 'NO' Approval"
+              number="6"
+              bgColor="bg-gradient-to-r from-cyan-200 to-cyan-400"
+            />
+          </section>
+          <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+            <Card
+              name="Appointment Group"
+              number="6"
+              bgColor="bg-gradient-to-r from-blue-500 via-blue-450 to-gray-600"
+            />
+            <Card
+              name="PiT Group(Specialist)"
+              number="6"
+              bgColor="bg-gradient-to-r from-cyan-500 to-blue-500"
+            />
+            <Card
+              name="PiB Group(Moderate)"
+              number="6"
+              bgColor="bg-gradient-to-b from-green-300 via-teal-500 to-teal-500"
+            />
+            <Card
+              name="Heraanmelding"
+              number="6"
+              bgColor="bg-gradient-to-r from-pink-400 via-pink-300 to-pink-100"
+            />
+          </section>
+          <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+            <Card
+              name="Service Category"
+              number="6"
+              bgColor="bg-gradient-to-r from-indigo-500 via-purple-400 to-pink-400"
+            />
+            <Card
+              name="Accounts"
+              number="6"
+              bgColor="bg-gradient-to-b from-sky-400 to-sky-200"
+            />
+            {/* <Card
+              name="PiB Group"
+              number="6"
+              bgColor="bg-gradient-to-r from-indigo-300 to-purple-400"
+            />
+            <Card
+              name="Heraanmelding"
+              number="6"
+              bgColor="bg-gradient-to-r from-cyan-200 to-cyan-400"
+            /> */}
+          </section>
+        </main>
+      </>
     </>
   );
 }

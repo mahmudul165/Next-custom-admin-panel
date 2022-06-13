@@ -13,7 +13,7 @@ const schema = yup
     service_category_id: yup.string().required(),
     name: yup.string().required(),
     // details: yup.string().required(),
-    remarks: yup.string().required(),
+    //remarks: yup.string().required(),
     status: yup.string().required(),
   })
   .required();
@@ -164,7 +164,6 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             id="remarks"
             className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
             placeholder="  "
-            required
           />
           <label
             htmlFor="remarks"
@@ -195,25 +194,38 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
         </div> */}
 
         {/* Status */}
-        <div className="relative my-3">
-          {/* <input
-                  type="text"
-                  id="floating_outlined"
-                  className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  placeholder="  "
-                  required
-                /> */}
+        <div className="relative  my-3">
           <select
             id="status"
+            className="form-select appearance-none
+block
+w-full
+px-3
+py-1.5
+text-base
+font-normal
+text-gray-700
+bg-white bg-clip-padding bg-no-repeat
+border border-solid border-gray-300
+rounded
+transition
+ease-in-out
+m-0
+focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            aria-label="Default select example"
             {...register("status")}
-            className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
           >
-            <option selected>Select status</option>
-            <option value="A">Active</option>
-            <option value="I">Inactive</option>
+            {/* <option selected>status</option> */}
+            <option value="A" selected>
+              Active
+            </option>
+            <option value="Inactive">Inactive</option>
+            <option value="P">Pending</option>
+            <option value="C">Cancelled</option>
+            <option value="D">Deleted</option>
           </select>
           <label
-            htmlFor="status"
+            htmlFor="remarks"
             className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
           >
             Status

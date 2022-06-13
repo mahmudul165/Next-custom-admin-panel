@@ -1,17 +1,3 @@
-// import {
-//   ArrowNarrowLeftIcon,
-//   ArrowNarrowRightIcon,
-//   CollectionIcon,
-//   DuplicateIcon,
-//   FilmIcon,
-//   ViewBoardsIcon,
-//   TemplateIcon,
-//   ArchiveIcon,
-//   HiViewListIcon,
-//   BadgeCheckIcon,
-//   TicketIcon,
-//   CursorClickIcon,
-// } from "@heroicons/react/solid";
 import { HiOutlineTicket, HiAdjustments, HiOutlineMenu } from "react-icons/hi";
 import {
   MdOutlineDashboard,
@@ -50,13 +36,13 @@ const Nav = ({ sidebarOutsideClick }) => {
       linkHref: "/services",
     },
     {
-      subMenuTitle: "Menu Two",
+      subMenuTitle: "List two",
       linkHref: "/services/category",
     },
-    {
-      subMenuTitle: "Menu Three",
-      linkHref: "/",
-    },
+    // {
+    //   subMenuTitle: "Menu Three",
+    //   linkHref: "/",
+    // },
   ];
 
   // useEffect(() => {
@@ -67,6 +53,7 @@ const Nav = ({ sidebarOutsideClick }) => {
   //console.log("sidebar Nav", sidebarOutsideClick)
   return (
     <>
+      {/* SideNavebar */}
       <nav className="flex flex-col mx-2 my-6 space-y-4 w-44">
         {/* <div className="inline-flex items-center justify-center ">
           {sidebarStatus ? (
@@ -96,7 +83,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="/services/category"
           // sidebarStatus={sidebarStatus}
-          menuTitle="Category"
+          menuTitle="Service Category"
           subMenu={false}
           subMenuArray={null}
         >
@@ -105,7 +92,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="/services/sub-category"
           // sidebarStatus={sidebarStatus}
-          menuTitle="Sub-Category"
+          menuTitle="Service Sub Category"
           subMenu={false}
           subMenuArray={null}
         >
@@ -114,7 +101,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="/services/therapist-service"
           // sidebarStatus={sidebarStatus}
-          menuTitle="Therapist-Service"
+          menuTitle="Therapist Service"
           subMenu={false}
           subMenuArray={null}
         >
@@ -124,7 +111,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="/patient"
           // sidebarStatus={sidebarStatus}
-          menuTitle="Patient list"
+          menuTitle="Patient List"
           subMenu={false}
           subMenuArray={null}
         >
@@ -133,7 +120,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="/therapist"
           // sidebarStatus={sidebarStatus}
-          menuTitle="Therapist list"
+          menuTitle="Therapist List"
           subMenu={false}
           subMenuArray={null}
         >
@@ -142,7 +129,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="/all-ticket"
           // sidebarStatus={sidebarStatus}
-          menuTitle="All Ticket"
+          menuTitle="All Tickets"
           subMenu={false}
           subMenuArray={null}
         >
@@ -151,7 +138,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="/services/therapist-doctor"
           // sidebarStatus={sidebarStatus}
-          menuTitle="Therapist-Doctor"
+          menuTitle="Therapist/Doctor"
           subMenu={false}
           subMenuArray={null}
         >
@@ -184,7 +171,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="#"
           // sidebarStatus={sidebarStatus}
-          menuTitle="Chiled Menu"
+          menuTitle="Appointment"
           subMenu={true}
           subMenuArray={childMenu}
         >
