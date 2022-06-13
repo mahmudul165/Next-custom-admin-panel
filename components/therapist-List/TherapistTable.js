@@ -6,8 +6,11 @@ import styled from "styled-components";
 import OperationModal from "../common/OperationModal";
 import Thform from "./Thform";
 import Link from "next/link";
+import useAuth from "/hook/useAuth";
+import axios from "axios";
 
 const SubCategoryTable = () => {
+  const { deleteData, Statustest } = useAuth();
   const [modal, setModal] = useState(false);
   const BodyRow = styled.tr`
     & th {
@@ -50,76 +53,6 @@ const SubCategoryTable = () => {
   //  remarks
   //  service_category_id
   //  service_subcategory_id
-  const columns = [
-    {
-      title: "#",
-      dataIndex: "id",
-      key: "id",
-      width: 80,
-      className: "    p-2 border-r-2 border-b-2",
-      rowClassName: "bg-black-ripon",
-    },
-    {
-      title: "Therapist_name",
-      dataIndex: "therapist_service_name",
-      key: "therapist_service_name",
-      width: 400,
-      className: "    p-2 border-r-2 border-b-2",
-      rowClassName: "bg-black-ripon",
-    },
-    // {
-    //   title: "Category_Id",
-    //   dataIndex: "service_category_id",
-    //   key: "service_category_id",
-    //   width: 400,
-    //   className: "   p-2 border-r-2 border-b-2",
-    // },
-    // {
-    //   title: "Sub_Category_Id",
-    //   dataIndex: "service_subcategory_id",
-    //   key: "service_subcategory_id",
-    //   width: 400,
-    //   className: "    p-2 border-r-2 border-b-2",
-    //   rowClassName: "bg-black-ripon",
-    // },
-
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      width: 400,
-      className: "    p-2 border-r-2 border-b-2",
-    },
-    {
-      title: "Remarks",
-      dataIndex: "remarks",
-      key: "remarks",
-      width: 400,
-      className: "    p-2 border-r-2 border-b-2",
-    },
-
-    {
-      title: "Operations",
-      dataIndex: "",
-      key: "operations",
-      className: "   p-2 border-b-2",
-      render: () => (
-        <>
-          {" "}
-          <Link href="/therapist/edit">
-            <a className="me-2">Edit</a>
-          </Link>
-          {/* <a href="#" onClick={() => setModal(true)}>
-            edit
-          </a>
-          <OperationModal modal={modal} setModal={setModal}>
-            {<Thform />}
-          </OperationModal>{" "} */}
-          | <a href="#">Delete</a>
-        </>
-      ),
-    },
-  ];
 
   //Pagination
   const [activePage, setActivePage] = useState(10);
@@ -132,28 +65,152 @@ const SubCategoryTable = () => {
       {data ? (
         <>
           {console.log(data.length)}
-
-          <Table
-            columns={columns}
-            data={data}
-            rowKey="id"
-            components={components}
-            className="table rounded-lg p-4 w-full text-center rc-table-custom font-semibold border-collapse border border-slate-400 "
-          />
-          <Pagination
-            activePage={activePage}
-            itemsCountPerPage={10}
-            totalItemsCount={data.length}
-            pageRangeDisplayed={5}
-            onChange={handlePageChange}
-            nextPageText={"Next"}
-            prevPageText={"Prev"}
-            firstPageText={"First"}
-            lastPageText={"Last"}
-            innerClass="js-ul"
-            itemClass="js-li"
-            linkClass="page-link"
-          />
+          <div className="min-h-screen bg-white-800 py-3">
+            <div className="overflow-x-auto w-full">
+              <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
+                <thead className="bg-gray-900">
+                  <tr className="text-white text-left">
+                    <th className="font-semibold text-sm px-6 py-3">#</th>
+                    <th className="font-semibold text-sm px-6 py-3">
+                      First Name
+                    </th>
+                    <th className="font-semibold text-sm px-6 py-3">
+                      Last Name
+                    </th>
+                    <th className="font-semibold text-sm px-6 py-3">
+                      Phone Number
+                    </th>
+                    <th className="font-semibold text-sm px-6 py-3">
+                      Email Address
+                    </th>
+                    <th className="font-semibold text-sm px-6 py-3">
+                      Residential Address
+                    </th>
+                    <th className="font-semibold text-sm px-6 py-3">
+                      State/City
+                    </th>
+                    <th className="font-semibold text-sm px-6 py-3">
+                      Nationality
+                    </th>
+                    <th className="font-semibold text-sm px-6 py-3">
+                      Language
+                    </th>
+                    <th className="font-semibold text-sm px-6 py-3">
+                      BSN Number
+                    </th>
+                    <th className="font-semibold text-sm px-6 py-3">
+                      DOB Number
+                    </th>
+                    <th className="font-semibold text-sm px-6 py-3">
+                      Insurance Number
+                    </th>
+                    <th className="font-semibold text-sm px-6 py-3">
+                      Emergency Contacts
+                    </th>
+                    <th className="font-semibold text-sm px-6 py-3">Age</th>
+                    <th className="font-semibold text-sm px-6 py-3">Sex</th>
+                    <th className="font-semibold text-sm px-6 py-3">
+                      Therapist Type
+                    </th>
+                    <th className="font-semibold text-sm px-6 py-3">
+                      Date of Birth
+                    </th>
+                    <th className="font-semibold text-sm px-6 py-3">
+                      Blood Group
+                    </th>
+                    <th className="font-semibold text-sm px-6 py-3">
+                      File Upload
+                    </th>
+                    <th className="font-semibold text-sm  px-6 py-3">
+                      {" "}
+                      Remarks
+                    </th>
+                    <th className="font-semibold text-sm  px-6 py-3 text-center">
+                      {" "}
+                      Status
+                    </th>
+                    <th className="font-semibold text-sm  px-6 py-3 text-center">
+                      Operations
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {data ? (
+                    data.map((data) => (
+                      <>
+                        <tr className="hover:text-white hover:bg-teal-400">
+                          <td className="px-6 py-4">{/* {data.id} */}</td>
+                          <td className="px-6 py-4">{/* {data.id} */}</td>
+                          <td className="px-6 py-4">{/* {data.id} */}</td>
+                          <td className="px-6 py-4">{/* {data.id} */}</td>
+                          <td className="px-6 py-4">{/* {data.id} */}</td>
+                          <td className="px-6 py-4">{/* {data.id} */}</td>
+                          <td className="px-6 py-4">{/* {data.id} */}</td>
+                          <td className="px-6 py-4">{/* {data.id} */}</td>
+                          <td className="px-6 py-4">{/* {data.id} */}</td>
+                          <td className="px-6 py-4">{/* {data.id} */}</td>
+                          <td className="px-6 py-4">{/* {data.id} */}</td>
+                          <td className="px-6 py-4">{/* {data.id} */}</td>
+                          <td className="px-6 py-4">{/* {data.id} */}</td>
+                          <td className="px-6 py-4">{/* {data.id} */}</td>
+                          <td className="px-6 py-4">{/* {data.id} */}</td>
+                          <td className="px-6 py-4">{/* {data.id} */}</td>
+                          <td className="px-6 py-4">{/* {data.id} */}</td>
+                          <td className="px-6 py-4">
+                            {/* {data.service_category_id} */}
+                          </td>
+                          <td className="px-6 py-4">
+                            {/* {data.service_subcategory_name} */}
+                          </td>
+                          <td className="px-6 py-4 text-center">
+                            {/* {data.remarks} */}
+                          </td>
+                          <td className="px-6 py-4 text-center">
+                            {" "}
+                            <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
+                              {/* {data.status == "A" ? "Active" : "inactive"} */}
+                              {Statustest(data.status)}
+                            </span>{" "}
+                          </td>
+                          <td className="px-6 py-4 text-center">
+                            <>
+                              <Link href="/therapist/edit">
+                                <a className="text-purple-800 hover:underline">
+                                  Edit
+                                </a>
+                              </Link>
+                              <span> | </span>
+                              <>
+                                <a
+                                  href=""
+                                  className="text-purple-800 hover:underline"
+                                  // onClick={() =>
+                                  //   axios.post(
+                                  //     `https://misiapi.lamptechs.com/api/service/delete/${data.id}`
+                                  //   )
+                                  // }
+                                  onClick={() =>
+                                    deleteData(
+                                      `https://misiapi.lamptechs.com/api/service/delete`,
+                                      data.id
+                                    )
+                                  }
+                                >
+                                  Delete
+                                </a>
+                              </>
+                            </>
+                          </td>
+                        </tr>
+                      </>
+                    ))
+                  ) : (
+                    <> </>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </>
       ) : (
         <div className="text-center">

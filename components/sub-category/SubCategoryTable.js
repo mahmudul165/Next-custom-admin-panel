@@ -112,21 +112,22 @@ const SubCategoryTable = () => {
               <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
                 <thead className="bg-gray-900">
                   <tr className="text-white text-left">
-                    <th className="font-semibold text-sm uppercase px-6 py-3">
-                      #
-                    </th>
-                    <th className="font-semibold text-sm uppercase px-6 py-3">
+                    <th className="font-semibold text-sm px-4 py-3">#</th>
+                    <th className="font-semibold text-sm px-4 py-3">
                       Service category name
                     </th>
-                    <th className="font-semibold text-sm uppercase px-6 py-3">
+                    <th className="font-semibold text-sm px-4 py-3">
+                      Service subcategory name
+                    </th>
+                    <th className="font-semibold text-sm  px-4 py-3">
                       {" "}
                       Remarks
                     </th>
-                    <th className="font-semibold text-sm uppercase px-6 py-3 text-center">
+                    <th className="font-semibold text-sm  px-4 py-3 text-center">
                       {" "}
                       Status
                     </th>
-                    <th className="font-semibold text-sm uppercase px-6 py-3 text-center">
+                    <th className="font-semibold text-sm  px-4 py-3 text-center">
                       Operations
                     </th>
                   </tr>
@@ -136,21 +137,23 @@ const SubCategoryTable = () => {
                     data.map((data) => (
                       <>
                         <tr className="hover:text-white hover:bg-teal-400">
-                          <td className="px-6 py-4">{data.id}</td>
-                          <td className="px-6 py-4">
-                            {data.service_category_name}
+                          <td className="px-4 py-4">{data.id}</td>
+                          <td className="px-4 py-4">
+                            {/* {data.service_category_id} */}
+                            mahmud
                           </td>
-                          <td className="px-6 py-4 text-center">
-                            {data.remarks}
+                          <td className="px-4 py-4">
+                            {data.service_subcategory_name}
                           </td>
-                          <td className="px-6 py-4 text-center">
+                          <td className="  py-4 text-center">{data.remarks}</td>
+                          <td className="px-4 py-4 text-center">
                             {" "}
                             <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
                               {/* {data.status == "A" ? "Active" : "inactive"} */}
                               {Statustest(data.status)}
                             </span>{" "}
                           </td>
-                          <td className="px-6 py-4 text-center">
+                          <td className="px-4 py-4 text-center">
                             <>
                               <a
                                 href="#"
@@ -170,7 +173,7 @@ const SubCategoryTable = () => {
                                   // }
                                   onClick={() =>
                                     deleteData(
-                                      `https://misiapi.lamptechs.com/api/service/delete`,
+                                      `https://misiapi.lamptechs.com/api/subservice/delete`,
                                       data.id
                                     )
                                   }

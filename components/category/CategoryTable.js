@@ -46,92 +46,16 @@ const CategoryTable = () => {
     return data;
   }
   const { data, error, isError, isLoading } = useQuery("posts", fetchPosts);
-  console.log("first,", data ? data.status : "");
 
-  const [idValue, setid] = useState([]);
-  // useEffect(() => {
-  //   // console.log(
-  //   //   "deleted",
-  //   //   `https://misiapi.lamptechs.com/api/service/delete/${data.id}`
-  //   // );
-  //   setid(data.id);
-  // }, []);
-  // console.log(idValue);
-  // console.log(data);
-  {
-    data ? (
-      data.map(
-        (id) => `https://misiapi.lamptechs.com/api/service/delete/${id.id}`
-      )
-    ) : (
-      <> </>
-    );
-  }
-  // console.log(idValue);
-  //console.log("first test", Statustest(data.status));
-  //console.log("first test", Statustest(data.status));
-  const columns = [
-    {
-      title: "#",
-      dataIndex: "id",
-      key: "id",
-      width: 80,
-      className: "  p-2 border-r-2 border-b-2",
-      rowClassName: "bg-black-ripon",
-    },
-    {
-      title: "Service category name",
-      dataIndex: "service_category_name",
-      key: "service_category_name",
-      width: 400,
-      className: "p-2 border-r-2 border-b-2",
-    },
-    {
-      title: "Remarks",
-      dataIndex: "remarks",
-      key: "remarks",
-      width: 400,
-      className: "  p-2 border-r-2 border-b-2",
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      // dataIndex: Statustest("status"),
-      key: "status",
-      width: 400,
-      className: "      p-2 border-r-2 border-b-2",
-    },
-    {
-      title: "Operations",
-      dataIndex: "id",
-      key: "operations",
-      className: "  p-2 border-b-2",
-      render: () => (
-        // <a href="#">View</a> |
-        <>
-          <a href="#">Edit</a> |
-          <Link
-            href="#"
-            // onClick={() =>
-            //   axios.post(
-            //     `https://misiapi.lamptechs.com/api/service/delete/${data.id}`
-            //   )
-            // }
-          >
-            <a
-              onClick={() =>
-                axios.post(
-                  `https://misiapi.lamptechs.com/api/service/delete/${dataIndex}`
-                )
-              }
-            >
-              Delete
-            </a>
-          </Link>
-        </>
-      ),
-    },
-  ];
+  // {
+  //   data ? (
+  //     data.map(
+  //       (id) => `https://misiapi.lamptechs.com/api/service/delete/${id.id}`
+  //     )
+  //   ) : (
+  //     <> </>
+  //   );
+  // }
 
   //Pagination
   const [activePage, setActivePage] = useState(15);
