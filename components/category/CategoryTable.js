@@ -1,9 +1,14 @@
 import Table from "rc-table";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Pagination from "react-js-pagination";
 import useSWR from "swr";
 import styled from "styled-components";
+import useAuth from "/hook/useAuth";
+import axios from "axios";
+import Link from "next/link";
+import { useQuery } from "react-query";
 const CategoryTable = () => {
+  const { deleteData, Statustest } = useAuth();
   const BodyRow = styled.tr`
     & th {
       color: rgb(148 163 184);
@@ -29,29 +34,41 @@ const CategoryTable = () => {
     },
   };
   //const [first, setfirst] = useState(second)
-  const { data, error } = useSWR(
-    "https://misiapi.lamptechs.com/api/service",
-    { fetcher: async (url) => await fetch(url).then((res) => res.json()) }
-    // { fetcher: async (url) => await axios.get(url).then((res) => res.data) }
-  );
+  // const { data, error } = useSWR(
+  //   "https://misiapi.lamptechs.com/api/service",
+  //   { fetcher: async (url) => await fetch(url).then((res) => res.json()) }
+  //    { fetcher: async (url) => await axios.get(url).then((res) => res.data) }
+  // );
+  async function fetchPosts() {
+    const { data } = await axios.get(
+      "https://misiapi.lamptechs.com/api/service"
+    );
+    return data;
+  }
+  const { data, error, isError, isLoading } = useQuery("posts", fetchPosts);
   console.log("first,", data ? data.status : "");
 
-  const Statustest = async (status) => {
-    if (status == "A") {
-      return await "Active";
-    } else if (status == "I") {
-      return await "Inactive";
-    } else if (status == "P") {
-      return await "Pending";
-    } else if (status == "C") {
-      return await "Cancelled";
-    } else if (status == "D") {
-      return await "Deleted";
-    } else {
-      return await " ";
-    }
-  };
-
+  const [idValue, setid] = useState([]);
+  // useEffect(() => {
+  //   // console.log(
+  //   //   "deleted",
+  //   //   `https://misiapi.lamptechs.com/api/service/delete/${data.id}`
+  //   // );
+  //   setid(data.id);
+  // }, []);
+  // console.log(idValue);
+  // console.log(data);
+  {
+    data ? (
+      data.map(
+        (id) => `https://misiapi.lamptechs.com/api/service/delete/${id.id}`
+      )
+    ) : (
+      <> </>
+    );
+  }
+  // console.log(idValue);
+  //console.log("first test", Statustest(data.status));
   //console.log("first test", Statustest(data.status));
   const columns = [
     {
@@ -86,13 +103,31 @@ const CategoryTable = () => {
     },
     {
       title: "Operations",
-      dataIndex: "",
+      dataIndex: "id",
       key: "operations",
       className: "  p-2 border-b-2",
       render: () => (
         // <a href="#">View</a> |
         <>
-          <a href="#">Edit</a> | <a href="#">Delete</a>
+          <a href="#">Edit</a> |
+          <Link
+            href="#"
+            // onClick={() =>
+            //   axios.post(
+            //     `https://misiapi.lamptechs.com/api/service/delete/${data.id}`
+            //   )
+            // }
+          >
+            <a
+              onClick={() =>
+                axios.post(
+                  `https://misiapi.lamptechs.com/api/service/delete/${dataIndex}`
+                )
+              }
+            >
+              Delete
+            </a>
+          </Link>
         </>
       ),
     },
@@ -108,28 +143,89 @@ const CategoryTable = () => {
     <>
       {data ? (
         <>
-          {" "}
-          <Table
-            columns={columns}
-            data={data}
-            rowKey="id"
-            components={components}
-            className="table rounded-lg p-4 w-full text-center rc-table-custom font-semibold border-collapse border border-slate-400 "
-          />
-          <Pagination
-            activePage={activePage}
-            itemsCountPerPage={10}
-            totalItemsCount={450}
-            pageRangeDisplayed={5}
-            onChange={handlePageChange}
-            nextPageText={"Next"}
-            prevPageText={"Prev"}
-            firstPageText={"First"}
-            lastPageText={"Last"}
-            innerclassName="js-ul"
-            itemclassName="js-li"
-            linkclassName="page-link"
-          />
+          <div className="min-h-screen bg-white-800 py-3">
+            <div className="overflow-x-auto w-full">
+              <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
+                <thead className="bg-gray-900">
+                  <tr className="text-white text-left">
+                    <th className="font-semibold text-sm uppercase px-6 py-3">
+                      #
+                    </th>
+                    <th className="font-semibold text-sm uppercase px-6 py-3">
+                      Service category name
+                    </th>
+                    <th className="font-semibold text-sm uppercase px-6 py-3">
+                      {" "}
+                      Remarks
+                    </th>
+                    <th className="font-semibold text-sm uppercase px-6 py-3 text-center">
+                      {" "}
+                      Status
+                    </th>
+                    <th className="font-semibold text-sm uppercase px-6 py-3 text-center">
+                      Operations
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {data ? (
+                    data.map((data) => (
+                      <>
+                        <tr className="hover:text-white hover:bg-teal-400">
+                          <td className="px-6 py-4">{data.id}</td>
+                          <td className="px-6 py-4">
+                            {data.service_category_name}
+                          </td>
+                          <td className="px-6 py-4 text-center">
+                            {data.remarks}
+                          </td>
+                          <td className="px-6 py-4 text-center">
+                            {" "}
+                            <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
+                              {/* {data.status == "A" ? "Active" : "inactive"} */}
+                              {Statustest(data.status)}
+                            </span>{" "}
+                          </td>
+                          <td className="px-6 py-4 text-center">
+                            <>
+                              <a
+                                href="#"
+                                className="text-purple-800 hover:underline"
+                              >
+                                Edit
+                              </a>
+                              <span>| </span>
+                              <>
+                                <a
+                                  href=""
+                                  className="text-purple-800 hover:underline"
+                                  // onClick={() =>
+                                  //   axios.post(
+                                  //     `https://misiapi.lamptechs.com/api/service/delete/${data.id}`
+                                  //   )
+                                  // }
+                                  onClick={() =>
+                                    deleteData(
+                                      `https://misiapi.lamptechs.com/api/service/delete`,
+                                      data.id
+                                    )
+                                  }
+                                >
+                                  Delete
+                                </a>
+                              </>
+                            </>
+                          </td>
+                        </tr>
+                      </>
+                    ))
+                  ) : (
+                    <> </>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </>
       ) : (
         <>

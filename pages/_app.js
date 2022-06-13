@@ -10,7 +10,13 @@ import { SessionProvider } from "next-auth/react";
 import "../styles/globals.css";
 import Head from "next/head";
 import Script from "next/script";
-
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "react-query";
 import Meta from "/components/seo/Meta";
 // import Header from "../component/layout/Header";
 // import Footer from "../component/layout/Footer";
@@ -18,7 +24,9 @@ import Meta from "/components/seo/Meta";
 import AuthProvider from "/contexts/AuthProvider";
 import { AnimatePresence } from "framer-motion";
 import Layout from "/components/layout/Layout";
+
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
+  const queryClient = new QueryClient();
   if (Component.getLayout) {
     return Component.getLayout(<Component {...pageProps} />);
   }
@@ -47,13 +55,15 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       />
 
       <SessionProvider session={session}>
-        <AuthProvider>
-          <Layout>
-            <AnimatePresence exitBeforeEnter>
-              <Component {...pageProps} />
-            </AnimatePresence>
-          </Layout>
-        </AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
+            <Layout>
+              <AnimatePresence exitBeforeEnter>
+                <Component {...pageProps} />
+              </AnimatePresence>
+            </Layout>
+          </AuthProvider>
+        </QueryClientProvider>
       </SessionProvider>
     </>
   );
