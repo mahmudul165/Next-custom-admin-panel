@@ -1,107 +1,62 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-
+import { useQuery } from "react-query";
 const useGlobal = () => {
+  const [categorydata, setCategory] = useState([]);
+  const [subservicedata, setSubservice] = useState([]);
+  const [therapistservicedata, setTherapistservice] = useState([]);
+  // global get data method
+  async function fetchCategoryService() {
+    const { data } = await axios.get(
+      "https://misiapi.lamptechs.com/api/service"
+    );
+    return data;
+  }
+  async function fetchSubService() {
+    const { data } = await axios.get(
+      "https://misiapi.lamptechs.com/api/subservice"
+    );
+    return data;
+  }
+  async function fetchTherapistService() {
+    const { data } = await axios.get(
+      "https://misiapi.lamptechs.com/api/therapistService"
+    );
+    return data;
+  }
+  const { data: categoryService } = useQuery(
+    "categoryService",
+    fetchCategoryService
+  );
+
+  const { data: subService } = useQuery("subService", fetchSubService);
+  const { data: therapistService } = useQuery(
+    "therapistService",
+    fetchTherapistService
+  );
+  useEffect(() => {
+    setCategory(categoryService);
+    setSubservice(subService);
+    setTherapistservice(therapistService);
+  }, [categoryService, subService, therapistService]);
+  // console.log(
+  //   "my data of 3 api is",
+  //   categorydata,
+  //   subservicedata,
+  //   therapistservicedata
+  // );
   // global post method
   const postData = (url, data) => {
     axios.post(url, data).then((response) => {
       console.log(response);
       alert("successfully added ");
-      <>
-        {" "}
-        {/* <div
-          id="popup-modal"
-          tabIndex="-1"
-          className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full"
-        >
-          <div className="relative p-4 w-full max-w-md h-full md:h-auto">
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-              <button
-                type="button"
-                className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                data-modal-toggle="popup-modal"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-              <div className="p-6 text-center">
-                <svg
-                  className="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  ></path>
-                </svg>
-                <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                  Are you sure you want to delete this product?
-                </h3>
-                <button
-                  data-modal-toggle="popup-modal"
-                  type="button"
-                  className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-                >
-                  Yes, I'm sure
-                </button>
-                <button
-                  data-modal-toggle="popup-modal"
-                  type="button"
-                  className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                >
-                  No, cancel
-                </button>
-              </div>
-            </div>
-          </div>
-        </div> */}
-        {/* <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
-          <div className="flex items-center justify-center w-12 bg-emerald-500">
-            <svg
-              className="w-6 h-6 text-white fill-current"
-              viewBox="0 0 40 40"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z" />
-            </svg>
-          </div>
-
-          <div className="px-4 py-2 -mx-3">
-            <div className="mx-3">
-              <span className="font-semibold text-emerald-500 dark:text-emerald-400">
-                Success
-              </span>
-              <p className="text-sm text-gray-600 dark:text-gray-200">
-                Your account was registered!
-              </p>
-            </div>
-          </div>
-        </div> */}
-        ;
-      </>;
     });
   };
-
+  // global delete data
   const deleteData = (url, id) => {
     axios.post(`${url}/${id}`).then((response) => {
       console.log(response);
-      //misiapi.lamptechs.com/api/service/delete/
-      https: alert("data field deleted  ");
+      alert("data field deleted  ");
     });
   };
 
@@ -122,6 +77,12 @@ const useGlobal = () => {
     }
   };
   return {
+    categorydata,
+    subservicedata,
+    therapistservicedata,
+    fetchCategoryService,
+    fetchSubService,
+    fetchTherapistService,
     postData,
     deleteData,
     Statustest,

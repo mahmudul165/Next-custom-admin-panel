@@ -7,6 +7,7 @@ import useAuth from "/hook/useAuth";
 import axios from "axios";
 import Link from "next/link";
 import { useQuery } from "react-query";
+import { fetchCategoryService, fetchSubService } from "../../hook/useApi";
 const CategoryTable = () => {
   const { deleteData, Statustest } = useAuth();
   const BodyRow = styled.tr`
@@ -33,19 +34,11 @@ const CategoryTable = () => {
       row: BodyRow,
     },
   };
-  //const [first, setfirst] = useState(second)
-  // const { data, error } = useSWR(
-  //   "https://misiapi.lamptechs.com/api/service",
-  //   { fetcher: async (url) => await fetch(url).then((res) => res.json()) }
-  //    { fetcher: async (url) => await axios.get(url).then((res) => res.data) }
-  // );
-  async function fetchPosts() {
-    const { data } = await axios.get(
-      "https://misiapi.lamptechs.com/api/service"
-    );
-    return data;
-  }
-  const { data, error, isError, isLoading } = useQuery("posts", fetchPosts);
+
+  const { data, error, isError, isLoading } = useQuery(
+    "posts",
+    fetchCategoryService
+  );
 
   // {
   //   data ? (

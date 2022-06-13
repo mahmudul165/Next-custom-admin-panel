@@ -6,6 +6,8 @@ import useAuth from "/hook/useAuth";
 import axios from "axios";
 import Link from "next/link";
 import styled from "styled-components";
+import { fetchCategoryService, fetchSubService } from "../../hook/useApi";
+import { useQuery } from "react-query";
 const SubCategoryTable = () => {
   const { deleteData, Statustest } = useAuth();
   const BodyRow = styled.tr`
@@ -33,70 +35,12 @@ const SubCategoryTable = () => {
     },
   };
 
-  //   "id": 1,
-  // "service_subcategory_name": "service 2 updated",
-  // "status": "A",
-  // "remarks": "Checking update",
-  // "service_category_id": "1"
-  const { data, error } = useSWR(
-    "https://misiapi.lamptechs.com/api/subservice",
-    { fetcher: async (url) => await fetch(url).then((res) => res.json()) }
-    // { fetcher: async (url) => await axios.get(url).then((res) => res.data) }
+  const { data, error, isError, isLoading } = useQuery(
+    "subService",
+    fetchSubService
   );
-  const columns = [
-    // {
-    //   title: "Sub_Category_Id",
-    //   dataIndex: "id",
-    //   key: "id",
-    //   width: 400,
-    //   className: "    p-2 border-r-2 border-b-2",
-    //   rowClassName: "bg-black-ripon",
-    // },
-    {
-      title: "Category_Name",
-      dataIndex: "service_category_id",
-      key: "service_category_id",
-      width: 400,
-      className: "    p-2 border-r-2 border-b-2",
-    },
-    {
-      title: "service_subcategory_name",
-      dataIndex: "service_subcategory_name",
-      key: "service_subcategory_name",
-      width: 400,
-      className: "     p-2 border-r-2 border-b-2",
-      rowClassName: "bg-black-ripon",
-    },
-
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      width: 400,
-      className: "    p-2 border-r-2 border-b-2",
-    },
-    {
-      title: "Remarks",
-      dataIndex: "remarks",
-      key: "remarks",
-      width: 400,
-      className: "p-2 border-r-2 border-b-2",
-    },
-
-    {
-      title: "Operations",
-      dataIndex: "",
-      key: "operations",
-      className: "p-2 border-b-2",
-      render: () => (
-        // <a href="#">View</a> |
-        <>
-          <a href="#">Edit</a> | <a href="#">Delete</a>
-        </>
-      ),
-    },
-  ];
-
+  // const { data: items } = useQuery("categoryService", fetchCategoryService);
+  // console.log("fetchCategoryService items is ", items);
   //Pagination
   const [activePage, setActivePage] = useState(15);
   const handlePageChange = (pageNumber) => {
