@@ -11,7 +11,8 @@ const schema = yup
   .shape({
     name: yup.string().required(),
     // details: yup.string().required(),
-    remarks: yup.string().required(),
+    //remarks: yup.string().required(),
+    // remarks: yup.string().required(),
     status: yup.string().required(),
   })
   .required();
@@ -67,14 +68,8 @@ const CategoryForm = ({ modal, setModal }) => {
           </label>
         </div> */}
         {/* details */}
-        <div className="relative my-3">
-          {/* <input
-                  type="text-area"
-                  id="floating_outlined"
-                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  placeholder="  "
-                  required
-                /> */}
+        {/* <div className="relative my-3">
+         
           <textarea
             className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
             id="inline-full-name"
@@ -87,7 +82,7 @@ const CategoryForm = ({ modal, setModal }) => {
           >
             details
           </label>
-        </div>
+        </div> */}
         {/* Remarks */}
         <div className="relative  my-3">
           <input
@@ -96,7 +91,6 @@ const CategoryForm = ({ modal, setModal }) => {
             id="remarks"
             className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
             placeholder="  "
-            required
           />
           <label
             htmlFor="remarks"
@@ -146,11 +140,14 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             aria-label="Default select example"
             {...register("status")}
           >
-            <option selected>status</option>
+            {/* <option selected>status</option> */}
             <option value="A" selected>
-              active
+              Active
             </option>
-            <option value="I">inactive</option>
+            <option value="Inactive">Inactive</option>
+            <option value="P">Pending</option>
+            <option value="C">Cancelled</option>
+            <option value="D">Deleted</option>
           </select>
           <label
             htmlFor="remarks"

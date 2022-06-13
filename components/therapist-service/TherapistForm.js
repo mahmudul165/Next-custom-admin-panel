@@ -13,7 +13,7 @@ const schema = yup
     service_category_id: yup.string().required(),
     name: yup.string().required(),
     // details: yup.string().required(),
-    remarks: yup.string().required(),
+    //remarks: yup.string().required(),
     status: yup.string().required(),
   })
   .required();
@@ -198,14 +198,8 @@ function SubCategoryForm() {
       </div>
     </div> */}
       {/* details */}
-      <div className="relative my-3">
-        {/* <input
-                  type="text-area"
-                  id="floating_outlined"
-                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  placeholder="  "
-                  required
-                /> */}
+      {/* <div className="relative my-3">
+         
         <textarea
           className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
           id="inline-full-name"
@@ -218,7 +212,7 @@ function SubCategoryForm() {
         >
           details
         </label>
-      </div>
+      </div> */}
       {/* Remarks */}
       <div className="relative my-3">
         <input
@@ -227,7 +221,6 @@ function SubCategoryForm() {
           id="remarks"
           className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
           placeholder="  "
-          required
         />
         <label
           htmlFor="remarks"

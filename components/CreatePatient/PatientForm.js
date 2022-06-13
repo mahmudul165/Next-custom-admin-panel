@@ -10,7 +10,7 @@ function PaitentForm() {
         <div className=" px-3">
           <div className=" card d-flex      justify-center ">
             <h2 className="mt-3 text-center text-3xl font-extrabold text-teal-500">
-              Create your profile
+              Create new patient
             </h2>
             {/* first portion of the form */}
             <div className=" m-3 p-3 ">

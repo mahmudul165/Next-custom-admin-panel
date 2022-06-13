@@ -55,6 +55,7 @@ const Nav = ({ sidebarOutsideClick }) => {
   //console.log("sidebar Nav", sidebarOutsideClick)
   return (
     <>
+      {/* SideNavebar */}
       <nav className="flex flex-col mx-2 my-6 space-y-4 w-44">
         {/* <div className="inline-flex items-center justify-center ">
           {sidebarStatus ? (
@@ -84,7 +85,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="/services/category"
           // sidebarStatus={sidebarStatus}
-          menuTitle="Category"
+          menuTitle="Service Category"
           subMenu={false}
           subMenuArray={null}
         >
@@ -93,7 +94,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="/services/sub-category"
           // sidebarStatus={sidebarStatus}
-          menuTitle="Sub-Category"
+          menuTitle="Service Sub Category"
           subMenu={false}
           subMenuArray={null}
         >
@@ -102,7 +103,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="/services/therapist-service"
           // sidebarStatus={sidebarStatus}
-          menuTitle="Therapist-Service"
+          menuTitle="Therapist Service"
           subMenu={false}
           subMenuArray={null}
         >
@@ -112,7 +113,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="/patient/create-new-patient"
           // sidebarStatus={sidebarStatus}
-          menuTitle="Patient list"
+          menuTitle="Patient List"
           subMenu={false}
           subMenuArray={null}
         >
@@ -121,7 +122,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="/therapist/create-new-therapist"
           // sidebarStatus={sidebarStatus}
-          menuTitle="Therapist list"
+          menuTitle="Therapist List"
           subMenu={false}
           subMenuArray={null}
         >
@@ -130,7 +131,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="/all-ticket"
           // sidebarStatus={sidebarStatus}
-          menuTitle="All Ticket"
+          menuTitle="All Tickets"
           subMenu={false}
           subMenuArray={null}
         >
@@ -139,7 +140,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="/services/therapist-doctor"
           // sidebarStatus={sidebarStatus}
-          menuTitle="Therapist-Doctor"
+          menuTitle="Therapist/Doctor"
           subMenu={false}
           subMenuArray={null}
         >
@@ -169,7 +170,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         </NavItem> */}
 
         {/* this menu has child Menu     */}
-        <NavItem
+        {/* <NavItem
           hrefLink="#"
           // sidebarStatus={sidebarStatus}
           menuTitle="Chiled Menu"
@@ -177,7 +178,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenuArray={childMenu}
         >
           <FilmIcon className=" h-5" />
-        </NavItem>
+        </NavItem> */}
       </nav>
     </>
   );
