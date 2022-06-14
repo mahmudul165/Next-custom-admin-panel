@@ -63,21 +63,23 @@ const CategoryTable = () => {
           <div className="min-h-screen bg-white-800 py-3">
             <div className="overflow-x-auto w-full">
               <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
-                <thead className="bg-gray-200">
-                  <tr className="font-semibold text-base text-left">
-                    <th className="font-semibold text-base  px-6 py-3">#</th>
+                <thead className="bg-teal-500">
+                  <tr className="border font-semibold text-white text-sm    text-center ">
+                    <th className="font-semibold text-base  px-6 py-3 border">
+                      #
+                    </th>
                     <th className="font-semibold text-base  px-6 py-3">
                       Service category name
                     </th>
-                    <th className="font-semibold text-base  px-6 py-3">
+                    <th className="font-semibold text-base  px-6 py-3 border">
                       {" "}
                       Remarks
                     </th>
-                    <th className="font-semibold text-base  px-6 py-3 text-center">
+                    <th className="font-semibold text-base  px-6 py-3 text-center border">
                       {" "}
                       Status
                     </th>
-                    <th className="font-semibold text-base  px-6 py-3 text-center">
+                    <th className="font-semibold text-base  px-6 py-3 text-center border">
                       Operations
                     </th>
                   </tr>
@@ -86,22 +88,23 @@ const CategoryTable = () => {
                   {data ? (
                     data.map((data) => (
                       <>
-                        <tr className="hover:text-white hover:bg-teal-300 hover:text-base  ">
-                          <td className="px-6 py-4">{data.id}</td>
-                          <td className="px-6 py-4">
+                        <tr className=" hover:bg-gray-100 hover:text-base   border">
+                          <td className="border px-6 py-4 text-center ">
+                            {data.id}
+                          </td>
+                          <td className="border px-6 py-4  text-center">
                             {data.service_category_name}
                           </td>
-                          <td className="px-6 py-4 text-center">
+                          <td className=" border px-6 py-4 text-center ">
                             {data.remarks}
                           </td>
-                          <td className="px-6 py-4 text-center">
-                            {" "}
+                          <td className="border px-6 py-4 text-center ">
                             <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
                               {/* {data.status == "A" ? "Active" : "inactive"} */}
                               {Statustest(data.status)}
                             </span>{" "}
                           </td>
-                          <td className="px-6 py-4 text-center">
+                          <td className="border px-6 py-4 text-center ">
                             <>
                               <a
                                 href="#"
