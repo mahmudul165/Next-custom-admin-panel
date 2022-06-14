@@ -54,7 +54,7 @@ const Nav = ({ sidebarOutsideClick }) => {
   return (
     <>
       {/* SideNavebar */}
-      <nav className="flex flex-col mx-2 my-6 space-y-4 w-44">
+      <nav className="flex flex-col mx-2 my-6 space-y-3 w-44">
         {/* <div className="inline-flex items-center justify-center ">
           {sidebarStatus ? (
             <ArrowNarrowLeftIcon

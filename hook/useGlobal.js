@@ -63,13 +63,13 @@ const useGlobal = () => {
   // status
   const Statustest = (status) => {
     if (status == "A") {
-      return "Active";
+      return " Active";
     } else if (status == "I") {
       return "Inactive";
     } else if (status == "P") {
       return "Pending";
     } else if (status == "C") {
-      return "Cancelled";
+      return "Canceled";
     } else if (status == "D") {
       return "Deleted";
     } else {

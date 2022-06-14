@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-function TicketForm() {
+function TicketEditForm() {
   const [startDate, setStartDate] = useState(new Date());
   return (
     <>
       <form className="w-10/12 m-auto   first-line: ">
-        <div className=" px-3">
-          <div className=" card d-flex      justify-center ">
+        <div className=" px-6">
+          <div className="p-4 card d-flex      justify-center ">
             <h2 className="mt-3 text-center text-3xl font-extrabold text-teal-500">
-              Create new ticket
+              Edit ticket
             </h2>
             {/* first portion of the form */}
             <div className=" m-3 p-3 ">
@@ -536,4 +536,4 @@ function TicketForm() {
   );
 }
 
-export default TicketForm;
+export default TicketEditForm;

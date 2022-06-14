@@ -99,10 +99,26 @@ const CategoryTable = () => {
                             {data.remarks}
                           </td>
                           <td className="border px-6 py-4 text-center ">
-                            <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
-                              {/* {data.status == "A" ? "Active" : "inactive"} */}
+                            {/* {Statustest(data.status)} */}
+
+                            {/* <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
                               {Statustest(data.status)}
-                            </span>{" "}
+                            </span> */}
+
+                            {Statustest(data.status) && (
+                              <>
+                                {Statustest(data.status) === "Canceled" ||
+                                Statustest(data.status) === "Deleted" ? (
+                                  <span className="text-white text-sm w-1/3 pb-1 bg-red-500 font-semibold px-2 rounded-full">
+                                    {Statustest(data.status)}
+                                  </span>
+                                ) : (
+                                  <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
+                                    {Statustest(data.status)}
+                                  </span>
+                                )}
+                              </>
+                            )}
                           </td>
                           <td className="border px-6 py-4 text-center ">
                             <>
