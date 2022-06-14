@@ -131,12 +131,11 @@ const SubCategoryTable = () => {
                           </td>
                           <td className="border px-4 py-4 text-center  ">
                             <>
-                              <a
-                                href="#"
-                                className="text-purple-800 hover:underline"
-                              >
-                                Edit
-                              </a>
+                              <Link href="#">
+                                <a className="text-purple-800 hover:underline">
+                                  Edit
+                                </a>
+                              </Link>
                               <span>| </span>
                               <>
                                 <a

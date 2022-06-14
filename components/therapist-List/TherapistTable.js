@@ -214,10 +214,7 @@ const SubCategoryTable = () => {
                           </td>
                           <td className="border px-6 py-4 text-center   ">
                             <>
-                              <Link
-                                href="/therapist
-                              /edit"
-                              >
+                              <Link href="/therapist/edit">
                                 <a className="text-purple-800 hover:underline">
                                   Edit
                                 </a>
