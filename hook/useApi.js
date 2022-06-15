@@ -17,6 +17,14 @@ export const fetchTherapistService = async () => {
   );
   return data;
 };
+export const patientList = async () => {
+  const { data } = await axios.get("https://misiapi.lamptechs.com/api/patient");
+  return data;
+};
+export const allTicketList = async () => {
+  const { data } = await axios.get("https://misiapi.lamptechs.com/api/patient");
+  return data;
+};
 
 // export const categoryServiceData = () => {
 //   return useQuery("categoryServiceData", fetchCategoryService());

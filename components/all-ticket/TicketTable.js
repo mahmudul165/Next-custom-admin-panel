@@ -38,6 +38,7 @@ const PatientTable = () => {
   // "status": "A",
   // "remarks": "Checking update",
   // "service_category_id": "1"
+
   const { data, error } = useSWR(
     "https://misiapi.lamptechs.com/api/therapistService",
     { fetcher: async (url) => await fetch(url).then((res) => res.json()) }
@@ -180,91 +181,91 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
                 <thead className="bg-teal-500 border">
                   <tr className="border font-semibold text-white text-sm    text-center  ">
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       #
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Patient Source
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Patient ID
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Ticket ID
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       First Name
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Last Name
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Email Address
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Phone Number
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Residential Address
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       State/City
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Nationality
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Age
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Marital status
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Date of Birth
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Occupation
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Emergency Contacts
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       BSN Number
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       DOB Number
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Insurance Number
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Assign To
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Pass Department
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Call Strike
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Sex
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Medical History
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Blood Group
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       File Upload
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Remarks
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Status
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2 py-2 border">
                       Operations
                     </th>
                   </tr>
@@ -274,95 +275,95 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     data.map((data) => (
                       <>
                         <tr className=" hover:bg-gray-100 hover:text-base   border">
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.service_category_id} */}
                           </td>
-                          <td className="border px-6 py-4 text-center ">
+                          <td className="border px-2 py-2 text-center ">
                             {/* {data.service_subcategory_name} */}
                           </td>
-                          <td className="border px-6 py-4 text-center   ">
+                          <td className="border px-2 py-2 text-center   ">
                             {/* {data.remarks} */}
                           </td>
-                          <td className="border px-6 py-4 text-center   ">
+                          <td className="border px-2 py-2 text-center   ">
                             {" "}
                             <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
                               {/* {data.status == "A" ? "Active" : "inactive"} */}
                               {Statustest(data.status)}
                             </span>
                           </td>
-                          <td className="border px-6 py-4 text-center   ">
+                          <td className="border px-2 py-2 text-center   ">
                             <>
                               <Link href="/all-ticket/edit">
                                 <a className="text-purple-800 hover:underline">

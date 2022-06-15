@@ -7,7 +7,7 @@ import UserMenu from "./header/UserMenu";
 
 const Header = ({ mobileNavsidebar, setMobileNavsidebar }) => {
   return (
-    <header className="flex items-center h-20 px-6 sm:px-10   bg-gray-600">
+    <header className="flex items-center h-18 px-6 sm:px-10   bg-gray-600">
       <MenuIcon
         className="h-12 stroke-slate-600 cursor-pointer sm:hidden"
         onClick={() => setMobileNavsidebar(!mobileNavsidebar)}
