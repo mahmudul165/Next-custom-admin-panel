@@ -14,7 +14,8 @@ import { useQuery } from "react-query";
 const PatientTable = () => {
   const { deleteData, Statustest } = useAuth();
   //   Catch Search input
-  const [searchInput, setInput] = useState("");
+  const [searchInput, setInput] = useState([]);
+  const [statusSearch, setStatus] = useState([]);
   // const handleSearchChange = (e) => {
   //   e.preventDefault();
   //   setInput(e.target.value.toLowerCase());
@@ -23,6 +24,7 @@ const PatientTable = () => {
   const [results, setResults] = useState([]);
   console.log("results", results);
   console.log("Search input value ", searchInput);
+  console.log("Search status value ", statusSearch);
 
   //const { handleSearchChange, searchInput } = useAuth();
   useEffect(() => {
@@ -184,12 +186,13 @@ ease-in-out
 m-0
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               aria-label="Default select example"
+              onChange={(e) => setStatus(e.target.value)}
             >
               {/* <option selected>status</option> */}
               <option value="A" selected>
                 Active
               </option>
-              <option value="Inactive">Inactive</option>
+              <option value="I">Inactive</option>
               <option value="P">Pending</option>
               <option value="C">Cancelled</option>
               <option value="D">Deleted</option>
@@ -284,7 +287,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {results ? (
+                  {searchInput.length < 1 && statusSearch.length < 1 ? (
                     <>
                       {results.map((data, index) => {
                         return (
@@ -390,7 +393,115 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       })}
                     </>
                   ) : (
-                    <> </>
+                    <>
+                      {results
+                        .filter(
+                          (i) =>
+                            i.id == searchInput || i.status === statusSearch
+                        )
+                        .map((data, index) => {
+                          return (
+                            <>
+                              <tr className=" hover:bg-gray-100 hover:text-base   border">
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.id}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.patient_first_name}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.patient_last_name}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.patient_email}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.patient_phone}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.patient_address}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.patient_city}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.patient_country}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.age}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.marital_status}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.date_of_birth}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.occupation}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.emergency_contact}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.bsn_number}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.dob_number}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.insurance_number}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.sex}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.medical_history}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.blood_group}
+                                </td>
+                                <td className="border px-6 py-4 text-center ">
+                                  {data.patient_picture_name}
+                                </td>
+                                <td className="border px-6 py-4 text-center   ">
+                                  {data.admin_remarks}
+                                </td>
+                                <td className="border px-6 py-4 text-center   ">
+                                  <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
+                                    {/* {data.status == "A" ? "Active" : "inactive"} */}
+                                    {Statustest(data.status)}
+                                  </span>
+                                </td>
+                                <td className="border px-6 py-4 text-center   ">
+                                  <>
+                                    <Link href="/patient/edit">
+                                      <a className="text-purple-800 hover:underline">
+                                        Edit
+                                      </a>
+                                    </Link>
+                                    <span> | </span>
+                                    <>
+                                      <a
+                                        href=""
+                                        className="text-purple-800 hover:underline"
+
+                                        // onClick={() =>
+                                        //   deleteData(
+                                        //     `https://misiapi.lamptechs.com/api/service/delete`,
+                                        //     data.id
+                                        //   )
+                                        // }
+                                      >
+                                        Delete
+                                      </a>
+                                    </>
+                                  </>
+                                </td>
+                              </tr>
+                            </>
+                          );
+                        })}
+                    </>
                   )}
                 </tbody>
               </table>
