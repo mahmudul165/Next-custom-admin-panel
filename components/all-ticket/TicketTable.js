@@ -60,11 +60,11 @@ const PatientTable = () => {
   return (
     <>
       <>
-        <div className="grid grid-cols-3 gap-x-8 my-1 p-4 ">
+        <div className="grid grid-cols-3 gap-x-8      ">
           {/*ticket search */}
 
-          <div className="flex justify-center">
-            <div className="mb-3 xl:w-96">
+          <div className="flex  ">
+            <div className="mb-3 xl:w-72">
               <div className="input-group relative flex flex-wrap items-stretch w-full mb-4">
                 <input
                   type="text"
@@ -99,8 +99,8 @@ const PatientTable = () => {
             </div>
           </div>
           {/*patient id search */}
-          <div className="flex justify-center">
-            <div className="mb-3 xl:w-96">
+          <div className="flex  ">
+            <div className="mb-3 xl:w-72">
               <div className="input-group relative flex flex-wrap items-stretch w-full mb-4">
                 <input
                   type="search"
@@ -134,7 +134,7 @@ const PatientTable = () => {
             </div>
           </div>
           {/* status */}
-          <div className="relative">
+          <div className="relative w-64  ">
             <select
               id="status"
               className="form-select appearance-none

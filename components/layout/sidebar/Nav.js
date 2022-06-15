@@ -54,7 +54,7 @@ const Nav = ({ sidebarOutsideClick }) => {
   return (
     <>
       {/* SideNavebar */}
-      <nav className="flex flex-col mx-2 my-6 space-y-3 w-44">
+      <nav className="flex flex-col mx-1 my-6 space-y-2 w-44">
         {/* <div className="inline-flex items-center justify-center ">
           {sidebarStatus ? (
             <ArrowNarrowLeftIcon
@@ -79,6 +79,33 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenuArray={null}
         >
           <MdOutlineDashboard className="h-5" />
+        </NavItem>
+        <NavItem
+          hrefLink="/patient"
+          // sidebarStatus={sidebarStatus}
+          menuTitle="Patient List"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          <MdList className=" h-6" />
+        </NavItem>
+        <NavItem
+          hrefLink="/therapist"
+          // sidebarStatus={sidebarStatus}
+          menuTitle="Therapist List"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          <TbPhysotherapist className=" h-6" />
+        </NavItem>
+        <NavItem
+          hrefLink="/all-ticket"
+          // sidebarStatus={sidebarStatus}
+          menuTitle="All Tickets"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          <HiOutlineTicket className=" h-6" />
         </NavItem>
         <NavItem
           hrefLink="/services/category"
@@ -108,33 +135,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           {" "}
           <RiPsychotherapyLine className=" h-6" />
         </NavItem>
-        <NavItem
-          hrefLink="/patient"
-          // sidebarStatus={sidebarStatus}
-          menuTitle="Patient List"
-          subMenu={false}
-          subMenuArray={null}
-        >
-          <MdList className=" h-6" />
-        </NavItem>
-        <NavItem
-          hrefLink="/therapist"
-          // sidebarStatus={sidebarStatus}
-          menuTitle="Therapist List"
-          subMenu={false}
-          subMenuArray={null}
-        >
-          <TbPhysotherapist className=" h-6" />
-        </NavItem>
-        <NavItem
-          hrefLink="/all-ticket"
-          // sidebarStatus={sidebarStatus}
-          menuTitle="All Tickets"
-          subMenu={false}
-          subMenuArray={null}
-        >
-          <HiOutlineTicket className=" h-6" />
-        </NavItem>
+
         <NavItem
           hrefLink="/services/therapist-doctor"
           // sidebarStatus={sidebarStatus}

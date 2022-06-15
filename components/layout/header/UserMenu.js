@@ -38,12 +38,15 @@ const UserMenu = () => {
       </span>
 
       {userMenuStatus && (
-        <div className="absolute right-0 sm:-bottom-16 bg-slate-700 px-2 py-1 space-x-2 text-white w-full -bottom-28">
-          <a className="block hover:bg-teal-500 hover:text-black">
-            user Profile
+        <div className="card absolute right-0 sm:-bottom-16 bg-gray-300 hover:bg-white px-2 py-1  space-x-2 text-gray-600    font-bold   w-full -bottom-28">
+          <a className="block  hover:bg-slate-200 hover:text-teal-500  rounded-lg">
+            My profile
           </a>
-          <a className="block hover:bg-teal-500 hover:text-black">
-            user setting
+          <a className="block  hover:bg-slate-200 hover:text-teal-500  rounded-lg">
+            Setting
+          </a>
+          <a className="block  hover:bg-slate-200  hover:text-teal-500 rounded-lg">
+            Logout
           </a>
         </div>
       )}
