@@ -54,7 +54,7 @@ const SubCategoryTable = () => {
         .get("https://misiapi.lamptechs.com/api/therapistService")
         .then((res) => res.data)
   );
-  console.log(" result", data, status, isLoading, isFetching);
+  // console.log(" result", data, status, isLoading, isFetching);
 
   //   id
   //   therapist_service_name

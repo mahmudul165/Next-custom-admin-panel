@@ -364,7 +364,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                               </td>
                               <td className="border px-2 py-2 text-center   ">
                                 <>
-                                  <Link href="/patient/edit">
+                                  <Link href={`/patient/edit/${data.id}`}>
                                     <a className="text-purple-800 hover:underline">
                                       Edit
                                     </a>
@@ -474,9 +474,9 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 </td>
                                 <td className="border px-2 py-2 text-center   ">
                                   <>
-                                    <Link href="/patient/edit">
+                                    <Link href={`/patient/edit/${data.id}`}>
                                       <a className="text-purple-800 hover:underline">
-                                        Edit
+                                        dddEdit
                                       </a>
                                     </Link>
                                     <span> | </span>
