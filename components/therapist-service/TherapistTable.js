@@ -78,28 +78,31 @@ const SubCategoryTable = () => {
           <div className="min-h-screen bg-white-800 py-3">
             <div className="overflow-x-auto w-full">
               <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
-                <thead className="bg-teal-500  border ">
+                <thead
+                  className="   border "
+                  style={{ backgroundColor: "#01a9ac" }}
+                >
                   <tr className="border font-semibold text-white text-sm    text-center ">
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2.5   py-2.5   border">
                       #
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2.5   py-2.5   border">
                       Therapist service name
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2.5   py-2.5   border">
                       Service category name
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2.5   py-2.5   border">
                       Service subcategory name
                     </th>
 
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2.5   py-2.5   border">
                       Remarks
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2.5   py-2.5   border">
                       Status
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base  px-2.5   py-2.5   border">
                       Operations
                     </th>
                   </tr>
@@ -109,27 +112,29 @@ const SubCategoryTable = () => {
                     data.map((data) => (
                       <>
                         <tr className="hover:bg-gray-100 hover:text-base   border ">
-                          <td className="border px-4 py-4 text-center">
+                          <td className="px-2   py-2    border text-center">
                             {data.id}
                           </td>
-                          <td className="border px-4 py-4 text-center">
+                          <td className="px-2    py-2    border text-center">
                             {data.therapist_service_name}
                           </td>
-                          <td className="border px-4 py-4 text-center">
+                          <td className="px-2    py-2    border text-center">
                             {/* {data.service_subcategory_name} */}
                           </td>
-                          <td className="border px-4 py-4 text-center">
+                          <td className="px-2    py-2   border text-center">
                             {/* {data.service_subcategory_name} */}
                           </td>
-                          <td className="  py-4 text-center">{data.remarks}</td>
-                          <td className="border px-4 py-4 text-center  ">
+                          <td className=" px-2    py-2    border text-center">
+                            {data.remarks}
+                          </td>
+                          <td className="px-2    py-2    border text-center  ">
                             {" "}
                             <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
                               {/* {data.status == "A" ? "Active" : "inactive"} */}
                               {Statustest(data.status)}
                             </span>{" "}
                           </td>
-                          <td className="border px-4 py-4 text-center  ">
+                          <td className="px-2    py-2    border text-center  ">
                             <>
                               <Link href="#">
                                 <a className="text-purple-800 hover:underline">

@@ -2,14 +2,40 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+const schema = yup
+  .object()
+  .shape({
+    // service_category_id
+    // service_subcategory_name
+    //  status
+    //  remarks
+    // service_category_id: yup.string().required(),
+    // name: yup.string().required(),
+    // details: yup.string().required(),
+    //remarks: yup.string().required(),
+    //status: yup.string().required(),
+  })
+  .required();
 function TicketForm() {
   const [startDate, setStartDate] = useState(new Date());
+  const { register, handleSubmit, error } = useForm({
+    resolver: yupResolver(schema),
+  });
   return (
     <>
-      <form className="w-10/12 m-auto   first-line: ">
+      <form
+        className="w-10/12 m-auto   first-line: "
+        onSubmit={handleSubmit((d) => console.log("all ticket form data", d))}
+      >
         <div className=" px-3">
           <div className=" card d-flex      justify-center ">
-            <h2 className="mt-3 text-center text-3xl font-extrabold text-teal-500">
+            <h2
+              className="mt-3 text-center text-3xl font-extrabold  "
+              style={{ color: "#01a9ac" }}
+            >
               Create new ticket
             </h2>
             {/* first portion of the form */}
@@ -60,14 +86,20 @@ function TicketForm() {
                       SVG, PNG, JPG or GIF (MAX. 500x500px)
                     </p>
                   </div>
-                  <input id="dropzone-file" type="file" className="hidden" />
+                  <input
+                    id="dropzone-file"
+                    type="file"
+                    className="hidden"
+                    {...register("dropzone-file")}
+                  />
                 </label>
               </div>
               {/* Patient Id */}
               <div className="relative my-2">
                 <input
                   className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  id="inline-full-name"
+                  id="patient_id"
+                  {...register("patient_id")}
                   type="text"
                   placeholder="  "
                 />
@@ -84,6 +116,7 @@ function TicketForm() {
                 <div className="relative">
                   <select
                     id="patient_source"
+                    {...register("patient_source")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   >
                     <option selected>Select patient source</option>
@@ -102,6 +135,7 @@ function TicketForm() {
                 <div className="relative">
                   <select
                     id="language"
+                    {...register("language")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   >
                     <option selected>Select Language</option>
@@ -124,6 +158,7 @@ function TicketForm() {
                   <input
                     type="text"
                     id="firstname"
+                    {...register("firstname")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -140,6 +175,7 @@ function TicketForm() {
                   <input
                     type="text"
                     id="lastname"
+                    {...register("lastname")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -159,6 +195,7 @@ function TicketForm() {
                   <input
                     type="email"
                     id="email"
+                    {...register("email")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -175,6 +212,7 @@ function TicketForm() {
                   <input
                     type="tel"
                     id="phone"
+                    {...register("phone")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -191,7 +229,8 @@ function TicketForm() {
               <div className="relative mt-2.5">
                 <textarea
                   className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  id="inline-full-name"
+                  id="address"
+                  {...register("address")}
                   type="text"
                   placeholder="  "
                 />
@@ -209,6 +248,7 @@ function TicketForm() {
                   <input
                     type="text"
                     id="state_city"
+                    {...register("state_city")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -225,6 +265,7 @@ function TicketForm() {
                   <input
                     type="text"
                     id="nationality"
+                    {...register("nationality")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -244,6 +285,7 @@ function TicketForm() {
                   <input
                     type="text"
                     id="DOB_Number"
+                    {...register("DOB_Number")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -260,6 +302,7 @@ function TicketForm() {
                   <input
                     type="text"
                     id="BSN_Number"
+                    {...register("BSN_Number")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -279,6 +322,7 @@ function TicketForm() {
                   <input
                     type="text"
                     id="insurance"
+                    {...register("insurance")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -294,6 +338,7 @@ function TicketForm() {
                 <div className="col-start-2 relative  ">
                   <input
                     id="date-of-birth"
+                    {...register("date-of-birth")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -309,8 +354,12 @@ function TicketForm() {
               {/* Marital status and occupation */}
               <div className="grid   grid-cols-2  gap-4 mt-2.5">
                 {/* Marital status*/}
-                <div id="marital-status" className="  relative  ">
-                  <select className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
+                <div className="  relative  ">
+                  <select
+                    id="marital-status"
+                    {...register("marital-status")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  >
                     <option selected>Select status</option>
                     <option value="">Single</option>
                     <option value="">Married</option>
@@ -329,6 +378,7 @@ function TicketForm() {
                   <input
                     type="text"
                     id="Occupation"
+                    {...register("Occupation")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -347,6 +397,7 @@ function TicketForm() {
                 <div className=" relative   ">
                   <select
                     id="sex"
+                    {...register("sex")}
                     className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   >
                     <option selected>Select sex</option>
@@ -366,6 +417,7 @@ function TicketForm() {
                   {" "}
                   <select
                     id="blood_group"
+                    {...register("blood_group")}
                     className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   >
                     <option selected>Select blood group</option>
@@ -397,7 +449,8 @@ function TicketForm() {
             />  */}
                 <textarea
                   className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  id="textarea"
+                  id="medical_history"
+                  {...register("medical_history")}
                   type="text"
                   placeholder="  "
                 />
@@ -414,6 +467,7 @@ function TicketForm() {
                 <div className="  relative   ">
                   <select
                     id="file-type"
+                    {...register("file-type")}
                     className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   >
                     <option selected>Select file type</option>
@@ -436,6 +490,7 @@ function TicketForm() {
                     required
                     type="file"
                     id="formFileMultiple"
+                    {...register("formFileMultiple")}
                     multiple
                   />
 
@@ -453,6 +508,7 @@ function TicketForm() {
                 <div className="relative">
                   <select
                     id="assign_to"
+                    {...register("assign_toe")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   >
                     <option selected>Select Assign To</option>
@@ -471,6 +527,7 @@ function TicketForm() {
                 <div className="relative">
                   <select
                     id="pass_department"
+                    {...register("pass_department")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   >
                     <option selected>Select Department</option>
@@ -490,7 +547,11 @@ function TicketForm() {
               <div className="grid gap-4 grid-cols-2 mt-2.5">
                 {/* Assign To  */}
                 <div className="relative">
-                  <select className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
+                  <select
+                    id="assign_department"
+                    {...register("assign_department")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  >
                     <option selected>Select Call Strike </option>
                     <option value="">Call Strike 1</option>
                     <option value="">Call Strike 2</option>
@@ -507,6 +568,7 @@ function TicketForm() {
                   <input
                     type="text"
                     id="remarks"
+                    {...register("remarks")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -522,8 +584,9 @@ function TicketForm() {
 
               <div className=" flex justify-end">
                 <button
-                  className="decoration-4 text-xl shadow mt-6 bg-teal-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                  className="decoration-4 text-xl shadow mt-6   hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                   type="submit"
+                  style={{ backgroundColor: "#01a9ac" }}
                 >
                   Save
                 </button>

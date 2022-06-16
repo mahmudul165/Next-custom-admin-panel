@@ -76,9 +76,10 @@ const PatientTable = () => {
                 />
 
                 <button
-                  className="btn inline-block px-6 py-2.5 bg-teal-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center"
+                  className="btn inline-block px-6 py-2.5   text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center"
                   type="button"
                   id="button-addon2"
+                  style={{ backgroundColor: "#01a9ac" }}
                 >
                   <svg
                     aria-hidden="true"
@@ -111,9 +112,10 @@ const PatientTable = () => {
                   aria-describedby="button-addon2"
                 />
                 <button
-                  className="btn inline-block px-6 py-2.5 bg-teal-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center"
+                  className="btn inline-block px-6 py-2.5   text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center"
                   type="button"
                   id="button-addon2"
+                  style={{ backgroundColor: "#01a9ac" }}
                 >
                   <svg
                     aria-hidden="true"
@@ -179,93 +181,96 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           <div className="min-h-screen bg-white-800 py-3">
             <div className="overflow-x-auto w-full">
               <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
-                <thead className="bg-teal-500 border">
+                <thead
+                  className="  border"
+                  style={{ backgroundColor: "#01a9ac" }}
+                >
                   <tr className="border font-semibold text-white text-sm    text-center  ">
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       #
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Patient Source
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Patient ID
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Ticket ID
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       First Name
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Last Name
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Email Address
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Phone Number
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Residential Address
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       State/City
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Nationality
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Age
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Marital status
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Date of Birth
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Occupation
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Emergency Contacts
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       BSN Number
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       DOB Number
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Insurance Number
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Assign To
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Pass Department
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Call Strike
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Sex
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Medical History
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Blood Group
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       File Upload
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Remarks
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Status
                     </th>
-                    <th className=" font-semibold text-base  px-2 py-2 border">
+                    <th className=" font-semibold text-base  px-2.5 py-2.5 border">
                       Operations
                     </th>
                   </tr>

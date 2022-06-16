@@ -9,7 +9,10 @@ function PForm() {
       <form className="w-10/12 m-auto  p-5  ">
         <div className=" px-6">
           <div className=" card d-flex    m-3 p-3  justify-center ">
-            <h2 className="mt-3 text-center text-3xl font-extrabold text-teal-500">
+            <h2
+              className="mt-3 text-center text-3xl font-extrabold  "
+              style={{ color: "#01a9ac" }}
+            >
               Edit your profile
             </h2>
             {/* first portion of the form */}
@@ -467,8 +470,9 @@ function PForm() {
               {/* button */}
               <div className=" flex justify-end">
                 <button
-                  className="decoration-4 text-xl shadow mt-6 bg-teal-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                  className="decoration-4 text-xl shadow mt-6   hover:bg-cyan-300 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                   type="submit"
+                  style={{ backgroundColor: "#01a9ac" }}
                 >
                   Save
                 </button>

@@ -1,18 +1,46 @@
 import React, { useState } from "react";
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
-
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+const schema = yup
+  .object()
+  .shape({
+    // service_category_id
+    // service_subcategory_name
+    //  status
+    //  remarks
+    // service_category_id: yup.string().required(),
+    //name: yup.string().required(),
+    // details: yup.string().required(),
+    //remarks: yup.string().required(),
+    // status: yup.string().required(),
+  })
+  .required();
 function PaitentForm() {
   const [startDate, setStartDate] = useState(new Date());
+
+  const { register, handleSubmit, error } = useForm({
+    resolver: yupResolver(schema),
+  });
+
   return (
     <>
-      <form className="w-10/12 m-auto   first-line: ">
+      <form
+        className="w-10/12 m-auto   first-line: "
+        onSubmit={handleSubmit((d) => console.log("form data", d))}
+        type="submit"
+      >
         <div className=" px-3">
           <div className=" card d-flex      justify-center ">
-            <h2 className="mt-3 text-center text-3xl font-extrabold text-teal-500">
+            <h2
+              className="mt-3 text-center text-3xl font-extrabold  "
+              style={{ color: "#01a9ac" }}
+            >
               Create new patient
             </h2>
-            {/* first portion of the form */}
+            {/*form */}
             <div className=" m-3 p-3 ">
               <div className="flex justify-center items-center w-full  ">
                 <label
@@ -44,7 +72,12 @@ function PaitentForm() {
                       SVG, PNG, JPG or GIF (MAX. 500x500px)
                     </p>
                   </div>
-                  <input id="dropzone-file" type="file" className="hidden" />
+                  <input
+                    id="dropzone-file"
+                    type="file"
+                    {...register("dropzone-file")}
+                    className="hidden"
+                  />
                 </label>
               </div>
               {/* Patient Source */}
@@ -75,6 +108,8 @@ function PaitentForm() {
                   //   m-0
                   //  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   //             aria-label="Default select example"
+                  id="patient_source"
+                  {...register("patient_source")}
                 >
                   <option selected>Select patient source</option>
                   <option value="male">ZD</option>
@@ -96,6 +131,7 @@ function PaitentForm() {
                   <input
                     type="text"
                     id="firstname"
+                    {...register("firstname")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -112,6 +148,7 @@ function PaitentForm() {
                   <input
                     type="text"
                     id="lastname"
+                    {...register("lastname")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -131,6 +168,7 @@ function PaitentForm() {
                   <input
                     type="email"
                     id="email"
+                    {...register("email")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -147,6 +185,7 @@ function PaitentForm() {
                   <input
                     type="tel"
                     id="phone"
+                    {...register("phone")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -163,7 +202,8 @@ function PaitentForm() {
               <div className="relative mt-2.5">
                 <textarea
                   className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  id="inline-full-name"
+                  id="address"
+                  {...register("address")}
                   type="text"
                   placeholder="  "
                 />
@@ -181,6 +221,7 @@ function PaitentForm() {
                   <input
                     type="text"
                     id="state_city"
+                    {...register("state_city")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -197,6 +238,7 @@ function PaitentForm() {
                   <input
                     type="text"
                     id="nationality"
+                    {...register("nationality")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -216,6 +258,7 @@ function PaitentForm() {
                   <input
                     type="text"
                     id="DOB_Number"
+                    {...register("DOB_Number")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -232,6 +275,7 @@ function PaitentForm() {
                   <input
                     type="text"
                     id="BSN_Number"
+                    {...register("BSN_Number")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -251,6 +295,7 @@ function PaitentForm() {
                   <input
                     type="text"
                     id="Insurance"
+                    {...register("Insurance")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -266,6 +311,7 @@ function PaitentForm() {
                 <div className="col-start-2 relative  ">
                   <input
                     id="date-of-birth"
+                    {...register("date-of-birth")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -281,8 +327,12 @@ function PaitentForm() {
               {/* Marital status and occupation */}
               <div className="grid   grid-cols-2  gap-4 mt-2.5">
                 {/* Marital status*/}
-                <div id="marital-status" className="  relative  ">
-                  <select className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
+                <div className="  relative  ">
+                  <select
+                    id="marital-status"
+                    {...register("marital-status")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  >
                     <option selected>Select status</option>
                     <option value="">Single</option>
                     <option value="">Married</option>
@@ -301,6 +351,7 @@ function PaitentForm() {
                   <input
                     type="text"
                     id="Occupation"
+                    {...register("Occupation")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -317,7 +368,11 @@ function PaitentForm() {
               <div className="grid gap-4 grid-cols-2 mt-2.5">
                 {/* sex  */}
                 <div className=" relative   ">
-                  <select className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
+                  <select
+                    id="sex"
+                    {...register("sex")}
+                    className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  >
                     <option selected>Select sex</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -333,7 +388,11 @@ function PaitentForm() {
                 {/* blood  */}
                 <div className=" relative   ">
                   {" "}
-                  <select className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
+                  <select
+                    id="blood"
+                    {...register("blood")}
+                    className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  >
                     <option selected>Select blood group</option>
                     <option value="a+">A+</option>
                     <option value="a-">A-</option>
@@ -363,7 +422,8 @@ function PaitentForm() {
                 />  */}
                 <textarea
                   className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  id="textarea"
+                  id="medical_history"
+                  {...register("medical_history")}
                   type="text"
                   placeholder="  "
                 />
@@ -380,6 +440,7 @@ function PaitentForm() {
                 <div className="  relative   ">
                   <select
                     id="file-type"
+                    {...register("file-type")}
                     className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   >
                     <option selected>Select file type</option>
@@ -401,8 +462,9 @@ function PaitentForm() {
                     placeholder="  "
                     required
                     type="file"
-                    id="formFileMultiple"
                     multiple
+                    id="formFileMultiple"
+                    {...register("formFileMultiple")}
                   />
 
                   <label
@@ -420,6 +482,7 @@ function PaitentForm() {
                   <input
                     type="tel"
                     id="emergency_number"
+                    {...register("emergency_number")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -436,9 +499,9 @@ function PaitentForm() {
                   <input
                     type="number"
                     id="remarks"
+                    {...register("remarks")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
-                    required
                   />
                   <label
                     htmlFor="remarks"
@@ -451,8 +514,9 @@ function PaitentForm() {
               {/* button */}
               <div className=" flex justify-end">
                 <button
-                  className="decoration-4 text-xl shadow mt-6 bg-teal-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                  className="decoration-4 text-xl shadow mt-6   hover:bg-tea-300 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                   type="submit"
+                  style={{ backgroundColor: "#01a9ac" }}
                 >
                   Save
                 </button>
