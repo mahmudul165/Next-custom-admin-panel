@@ -12,6 +12,43 @@ import axios from "axios";
 const SubCategoryTable = () => {
   const { deleteData, Statustest } = useAuth();
   const [modal, setModal] = useState(false);
+
+  // TASK 1
+  // 1.patient list table design,
+  // 2.patient form value catch in console,
+  // 3.post patient form data in API
+  // 4.patient table row data  delete,
+
+  // Therapist Liat TASK 2
+  // 1.Therapist api get data ,Therapist table
+  // 2.Therapist list table design,
+  // 3.Therapist form value catch in console,
+  // 4.Therapist patient form data in API
+  // 5.Therapist table row data  delete,
+  // 6.Therapist data search accroding to id and status
+
+  // TASK 3
+  // 1.Therapist api get data
+  // 2.Therapist list table design,
+  // 3.Therapist form value catch in console,
+  // 4.Therapist patient form data in API
+  // 5.Therapist table row data  delete,
+  // 6.Therapist data search accroding to id and status
+
+  // TASK 4
+  // 1.All tickets api get data show in table
+  // 2.All tickets table design,
+  // 3.All tickets form value catch in console,
+  // 4.All tickets form data POST in API
+  // 5.All tickets table row data  delete,
+  // 6.All tickets data search accroding to id and status
+
+  // TASK 5
+  // 1.Logo adjustment
+  // 2.Create New Patient
+  // 3.Create New Tickets
+  // 4.All Tickets
+  // 5.All Patients
   const BodyRow = styled.tr`
     & th {
       color: rgb(148 163 184);
