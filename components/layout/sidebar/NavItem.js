@@ -30,8 +30,8 @@ const NavItem = ({
           className="   inline-flex items-center justify-start px-2 py-1  hover:text-teal-500 hover:bg-stone-200 focus:text-gray-400 focus:bg-gray-700 rounded-lg   cursor-pointer relative group"
           onClick={subMenuToggle}
         >
-          <span className="text-sm"> {children}</span>
-          <span className={`${!sidebarStatus ? "text-sm ml-1" : "sr-only"}`}>
+          <span className="text-lg"> {children}</span>
+          <span className={`${!sidebarStatus ? "text-sm ml-2" : "sr-only"}`}>
             {menuTitle}
           </span>
 

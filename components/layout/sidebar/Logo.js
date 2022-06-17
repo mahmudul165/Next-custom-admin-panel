@@ -5,7 +5,7 @@ import React from "react";
 const Logo = () => {
   return (
     <Link href="/">
-      <span className="p-1 m-1">
+      <span className=" ml-3 p-1 mt-2">
         {/* inline-flex justify-center align-center */}
         {/* bg-teal-500 hover:bg-purple-500 focus:bg-purple-500 cursor-pointer h-20*/}
         {/* <svg fill="none" viewBox="0 0 64 64" className="h-12 w-14">
@@ -21,7 +21,7 @@ const Logo = () => {
           </a>
         </Link> */}
 
-        <a className="font-extrabold text-4xl   text-white m-1 p-1 no-underline">
+        <a className="font-bold text-3xl tracking-wider     text-white   no-underline">
           {/* <img src="/admin/Misi.png" className="" alt="" /> */}
           MISI
         </a>

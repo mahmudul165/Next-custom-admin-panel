@@ -5,7 +5,9 @@ function Card({ name, number, bgColor }) {
   return (
     <>
       {bgColor ? (
-        <div className={`flex items-center p-3   shadow rounded-lg ${bgColor}`}>
+        <div
+          className={`  items-center   grid grid-cols-1 divide-y  shadow rounded-lg ${bgColor}`}
+        >
           {/* <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
         <svg
           aria-hidden="true"
@@ -22,11 +24,19 @@ function Card({ name, number, bgColor }) {
           />
         </svg>
       </div> */}
-          <div>
-            <span className="block text-2xl font-bold text-white">
+
+          <div className="p-3">
+            <span className="block text-lg font-bold text-white py-1">
               {number}
             </span>
-            <span className="block text-white   text-xl font-bold">{name}</span>
+            <span className="block text-white   text-base  font-normal">
+              {name}
+            </span>
+          </div>
+          <div className="p-2.5  ">
+            <span className="block text-slate-800  text-base font-normal text-center">
+              {name}
+            </span>
           </div>
         </div>
       ) : (

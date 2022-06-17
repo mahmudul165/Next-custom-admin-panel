@@ -4,7 +4,7 @@ import TicketTable from "./TicketTable";
 
 const SubCategory = () => {
   return (
-    <main className="p-6 sm:p-10 space-y-6">
+    <main className="p-6  space-y-6">
       <div className="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
         <PageTicketComponentTitle
           title="All ticket"
