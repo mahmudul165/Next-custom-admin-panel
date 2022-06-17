@@ -1,7 +1,7 @@
 import React from "react";
 
-function edit() {
+function Edit() {
   return <div>[id]</div>;
 }
 
-export default edit;
+export default Edit;
