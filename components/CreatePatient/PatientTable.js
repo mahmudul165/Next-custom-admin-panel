@@ -292,7 +292,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       {results.map((data, index) => {
                         return (
                           <>
-                            <tr className=" hover:bg-gray-100 hover:text-base   border">
+                            <tr className=" hover:bg-gray-100  hover:text-sm   border">
                               <td className="border px-2 py-2 text-center ">
                                 {data.id}
                               </td>

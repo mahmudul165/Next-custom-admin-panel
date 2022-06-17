@@ -1,6 +1,6 @@
 import React from "react";
-import SubCategory from "../../components/sub-category/SubCategory";
-
+// import SubCategory from "../../components/sub-category/";
+import SubCategory from "/components/sub-category/SubCategory";
 function SubCategoryId() {
   return (
     <>

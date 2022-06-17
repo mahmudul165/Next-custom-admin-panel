@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import useAuth from "/hook/useAuth";
-import TherapistService from "../../components/therapist-service/TherapistService";
+import TherapistService from "/components/therapist-service/TherapistService";
 const schema = yup
   .object()
   .shape({
