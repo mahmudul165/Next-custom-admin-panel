@@ -99,25 +99,6 @@ const CategoryForm = ({ modal, setModal }) => {
             Remarks
           </label>
         </div>
-        {/* <div className="md:flex md:items-center mb-6">
-          <div className="md:w-1/3">
-            <label
-              className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              htmlFor="inline-full-name"
-            >
-              Reamrks
-            </label>
-          </div>
-          <div className="md:w-2/3">
-            <input
-              {...register("remarks")}
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              id="inline-full-name"
-              type="text"
-              placeholder="Jane Doe"
-            />
-          </div>
-        </div> */}
         {/* status */}
         <div className="relative  my-3">
           <select
@@ -156,50 +137,14 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             Status
           </label>
         </div>
-        {/* <div className="md:flex md:items-center mb-6">
-          <div className="md:w-1/3">
-            <label
-              className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              htmlFor="inline-full-name"
-            >
-              Status
-            </label>
-          </div>
-          <div className="md:w-2/3">
-            <select
-              id="status"
-              className="form-select appearance-none
-block
-w-full
-px-3
-py-1.5
-text-base
-font-normal
-text-gray-700
-bg-white bg-clip-padding bg-no-repeat
-border border-solid border-gray-300
-rounded
-transition
-ease-in-out
-m-0
-focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              aria-label="Default select example"
-              {...register("status")}
-            >
-              <option selected>status</option>
-              <option value="A" selected>
-                active
-              </option>
-              <option value="I">inactive</option>
-            </select>
-          </div>
-        </div> */}
+        {/* save submit button */}
         <div className="md:flex md:items-center">
           <div className="md:w-1/3"></div>
           <div className="md:w-2/3">
             <button
-              className="shadow bg-teal-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+              className="shadow   hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
               type="submit"
+              style={{ backgroundColor: "#01a9ac" }}
             >
               Save
             </button>

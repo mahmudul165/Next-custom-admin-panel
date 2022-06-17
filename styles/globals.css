@@ -35,3 +35,8 @@
 }
 
 @table-head-background-color: #f7f7f7;
+
+/* table  */
+.global-color {
+  background-color: "#01a9ac";
+}

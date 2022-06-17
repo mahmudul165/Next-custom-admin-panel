@@ -2,17 +2,42 @@ import React, { useState } from "react";
 //import DatePicker from "react-datepicker";
 //import "react-datepicker/dist/react-datepicker.css";
 
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+const schema = yup
+  .object()
+  .shape({
+    // service_category_id
+    // service_subcategory_name
+    //  status
+    //  remarks
+    // service_category_id: yup.string().required(),
+    //name: yup.string().required(),
+    // details: yup.string().required(),
+    //remarks: yup.string().required(),
+    //status: yup.string().required(),
+  })
+  .required();
 function ThForm() {
   const [startDate, setStartDate] = useState(new Date());
+  const { register, handleSubmit, error } = useForm({
+    resolver: yupResolver(schema),
+  });
   return (
     <>
-      <form className="w-full m-auto  p-1  ">
+      <form
+        className="w-full m-auto  p-1  "
+        onSubmit={handleSubmit((d) =>
+          console.log("create therapist form data", d)
+        )}
+      >
         <div className=" px-6">
           <div className=" card d-flex    m-3 p-3  justify-center ">
             <h2 className="mt-3 text-center text-3xl font-extrabold text-teal-500">
               Create new therapist
             </h2>
-            {/* first portion of the form */}
+            {/*   form */}
             <div className=" m-3 p-3 ">
               <div className="flex justify-center items-center w-full  ">
                 <label
@@ -44,7 +69,12 @@ function ThForm() {
                       SVG, PNG, JPG or GIF (MAX. 500x500px)
                     </p>
                   </div>
-                  <input id="dropzone-file" type="file" className="hidden" />
+                  <input
+                    id="dropzone-file"
+                    type="file"
+                    {...register("dropzone-file")}
+                    className="hidden"
+                  />
                 </label>
               </div>
               {/* Patient Source */}
@@ -70,6 +100,7 @@ function ThForm() {
                   <input
                     type="text"
                     id="firstname"
+                    {...register("firstname")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -86,6 +117,7 @@ function ThForm() {
                   <input
                     type="text"
                     id="lastname"
+                    {...register("lastname")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -105,6 +137,7 @@ function ThForm() {
                   <input
                     type="email"
                     id="email"
+                    {...register("email")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -121,6 +154,7 @@ function ThForm() {
                   <input
                     type="tel"
                     id="phone"
+                    {...register("phone")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -137,8 +171,9 @@ function ThForm() {
               <div className="relative my-3">
                 <textarea
                   className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  id="inline-full-name"
                   type="text"
+                  id="address"
+                  {...register("address")}
                   placeholder="  "
                 />
                 <label
@@ -155,6 +190,7 @@ function ThForm() {
                   <input
                     type="text"
                     id="state_city"
+                    {...register("state_city")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -171,6 +207,7 @@ function ThForm() {
                   <input
                     type="text"
                     id="nationality"
+                    {...register("nationality")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -190,6 +227,7 @@ function ThForm() {
                   <input
                     type="text"
                     id="DOB_Number"
+                    {...register("DOB_Number")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -206,6 +244,7 @@ function ThForm() {
                   <input
                     type="text"
                     id="BSN_Number"
+                    {...register("BSN_Number")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -225,6 +264,7 @@ function ThForm() {
                   <input
                     type="text"
                     id="Insurance"
+                    {...register("Insurance")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -240,6 +280,7 @@ function ThForm() {
                 <div className="col-start-2 relative my-3">
                   <input
                     id="date-of-birth"
+                    {...register("date-of-birth")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -255,7 +296,11 @@ function ThForm() {
               {/* Marital status and occupation */}
 
               <div id="language" className="  relative my-3">
-                <select className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
+                <select
+                  id="marital_status"
+                  {...register("marital_status")}
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                >
                   <option selected>Select Language</option>
                   <option value="">Dutch</option>
                   <option value="">English</option>
@@ -274,7 +319,11 @@ function ThForm() {
               <div className="grid gap-4 grid-cols-2">
                 {/* sex  */}
                 <div className=" relative  my-3">
-                  <select className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
+                  <select
+                    id="sex"
+                    {...register("sex")}
+                    className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  >
                     <option selected>Select sex</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -290,7 +339,11 @@ function ThForm() {
                 {/* blood  */}
                 <div className=" relative  my-3">
                   {" "}
-                  <select className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer">
+                  <select
+                    id="blood"
+                    {...register("blood")}
+                    className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  >
                     <option selected>Select blood group</option>
                     <option value="a+">A+</option>
                     <option value="a-">A-</option>
@@ -319,8 +372,9 @@ function ThForm() {
                   required
                 />  */}
                 <textarea
+                  id="medical_history"
+                  {...register("medical_history")}
                   className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  id="textarea"
                   type="text"
                   placeholder="  "
                 />
@@ -337,6 +391,7 @@ function ThForm() {
                 <div className="  relative  my-3">
                   <select
                     id="file-type"
+                    {...register("file-type")}
                     className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   >
                     <option selected>Select file type</option>
@@ -360,6 +415,7 @@ function ThForm() {
                     type="file"
                     id="formFileMultiple"
                     multiple
+                    {...register("formFileMultiple")}
                   />
 
                   <label
@@ -377,6 +433,7 @@ function ThForm() {
                   <input
                     type="tel"
                     id="emergency_number"
+                    {...register("emergency_number")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -393,6 +450,7 @@ function ThForm() {
                   <input
                     type="number"
                     id="remarks"
+                    {...register("remarks")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
@@ -408,8 +466,9 @@ function ThForm() {
               {/* button */}
               <div className=" flex justify-end">
                 <button
-                  className="decoration-4 text-xl shadow mt-6 bg-teal-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                  className="decoration-4 text-xl shadow mt-6   hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                   type="submit"
+                  style={{ backgroundColor: "#01a9ac" }}
                 >
                   Save
                 </button>

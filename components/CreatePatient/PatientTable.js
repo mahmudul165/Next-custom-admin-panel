@@ -22,9 +22,9 @@ const PatientTable = () => {
   //   console.log(searchInput);
   // };
   const [results, setResults] = useState([]);
-  console.log("results", results);
-  console.log("Search input value ", searchInput);
-  console.log("Search status value ", statusSearch);
+  // console.log("results", results);
+  // console.log("Search input value ", searchInput);
+  // console.log("Search status value ", statusSearch);
 
   //const { handleSearchChange, searchInput } = useAuth();
   useEffect(() => {
@@ -49,15 +49,12 @@ const PatientTable = () => {
   const BodyRow = styled.tr`
     & th {
       color: rgb(148 163 184);
-
       background: rgb(20 184 166);
     }
-
     & td {
       color: rgb(15 23 42);
       transition: all 0.3s;
     }
-
     &:hover td {
       background: rgb(20 184 166);
       color: white;
@@ -105,7 +102,6 @@ const PatientTable = () => {
                   aria-label="Search"
                   aria-describedby="button-addon2"
                 />
-
                 <button
                   className="btn inline-block px-6 py-2.5 bg-teal-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center"
                   type="button"
@@ -143,9 +139,10 @@ const PatientTable = () => {
                   onChange={(e) => setInput(e.target.value)}
                 />
                 <button
-                  className="btn inline-block px-6 py-2.5 bg-teal-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center"
+                  className="btn inline-block px-6 py-2.5   text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center"
                   type="button"
                   id="button-addon2"
+                  style={{ backgroundColor: "#01a9ac" }}
                 >
                   <svg
                     aria-hidden="true"
@@ -211,77 +208,80 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           <div className="min-h-screen bg-white-800 py-3">
             <div className="overflow-x-auto w-full">
               <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
-                <thead className="bg-teal-500 border">
+                <thead
+                  className="  border"
+                  style={{ backgroundColor: "#01a9ac" }}
+                >
                   <tr className="border font-semibold text-white text-sm    text-center  ">
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       #
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       First Name
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       Last Name
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       Email Address
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       Phone Number
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       Residential Address
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       State/City
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       Nationality
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       Age
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       Marital status
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       Date of Birth
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       Occupation
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       Emergency Contacts
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       BSN Number
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       DOB Number
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       Insurance Number
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       Sex
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       Medical History
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       Blood Group
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       File Upload
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       {" "}
                       Remarks
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       {" "}
                       Status
                     </th>
-                    <th className=" font-semibold text-base  px-6 py-3 border">
+                    <th className=" font-semibold text-base px-2.5 py-2.5 border">
                       Operations
                     </th>
                   </tr>
@@ -293,78 +293,78 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         return (
                           <>
                             <tr className=" hover:bg-gray-100 hover:text-base   border">
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.id}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.patient_first_name}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.patient_last_name}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.patient_email}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.patient_phone}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.patient_address}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.patient_city}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.patient_country}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.age}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.marital_status}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.date_of_birth}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.occupation}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.emergency_contact}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.bsn_number}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.dob_number}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.insurance_number}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.sex}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.medical_history}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.blood_group}
                               </td>
-                              <td className="border px-6 py-4 text-center ">
+                              <td className="border px-2 py-2 text-center ">
                                 {data.patient_picture_name}
                               </td>
-                              <td className="border px-6 py-4 text-center   ">
+                              <td className="border px-2 py-2 text-center   ">
                                 {data.admin_remarks}
                               </td>
-                              <td className="border px-6 py-4 text-center   ">
+                              <td className="border px-2 py-2 text-center   ">
                                 <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
                                   {/* {data.status == "A" ? "Active" : "inactive"} */}
                                   {Statustest(data.status)}
                                 </span>
                               </td>
-                              <td className="border px-6 py-4 text-center   ">
+                              <td className="border px-2 py-2 text-center   ">
                                 <>
-                                  <Link href="/patient/edit">
+                                  <Link href={`/patient/edit/${data.id}`}>
                                     <a className="text-purple-800 hover:underline">
                                       Edit
                                     </a>
@@ -403,80 +403,80 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                           return (
                             <>
                               <tr className=" hover:bg-gray-100 hover:text-base   border">
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.id}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.patient_first_name}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.patient_last_name}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.patient_email}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.patient_phone}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.patient_address}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.patient_city}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.patient_country}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.age}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.marital_status}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.date_of_birth}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.occupation}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.emergency_contact}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.bsn_number}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.dob_number}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.insurance_number}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.sex}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.medical_history}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.blood_group}
                                 </td>
-                                <td className="border px-6 py-4 text-center ">
+                                <td className="border px-2 py-2 text-center ">
                                   {data.patient_picture_name}
                                 </td>
-                                <td className="border px-6 py-4 text-center   ">
+                                <td className="border px-2 py-2 text-center   ">
                                   {data.admin_remarks}
                                 </td>
-                                <td className="border px-6 py-4 text-center   ">
+                                <td className="border px-2 py-2 text-center   ">
                                   <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
                                     {/* {data.status == "A" ? "Active" : "inactive"} */}
                                     {Statustest(data.status)}
                                   </span>
                                 </td>
-                                <td className="border px-6 py-4 text-center   ">
+                                <td className="border px-2 py-2 text-center   ">
                                   <>
-                                    <Link href="/patient/edit">
+                                    <Link href={`/patient/edit/${data.id}`}>
                                       <a className="text-purple-800 hover:underline">
-                                        Edit
+                                        dddEdit
                                       </a>
                                     </Link>
                                     <span> | </span>
