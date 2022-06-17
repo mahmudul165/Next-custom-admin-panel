@@ -39,7 +39,7 @@ const UserMenu = () => {
       </span>
 
       {userMenuStatus && (
-        <div className="    grid justify-items-start   -mb-12 rounded-lg absolute p-1   sm:-bottom-12  bg-white       text-gray-600    font-medium   w-full -bottom-16">
+        <div className=" card   grid justify-items-start   -mb-12 rounded-lg absolute p-1   sm:-bottom-12  bg-white       text-gray-600    font-medium   w-full -bottom-16">
           <div className="   inline-flex items-center justify-start px-0.5  py-1     rounded-lg   cursor-pointer relative group">
             <span className="text-base">
               <CgProfile />
