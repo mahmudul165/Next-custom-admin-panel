@@ -8,16 +8,15 @@ const PagePatientComponentTitle = ({
   const [submodal, setSubModal] = useState(false);
 
   return (
-    <>
-      <div className="mr-6">
+    <div className="grid grid-cols-3 card  rounded-lg py-3 px-2 border-b-2 border-slate-200">
+      <div className="col-span-2">
         <h1 className="text-4xl font-semibold mb-2">{title}</h1>
         <h2
           className="text-gray-600 ml-0.5"
           style={{ backgroundColor: "#01a9ac" }}
         ></h2>
       </div>
-
-      <div className="flex flex-wrap items-start justify-end -mb-3">
+      <div className="flex flex-wrap   justify-end items-end  -mb-3">
         <button
           className="inline-flex px-2 py-2 text-white  hover:bg-teal-300 focus:bg-teal-400 rounded-md ml-6 mb-3"
           onClick={() => setSubModal(true)}
@@ -41,7 +40,7 @@ const PagePatientComponentTitle = ({
         </button>
         <PatientModal submodal={submodal} setSubModal={setSubModal} />
       </div>
-    </>
+    </div>
   );
 };
 

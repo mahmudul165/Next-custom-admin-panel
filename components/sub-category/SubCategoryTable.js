@@ -6,46 +6,17 @@ import useAuth from "/hook/useAuth";
 import axios from "axios";
 import Link from "next/link";
 import styled from "styled-components";
-import { fetchCategoryService, fetchSubService } from "../../hook/useApi";
 import { useQuery } from "react-query";
+import { useCategoryQuery, useSubCategoryQuery } from "../../hook/useApi";
 const SubCategoryTable = () => {
-  const { deleteData, Statustest } = useAuth();
-  const BodyRow = styled.tr`
-    & th {
-      color: rgb(148 163 184);
-
-      background: rgb(20 184 166);
-    }
-
-    & td {
-      color: rgb(15 23 42);
-      transition: all 0.3s;
-    }
-
-    &:hover td {
-      background: rgb(20 184 166);
-      color: white;
-      transform: scale(1.01);
-    }
-  `;
-
-  const components = {
-    body: {
-      row: BodyRow,
-    },
-  };
-
-  const { data, error, isError, isLoading } = useQuery(
-    "subService",
-    fetchSubService
-  );
-  // const { data: items } = useQuery("categoryService", fetchCategoryService);
-  // console.log("fetchCategoryService items is ", items);
-  //Pagination
-  const [activePage, setActivePage] = useState(15);
-  const handlePageChange = (pageNumber) => {
-    setActivePage(pageNumber);
-  };
+  const { categorydata, setCategory, deleteData, Statustest } = useAuth();
+  const { data, error, isError, isLoading } = useSubCategoryQuery();
+  const { data: category } = useCategoryQuery();
+  console.log("category data", category);
+  // const [activePage, setActivePage] = useState(15);
+  // const handlePageChange = (pageNumber) => {
+  //   setActivePage(pageNumber);
+  // };
 
   return (
     <>
@@ -85,23 +56,32 @@ const SubCategoryTable = () => {
                   {data ? (
                     data.map((data) => (
                       <>
-                        <tr className="  hover:bg-gray-100 hover:text-base   border">
+                        <tr className="   hover:bg-gray-200   border">
                           <td className="px-2  py-2  border text-center">
                             {data.id}
                           </td>
                           <td className="px-2  py-2  border text-center">
-                            {/* {data.service_category_id} */}
-                            mahmud
+                            {/* {data.service_categorie_id} */}
+                            {
+                              // category
+                              //   .filter((i) => i.id == data.service_categorie_id)
+                              //   .map((item) => (
+                              //     <>{item.name}</>
+                              //   ))
+
+                              `${data.service_categorie_id}  filter this category id value `
+                            }
                           </td>
                           <td className="px-2  py-2  border text-center">
-                            {data.service_subcategory_name}
+                            {data.name}
                           </td>
                           <td className="  py-4 text-center">{data.remarks}</td>
                           <td className="px-2  py-2  border text-center">
                             {" "}
                             <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
                               {/* {data.status == "A" ? "Active" : "inactive"} */}
-                              {Statustest(data.status)}
+                              {/* {Statustest(data.status)} */}
+                              {data.status}
                             </span>{" "}
                           </td>
                           <td className="px-2  py-2  border text-center">
@@ -114,23 +94,17 @@ const SubCategoryTable = () => {
                               </a>
                               <span>| </span>
                               <>
-                                <a
-                                  href=""
+                                <button
                                   className="text-purple-800 hover:underline"
-                                  // onClick={() =>
-                                  //   axios.post(
-                                  //     `https://misiapi.lamptechs.com/api/service/delete/${data.id}`
-                                  //   )
-                                  // }
                                   onClick={() =>
                                     deleteData(
-                                      `https://misiapi.lamptechs.com/api/subservice/delete`,
+                                      `https://misiapi.lamptechs.com/api/v1/subservice/delete`,
                                       data.id
                                     )
                                   }
                                 >
                                   Delete
-                                </a>
+                                </button>
                               </>
                             </>
                           </td>

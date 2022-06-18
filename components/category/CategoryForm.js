@@ -27,7 +27,7 @@ const CategoryForm = ({ modal, setModal }) => {
       <form
         className="w-full     m-auto max-w-sm my-3 p-2 bg-white border-0   "
         onSubmit={handleSubmit((d) =>
-          postData("https://misiapi.lamptechs.com/api/service/store", d)
+          postData("https://misiapi.lamptechs.com/api/v1/service/store", d)
         )}
         type="submit"
       >
@@ -122,13 +122,13 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             {...register("status")}
           >
             {/* <option selected>status</option> */}
-            <option value="A" selected>
+            <option value="1" selected>
               Active
             </option>
-            <option value="Inactive">Inactive</option>
-            <option value="P">Pending</option>
-            <option value="C">Cancelled</option>
-            <option value="D">Deleted</option>
+            <option value="2">Inactive</option>
+            <option value="3">Pending</option>
+            <option value="4">Cancelled</option>
+            <option value="5">Deleted</option>
           </select>
           <label
             htmlFor="remarks"

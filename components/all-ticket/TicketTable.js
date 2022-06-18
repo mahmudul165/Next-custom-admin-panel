@@ -40,7 +40,7 @@ const PatientTable = () => {
   // "service_category_id": "1"
 
   const { data, error } = useSWR(
-    "https://misiapi.lamptechs.com/api/therapistService",
+    "https://misiapi.lamptechs.com/api/v1/therapistService",
     { fetcher: async (url) => await fetch(url).then((res) => res.json()) }
     // { fetcher: async (url) => await axios.get(url).then((res) => res.data) }
   );
@@ -177,7 +177,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
       </>
       {data ? (
         <>
-          {/* <div className="flex-grow items-center p-8 bg-white shadow rounded-lg"> */}
+          {/* <div className="flex-grow items-center py-8p-8 bg-white shadow rounded-lg"> */}
           <div className="min-h-screen bg-white-800 py-3">
             <div className="overflow-x-auto w-full">
               <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
@@ -279,7 +279,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   {data ? (
                     data.map((data) => (
                       <>
-                        <tr className=" hover:bg-gray-100 hover:text-base   border">
+                        <tr className="  hover:bg-gray-200   border">
                           <td className="border px-2 py-2 text-center ">
                             {/* {data.id} */}
                           </td>
@@ -383,7 +383,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 
                                   // onClick={() =>
                                   //   deleteData(
-                                  //     `https://misiapi.lamptechs.com/api/service/delete`,
+                                  //     `https://misiapi.lamptechs.com/api/v1/service/delete`,
                                   //     data.id
                                   //   )
                                   // }

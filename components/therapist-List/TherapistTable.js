@@ -79,7 +79,7 @@ const SubCategoryTable = () => {
   // "remarks": "Checking update",
   // "service_category_id": "1"
   const { data, error } = useSWR(
-    "https://misiapi.lamptechs.com/api/therapistService",
+    "https://misiapi.lamptechs.com/api/v1/therapistService",
     { fetcher: async (url) => await fetch(url).then((res) => res.json()) }
     // { fetcher: async (url) => await axios.get(url).then((res) => res.data) }
   );
@@ -184,7 +184,7 @@ const SubCategoryTable = () => {
                   {data ? (
                     data.map((data) => (
                       <>
-                        <tr className=" hover:bg-gray-100 hover:text-base   border">
+                        <tr className="  hover:bg-gray-200   border">
                           <td className="px-2   py-2   border text-center ">
                             {/* {data.id} */}
                           </td>
@@ -266,12 +266,12 @@ const SubCategoryTable = () => {
                                   className="text-purple-800 hover:underline"
                                   // onClick={() =>
                                   //   axios.post(
-                                  //     `https://misiapi.lamptechs.com/api/service/delete/${data.id}`
+                                  //     `https://misiapi.lamptechs.com/api/v1/service/delete/${data.id}`
                                   //   )
                                   // }
                                   onClick={() =>
                                     deleteData(
-                                      `https://misiapi.lamptechs.com/api/service/delete`,
+                                      `https://misiapi.lamptechs.com/api/v1/service/delete`,
                                       data.id
                                     )
                                   }

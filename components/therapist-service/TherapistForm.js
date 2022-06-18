@@ -1,6 +1,11 @@
 import React from "react";
 import useAuth from "/hook/useAuth";
-import { fetchCategoryService, fetchSubService } from "../../hook/useApi";
+import {
+  fetchCategoryService,
+  fetchSubService,
+  useCategoryQuery,
+  useSubCategoryQuery,
+} from "../../hook/useApi";
 import { useQuery } from "react-query";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,11 +18,11 @@ const schema = yup
     // service_subcategory_name
     //  status
     //  remarks
-    service_category_id: yup.string().required(),
-    name: yup.string().required(),
+    //service_category_id: yup.string().required(),
+    //name: yup.string().required(),
     // details: yup.string().required(),
     //remarks: yup.string().required(),
-    status: yup.string().required(),
+    //status: yup.string().required(),
   })
   .required();
 
@@ -27,17 +32,17 @@ function SubCategoryForm() {
     resolver: yupResolver(schema),
   });
 
-  const { data: categoryService } = useQuery(
-    "categoryService",
-    fetchCategoryService
-  );
-  const { data: subService } = useQuery("subService", fetchSubService);
+  const { data: categoryService } = useCategoryQuery();
+  const { data: subService } = useSubCategoryQuery();
 
   return (
     <form
       className="w-full max-w-sm my-3 p-2   m-auto   "
       onSubmit={handleSubmit((d) =>
-        postData("https://misiapi.lamptechs.com/api/therapistService/store", d)
+        postData(
+          "https://misiapi.lamptechs.com/api/v1/therapistService/store",
+          d
+        )
       )}
       type="submit"
     >
@@ -45,6 +50,11 @@ function SubCategoryForm() {
         Therapist service
       </h2>
       {/* Service Categorey List */}
+      {/* "id": 1,
+"therapist_id": "1",
+"name": "Therapist Service 1",
+"status": "1",
+"service_category_id": "1", */}
       {categoryService ? (
         <div className="relative my-3">
           <select
@@ -55,7 +65,7 @@ function SubCategoryForm() {
             <option>Select service category</option>
             {categoryService.map((item) => (
               <option key={item.id} value={`${item.id}`}>
-                {item.service_category_name}
+                {item.name}
               </option>
             ))}
             {/* <option>Select service category</option>
@@ -63,7 +73,7 @@ function SubCategoryForm() {
             <option value="2">Category 2</option> */}
           </select>
           <label
-            htmlFor="service_category"
+            htmlFor="service_category_id"
             className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
           >
             Service category
@@ -97,14 +107,14 @@ function SubCategoryForm() {
       {subService ? (
         <div className="relative my-3">
           <select
-            id="service_subcategory_id"
-            {...register("service_subcategory_id")}
+            id="service_sub_category_id"
+            {...register("service_sub_category_id")}
             className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
           >
             <option selected>Select service sub-category</option>
             {subService.map((item) => (
               <option key={item.id} value={`${item.id}`}>
-                {item.service_subcategory_name}
+                {item.name}
               </option>
             ))}
             {/* <option selected>Select service sub-category</option>
@@ -112,7 +122,7 @@ function SubCategoryForm() {
             <option value="2">SubCategory 2</option> */}
           </select>
           <label
-            htmlFor="service_subcategory_id"
+            htmlFor="service_sub_category_id"
             className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
           >
             Service subcategory
@@ -254,13 +264,13 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           {...register("status")}
         >
           {/* <option selected>status</option> */}
-          <option value="A" selected>
+          <option value="1" selected>
             Active
           </option>
-          <option value="Inactive">Inactive</option>
-          <option value="P">Pending</option>
-          <option value="C">Cancelled</option>
-          <option value="D">Deleted</option>
+          <option value="2">Inactive</option>
+          <option value="3">Pending</option>
+          <option value="4">Cancelled</option>
+          <option value="5">Deleted</option>
         </select>
         <label
           htmlFor="remarks"

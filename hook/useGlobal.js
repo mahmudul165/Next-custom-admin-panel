@@ -2,43 +2,15 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 const useGlobal = () => {
-  const [categorydata, setCategory] = useState([]);
-  const [subservicedata, setSubservice] = useState([]);
-  const [therapistservicedata, setTherapistservice] = useState([]);
+  const [categorydata, setCategory] = useState("");
+  const [subservicedata, setSubservice] = useState("");
+  const [therapistservicedata, setTherapistservice] = useState("");
   // global get data method
-  async function fetchCategoryService() {
-    const { data } = await axios.get(
-      "https://misiapi.lamptechs.com/api/service"
-    );
-    return data;
-  }
-  async function fetchSubService() {
-    const { data } = await axios.get(
-      "https://misiapi.lamptechs.com/api/subservice"
-    );
-    return data;
-  }
-  async function fetchTherapistService() {
-    const { data } = await axios.get(
-      "https://misiapi.lamptechs.com/api/therapistService"
-    );
-    return data;
-  }
-  const { data: categoryService } = useQuery(
-    "categoryService",
-    fetchCategoryService
-  );
-
-  const { data: subService } = useQuery("subService", fetchSubService);
-  const { data: therapistService } = useQuery(
-    "therapistService",
-    fetchTherapistService
-  );
-  useEffect(() => {
-    setCategory(categoryService);
-    setSubservice(subService);
-    setTherapistservice(therapistService);
-  }, [categoryService, subService, therapistService]);
+  // useEffect(() => {
+  //   setCategory(categoryService);
+  //   setSubservice(subService);
+  //   setTherapistservice(therapistService);
+  // }, [categoryService, subService, therapistService]);
   // console.log(
   //   "my data of 3 api is",
   //   categorydata,
@@ -78,11 +50,12 @@ const useGlobal = () => {
   };
   return {
     categorydata,
+    setCategory,
     subservicedata,
+    setSubservice,
     therapistservicedata,
-    fetchCategoryService,
-    fetchSubService,
-    fetchTherapistService,
+    setTherapistservice,
+
     postData,
     deleteData,
     Statustest,

@@ -9,52 +9,15 @@ import Link from "next/link";
 import useAuth from "/hook/useAuth";
 // react query
 import { useQuery } from "react-query";
-import axios from "axios";
+import { useTherapistServiceQuery } from "../../hook/useApi";
 
 const SubCategoryTable = () => {
   const { deleteData, Statustest } = useAuth();
   const [modal, setModal] = useState(false);
-  const BodyRow = styled.tr`
-    & th {
-      color: rgb(148 163 184);
 
-      background: rgb(20 184 166);
-    }
-
-    & td {
-      color: rgb(15 23 42);
-      transition: all 0.3s;
-    }
-
-    &:hover td {
-      background: rgb(20 184 166);
-      color: white;
-      transform: scale(1.01);
-    }
-  `;
-
-  const components = {
-    body: {
-      row: BodyRow,
-    },
-  };
-  //   "id": 1,
-  // "service_subcategory_name": "service 2 updated",
-  // "status": "A",
-  // "remarks": "Checking update",
-  // "service_category_id": "1"
-
-  // const getData = async (url) => {
-  //   await axios.get(url).then((res) => res.data);
-  // };
-  const { isLoading, isFetching, status, data, error } = useQuery(
-    "repoData",
-    () =>
-      axios
-        .get("https://misiapi.lamptechs.com/api/therapistService")
-        .then((res) => res.data)
-  );
-  // console.log(" result", data, status, isLoading, isFetching);
+  const { isLoading, isFetching, status, data, error } =
+    useTherapistServiceQuery();
+  console.log("result", data);
 
   //   id
   //   therapist_service_name
@@ -111,12 +74,12 @@ const SubCategoryTable = () => {
                   {data ? (
                     data.map((data) => (
                       <>
-                        <tr className="hover:bg-gray-100 hover:text-base   border ">
+                        <tr className=" hover:bg-gray-200   border ">
                           <td className="px-2   py-2    border text-center">
-                            {data.id}
+                            {data.therapist_id}
                           </td>
                           <td className="px-2    py-2    border text-center">
-                            {data.therapist_service_name}
+                            {data.name}
                           </td>
                           <td className="px-2    py-2    border text-center">
                             {/* {data.service_subcategory_name} */}
@@ -131,7 +94,8 @@ const SubCategoryTable = () => {
                             {" "}
                             <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
                               {/* {data.status == "A" ? "Active" : "inactive"} */}
-                              {Statustest(data.status)}
+                              {/* {Statustest(data.status)} */}
+                              {data.status}
                             </span>{" "}
                           </td>
                           <td className="px-2    py-2    border text-center  ">
@@ -143,23 +107,22 @@ const SubCategoryTable = () => {
                               </Link>
                               <span>| </span>
                               <>
-                                <a
-                                  href=""
+                                <button
                                   className="text-purple-800 hover:underline"
                                   // onClick={() =>
                                   //   axios.post(
-                                  //     `https://misiapi.lamptechs.com/api/service/delete/${data.id}`
+                                  //     `https://misiapi.lamptechs.com/api/v1/service/delete/${data.id}`
                                   //   )
                                   // }
                                   onClick={() =>
                                     deleteData(
-                                      `https://misiapi.lamptechs.com/api/therapistService/delete`,
-                                      data.id
+                                      `https://misiapi.lamptechs.com/api/v1/therapistService/delete`,
+                                      data.therapist_id
                                     )
                                   }
                                 >
                                   Delete
-                                </a>
+                                </button>
                               </>
                             </>
                           </td>

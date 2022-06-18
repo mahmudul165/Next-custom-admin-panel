@@ -3,30 +3,21 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import useAuth from "/hook/useAuth";
-import { fetchCategoryService } from "../../hook/useApi";
 import { useQuery } from "react-query";
+import { useCategoryQuery } from "../../hook/useApi";
 const schema = yup
   .object()
   .shape({
-    // service_category_id
-    // service_subcategory_name
-    //  status
-    //  remarks
-    service_category_id: yup.string().required(),
-    name: yup.string().required(),
-    // details: yup.string().required(),
-    //remarks: yup.string().required(),
-    status: yup.string().required(),
+    // service_category_id: yup.string().required(),
+    // name: yup.string().required(),
+    // status: yup.string().required(),
   })
   .required();
 
 function SubCategoryForm() {
-  const { postData, categorydata } = useAuth();
-  const { data: categoryService } = useQuery(
-    "categoryService",
-    fetchCategoryService
-  );
-  console.log("my categorydata data  is", categoryService);
+  const { postData, categorydata, setCategory } = useAuth();
+  const { data } = useCategoryQuery();
+  //console.log("my categorydata data  is", data);
   const { register, handleSubmit, error } = useForm({
     resolver: yupResolver(schema),
   });
@@ -35,7 +26,7 @@ function SubCategoryForm() {
       <form
         className="w-full max-w-sm my-3 p-2   m-auto"
         onSubmit={handleSubmit((d) =>
-          postData("https://misiapi.lamptechs.com/api/subservice/store", d)
+          postData("https://misiapi.lamptechs.com/api/v1/subservice/store", d)
         )}
         type="submit"
       >
@@ -44,17 +35,17 @@ function SubCategoryForm() {
         </h2>
 
         {/* Service Categorey List */}
-        {categoryService ? (
+        {data ? (
           <div className="relative my-3">
             <select
-              id="service_category_id"
-              {...register("service_category_id")}
+              id="service_categorie_id"
+              {...register("service_categorie_id")}
               className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
             >
               <option>Select service category</option>
-              {categoryService.map((item) => (
+              {data.map((item) => (
                 <option key={item.id} value={`${item.id}`}>
-                  {item.service_category_name}
+                  {item.name}
                 </option>
               ))}
               {/* <option>Select service category</option>
@@ -245,13 +236,13 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             {...register("status")}
           >
             {/* <option selected>status</option> */}
-            <option value="A" selected>
+            <option value="1" selected>
               Active
             </option>
-            <option value="Inactive">Inactive</option>
-            <option value="P">Pending</option>
-            <option value="C">Cancelled</option>
-            <option value="D">Deleted</option>
+            <option value="2">Inactive</option>
+            <option value="3">Pending</option>
+            <option value="4">Cancelled</option>
+            <option value="5">Deleted</option>
           </select>
           <label
             htmlFor="remarks"

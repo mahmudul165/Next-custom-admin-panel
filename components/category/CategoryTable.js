@@ -7,48 +7,12 @@ import useAuth from "/hook/useAuth";
 import axios from "axios";
 import Link from "next/link";
 import { useQuery } from "react-query";
-import { fetchCategoryService, fetchSubService } from "../../hook/useApi";
+import { useCategoryQuery } from "../../hook/useApi";
+
 const CategoryTable = () => {
   const { deleteData, Statustest } = useAuth();
-  const BodyRow = styled.tr`
-    & th {
-      color: rgb(148 163 184);
-
-      background: rgb(20 184 166);
-    }
-
-    & td {
-      color: rgb(15 23 42);
-      transition: all 0.3s;
-    }
-
-    &:hover td {
-      background: rgb(20 184 166);
-      color: white;
-      transform: scale(1.01);
-    }
-  `;
-
-  const components = {
-    body: {
-      row: BodyRow,
-    },
-  };
-
-  const { data, error, isError, isLoading } = useQuery(
-    "posts",
-    fetchCategoryService
-  );
-
-  // {
-  //   data ? (
-  //     data.map(
-  //       (id) => `https://misiapi.lamptechs.com/api/service/delete/${id.id}`
-  //     )
-  //   ) : (
-  //     <> </>
-  //   );
-  // }
+  const { data, error, isError, isLoading } = useCategoryQuery();
+  console.log("category service data ", data);
 
   //Pagination
   const [activePage, setActivePage] = useState(15);
@@ -88,12 +52,16 @@ const CategoryTable = () => {
                   {data ? (
                     data.map((data) => (
                       <>
-                        <tr className=" hover:bg-gray-100 hover:text-base   border">
+                        {/* id
+                      name
+                      status
+                      remarks */}
+                        <tr className=" hover:bg-gray-200     border">
                           <td className="px-2.5 py-2.5 border text-center ">
                             {data.id}
                           </td>
                           <td className="px-2.5 py-2.5 border  text-center">
-                            {data.service_category_name}
+                            {data.name}
                           </td>
                           <td className=" px-2.5 py-2.5 border text-center ">
                             {data.remarks}
@@ -105,7 +73,7 @@ const CategoryTable = () => {
                               {Statustest(data.status)}
                             </span> */}
 
-                            {Statustest(data.status) && (
+                            {/* {Statustest(data.status) && (
                               <>
                                 {Statustest(data.status) === "Canceled" ||
                                 Statustest(data.status) === "Deleted" ? (
@@ -118,7 +86,8 @@ const CategoryTable = () => {
                                   </span>
                                 )}
                               </>
-                            )}
+                            )} */}
+                            {data.status}
                           </td>
                           <td className="px-2.5 py-2.5 border text-center ">
                             <>
@@ -129,23 +98,17 @@ const CategoryTable = () => {
                               </Link>
                               <span> | </span>
                               <>
-                                <a
-                                  href=""
+                                <button
                                   className="text-purple-800 hover:underline"
-                                  // onClick={() =>
-                                  //   axios.post(
-                                  //     `https://misiapi.lamptechs.com/api/service/delete/${data.id}`
-                                  //   )
-                                  // }
                                   onClick={() =>
                                     deleteData(
-                                      `https://misiapi.lamptechs.com/api/service/delete`,
+                                      `https://misiapi.lamptechs.com/api/v1/service/delete`,
                                       data.id
                                     )
                                   }
                                 >
                                   Delete
-                                </a>
+                                </button>
                               </>
                             </>
                           </td>

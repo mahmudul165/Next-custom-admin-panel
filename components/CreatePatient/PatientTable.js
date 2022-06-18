@@ -73,7 +73,7 @@ const PatientTable = () => {
   // "remarks": "Checking update",
   // "service_category_id": "1"
   // const { data, error } = useSWR(
-  //   "https://misiapi.lamptechs.com/api/therapistService",
+  //   "https://misiapi.lamptechs.com/api/v1/therapistService",
   //   { fetcher: async (url) => await fetch(url).then((res) => res.json()) }
   //    { fetcher: async (url) => await axios.get(url).then((res) => res.data) }
   // );
@@ -87,9 +87,9 @@ const PatientTable = () => {
   };
 
   return (
-    <>
+    <section className="p-4">
       <>
-        <div className="grid grid-cols-2 gap-x-8      ">
+        <div className="flex justify-between     ">
           {/*ticket search */}
 
           {/* <div className="flex  ">
@@ -127,9 +127,9 @@ const PatientTable = () => {
             </div>
           </div> */}
           {/*patient id search */}
-          <div className="flex  ">
-            <div className="mb-3 xl:w-72">
-              <div className="input-group relative flex flex-wrap items-stretch w-full mb-4">
+          <div className="  flex  ">
+            <div className="  xl:w-72">
+              <div className="input-group relative flex flex-wrap items-stretch w-full  ">
                 <input
                   type="search"
                   className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
@@ -359,7 +359,8 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                               <td className="border px-2 py-2 text-center   ">
                                 <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
                                   {/* {data.status == "A" ? "Active" : "inactive"} */}
-                                  {Statustest(data.status)}
+                                  {/* {Statustest(data.status)} */}
+                                  {data.status}
                                 </span>
                               </td>
                               <td className="border px-2 py-2 text-center   ">
@@ -377,7 +378,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 
                                       // onClick={() =>
                                       //   deleteData(
-                                      //     `https://misiapi.lamptechs.com/api/service/delete`,
+                                      //     `https://misiapi.lamptechs.com/api/v1/service/delete`,
                                       //     data.id
                                       //   )
                                       // }
@@ -402,7 +403,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         .map((data, index) => {
                           return (
                             <>
-                              <tr className=" hover:bg-gray-100 hover:text-base   border">
+                              <tr className="  hover:bg-gray-200   border">
                                 <td className="border px-2 py-2 text-center ">
                                   {data.id}
                                 </td>
@@ -487,7 +488,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 
                                         // onClick={() =>
                                         //   deleteData(
-                                        //     `https://misiapi.lamptechs.com/api/service/delete`,
+                                        //     `https://misiapi.lamptechs.com/api/v1/service/delete`,
                                         //     data.id
                                         //   )
                                         // }
@@ -528,7 +529,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           </svg>
         </div>
       )}
-    </>
+    </section>
   );
 };
 
