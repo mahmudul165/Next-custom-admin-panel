@@ -11,11 +11,8 @@ const SubCategory = () => {
           buttonTitle="Create new  Patient"
         />
       </>
-
-      <section className="grid md:grid-cols-1 xl:grid-cols-1 gap-6 gap-y-4">
-        <div className="flex-grow items-center     bg-white shadow rounded-lg">
-          <PatientTable />
-        </div>
+      <section className="grid card px-3 pt-3 md:grid-cols-1 xl:grid-cols-1 gap-6 gap-y-4">
+        <PatientTable />
       </section>
     </main>
   );

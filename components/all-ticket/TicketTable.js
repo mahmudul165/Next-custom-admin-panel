@@ -61,12 +61,11 @@ const PatientTable = () => {
   return (
     <>
       <>
-        <div className="grid grid-cols-3 gap-x-8      ">
+        <div className="flex justify-between   ">
           {/*ticket search */}
-
           <div className="flex  ">
-            <div className="mb-3 xl:w-72">
-              <div className="input-group relative flex flex-wrap items-stretch w-full mb-4">
+            <div className="  xl:w-72">
+              <div className="input-group relative flex flex-wrap items-stretch w-full  ">
                 <input
                   type="text"
                   className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
@@ -102,8 +101,8 @@ const PatientTable = () => {
           </div>
           {/*patient id search */}
           <div className="flex  ">
-            <div className="mb-3 xl:w-72">
-              <div className="input-group relative flex flex-wrap items-stretch w-full mb-4">
+            <div className="  xl:w-72">
+              <div className="input-group relative flex flex-wrap items-stretch w-full  ">
                 <input
                   type="search"
                   className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
@@ -178,7 +177,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
       {data ? (
         <>
           {/* <div className="flex-grow items-center py-8p-8 bg-white shadow rounded-lg"> */}
-          <div className="min-h-screen bg-white-800 py-3">
+          <div className="min-h-screen bg-white-800 pt-3">
             <div className="overflow-x-auto w-full">
               <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
                 <thead

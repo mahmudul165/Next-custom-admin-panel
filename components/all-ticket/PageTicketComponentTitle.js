@@ -8,7 +8,7 @@ const PagePatientComponentTitle = ({
   const [submodal, setSubModal] = useState(false);
 
   return (
-    <>
+    <div className="grid grid-cols-2 card  rounded-lg py-3 px-2 border-b-2 border-slate-200">
       <div className="mr-6">
         <h1 className="text-4xl font-semibold mb-2">{title}</h1>
         <h2 className="text-gray-600 ml-0.5">{titleDescription}</h2>
@@ -38,7 +38,7 @@ const PagePatientComponentTitle = ({
         </button>
         <TicketModal submodal={submodal} setSubModal={setSubModal} />
       </div>
-    </>
+    </div>
   );
 };
 

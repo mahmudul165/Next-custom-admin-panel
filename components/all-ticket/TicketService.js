@@ -5,17 +5,13 @@ import TicketTable from "./TicketTable";
 const SubCategory = () => {
   return (
     <main className="p-6  space-y-6">
-      <div className="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
-        <PageTicketComponentTitle
-          title="All ticket"
-          buttonTitle="Create new ticket"
-        />
-      </div>
+      <PageTicketComponentTitle
+        title="All ticket"
+        buttonTitle="Create new ticket"
+      />
 
-      <section className="grid md:grid-cols-1 xl:grid-cols-1 gap-6">
-        {/* <div className="flex-grow items-center py-8p-8 bg-white shadow rounded-lg"> */}
+      <section className="grid card px-3 pt-3 md:grid-cols-1 xl:grid-cols-1 gap-6 gap-y-4">
         <TicketTable />
-        {/* </div> */}
       </section>
     </main>
   );

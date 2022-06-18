@@ -46,9 +46,9 @@ const PatientTable = () => {
   };
 
   return (
-    <section className="p-4">
+    <>
       <>
-        <div className="flex justify-between">
+        <div className="flex justify-between  ">
           {/*ticket search */}
 
           {/* <div className="flex  ">
@@ -164,8 +164,8 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
       </>
       {results ? (
         <>
-          <div className="min-h-screen bg-white-800 py-3">
-            <div className="overflow-x-auto w-full">
+          <div className=" min-h-screen bg-white-800 pt-3">
+            <div className="overflow-x-auto w-full  ">
               <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
                 <thead
                   className="  border"
@@ -250,106 +250,104 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     <>
                       {results.map((data, index) => {
                         return (
-                          <>
-                            <tr
-                              key={index}
-                              className=" hover:bg-gray-100  hover:text-sm   border"
-                            >
-                              <td className="border px-2 py-2 text-center ">
-                                {data.id}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.first_name}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.last_name}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.email}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.phone}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.address}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.city || data.area}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.country}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.age}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.marital_status}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.date_of_birth}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.occupation}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.emergency_contact}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.bsn_number}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.dob_number}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.insurance_number}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.gender}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.medical_history}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.blood_group_id}
-                              </td>
-                              <td className="border px-2 py-2 text-center ">
-                                {data.patient_picture_name}
-                              </td>
-                              <td className="border px-2 py-2 text-center   ">
-                                {data.admin_remarks}
-                              </td>
-                              <td className="border px-2 py-2 text-center   ">
-                                <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
-                                  {/* {data.status == "A" ? "Active" : "inactive"} */}
-                                  {/* {Statustest(data.status)} */}
-                                  {data.status}
-                                </span>
-                              </td>
-                              <td className="border px-2 py-2 text-center   ">
+                          <tr
+                            key={index}
+                            className=" hover:bg-gray-200     border"
+                          >
+                            <td className="border px-2 py-2 text-center ">
+                              {data.id}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.first_name}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.last_name}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.email}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.phone}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.address}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.city || data.area}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.country}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.age}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.marital_status}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.date_of_birth}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.occupation}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.emergency_contact}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.bsn_number}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.dob_number}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.insurance_number}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.gender}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.medical_history}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.blood_group_id}
+                            </td>
+                            <td className="border px-2 py-2 text-center ">
+                              {data.patient_picture_name}
+                            </td>
+                            <td className="border px-2 py-2 text-center   ">
+                              {data.admin_remarks}
+                            </td>
+                            <td className="border px-2 py-2 text-center   ">
+                              <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
+                                {/* {data.status == "A" ? "Active" : "inactive"} */}
+                                {/* {Statustest(data.status)} */}
+                                {data.status}
+                              </span>
+                            </td>
+                            <td className="border px-2 py-2 text-center   ">
+                              <>
+                                <Link href={`/patient/edit/${data.id}`}>
+                                  <a className="text-purple-800 hover:underline">
+                                    Edit
+                                  </a>
+                                </Link>
+                                <span> | </span>
                                 <>
-                                  <Link href={`/patient/edit/${data.id}`}>
-                                    <a className="text-purple-800 hover:underline">
-                                      Edit
-                                    </a>
-                                  </Link>
-                                  <span> | </span>
-                                  <>
-                                    <button
-                                      className="text-purple-800 hover:underline"
-                                      onClick={() =>
-                                        deleteData(
-                                          `https://misiapi.lamptechs.com/api/v1/patient/delete`,
-                                          data.id
-                                        )
-                                      }
-                                    >
-                                      Delete
-                                    </button>
-                                  </>
+                                  <button
+                                    className="text-purple-800 hover:underline"
+                                    onClick={() =>
+                                      deleteData(
+                                        `https://misiapi.lamptechs.com/api/v1/patient/delete`,
+                                        data.id
+                                      )
+                                    }
+                                  >
+                                    Delete
+                                  </button>
                                 </>
-                              </td>
-                            </tr>
-                          </>
+                              </>
+                            </td>
+                          </tr>
                         );
                       })}
                     </>
@@ -500,7 +498,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           </svg>
         </div>
       )}
-    </section>
+    </>
   );
 };
 

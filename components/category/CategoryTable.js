@@ -26,7 +26,7 @@ const CategoryTable = () => {
         <>
           <div className="min-h-screen bg-white-800 py-3">
             <div className="overflow-x-auto w-full">
-              <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
+              <table className="mx-auto max-w-5xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
                 <thead className=" " style={{ backgroundColor: "#01a9ac" }}>
                   <tr className="border font-semibold text-white text-sm    text-center ">
                     <th className="font-semibold text-base px-2.5 py-2.5 border">
@@ -39,8 +39,7 @@ const CategoryTable = () => {
                       {" "}
                       Remarks
                     </th>
-                    <th className="font-semibold text-base  px-2.5 py-2.5 border text-center  selection:">
-                      {" "}
+                    <th className="font-semibold text-base  px-2.5 py-2.5 border text-center   ">
                       Status
                     </th>
                     <th className="font-semibold text-base  px-2.5 py-2.5 border text-center ">
@@ -60,7 +59,7 @@ const CategoryTable = () => {
                           <td className="px-2.5 py-2.5 border text-center ">
                             {data.id}
                           </td>
-                          <td className="px-2.5 py-2.5 border  text-center">
+                          <td className="px-2.5 py-2.5 border text-center">
                             {data.name}
                           </td>
                           <td className=" px-2.5 py-2.5 border text-center ">

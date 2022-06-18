@@ -39,7 +39,7 @@ const SubCategoryTable = () => {
 
           <div className="min-h-screen bg-white-800 py-3">
             <div className="overflow-x-auto w-full">
-              <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
+              <table className="mx-auto max-w-5xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
                 <thead
                   className="   border "
                   style={{ backgroundColor: "#01a9ac" }}

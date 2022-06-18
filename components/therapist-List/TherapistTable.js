@@ -68,11 +68,6 @@ const SubCategoryTable = () => {
     }
   `;
 
-  const components = {
-    body: {
-      row: BodyRow,
-    },
-  };
   //   "id": 1,
   // "service_subcategory_name": "service 2 updated",
   // "status": "A",

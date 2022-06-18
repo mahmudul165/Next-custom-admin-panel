@@ -24,7 +24,7 @@ const SubCategoryTable = () => {
         <>
           <div className="min-h-screen bg-white-800 py-3">
             <div className="overflow-x-auto w-full">
-              <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
+              <table className="mx-auto max-w-5xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
                 <thead
                   className="   border  "
                   style={{ backgroundColor: "#01a9ac" }}
@@ -39,7 +39,7 @@ const SubCategoryTable = () => {
                     <th className="font-semibold text-base  px-2.5 py-2.5 border">
                       Service subcategory name
                     </th>
-                    <th className=" font-semibold text-base  px-2.5 py-2.5 border ">
+                    <th className="font-semibold text-base  px-2.5 py-2.5 border">
                       {" "}
                       Remarks
                     </th>
@@ -56,11 +56,11 @@ const SubCategoryTable = () => {
                   {data ? (
                     data.map((data) => (
                       <>
-                        <tr className="   hover:bg-gray-200   border">
-                          <td className="px-2  py-2  border text-center">
+                        <tr className="  hover:bg-gray-200   border">
+                          <td className="px-2.5 py-2.5 border text-center ">
                             {data.id}
                           </td>
-                          <td className="px-2  py-2  border text-center">
+                          <td className="px-2.5 py-2.5 border text-center ">
                             {/* {data.service_categorie_id} */}
                             {/* {
                                
@@ -77,11 +77,13 @@ const SubCategoryTable = () => {
                               <>loading ...</>
                             )}
                           </td>
-                          <td className="px-2  py-2  border text-center">
+                          <td className="px-2.5 py-2.5 border text-center ">
                             {data.name}
                           </td>
-                          <td className="  py-4 text-center">{data.remarks}</td>
-                          <td className="px-2  py-2  border text-center">
+                          <td className="px-2.5 py-2.5 border text-center ">
+                            {data.remarks}
+                          </td>
+                          <td className="px-2.5 py-2.5 border text-center ">
                             {Statustest(data.status) && (
                               <>
                                 {Statustest(data.status) === "Canceled" ||
@@ -97,14 +99,11 @@ const SubCategoryTable = () => {
                               </>
                             )}
                           </td>
-                          <td className="px-2  py-2  border text-center">
+                          <td className="px-2.5 py-2.5 border text-center ">
                             <>
-                              <a
-                                href="#"
-                                className="text-purple-800 hover:underline"
-                              >
+                              <button className="text-purple-800 hover:underline">
                                 Edit
-                              </a>
+                              </button>
                               <span>| </span>
                               <>
                                 <button
