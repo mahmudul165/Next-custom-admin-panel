@@ -30,6 +30,7 @@
     "react-pure-modal": "^2.1.1",
     "react-query": "^3.39.1",
     "react-reveal": "^1.2.2",
+    "react-sort-search-table": "^1.1.2",
     "react-spring": "^9.4.5",
     "react-transition-group": "^4.4.2",
     "styled-components": "^5.3.5",
