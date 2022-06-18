@@ -38,12 +38,12 @@ const fetchPatientList = async () => {
 export const usePatientListQuery = () =>
   useQuery(["patientList"], fetchPatientList);
 
-export const allTicketList = async () => {
-  const { data } = await axios.get(
-    "https://misiapi.lamptechs.com/api/v1/patient"
-  );
-  return data;
+// get  All ticket  data
+const fetchAllTicket = async () => {
+  const response = await fetch("https://misiapi.lamptechs.com/api/v1/patient");
+  return await response.json();
 };
+export const useAllTicketQuery = () => useQuery(["allticket"], fetchAllTicket);
 
 // global get data method
 // async function fetchCategoryService() {
