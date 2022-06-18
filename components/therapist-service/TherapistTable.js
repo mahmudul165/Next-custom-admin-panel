@@ -132,15 +132,10 @@ const SubCategoryTable = () => {
                               <>
                                 <button
                                   className="text-purple-800 hover:underline"
-                                  // onClick={() =>
-                                  //   axios.post(
-                                  //     `https://misiapi.lamptechs.com/api/v1/service/delete/${data.id}`
-                                  //   )
-                                  // }
                                   onClick={() =>
                                     deleteData(
                                       `https://misiapi.lamptechs.com/api/v1/therapistService/delete`,
-                                      data.therapist_id
+                                      data.id
                                     )
                                   }
                                 >

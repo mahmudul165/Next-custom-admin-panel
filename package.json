@@ -14,6 +14,7 @@
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
     "framer-motion": "^6.3.10",
+    "mdbreact": "^5.2.0",
     "next": "12.1.0",
     "next-auth": "^4.3.4",
     "rc-table": "^7.23.0",
