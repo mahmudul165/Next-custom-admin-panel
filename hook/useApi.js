@@ -18,10 +18,8 @@ const fetchSubService = async () => {
   return await response.json();
 };
 export const useSubCategoryQuery = () =>
-  useQuery(["subcategory"], fetchSubService, {
-    // refetchOnMount: false,
-    // refetchOnWindowFocus: false,
-  });
+  useQuery(["subcategory"], fetchSubService);
+
 // get  service therapist data
 const fetchTherapistService = async () => {
   const response = await fetch(
@@ -30,23 +28,20 @@ const fetchTherapistService = async () => {
   return await response.json();
 };
 export const useTherapistServiceQuery = () =>
-  useQuery(["therapistService"], fetchTherapistService, {
-    // refetchOnMount: false,
-    // refetchOnWindowFocus: false,
-  });
+  useQuery(["therapistService"], fetchTherapistService);
 
-// export const fetchTherapistService = async () => {
-//   const { data } = await axios.get(
-//     "https://misiapi.lamptechs.com/api/v1/therapistService"
-//   );
-//   return data;
-// };
-export const patientList = async () => {
-  const { data } = await axios.get("https://misiapi.lamptechs.com/api/patient");
-  return data;
+// get  patient list  data
+const fetchPatientList = async () => {
+  const response = await fetch("https://misiapi.lamptechs.com/api/v1/patient");
+  return await response.json();
 };
+export const usePatientListQuery = () =>
+  useQuery(["patientList"], fetchPatientList);
+
 export const allTicketList = async () => {
-  const { data } = await axios.get("https://misiapi.lamptechs.com/api/patient");
+  const { data } = await axios.get(
+    "https://misiapi.lamptechs.com/api/v1/patient"
+  );
   return data;
 };
 

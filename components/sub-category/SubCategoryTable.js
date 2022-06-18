@@ -62,27 +62,40 @@ const SubCategoryTable = () => {
                           </td>
                           <td className="px-2  py-2  border text-center">
                             {/* {data.service_categorie_id} */}
-                            {
-                              // category
-                              //   .filter((i) => i.id == data.service_categorie_id)
-                              //   .map((item) => (
-                              //     <>{item.name}</>
-                              //   ))
+                            {/* {
+                               
 
                               `${data.service_categorie_id}  filter this category id value `
-                            }
+                            } */}
+                            {category ? (
+                              category
+                                .filter(
+                                  (i) => i.id == data.service_categorie_id
+                                )
+                                .map((item) => <>{item.name}</>)
+                            ) : (
+                              <>loading ...</>
+                            )}
                           </td>
                           <td className="px-2  py-2  border text-center">
                             {data.name}
                           </td>
                           <td className="  py-4 text-center">{data.remarks}</td>
                           <td className="px-2  py-2  border text-center">
-                            {" "}
-                            <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
-                              {/* {data.status == "A" ? "Active" : "inactive"} */}
-                              {/* {Statustest(data.status)} */}
-                              {data.status}
-                            </span>{" "}
+                            {Statustest(data.status) && (
+                              <>
+                                {Statustest(data.status) === "Canceled" ||
+                                Statustest(data.status) === "Deleted" ? (
+                                  <span className="text-white text-sm w-1/3 pb-1 bg-red-500 font-semibold px-2 rounded-full">
+                                    {Statustest(data.status)}
+                                  </span>
+                                ) : (
+                                  <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
+                                    {Statustest(data.status)}
+                                  </span>
+                                )}
+                              </>
+                            )}
                           </td>
                           <td className="px-2  py-2  border text-center">
                             <>

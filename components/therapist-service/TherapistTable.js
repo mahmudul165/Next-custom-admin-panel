@@ -9,7 +9,11 @@ import Link from "next/link";
 import useAuth from "/hook/useAuth";
 // react query
 import { useQuery } from "react-query";
-import { useTherapistServiceQuery } from "../../hook/useApi";
+import {
+  useCategoryQuery,
+  useSubCategoryQuery,
+  useTherapistServiceQuery,
+} from "../../hook/useApi";
 
 const SubCategoryTable = () => {
   const { deleteData, Statustest } = useAuth();
@@ -17,14 +21,9 @@ const SubCategoryTable = () => {
 
   const { isLoading, isFetching, status, data, error } =
     useTherapistServiceQuery();
-  console.log("result", data);
-
-  //   id
-  //   therapist_service_name
-  //  status
-  //  remarks
-  //  service_category_id
-  //  service_subcategory_id
+  //console.log("result", data);
+  const { data: category } = useCategoryQuery();
+  const { data: subcategory } = useSubCategoryQuery();
 
   //Pagination
   const [activePage, setActivePage] = useState(10);
@@ -76,27 +75,51 @@ const SubCategoryTable = () => {
                       <>
                         <tr className=" hover:bg-gray-200   border ">
                           <td className="px-2   py-2    border text-center">
-                            {data.therapist_id}
+                            {data.id}
                           </td>
                           <td className="px-2    py-2    border text-center">
                             {data.name}
                           </td>
                           <td className="px-2    py-2    border text-center">
                             {/* {data.service_subcategory_name} */}
+                            {category ? (
+                              category
+                                .filter((i) => i.id == data.service_category_id)
+                                .map((item) => <>{item.name}</>)
+                            ) : (
+                              <></>
+                            )}
                           </td>
                           <td className="px-2    py-2   border text-center">
                             {/* {data.service_subcategory_name} */}
+                            {subcategory ? (
+                              subcategory
+                                .filter(
+                                  (i) => i.id == data.service_sub_category_id
+                                )
+                                .map((item) => <>{item.name}</>)
+                            ) : (
+                              <></>
+                            )}
                           </td>
                           <td className=" px-2    py-2    border text-center">
                             {data.remarks}
                           </td>
                           <td className="px-2    py-2    border text-center  ">
-                            {" "}
-                            <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
-                              {/* {data.status == "A" ? "Active" : "inactive"} */}
-                              {/* {Statustest(data.status)} */}
-                              {data.status}
-                            </span>{" "}
+                            {Statustest(data.status) && (
+                              <>
+                                {Statustest(data.status) === "Canceled" ||
+                                Statustest(data.status) === "Deleted" ? (
+                                  <span className="text-white text-sm w-1/3 pb-1 bg-red-500 font-semibold px-2 rounded-full">
+                                    {Statustest(data.status)}
+                                  </span>
+                                ) : (
+                                  <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
+                                    {Statustest(data.status)}
+                                  </span>
+                                )}
+                              </>
+                            )}
                           </td>
                           <td className="px-2    py-2    border text-center  ">
                             <>

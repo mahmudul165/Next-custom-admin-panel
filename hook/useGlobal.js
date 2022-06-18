@@ -33,16 +33,31 @@ const useGlobal = () => {
   };
 
   // status
+  // const Statustest = (status) => {
+  //   if (status == "A") {
+  //     return " Active";
+  //   } else if (status == "I") {
+  //     return "Inactive";
+  //   } else if (status == "P") {
+  //     return "Pending";
+  //   } else if (status == "C") {
+  //     return "Canceled";
+  //   } else if (status == "D") {
+  //     return "Deleted";
+  //   } else {
+  //     return " ";
+  //   }
+  // };
   const Statustest = (status) => {
-    if (status == "A") {
+    if (status == "1") {
       return " Active";
-    } else if (status == "I") {
+    } else if (status == "2") {
       return "Inactive";
-    } else if (status == "P") {
+    } else if (status == "3") {
       return "Pending";
-    } else if (status == "C") {
+    } else if (status == "4") {
       return "Canceled";
-    } else if (status == "D") {
+    } else if (status == "5") {
       return "Deleted";
     } else {
       return " ";

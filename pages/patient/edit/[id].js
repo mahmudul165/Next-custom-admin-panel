@@ -10,7 +10,7 @@ function Edit() {
   //console.log("router params id", id);
   //const [data, setdata] = useState();
   const { data, error } = useSWR(
-    `https://misiapi.lamptechs.com/api/patient/${id}`,
+    `https://misiapi.lamptechs.com/api/v1/patient/${id}`,
     {
       fetcher: async (url) => await fetch(url).then((res) => res.json()),
     }
@@ -23,10 +23,10 @@ function Edit() {
   //console.log("router params data", data);
   // const { data, isError, isLoading } = useQuery(
   //   "posts",
-  //   axios.get(`https://misiapi.lamptechs.com/api/patient/${id}`)
+  //   axios.get(`https://misiapi.lamptechs.com/api/v1/patient/${id}`)
   // );
   // export const allTicketList = async () => {
-  //   const { data } = await axios.get("https://misiapi.lamptechs.com/api/patient");
+  //   const { data } = await axios.get("https://misiapi.lamptechs.com/api/v1/patient");
   //   return data;
   // };
   return (

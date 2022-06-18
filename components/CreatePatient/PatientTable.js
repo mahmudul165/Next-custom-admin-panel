@@ -8,7 +8,7 @@ import PaitentForm from "./PatientForm";
 import Link from "next/link";
 import useAuth from "/hook/useAuth";
 import axios from "axios";
-import { patientList } from "../../hook/useApi";
+import { patientList, usePatientListQuery } from "../../hook/useApi";
 import { useQuery } from "react-query";
 
 const PatientTable = () => {
@@ -16,22 +16,12 @@ const PatientTable = () => {
   //   Catch Search input
   const [searchInput, setInput] = useState([]);
   const [statusSearch, setStatus] = useState([]);
-  // const handleSearchChange = (e) => {
-  //   e.preventDefault();
-  //   setInput(e.target.value.toLowerCase());
-  //   console.log(searchInput);
-  // };
   const [results, setResults] = useState([]);
-  // console.log("results", results);
-  // console.log("Search input value ", searchInput);
-  // console.log("Search status value ", statusSearch);
 
-  //const { handleSearchChange, searchInput } = useAuth();
   useEffect(() => {
     const urls = [
-      // "https://arshi365.lamptechs.com/api/admin/products",
       // "https://arshi365.lamptechs.com/api/admin/todaysDeal",
-      "https://misiapi.lamptechs.com/api/patient",
+      "https://misiapi.lamptechs.com/api/v1/patient",
     ];
 
     Promise.all(
@@ -46,39 +36,8 @@ const PatientTable = () => {
   }, []);
 
   const [modal, setModal] = useState(false);
-  const BodyRow = styled.tr`
-    & th {
-      color: rgb(148 163 184);
-      background: rgb(20 184 166);
-    }
-    & td {
-      color: rgb(15 23 42);
-      transition: all 0.3s;
-    }
-    &:hover td {
-      background: rgb(20 184 166);
-      color: white;
-      transform: scale(1.01);
-    }
-  `;
 
-  const components = {
-    body: {
-      row: BodyRow,
-    },
-  };
-  //   "id": 1,
-  // "service_subcategory_name": "service 2 updated",
-  // "status": "A",
-  // "remarks": "Checking update",
-  // "service_category_id": "1"
-  // const { data, error } = useSWR(
-  //   "https://misiapi.lamptechs.com/api/v1/therapistService",
-  //   { fetcher: async (url) => await fetch(url).then((res) => res.json()) }
-  //    { fetcher: async (url) => await axios.get(url).then((res) => res.data) }
-  // );
-
-  const { data, error, isError, isLoading } = useQuery("posts", patientList);
+  //const { data, error, isError, isLoading } = usePatientListQuery();
 
   //Pagination
   const [activePage, setActivePage] = useState(10);
@@ -89,7 +48,7 @@ const PatientTable = () => {
   return (
     <section className="p-4">
       <>
-        <div className="flex justify-between     ">
+        <div className="flex justify-between">
           {/*ticket search */}
 
           {/* <div className="flex  ">
@@ -292,30 +251,33 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       {results.map((data, index) => {
                         return (
                           <>
-                            <tr className=" hover:bg-gray-100  hover:text-sm   border">
+                            <tr
+                              key={index}
+                              className=" hover:bg-gray-100  hover:text-sm   border"
+                            >
                               <td className="border px-2 py-2 text-center ">
                                 {data.id}
                               </td>
                               <td className="border px-2 py-2 text-center ">
-                                {data.patient_first_name}
+                                {data.first_name}
                               </td>
                               <td className="border px-2 py-2 text-center ">
-                                {data.patient_last_name}
+                                {data.last_name}
                               </td>
                               <td className="border px-2 py-2 text-center ">
-                                {data.patient_email}
+                                {data.email}
                               </td>
                               <td className="border px-2 py-2 text-center ">
-                                {data.patient_phone}
+                                {data.phone}
                               </td>
                               <td className="border px-2 py-2 text-center ">
-                                {data.patient_address}
+                                {data.address}
                               </td>
                               <td className="border px-2 py-2 text-center ">
-                                {data.patient_city}
+                                {data.city || data.area}
                               </td>
                               <td className="border px-2 py-2 text-center ">
-                                {data.patient_country}
+                                {data.country}
                               </td>
                               <td className="border px-2 py-2 text-center ">
                                 {data.age}
@@ -342,13 +304,13 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 {data.insurance_number}
                               </td>
                               <td className="border px-2 py-2 text-center ">
-                                {data.sex}
+                                {data.gender}
                               </td>
                               <td className="border px-2 py-2 text-center ">
                                 {data.medical_history}
                               </td>
                               <td className="border px-2 py-2 text-center ">
-                                {data.blood_group}
+                                {data.blood_group_id}
                               </td>
                               <td className="border px-2 py-2 text-center ">
                                 {data.patient_picture_name}
@@ -372,19 +334,17 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                   </Link>
                                   <span> | </span>
                                   <>
-                                    <a
-                                      href=""
+                                    <button
                                       className="text-purple-800 hover:underline"
-
-                                      // onClick={() =>
-                                      //   deleteData(
-                                      //     `https://misiapi.lamptechs.com/api/v1/service/delete`,
-                                      //     data.id
-                                      //   )
-                                      // }
+                                      onClick={() =>
+                                        deleteData(
+                                          `https://misiapi.lamptechs.com/api/v1/patient/delete`,
+                                          data.id
+                                        )
+                                      }
                                     >
                                       Delete
-                                    </a>
+                                    </button>
                                   </>
                                 </>
                               </td>
@@ -408,25 +368,25 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                   {data.id}
                                 </td>
                                 <td className="border px-2 py-2 text-center ">
-                                  {data.patient_first_name}
+                                  {data.first_name}
                                 </td>
                                 <td className="border px-2 py-2 text-center ">
-                                  {data.patient_last_name}
+                                  {data.last_name}
                                 </td>
                                 <td className="border px-2 py-2 text-center ">
-                                  {data.patient_email}
+                                  {data.email}
                                 </td>
                                 <td className="border px-2 py-2 text-center ">
-                                  {data.patient_phone}
+                                  {data.phone}
                                 </td>
                                 <td className="border px-2 py-2 text-center ">
-                                  {data.patient_address}
+                                  {data.address}
                                 </td>
                                 <td className="border px-2 py-2 text-center ">
-                                  {data.patient_city}
+                                  {data.city || data.area}
                                 </td>
                                 <td className="border px-2 py-2 text-center ">
-                                  {data.patient_country}
+                                  {data.country}
                                 </td>
                                 <td className="border px-2 py-2 text-center ">
                                   {data.age}
@@ -453,13 +413,13 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                   {data.insurance_number}
                                 </td>
                                 <td className="border px-2 py-2 text-center ">
-                                  {data.sex}
+                                  {data.gender}
                                 </td>
                                 <td className="border px-2 py-2 text-center ">
                                   {data.medical_history}
                                 </td>
                                 <td className="border px-2 py-2 text-center ">
-                                  {data.blood_group}
+                                  {data.blood_group_id}
                                 </td>
                                 <td className="border px-2 py-2 text-center ">
                                   {data.patient_picture_name}
@@ -468,33 +428,44 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                   {data.admin_remarks}
                                 </td>
                                 <td className="border px-2 py-2 text-center   ">
-                                  <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
-                                    {/* {data.status == "A" ? "Active" : "inactive"} */}
-                                    {Statustest(data.status)}
-                                  </span>
+                                  {/* {Statustest(data.state_id) && (
+                                    <>
+                                      {Statustest(data.state_id) ===
+                                        "Canceled" ||
+                                      Statustest(data.state_id) ===
+                                        "Deleted" ? (
+                                        <span className="text-white text-sm w-1/3 pb-1 bg-red-500 font-semibold px-2 rounded-full">
+                                          {Statustest(data.state_id)}
+                                        </span>
+                                      ) : (
+                                        <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
+                                          {Statustest(data.state_id)}
+                                        </span>
+                                      )}
+                                    </>
+                                  )} */}
+                                  {/* {data.state_id} */}
                                 </td>
                                 <td className="border px-2 py-2 text-center   ">
                                   <>
                                     <Link href={`/patient/edit/${data.id}`}>
                                       <a className="text-purple-800 hover:underline">
-                                        dddEdit
+                                        Edit
                                       </a>
                                     </Link>
                                     <span> | </span>
                                     <>
-                                      <a
-                                        href=""
+                                      <button
                                         className="text-purple-800 hover:underline"
-
-                                        // onClick={() =>
-                                        //   deleteData(
-                                        //     `https://misiapi.lamptechs.com/api/v1/service/delete`,
-                                        //     data.id
-                                        //   )
-                                        // }
+                                        onClick={() =>
+                                          deleteData(
+                                            `https://misiapi.lamptechs.com/api/v1/patient/delete`,
+                                            data.id
+                                          )
+                                        }
                                       >
                                         Delete
-                                      </a>
+                                      </button>
                                     </>
                                   </>
                                 </td>

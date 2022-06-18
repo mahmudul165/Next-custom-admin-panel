@@ -67,13 +67,7 @@ const CategoryTable = () => {
                             {data.remarks}
                           </td>
                           <td className="px-2.5 py-2.5 border text-center ">
-                            {/* {Statustest(data.status)} */}
-
-                            {/* <span className="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full">
-                              {Statustest(data.status)}
-                            </span> */}
-
-                            {/* {Statustest(data.status) && (
+                            {Statustest(data.status) && (
                               <>
                                 {Statustest(data.status) === "Canceled" ||
                                 Statustest(data.status) === "Deleted" ? (
@@ -86,8 +80,7 @@ const CategoryTable = () => {
                                   </span>
                                 )}
                               </>
-                            )} */}
-                            {data.status}
+                            )}
                           </td>
                           <td className="px-2.5 py-2.5 border text-center ">
                             <>
