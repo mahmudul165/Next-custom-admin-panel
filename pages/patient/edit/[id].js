@@ -14,26 +14,12 @@ function Edit() {
     {
       fetcher: async (url) => await fetch(url).then((res) => res.json()),
     }
-
-    // {
-    //   fetcher: async (url) =>
-    //     await axios.get(url).then((res) => setdata(res.data)),
-    // }
   );
-  //console.log("router params data", data);
-  // const { data, isError, isLoading } = useQuery(
-  //   "posts",
-  //   axios.get(`https://misiapi.lamptechs.com/api/v1/patient/${id}`)
-  // );
-  // export const allTicketList = async () => {
-  //   const { data } = await axios.get("https://misiapi.lamptechs.com/api/v1/patient");
-  //   return data;
-  // };
+  console.log("edit props data", data);
   return (
     <>
       {data ? (
         <>
-          {/* <h1>{data.patient_first_name}</h1> */}
           <PatientForm
             title="Edit your profile"
             data={data}
