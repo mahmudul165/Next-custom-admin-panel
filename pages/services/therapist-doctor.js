@@ -2,11 +2,11 @@ import React from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { MDBDataTable } from "mdbreact";
+//import { MDBDataTable } from "mdbreact";
 import { useCategoryQuery, useSubCategoryQuery } from "../../hook/useApi";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import "bootstrap-css-only/css/bootstrap.min.css";
-import "mdbreact/dist/css/mdb.css";
+// import "@fortawesome/fontawesome-free/css/all.min.css";
+// import "bootstrap-css-only/css/bootstrap.min.css";
+// import "mdbreact/dist/css/mdb.css";
 const schema = yup
   .object()
   .shape({
@@ -27,86 +27,166 @@ function TherapistDoctor() {
         label: "#",
         field: "id",
         sort: "asc",
-        width: 200,
-      },
-      {
-        label: "Name",
-        field: "name",
-        sort: "asc",
-        width: 200,
+        width: 300,
       },
 
       {
+        label: "First Name",
+        field: "name",
+        sort: "asc",
+        width: 300,
+      },
+
+      {
+        label: "Last Name",
+        field: "name",
+        sort: "asc",
+        width: 300,
+      },
+      {
+        label: "Phone Number",
+        field: "name",
+        sort: "asc",
+        width: 300,
+      },
+      {
+        label: "Email Address",
+        field: "name",
+        sort: "asc",
+        width: 300,
+      },
+      {
+        label: "Residential Address",
+        field: "name",
+        sort: "asc",
+        width: 300,
+      },
+      {
+        label: "State/City",
+        field: "name",
+        sort: "asc",
+        width: 300,
+      },
+      {
+        label: "Nationality",
+        field: "name",
+        sort: "asc",
+        width: 300,
+      },
+      {
+        label: "Language",
+        field: "name",
+        sort: "asc",
+        width: 300,
+      },
+      {
+        label: "BSN Number",
+        field: "name",
+        sort: "asc",
+        width: 300,
+      },
+      {
+        label: "DOB Number",
+        field: "name",
+        sort: "asc",
+        width: 300,
+      },
+      {
+        label: "Insurance Number",
+        field: "name",
+        sort: "asc",
+        width: 300,
+      },
+      {
+        label: "Emergency Contacts",
+        field: "name",
+        sort: "asc",
+        width: 300,
+      },
+      {
+        label: "Age",
+        field: "name",
+        sort: "asc",
+        width: 300,
+      },
+      // Sex	Therapist Type	Date of Birth	Blood Group	File Upload	Remarks	Status	Operations
+      {
         label: "Remarks",
         field: "remarks",
         sort: "asc",
-        width: 200,
+        width: 300,
       },
       {
         label: "Status",
         field: "status",
         sort: "asc",
-        width: 200,
+        width: 300,
       },
       {
         label: "Date",
         field: "created_at",
         sort: "asc",
-        width: 200,
+        width: 300,
       },
       {
         label: "Remarks",
         field: "remarks",
         sort: "asc",
-        width: 200,
+        width: 300,
       },
       {
         label: "Status",
         field: "status",
         sort: "asc",
-        width: 200,
+        width: 300,
       },
       {
         label: "Date",
         field: "created_at",
         sort: "asc",
-        width: 200,
+        width: 300,
       },
       {
         label: "Remarks",
         field: "remarks",
         sort: "asc",
-        width: 200,
+        width: 300,
       },
       {
         label: "Status",
         field: "status",
         sort: "asc",
-        width: 200,
+        width: 300,
       },
       {
         label: "Date",
         field: "created_at",
         sort: "asc",
-        width: 200,
+        width: 300,
       },
       {
         label: "Remarks",
         field: "remarks",
         sort: "asc",
-        width: 200,
+        width: 300,
       },
       {
         label: "Status",
         field: "status",
         sort: "asc",
-        width: 200,
+        width: 300,
       },
       {
         label: "Date",
         field: "created_at",
         sort: "asc",
-        width: 200,
+        width: 300,
+      },
+      {
+        label: "Operation",
+        field: "Operation",
+        sort: "asc",
+        width: 300,
       },
     ],
     rows: categoryData,
@@ -293,23 +373,30 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
       </form> */}
 
       {/* mbd react table */}
-      <div className="card p-3 m-2">
-        <MDBDataTable
-          theadColor="bg-cyan-200"
-          entriesLabel="Show data"
-          entriesOptions={[5, 10, 15, 1000]}
-          pagesAmount={10}
-          responsive
-          responsiveSm
-          responsiveMd
-          responsiveLg
-          responsiveXl
-          striped
-          bordered
-          small
-          data={data}
-        />
-      </div>
+      {/* <div className="card p-3 m-2">
+        <div className=" ">
+          <div className="m-3 p-3  ">
+            <MDBDataTable
+              entriesLabel="Show data"
+              responsive
+              responsiveSm
+              responsiveMd
+              responsiveLg
+              responsiveXl
+              bordered
+              small
+              data={data}
+              entriesOptions={[5, 20, 25]}
+              entries={5}
+              pagesAmount={4}
+              theadColor="bg-[#01a9ac] py-2 text-white font-bold  "
+              pagingTop
+              searchTopp
+              searchBottom={false}
+            />
+          </div>{" "}
+        </div>{" "}
+      </div> */}
     </>
   );
 }

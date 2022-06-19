@@ -36,6 +36,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         {/* <meta name="viewport" content="width=device-width, initial-scale=1" /> */}
         <Meta />
       </Head>
+      {/* jquery */}
+      <Script type="text/javascript" src="/static/script.js"></Script>
+      <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></Script>
       {/* bootstrap 4 */}
       {/* <script
         src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

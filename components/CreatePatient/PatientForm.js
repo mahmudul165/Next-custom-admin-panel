@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import useAuth from "/hook/useAuth";
 const schema = yup
   .object()
   .shape({
@@ -19,12 +20,12 @@ const schema = yup
   })
   .required();
 function PaitentForm({ title, data }) {
+  const { postData } = useAuth();
   const [startDate, setStartDate] = useState(new Date());
 
   const { register, handleSubmit, error } = useForm({
     resolver: yupResolver(schema),
   });
-
   console.log("edit data from patientlist", data);
   return (
     <>
@@ -32,9 +33,12 @@ function PaitentForm({ title, data }) {
         <>
           <form
             className="w-10/12 m-auto   first-line: "
-            onSubmit={handleSubmit((d) => console.log("form data", d))}
+            onSubmit={handleSubmit((d) =>
+              postData("https://misiapi.lamptechs.com/api/v1/service/store", d)
+            )}
             type="submit"
           >
+            {/* postData("https://misiapi.lamptechs.com/api/v1/service/store", d) console.log("form data", d) */}
             <div className=" px-3">
               <div className=" card d-flex      justify-center ">
                 <h2
@@ -133,14 +137,14 @@ function PaitentForm({ title, data }) {
                     <div className="col-start-1 relative   ">
                       <input
                         type="text"
-                        id="firstname"
-                        {...register("firstname")}
+                        id="first_name"
+                        {...register("first_name")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                        placeholder={data.patient_first_name}
+                        placeholder={data.first_name}
                         required
                       />
                       <label
-                        htmlFor="firstname"
+                        htmlFor="first_name"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         First name
@@ -151,7 +155,7 @@ function PaitentForm({ title, data }) {
                       <input
                         type="text"
                         id="lastname"
-                        {...register("lastname")}
+                        {...register("last_name")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder={data.patient_last_name}
                         required
@@ -219,14 +223,53 @@ function PaitentForm({ title, data }) {
                       Residential address
                     </label>
                   </div>
-                  {/* state  and nationality */}
+
+                  {/* country  and city */}
+                  <div className="grid  gap-4 mt-2.5">
+                    {/* country */}
+                    <div className="col-start-1 relative  ">
+                      <input
+                        type="text"
+                        id="country_id"
+                        {...register("country_id")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        required
+                      />
+                      <label
+                        htmlFor="state_city"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Country
+                      </label>
+                    </div>
+                    {/*  city */}
+                    <div className="col-start-2  relative  ">
+                      <input
+                        type="text"
+                        id="city"
+                        {...register("city")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        required
+                      />
+                      <label
+                        htmlFor="city"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        City
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* state  and area */}
                   <div className="grid  gap-4 mt-2.5">
                     {/* State/City */}
                     <div className="col-start-1 relative  ">
                       <input
                         type="text"
                         id="state_city"
-                        {...register("state_city")}
+                        {...register("state_id")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
@@ -236,24 +279,24 @@ function PaitentForm({ title, data }) {
                         htmlFor="state_city"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
-                        State/City
+                        State
                       </label>
                     </div>
                     {/* Nationality */}
                     <div className="col-start-2  relative  ">
                       <input
                         type="text"
-                        id="nationality"
-                        {...register("nationality")}
+                        id="area"
+                        {...register("area")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
                       />
                       <label
-                        htmlFor="nationality"
+                        htmlFor="area"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
-                        Nationality
+                        Area
                       </label>
                     </div>
                   </div>
@@ -263,15 +306,15 @@ function PaitentForm({ title, data }) {
                     <div className="col-start-1 relative  ">
                       <input
                         type="text"
-                        id="DOB_Number"
-                        {...register("DOB_Number")}
+                        id="dob_number"
+                        {...register("dob_number")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
                         value={data.dob_number}
                       />
                       <label
-                        htmlFor="DOB_Number"
+                        htmlFor="dob_number"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         DOB number
@@ -281,35 +324,35 @@ function PaitentForm({ title, data }) {
                     <div className="col-start-2 relative  ">
                       <input
                         type="text"
-                        id="BSN_Number"
-                        {...register("BSN_Number")}
+                        id="bsn_number"
+                        {...register("bsn_number")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
                       />
                       <label
-                        htmlFor="BSN_Number"
+                        htmlFor="bsn_number"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         BSN number
                       </label>
                     </div>
                   </div>
-                  {/* INSURANCE AND DATE OF BIRTH */}
+                  {/* insurance_number_number AND DATE OF BIRTH */}
                   <div className="grid  gap-4 mt-2.5">
-                    {/* INSURANCE*/}
+                    {/* insurance_number_number*/}
                     <div className="col-start-1 relative  ">
                       <input
                         type="text"
-                        id="Insurance"
-                        {...register("Insurance")}
+                        id="insurance_number"
+                        {...register("insurance_number")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
                         value={data.insurance_number}
                       />
                       <label
-                        htmlFor="Insurance"
+                        htmlFor="insurance_number"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         Insurance number
@@ -318,15 +361,15 @@ function PaitentForm({ title, data }) {
                     {/* DATE OF birth */}
                     <div className="col-start-2 relative  ">
                       <input
-                        id="date-of-birth"
-                        {...register("date-of-birth")}
+                        id="date_of_birth"
+                        {...register("date_of_birth")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
                         value={data.date_of_birth}
                       />
                       <label
-                        htmlFor="date-of-birth"
+                        htmlFor="date_of_birth"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         Date of birth
@@ -338,18 +381,17 @@ function PaitentForm({ title, data }) {
                     {/* Marital status*/}
                     <div className="  relative  ">
                       <select
-                        id="marital-status"
-                        {...register("marital-status")}
+                        id="marital_status"
+                        {...register("marital_status")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                       >
                         <option selected>Select status</option>
-                        <option value="">Single</option>
-                        <option value="">Married</option>
-                        <option value="">Divorced</option>
-                        <option value="">Engaged</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
                       </select>
                       <label
-                        htmlFor="marital-status"
+                        htmlFor="marital_status"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         Marital status
@@ -359,8 +401,8 @@ function PaitentForm({ title, data }) {
                     <div className="  relative  ">
                       <input
                         type="text"
-                        id="Occupation"
-                        {...register("Occupation")}
+                        id="occupation"
+                        {...register("occupation")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
@@ -450,17 +492,17 @@ function PaitentForm({ title, data }) {
                     {/* select file type3 */}
                     <div className="  relative   ">
                       <select
-                        id="file-type"
-                        {...register("file-type")}
+                        id="file_type"
+                        {...register("file_type")}
                         className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                       >
                         <option selected>Select file type</option>
-                        <option value="male">Nid</option>
-                        <option value="female">Passport</option>
-                        <option value="others">Others</option>
+                        <option value="NID">Nid</option>
+                        <option value="Driving">Driving</option>
+                        <option value="Others">Others</option>
                       </select>
                       <label
-                        htmlFor="file-type"
+                        htmlFor="file_type"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         File Type
@@ -474,12 +516,12 @@ function PaitentForm({ title, data }) {
                         required
                         type="file"
                         multiple
-                        id="formFileMultiple"
-                        {...register("formFileMultiple")}
+                        id="file"
+                        {...register("file")}
                       />
 
                       <label
-                        htmlFor="formFileMultiple"
+                        htmlFor="file"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         Attach file
@@ -544,7 +586,9 @@ function PaitentForm({ title, data }) {
           {" "}
           <form
             className="w-10/12 m-auto   first-line: "
-            onSubmit={handleSubmit((d) => console.log("form data", d))}
+            onSubmit={handleSubmit((d) =>
+              postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)
+            )}
             type="submit"
           >
             <div className=" px-3">
@@ -645,14 +689,14 @@ function PaitentForm({ title, data }) {
                     <div className="col-start-1 relative   ">
                       <input
                         type="text"
-                        id="firstname"
-                        {...register("firstname")}
+                        id="first_name"
+                        {...register("first_name")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
                       />
                       <label
-                        htmlFor="firstname"
+                        htmlFor="first_name"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         First Name
@@ -662,14 +706,14 @@ function PaitentForm({ title, data }) {
                     <div className="col-start-2  relative   ">
                       <input
                         type="text"
-                        id="lastname"
-                        {...register("lastname")}
+                        id="last_name"
+                        {...register("last_name")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
                       />
                       <label
-                        htmlFor="lastname"
+                        htmlFor="last_name"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         Last Name
@@ -729,14 +773,52 @@ function PaitentForm({ title, data }) {
                       Residential address
                     </label>
                   </div>
-                  {/* state  and nationality */}
+                  {/* country  and city */}
+                  <div className="grid  gap-4 mt-2.5">
+                    {/* country */}
+                    <div className="col-start-1 relative  ">
+                      <input
+                        type="text"
+                        id="country_id"
+                        {...register("country_id")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        required
+                      />
+                      <label
+                        htmlFor="country_id"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Country
+                      </label>
+                    </div>
+                    {/*  city */}
+                    <div className="col-start-2  relative  ">
+                      <input
+                        type="text"
+                        id="city"
+                        {...register("city")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        required
+                      />
+                      <label
+                        htmlFor="city"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        City
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* state  and area */}
                   <div className="grid  gap-4 mt-2.5">
                     {/* State/City */}
                     <div className="col-start-1 relative  ">
                       <input
                         type="text"
                         id="state_city"
-                        {...register("state_city")}
+                        {...register("state_id")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
@@ -745,24 +827,24 @@ function PaitentForm({ title, data }) {
                         htmlFor="state_city"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
-                        State/City
+                        State
                       </label>
                     </div>
                     {/* Nationality */}
                     <div className="col-start-2  relative  ">
                       <input
                         type="text"
-                        id="nationality"
-                        {...register("nationality")}
+                        id="area"
+                        {...register("area")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
                       />
                       <label
-                        htmlFor="nationality"
+                        htmlFor="area"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
-                        Nationality
+                        Area
                       </label>
                     </div>
                   </div>
@@ -772,14 +854,14 @@ function PaitentForm({ title, data }) {
                     <div className="col-start-1 relative  ">
                       <input
                         type="text"
-                        id="DOB_Number"
-                        {...register("DOB_Number")}
+                        id="dob_numberr"
+                        {...register("dob_numberr")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
                       />
                       <label
-                        htmlFor="DOB_Number"
+                        htmlFor="dob_numberr"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         DOB number
@@ -789,50 +871,50 @@ function PaitentForm({ title, data }) {
                     <div className="col-start-2 relative  ">
                       <input
                         type="text"
-                        id="BSN_Number"
-                        {...register("BSN_Number")}
+                        id="bsn_number"
+                        {...register("bsn_number")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
                       />
                       <label
-                        htmlFor="BSN_Number"
+                        htmlFor="bsn_number"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         BSN number
                       </label>
                     </div>
                   </div>
-                  {/* INSURANCE AND DATE OF BIRTH */}
+                  {/* insurance_number insurance_number_number_number AND DATE OF BIRTH */}
                   <div className="grid  gap-4 mt-2.5">
-                    {/* INSURANCE*/}
+                    {/* insurance_number_number*/}
                     <div className="col-start-1 relative  ">
                       <input
                         type="text"
-                        id="Insurance"
-                        {...register("Insurance")}
+                        id="insurance_number "
+                        {...register("insurance_number")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
                       />
                       <label
-                        htmlFor="Insurance"
+                        htmlFor="insurance_number"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
-                        Insurance number
+                        insurance number
                       </label>
                     </div>
                     {/* DATE OF birth */}
                     <div className="col-start-2 relative  ">
                       <input
-                        id="date-of-birth"
-                        {...register("date-of-birth")}
+                        id="date_of_birth"
+                        {...register("date_of_birth")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
                       />
                       <label
-                        htmlFor="date-of-birth"
+                        htmlFor="date_of_birth"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         Date of birth
@@ -865,14 +947,14 @@ function PaitentForm({ title, data }) {
                     <div className="  relative  ">
                       <input
                         type="text"
-                        id="Occupation"
-                        {...register("Occupation")}
+                        id="occupation"
+                        {...register("occupation")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
                       />
                       <label
-                        htmlFor="Occupation"
+                        htmlFor="occupation"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         Occupation
@@ -885,13 +967,13 @@ function PaitentForm({ title, data }) {
                     <div className=" relative   ">
                       <select
                         id="sex"
-                        {...register("sex")}
+                        {...register("gender")}
                         className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                       >
                         <option selected>Select sex</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="others">Others</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
                       </select>
                       <label
                         htmlFor="Sex"
@@ -904,18 +986,18 @@ function PaitentForm({ title, data }) {
                     <div className=" relative   ">
                       {" "}
                       <select
-                        id="blood"
-                        {...register("blood")}
+                        id="blood_group_id"
+                        {...register("blood_group_id")}
                         className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                       >
                         <option selected>Select blood group</option>
-                        <option value="a+">A+</option>
-                        <option value="a-">A-</option>
-                        <option value="b+">B+</option>
-                        <option value="b-">B-</option>
-                        <option value="ab+">AB+</option>
-                        <option value="o+">O+</option>
-                        <option value="o-">O-</option>
+                        <option value="1">A+</option>
+                        <option value="2">A-</option>
+                        <option value="3">B+</option>
+                        <option value="4">B-</option>
+                        <option value="5">AB+</option>
+                        <option value="6">O+</option>
+                        <option value="7">O-</option>
                       </select>
                       <label
                         htmlFor="floating_outlined"
@@ -975,7 +1057,6 @@ function PaitentForm({ title, data }) {
                       <input
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
-                        required
                         type="file"
                         multiple
                         id="formFileMultiple"
@@ -996,17 +1077,17 @@ function PaitentForm({ title, data }) {
                     <div className="col-start-1  relative  ">
                       <input
                         type="tel"
-                        id="emergency_number"
-                        {...register("emergency_number")}
+                        id="status"
+                        {...register("status")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
                       />
                       <label
-                        htmlFor="emergency_number"
+                        htmlFor="status"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
-                        Emergency contact
+                        status
                       </label>
                     </div>
                     {/* Remarks */}
