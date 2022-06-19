@@ -34,11 +34,11 @@ function PaitentForm({ title, data }) {
           <form
             className="w-10/12 m-auto   first-line: "
             onSubmit={handleSubmit((d) =>
-              postData("https://misiapi.lamptechs.com/api/v1/service/store", d)
+              postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)
             )}
             type="submit"
           >
-            {/* postData("https://misiapi.lamptechs.com/api/v1/service/store", d) console.log("form data", d) */}
+            {/* postData("https://misiapi.lamptechs.com/api/v1/patient/store", d) console.log("form data", d) */}
             <div className=" px-3">
               <div className=" card d-flex      justify-center ">
                 <h2
@@ -89,38 +89,14 @@ function PaitentForm({ title, data }) {
                   </div>
                   {/* Patient Source */}
                   <div className="relative my-2">
-                    {/* <input
-                  type="text"
-                  id="floating_outlined"
-                  className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  placeholder="  "
-                  required
-                /> */}
                     <select
                       className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                      // className="form-select appearance-none
-                      //   block
-                      //   px-2.5
-                      //   py-2
-                      //   pb-2
-                      //   w-full
-                      //   text-base
-                      //   font-normal
-                      //   text-gray-700
-                      //   bg-white bg-clip-padding bg-no-repeat
-                      //   border border-solid border-gray-300
-                      //   rounded
-                      //   transition
-                      //   ease-in-out
-                      //   m-0
-                      //  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      //             aria-label="Default select example"
-                      id="patient_source"
-                      {...register("patient_source")}
+                      id="source"
+                      {...register("source")}
                     >
                       <option selected>Select patient source</option>
-                      <option value="male">ZD</option>
-                      <option value="female">Own</option>
+                      <option value="ZD">ZD</option>
+                      <option value="Own">Own</option>
                       <option value="others">Others</option>
                     </select>
                     <label
@@ -237,7 +213,7 @@ function PaitentForm({ title, data }) {
                         required
                       />
                       <label
-                        htmlFor="state_city"
+                        htmlFor="country_id"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         Country
@@ -586,11 +562,12 @@ function PaitentForm({ title, data }) {
           {" "}
           <form
             className="w-10/12 m-auto   first-line: "
+            type="submit"
             onSubmit={handleSubmit((d) =>
               postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)
             )}
-            type="submit"
           >
+            {/* postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)  console.log("data patient", d)*/}
             <div className=" px-3">
               <div className=" card d-flex      justify-center ">
                 <h2
@@ -632,48 +609,43 @@ function PaitentForm({ title, data }) {
                         </p>
                       </div>
                       <input
-                        id="dropzone-file"
-                        type="file"
-                        {...register("dropzone-file")}
+                        id="image"
+                        type="text"
+                        //  {...register("image")}
                         className="hidden"
                       />
                     </label>
                   </div>
+
+                  {/* Patient id*/}
+                  <div className="relative my-2">
+                    <input
+                      type="number"
+                      id="id"
+                      className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                      placeholder="  "
+
+                      // {...register("id")}
+                    />
+
+                    <label
+                      htmlFor="id"
+                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                    >
+                      Patient Id
+                    </label>
+                  </div>
                   {/* Patient Source */}
                   <div className="relative my-2">
-                    {/* <input
-                  type="text"
-                  id="floating_outlined"
-                  className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  placeholder="  "
-                  required
-                /> */}
                     <select
                       className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                      // className="form-select appearance-none
-                      //   block
-                      //   px-2.5
-                      //   py-2
-                      //   pb-2
-                      //   w-full
-                      //   text-base
-                      //   font-normal
-                      //   text-gray-700
-                      //   bg-white bg-clip-padding bg-no-repeat
-                      //   border border-solid border-gray-300
-                      //   rounded
-                      //   transition
-                      //   ease-in-out
-                      //   m-0
-                      //  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      //             aria-label="Default select example"
-                      id="patient_source"
-                      {...register("patient_source")}
+                      id="source"
+                      {...register("source")}
                     >
                       <option selected>Select patient source</option>
-                      <option value="male">ZD</option>
-                      <option value="female">Own</option>
-                      <option value="others">Others</option>
+                      <option value="ZD">ZD</option>
+                      <option value="Own">Own</option>
+                      <option value="Others">Others</option>
                     </select>
                     <label
                       htmlFor="floating_outlined"
@@ -756,6 +728,23 @@ function PaitentForm({ title, data }) {
                         Phone number
                       </label>
                     </div>
+                  </div>
+                  {/*alternative  phone  */}
+                  <div className="col-start-2  relative   ">
+                    <input
+                      type="tel"
+                      id="alternet_phone"
+                      {...register("alternet_phone")}
+                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                      placeholder="  "
+                      required
+                    />
+                    <label
+                      htmlFor="alternet_phone"
+                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                    >
+                      Alternet phone
+                    </label>
                   </div>
                   {/* Residential Address */}
                   <div className="relative mt-2.5">
@@ -854,14 +843,14 @@ function PaitentForm({ title, data }) {
                     <div className="col-start-1 relative  ">
                       <input
                         type="text"
-                        id="dob_numberr"
-                        {...register("dob_numberr")}
+                        id="dob_number"
+                        {...register("dob_number")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
                       />
                       <label
-                        htmlFor="dob_numberr"
+                        htmlFor="dob_number"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         DOB number
@@ -926,18 +915,18 @@ function PaitentForm({ title, data }) {
                     {/* Marital status*/}
                     <div className="  relative  ">
                       <select
-                        id="marital-status"
-                        {...register("marital-status")}
+                        id="marital_status"
+                        {...register("marital_status")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                       >
                         <option selected>Select status</option>
-                        <option value="">Single</option>
-                        <option value="">Married</option>
-                        <option value="">Divorced</option>
-                        <option value="">Engaged</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                        <option value="Engaged">Engaged</option>
                       </select>
                       <label
-                        htmlFor="marital-status"
+                        htmlFor="marital_status"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         Marital status
@@ -966,7 +955,7 @@ function PaitentForm({ title, data }) {
                     {/* sex  */}
                     <div className=" relative   ">
                       <select
-                        id="sex"
+                        id="gender"
                         {...register("gender")}
                         className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                       >
@@ -976,7 +965,7 @@ function PaitentForm({ title, data }) {
                         <option value="Others">Others</option>
                       </select>
                       <label
-                        htmlFor="Sex"
+                        htmlFor="gender"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         Sex
@@ -1025,7 +1014,7 @@ function PaitentForm({ title, data }) {
                       placeholder="  "
                     />
                     <label
-                      htmlFor="textarea"
+                      htmlFor="medical_history"
                       className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                     >
                       Medical history
@@ -1036,17 +1025,17 @@ function PaitentForm({ title, data }) {
                     {/* select file type3 */}
                     <div className="  relative   ">
                       <select
-                        id="file-type"
-                        {...register("file-type")}
+                        id="file_type"
+                        {...register("file_type")}
                         className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                       >
                         <option selected>Select file type</option>
-                        <option value="male">Nid</option>
-                        <option value="female">Passport</option>
-                        <option value="others">Others</option>
+                        <option value="Nid">Nid</option>
+                        <option value="Passport">Passport</option>
+                        <option value="Others">Others</option>
                       </select>
                       <label
-                        htmlFor="file-type"
+                        htmlFor="file_type"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         File Type
@@ -1057,14 +1046,14 @@ function PaitentForm({ title, data }) {
                       <input
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
-                        type="file"
-                        multiple
-                        id="formFileMultiple"
-                        {...register("formFileMultiple")}
+                        type="text"
+                        // multiple
+                        id="image_url"
+                        {...register("image_url")}
                       />
 
                       <label
-                        htmlFor="formFileMultiple"
+                        htmlFor="image_url"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         Attach file
@@ -1077,17 +1066,17 @@ function PaitentForm({ title, data }) {
                     <div className="col-start-1  relative  ">
                       <input
                         type="tel"
-                        id="status"
-                        {...register("status")}
+                        id="emergency_contact"
+                        {...register("emergency_contact")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
                       />
                       <label
-                        htmlFor="status"
+                        htmlFor="emergency_contact"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
-                        status
+                        Emergency contact
                       </label>
                     </div>
                     {/* Remarks */}
@@ -1106,6 +1095,39 @@ function PaitentForm({ title, data }) {
                         Remarks
                       </label>
                     </div>
+                  </div>
+                  {/* Age */}
+                  <div className="col-start-1  relative  ">
+                    <input
+                      type="text"
+                      id="age"
+                      {...register("age")}
+                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                      placeholder="  "
+                      required
+                    />
+                    <label
+                      htmlFor="age"
+                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                    >
+                      Age
+                    </label>
+                  </div>
+                  {/* Password */}
+                  <div className="col-start-2  relative  ">
+                    <input
+                      type="text"
+                      id="password"
+                      // {...register("password")}
+                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                      placeholder="  "
+                    />
+                    <label
+                      htmlFor="password"
+                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                    >
+                      Password
+                    </label>
                   </div>
                   {/* button */}
                   <div className=" flex justify-end">

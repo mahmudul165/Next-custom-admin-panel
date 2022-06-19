@@ -15,7 +15,7 @@ const useGlobal = () => {
   // global post method
   const postData = (url, data) => {
     axios.post(url, data).then((response) => {
-      console.log(response);
+      console.log("post data", response);
       alert("successfully added ");
     });
   };
