@@ -7,6 +7,16 @@ class MyDocument extends Document {
         <Head>
           {/* logo icon */}
           {/* <link rel="shortcut icon" href="/home/logo.png" /> */}
+          {/* roboto front mui design */}
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          />
+          {/* mui icon */}
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          />
           {/* css from brootstrap   */}
           <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"

@@ -9,11 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
     "@heroicons/react": "^1.0.6",
     "@hookform/resolvers": "^2.9.0",
+    "@material-ui/core": "^4.12.4",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.8.4",
+    "@mui/styled-engine-sc": "^5.8.0",
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
     "framer-motion": "^6.3.10",
+    "material-react-table": "^0.13.1",
     "next": "12.1.0",
     "next-auth": "^4.3.4",
     "rc-table": "^7.24.2",

@@ -10,14 +10,15 @@ import useAuth from "/hook/useAuth";
 import axios from "axios";
 import { patientList, usePatientListQuery } from "../../hook/useApi";
 import { useQuery } from "react-query";
-
+// import $ from "jQuery";
+// import { findDOMNode } from "react-dom";
 const PatientTable = () => {
   const { deleteData, Statustest } = useAuth();
   //   Catch Search input
   const [searchInput, setInput] = useState([]);
   const [statusSearch, setStatus] = useState([]);
   const [results, setResults] = useState([]);
-
+  console.log("search value ", searchInput);
   useEffect(() => {
     const urls = [
       // "https://arshi365.lamptechs.com/api/admin/todaysDeal",
@@ -44,6 +45,11 @@ const PatientTable = () => {
   const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);
   };
+
+  // const handleToggle = () => {
+  //   const ss = findDOMNode(ref.mysearch);
+  //   $ss.sideToggle();
+  // };
 
   return (
     <>
@@ -95,7 +101,7 @@ const PatientTable = () => {
                   placeholder="patient id"
                   aria-label="Search"
                   aria-describedby="button-addon2"
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={(e) => setInput(e.target.value.toLowerCase())}
                 />
                 <button
                   className="btn inline-block px-6 py-2.5   text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center"
@@ -354,10 +360,16 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   ) : (
                     <>
                       {results
-                        .filter(
-                          (i) =>
-                            i.id == searchInput || i.status === statusSearch
+                        .filter((item) =>
+                          (
+                            item.first_name.toLowerCase() ||
+                            item.last_name.toLowerCase()
+                          )
+                            // item.email.toLowerCase() ||
+                            // item.phone.toLowerCase()
+                            .includes(searchInput.toLowerCase())
                         )
+
                         .map((data, index) => {
                           return (
                             <>

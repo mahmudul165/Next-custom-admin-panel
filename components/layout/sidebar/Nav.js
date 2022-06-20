@@ -33,7 +33,7 @@ const Nav = ({ sidebarOutsideClick }) => {
   const childMenu = [
     {
       subMenuTitle: "Menu one",
-      linkHref: "/services",
+      linkHref: "/services/testtable",
     },
     {
       subMenuTitle: "List two",
