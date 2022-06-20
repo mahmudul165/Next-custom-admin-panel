@@ -37,8 +37,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         <Meta />
       </Head>
       {/* jquery */}
-      <Script type="text/javascript" src="/static/script.js"></Script>
-      <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></Script>
+      {/* <Script type="text/javascript" src="/static/script.js"></Script>
+      <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></Script> */}
       {/* bootstrap 4 */}
       {/* <script
         src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -67,11 +67,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         crossOrigin="anonymous"
       />
       {/* testadmin */}
-      <Script src="http://maps.google.com/maps/api/js?sensor=true"></Script>
+      {/* <Script src="http://maps.google.com/maps/api/js?sensor=true"></Script>
       <Script
         type="text/javascript"
         src="https://demo.dashboardpack.com/architectui-html-free/assets/scripts/main.js"
-      />
+      /> */}
 
       <SessionProvider session={session}>
         <QueryClientProvider client={queryClient}>
