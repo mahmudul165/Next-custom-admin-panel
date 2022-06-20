@@ -57,7 +57,7 @@ function PaitentForm({ title, data }) {
                       htmlFor="picture"
                       className="flex flex-col justify-center items-center w-full h-40 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                     >
-                      <div className="flex flex-col justify-center items-center pt-5 pb-6">
+                      {/* <div className="flex flex-col justify-center items-center pt-5 pb-6">
                         <svg
                           className="mb-3 w-10 h-10 text-gray-400"
                           fill="none"
@@ -81,7 +81,7 @@ function PaitentForm({ title, data }) {
                         <p className="text-xs text-gray-500 dark:text-gray-400">
                           SVG, PNG, JPG or GIF (MAX. 500x500px)
                         </p>
-                      </div>
+                      </div> */}
                       <input
                         id="picture"
                         type="file"
@@ -489,8 +489,16 @@ function PaitentForm({ title, data }) {
                     </div>
                     {/*attach file  */}
                     <div className=" relative   ">
-                      <input
+                      {/* <input
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        required
+                        type="file"
+                        // multiple
+                        id="file"
+                        {...register("file")}
+                      /> */}
+                      <input
                         placeholder="  "
                         required
                         type="file"
@@ -1046,7 +1054,7 @@ function PaitentForm({ title, data }) {
                     {/*attach file  */}
                     <div className=" relative   ">
                       <input
-                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        //className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         type="file"
                         // multiple
