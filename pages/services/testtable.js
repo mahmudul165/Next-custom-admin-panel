@@ -1694,7 +1694,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable from "material-react-table";
 import TicketService from "/components/all-ticket/TicketService";
 import PageTicketComponentTitle from "/components/all-ticket/PageTicketComponentTitle";
-function index() {
+function TestTable() {
   const [remoteData, setRemoteData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -1815,4 +1815,4 @@ function index() {
   );
 }
 
-export default index;
+export default TestTable;

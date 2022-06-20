@@ -3,7 +3,7 @@ import PageTicketComponentTitle from "/components/all-ticket/PageTicketComponent
 import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable from "material-react-table";
 
-function index() {
+function AllTicket() {
   const [remoteData, setRemoteData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -124,4 +124,4 @@ function index() {
   );
 }
 
-export default index;
+export default AllTicket;
