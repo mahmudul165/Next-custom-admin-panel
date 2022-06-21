@@ -53,7 +53,7 @@ function AllTicketList() {
         // strike_history
         // ticket_history
         // date
-        id: userData.id,
+        id: `${userData.id}`,
         patient_id: userData.patient_id,
         therapist_id: userData.therapist_id,
         ticket_department_id: userData.ticket_department_id,
@@ -85,7 +85,7 @@ function AllTicketList() {
   const columns = useMemo(
     () => [
       {
-        header: "#",
+        header: "id",
         id: "id",
       },
       {

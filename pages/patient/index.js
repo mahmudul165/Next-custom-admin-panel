@@ -31,7 +31,7 @@ import PagePatientComponentTitle from "../../components/all-ticket/PageTicketCom
 function PatientList() {
   const { deleteData, Statustest } = useAuth();
   const { data, error, isError } = useTherapitListQuery();
-  console.log("therapist service data ", data);
+  //console.log("therapist service data ",userData);
 
   const [remoteData, setRemoteData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -53,7 +53,7 @@ function PatientList() {
   const parsedData = useMemo(
     () =>
       remoteData.map((userData) => ({
-        id: userData.id,
+        id: `${userData.id}`,
         first_name: userData.first_name,
         last_name: userData.last_name,
         email: userData.email,
@@ -74,6 +74,7 @@ function PatientList() {
         blood_group_id: userData.blood_group_id,
 
         remarks: userData.remarks,
+
         // options: (
         //   <Link
         //     href={`/therapist/edit/${userData.id}`}
@@ -85,13 +86,14 @@ function PatientList() {
       })) ?? [],
     [remoteData]
   );
-
+  console.log("id ", remoteData);
   const columns = useMemo(
     () => [
       {
         header: "#",
         id: "id",
       },
+
       {
         header: "First name",
         id: "first_name",

@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import useAuth from "/hook/useAuth";
 const schema = yup
   .object()
   .shape({
@@ -20,6 +21,7 @@ const schema = yup
   })
   .required();
 function ThForm() {
+  const { postData } = useAuth();
   const [startDate, setStartDate] = useState(new Date());
   const { register, handleSubmit, error } = useForm({
     resolver: yupResolver(schema),
@@ -28,8 +30,11 @@ function ThForm() {
     <>
       <form
         className="w-full m-auto  p-1  "
-        onSubmit={handleSubmit((d) =>
-          console.log("create therapist form data", d)
+        onSubmit={handleSubmit(
+          (d) =>
+            postData(" https://misiapi.lamptechs.com/api/v1/therapist/store", d)
+
+          // console.log("create therapist form data", d)
         )}
       >
         <div className=" px-6">
@@ -41,7 +46,7 @@ function ThForm() {
             <div className=" m-3 p-3 ">
               <div className="flex justify-center items-center w-full  ">
                 <label
-                  htmlFor="dropzone-file"
+                  htmlFor="picture"
                   className="flex flex-col justify-center items-center w-full h-40 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                 >
                   <div className="flex flex-col justify-center items-center pt-5 pb-6">
@@ -70,12 +75,44 @@ function ThForm() {
                     </p>
                   </div>
                   <input
-                    id="dropzone-file"
+                    id="picture"
                     type="file"
-                    {...register("dropzone-file")}
+                    // {...register("picture")}
                     className="hidden"
                   />
                 </label>
+              </div>
+              {/* therapist id*/}
+              <div className="relative my-2">
+                <input
+                  type="text"
+                  id="id"
+                  value="0"
+                  className="hidden block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  {...register("id")}
+                />
+
+                <label
+                  htmlFor="id"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                ></label>
+              </div>
+              {/* therapist_type_id*/}
+              <div className="relative my-2">
+                <input
+                  type="text"
+                  id="therapist_type_id"
+                  value="0"
+                  className="hidden block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  {...register("therapist_type_id")}
+                />
+
+                <label
+                  htmlFor="therapist_type_id"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                ></label>
               </div>
               {/* Patient Source */}
               {/* <div className="relative my-3">
@@ -99,14 +136,14 @@ function ThForm() {
                 <div className="col-start-1 relative  my-3">
                   <input
                     type="text"
-                    id="firstname"
-                    {...register("firstname")}
+                    id="first_name"
+                    {...register("first_name")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
                   />
                   <label
-                    htmlFor="firstname"
+                    htmlFor="first_name"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
                     First Name
@@ -116,14 +153,14 @@ function ThForm() {
                 <div className="col-start-2  relative  my-3">
                   <input
                     type="text"
-                    id="lastname"
-                    {...register("lastname")}
+                    id="last_name"
+                    {...register("last_name")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
                   />
                   <label
-                    htmlFor="lastname"
+                    htmlFor="last_name"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
                     Last Name
@@ -135,7 +172,7 @@ function ThForm() {
                 {/* email   */}
                 <div className="col-start-1 relative  my-3">
                   <input
-                    type="email"
+                    type="text"
                     id="email"
                     {...register("email")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
@@ -152,7 +189,7 @@ function ThForm() {
                 {/* phone  */}
                 <div className="col-start-2  relative  my-3">
                   <input
-                    type="tel"
+                    type="text"
                     id="phone"
                     {...register("phone")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
@@ -183,57 +220,40 @@ function ThForm() {
                   Residential address
                 </label>
               </div>
-              {/* state  and nationality */}
-              <div className="grid  gap-4">
-                {/* State/City */}
-                <div className="col-start-1 relative my-3">
-                  <input
-                    type="text"
-                    id="state_city"
-                    {...register("state_city")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                    required
-                  />
-                  <label
-                    htmlFor="state_city"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    State/City
-                  </label>
-                </div>
-                {/* Nationality */}
-                <div className="col-start-2  relative my-3">
-                  <input
-                    type="text"
-                    id="nationality"
-                    {...register("nationality")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                    required
-                  />
-                  <label
-                    htmlFor="nationality"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Nationality
-                  </label>
-                </div>
+              {/* country id   */}
+
+              {/* Age */}
+              <div className="col-start-1  relative   ">
+                <input
+                  type="text"
+                  id="country_id"
+                  {...register("country_id")}
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                  required
+                />
+                <label
+                  htmlFor="country_id"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Country id
+                </label>
               </div>
+
               {/* Dob and BNS */}
               <div className="grid  gap-4">
                 {/* DOB Number */}
                 <div className="col-start-1 relative my-3">
                   <input
                     type="text"
-                    id="DOB_Number"
-                    {...register("DOB_Number")}
+                    id="dob_number"
+                    {...register("dob_number")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
                   />
                   <label
-                    htmlFor="DOB_Number"
+                    htmlFor="dob_number"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
                     DOB number
@@ -243,34 +263,71 @@ function ThForm() {
                 <div className="col-start-2 relative my-3">
                   <input
                     type="text"
-                    id="BSN_Number"
-                    {...register("BSN_Number")}
+                    id="bsn_number"
+                    {...register("bsn_number")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
                   />
                   <label
-                    htmlFor="BSN_Number"
+                    htmlFor="bsn_number"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
                     BSN number
                   </label>
                 </div>
               </div>
-              {/* INSURANCE AND DATE OF BIRTH */}
-              <div className="grid  gap-4">
-                {/* INSURANCE*/}
-                <div className="col-start-1 relative my-3">
+              {/* state id and area */}
+              <div className="grid  gap-4 mt-2.5">
+                {/* State/City */}
+                <div className="col-start-1 relative  ">
                   <input
                     type="text"
-                    id="Insurance"
-                    {...register("Insurance")}
+                    id="state_id"
+                    {...register("state_id")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
                   />
                   <label
-                    htmlFor="Insurance"
+                    htmlFor="state_id"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    State id
+                  </label>
+                </div>
+                {/* Nationality */}
+                <div className="col-start-2  relative  ">
+                  <input
+                    type="text"
+                    id="area"
+                    // {...register("area")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                    required
+                  />
+                  <label
+                    htmlFor="area"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Area
+                  </label>
+                </div>
+              </div>
+              {/* insurance_number AND DATE OF BIRTH */}
+              <div className="grid  gap-4">
+                {/* insurance_number*/}
+                <div className="col-start-1 relative my-3">
+                  <input
+                    type="text"
+                    id="insurance_number"
+                    {...register("insurance_number")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                    required
+                  />
+                  <label
+                    htmlFor="insurance_number"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
                     Insurance number
@@ -279,98 +336,70 @@ function ThForm() {
                 {/* DATE OF birth */}
                 <div className="col-start-2 relative my-3">
                   <input
-                    id="date-of-birth"
-                    {...register("date-of-birth")}
+                    id="date_of_birth"
+                    {...register("date_of_birth")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
                   />
                   <label
-                    htmlFor="date-of-birth"
+                    htmlFor="date_of_birth"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
                     Date of birth
                   </label>
                 </div>
               </div>
-              {/* Marital status and occupation */}
 
-              <div id="language" className="  relative my-3">
-                <select
-                  id="marital_status"
-                  {...register("marital_status")}
-                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                >
-                  <option selected>Select Language</option>
-                  <option value="">Dutch</option>
-                  <option value="">English</option>
-                  <option value="">Hindi</option>
-                  <option value="">Others</option>
-                </select>
-                <label
-                  htmlFor="language"
-                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                >
-                  Language
-                </label>
-              </div>
-
-              {/* sex and blood */}
+              {/* gender and blood_group_id */}
               <div className="grid gap-4 grid-cols-2">
-                {/* sex  */}
+                {/* gender  */}
                 <div className=" relative  my-3">
                   <select
-                    id="sex"
-                    {...register("sex")}
+                    id="gender"
+                    {...register("gender")}
                     className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   >
-                    <option selected>Select sex</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="others">Others</option>
+                    <option selected>Select gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Others">Others</option>
                   </select>
                   <label
-                    htmlFor="Sex"
+                    htmlFor="gender"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
-                    Sex
+                    Gender
                   </label>
                 </div>
-                {/* blood  */}
+                {/* blood_group_id  */}
                 <div className=" relative  my-3">
                   {" "}
                   <select
-                    id="blood"
-                    {...register("blood")}
+                    id="blood_group_id"
+                    {...register("blood_group_id")}
                     className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   >
-                    <option selected>Select blood group</option>
-                    <option value="a+">A+</option>
-                    <option value="a-">A-</option>
-                    <option value="b+">B+</option>
-                    <option value="b-">B-</option>
-                    <option value="ab+">AB+</option>
-                    <option value="o+">O+</option>
-                    <option value="o-">O-</option>
+                    <option selected>Select group</option>
+                    <option value="1">A+</option>
+                    <option value="2">A-</option>
+                    <option value="3">B+</option>
+                    <option value="4">B-</option>
+                    <option value="5">AB+</option>
+                    <option value="6">O+</option>
+                    <option value="7">O-</option>
                   </select>
                   <label
-                    htmlFor="floating_outlined"
+                    htmlFor="blood_group_id"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
-                    Blood group
+                    Blood group id
                   </label>
                 </div>
               </div>
 
               {/* Medical History */}
-              <div className="relative my-3">
-                {/* <input
-                  type="text-area"
-                  id="floating_outlined"
-                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  placeholder="  "
-                  required
-                />  */}
+              {/* <div className="relative my-3">
                 <textarea
                   id="medical_history"
                   {...register("medical_history")}
@@ -384,14 +413,13 @@ function ThForm() {
                 >
                   Medical history
                 </label>
-              </div>
+              </div> */}
               {/* select file  and attach file  */}
-              <div className="grid   grid-cols-2  gap-4">
-                {/* select file type3 */}
-                <div className="  relative  my-3">
+              {/* <div className="grid   grid-cols-2  gap-4 mt-2.5"> */}
+              {/* <div className="  relative  my-3">
                   <select
-                    id="file-type"
-                    {...register("file-type")}
+                    id="file_type"
+                
                     className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   >
                     <option selected>Select file type</option>
@@ -400,14 +428,15 @@ function ThForm() {
                     <option value="others">Others</option>
                   </select>
                   <label
-                    htmlFor="file-type"
+                    htmlFor="file_type"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
                     File Type
                   </label>
-                </div>
-                {/*attach file  */}
-                <div className=" relative my-3 ">
+                </div> */}
+
+              {/*attach file  */}
+              {/* <div className=" relative my-3 ">
                   <input
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
@@ -424,44 +453,64 @@ function ThForm() {
                   >
                     Attach file
                   </label>
-                </div>
-              </div>
+                </div> */}
+
+              {/* </div> */}
               {/* emergency contract and remarks */}
-              <div className="grid  gap-4">
+              <div className="grid gap-4 grid-cols-2">
                 {/* Emergency Number */}
-                <div className="col-start-1  relative my-3">
+                <div className="   relative my-3">
                   <input
-                    type="tel"
-                    id="emergency_number"
-                    {...register("emergency_number")}
+                    type="text"
+                    id="emergency_contact"
+                    {...register("emergency_contact")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
                   />
                   <label
-                    htmlFor="emergency_number"
+                    htmlFor="emergency_contact"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
                     Emergency contact
                   </label>
                 </div>
-                {/* Remarks */}
-                <div className="col-start-2  relative my-3">
-                  <input
-                    type="number"
-                    id="remarks"
-                    {...register("remarks")}
+                {/* language */}
+                <div id="language" className="relative my-3">
+                  <select
+                    id="language"
+                    {...register("language")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                    required
-                  />
+                  >
+                    <option selected>Select Language</option>
+                    <option value="Dutch">Dutch</option>
+                    <option value="English">English</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="Others">Others</option>
+                  </select>
                   <label
-                    htmlFor="remarks"
+                    htmlFor="language"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
-                    Remarks
+                    Language
                   </label>
                 </div>
+              </div>
+              {/* status */}
+              <div className="  relative   ">
+                <input
+                  type="text"
+                  id="status"
+                  {...register("status")}
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  placeholder="  "
+                />
+                <label
+                  htmlFor="status"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  status
+                </label>
               </div>
               {/* button */}
               <div className=" flex justify-end">
