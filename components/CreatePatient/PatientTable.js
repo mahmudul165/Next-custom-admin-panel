@@ -34,7 +34,7 @@ const PatientTable = () => {
       ),
       []
     );
-  }, []);
+  }, [results]);
 
   const [modal, setModal] = useState(false);
 

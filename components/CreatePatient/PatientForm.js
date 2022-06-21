@@ -19,6 +19,10 @@ const schema = yup
     // status: yup.string().required(),
   })
   .required();
+
+//  mui design
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 function PaitentForm({ title, data }) {
   const { postData } = useAuth();
   const [startDate, setStartDate] = useState(new Date());
@@ -29,6 +33,13 @@ function PaitentForm({ title, data }) {
     resolver: yupResolver(schema),
   });
   console.log("edit data from patientlist", data);
+
+  //  mui data
+  const documents = [
+    { title: "Nid" },
+    { title: "Passport" },
+    { title: "Others" },
+  ];
   return (
     <>
       {data ? (
@@ -469,7 +480,7 @@ function PaitentForm({ title, data }) {
                   {/* select file  and attach file  */}
                   <div className="grid   grid-cols-2  gap-4 mt-2.5">
                     {/* select file type3 */}
-                    <div className="  relative   ">
+                    {/* <div className="  relative   ">
                       <select
                         id="file_type"
                         {...register("file_type")}
@@ -486,8 +497,26 @@ function PaitentForm({ title, data }) {
                       >
                         File Type
                       </label>
-                    </div>
-                    {/*attach file  */}
+                    </div> */}
+                    <Autocomplete
+                      multiple
+                      limitTags={2}
+                      id="file_type"
+                      options={documents}
+                      getOptionLabel={(option) => option.title}
+                      // defaultValue={[documents[0], documents[1], documents[2]]}
+                      {...register("file_type")}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="File Type"
+                          placeholder="Select file type"
+                          size="small"
+                        />
+                      )}
+                      // sx={{ width: "500px" }}
+                    />
+                    ;{/*attach file  */}
                     <div className=" relative   ">
                       {/* <input
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
@@ -574,7 +603,9 @@ function PaitentForm({ title, data }) {
           <form
             className="w-10/12 m-auto   first-line: "
             type="submit"
-            onSubmit={handleSubmit((d) => console.log("data patient", d))}
+            onSubmit={handleSubmit((d) =>
+              postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)
+            )}
           >
             {/* postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)  console.log("data patient", d)*/}
             <div className=" px-3">
@@ -588,7 +619,7 @@ function PaitentForm({ title, data }) {
                 {/*form */}
                 <div className=" m-3 p-3 ">
                   <div className="flex justify-center items-center w-full  ">
-                    {/* <label
+                    <label
                       htmlFor="picture"
                       className="flex flex-col justify-center items-center w-full h-40 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                     >
@@ -616,15 +647,15 @@ function PaitentForm({ title, data }) {
                         <p className="text-xs text-gray-500 dark:text-gray-400">
                           SVG, PNG, JPG or GIF (MAX. 500x500px)
                         </p>
-                      </div> */}
-                    <input
-                      id="picture"
-                      type="file"
-                      {...register("picture")}
-                      className=" "
-                      onClick={(e) => setPicture(e.target.value)}
-                    />
-                    {/* </label> */}
+                      </div>
+                      <input
+                        id="picture"
+                        type="file"
+                        //  {...register("picture")}
+                        className=" "
+                        // onClick={(e) => setPicture(e.target.value)}
+                      />
+                    </label>
                   </div>
 
                   {/* Patient id*/}
@@ -739,22 +770,24 @@ function PaitentForm({ title, data }) {
                       </label>
                     </div>
                   </div>
-                  {/*alternative  phone  */}
-                  <div className="col-start-2  relative   ">
-                    <input
-                      type="text"
-                      id="alternet_phone"
-                      {...register("alternet_phone")}
-                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                      placeholder="  "
-                      required
-                    />
-                    <label
-                      htmlFor="alternet_phone"
-                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                      Alternet phone
-                    </label>
+                  <div className="grid  gap-4 my-2.5">
+                    {/*alternative  phone  */}
+                    <div className="  relative   ">
+                      <input
+                        type="text"
+                        id="alternet_phone"
+                        {...register("alternet_phone")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        required
+                      />
+                      <label
+                        htmlFor="alternet_phone"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Alternet phone
+                      </label>
+                    </div>
                   </div>
                   {/* Residential Address */}
                   <div className="relative mt-2.5">
@@ -1033,14 +1066,14 @@ function PaitentForm({ title, data }) {
                   {/* select file  and attach file  */}
                   <div className="grid   grid-cols-2  gap-4 mt-2.5">
                     {/* select file type3 */}
-                    <div className="  relative   ">
+                    {/* <div className="  relative   ">
                       <select
                         id="file_type"
                         {...register("file_type")}
                         className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                       >
                         <option selected>Select file type</option>
-                        <option value="Nid">Nid</option>
+                        <option value="NID">Nid</option>
                         <option value="Passport">Passport</option>
                         <option value="Others">Others</option>
                       </select>
@@ -1050,16 +1083,34 @@ function PaitentForm({ title, data }) {
                       >
                         File Type
                       </label>
-                    </div>
+                    </div> */}
+                    <Autocomplete
+                      multiple
+                      limitTags={2}
+                      id="file_type"
+                      options={documents}
+                      getOptionLabel={(option) => option.title}
+                      defaultValue={[documents[0], documents[1]]}
+                      //  {...register("file_type")}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="File Type"
+                          placeholder="Select file type"
+                          size="small"
+                        />
+                      )}
+                      // sx={{ width: "500px" }}
+                    />
                     {/*attach file  */}
                     <div className=" relative   ">
                       <input
-                        //className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         type="file"
-                        // multiple
+                        multiple
                         id="file"
-                        {...register("file")}
+                        // {...register("file")}
                         onClick={(e) => setPicture(e.target.value)}
                       />
 
@@ -1107,39 +1158,42 @@ function PaitentForm({ title, data }) {
                       </label>
                     </div>
                   </div>
-                  {/* Age */}
-                  <div className="col-start-1  relative  ">
-                    <input
-                      type="text"
-                      id="age"
-                      {...register("age")}
-                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                      placeholder="  "
-                      required
-                    />
-                    <label
-                      htmlFor="age"
-                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                      Age
-                    </label>
-                  </div>
-                  {/* status */}
-                  <div className="col-start-2  relative  ">
-                    <input
-                      type="text"
-                      id="status"
-                      // value="1"
-                      {...register("status")}
-                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                      placeholder="  "
-                    />
-                    <label
-                      htmlFor="status"
-                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                      status
-                    </label>
+                  {/* age and status */}
+                  <div className="grid  gap-4 my-2.5">
+                    {/* Age */}
+                    <div className="col-start-1  relative   ">
+                      <input
+                        type="text"
+                        id="age"
+                        {...register("age")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        required
+                      />
+                      <label
+                        htmlFor="age"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Age
+                      </label>
+                    </div>
+                    {/* status */}
+                    <div className="col-start-2  relative   ">
+                      <input
+                        type="text"
+                        id="status"
+                        // value="1"
+                        {...register("status")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                      />
+                      <label
+                        htmlFor="status"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        status
+                      </label>
+                    </div>
                   </div>
                   {/* button */}
                   <div className=" flex justify-end">

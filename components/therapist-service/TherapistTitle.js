@@ -5,12 +5,12 @@ const TherapistTitle = () => {
   return (
     <>
       <div className="mr-6">
-        <h1 className="text-4xl font-semibold mb-2">Therapist Service</h1>
+        <h3 className="text-4xl mb-2">Therapist Services</h3>
       </div>
 
       <div className="flex flex-wrap items-start justify-end -mb-3">
         <button
-          className="inline-flex px-5 py-3 text-white   hover:bg-teal-200 focus:bg-teal-300 rounded-md ml-6 mb-3"
+          className="inline-flex px-5 py-3 text-white   hover:bg-teal-200 focus:bg-teal-300  ml-6 mb-3"
           onClick={() => setSubModal(true)}
           style={{ backgroundColor: "#01a9ac" }}
         >

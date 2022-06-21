@@ -37,50 +37,48 @@ const SubCategoryTable = () => {
         <>
           {console.log(data.length)}
 
-          <div className="min-h-screen bg-white-800 py-3">
+          <div className="min-h-screen  py-2">
             <div className="overflow-x-auto w-full">
-              <table className="mx-auto max-w-5xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
+              <table className="mx-auto  w-full whitespace-nowrap  bg-slate-100 divide-y divide-gray-100 overflow-hidden">
                 <thead
                   className="   border "
-                  style={{ backgroundColor: "#01a9ac" }}
+                  style={{ backgroundColor: "#0184ac" }}
                 >
-                  <tr className="border font-semibold text-white text-sm    text-center ">
-                    <th className=" font-semibold text-base  px-2.5   py-2.5   border">
+                  <tr className="border  text-gray-100 text-sm    text-center ">
+                    <th className=" font text-base  px-1.5   py-2  border">
                       #
                     </th>
-                    <th className=" font-semibold text-base  px-2.5   py-2.5   border">
-                      Therapist service name
+                    <th className="  text-base  px-1.5   py-2  border">
+                      Therapist Service
                     </th>
-                    <th className=" font-semibold text-base  px-2.5   py-2.5   border">
-                      Service category name
+                    <th className="  text-base  px-1.5   py-2  border">
+                      Service Category
                     </th>
-                    <th className=" font-semibold text-base  px-2.5   py-2.5   border">
-                      Service subcategory name
+                    <th className="  text-base  px-1.5   py-2  border">
+                      Service Subcategory
                     </th>
 
-                    <th className=" font-semibold text-base  px-2.5   py-2.5   border">
+                    <th className="  text-base  px-1.5   py-2 border">
                       Remarks
                     </th>
-                    <th className=" font-semibold text-base  px-2.5   py-2.5   border">
-                      Status
-                    </th>
-                    <th className=" font-semibold text-base  px-2.5   py-2.5   border">
+                    <th className="text-base  px-1.5   py-2  border">Status</th>
+                    <th className="text-base  px-1.5   py-2   border">
                       Operations
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-gray-100">
                   {data ? (
                     data.map((data) => (
                       <>
                         <tr className=" hover:bg-gray-200   border ">
-                          <td className="px-2   py-2    border text-center">
+                          <td className="px-3   py-2    border text-center">
                             {data.id}
                           </td>
-                          <td className="px-2    py-2    border text-center">
+                          <td className="px-3    py-2    border text-center">
                             {data.name}
                           </td>
-                          <td className="px-2    py-2    border text-center">
+                          <td className="px-3    py-2    border text-center">
                             {/* {data.service_subcategory_name} */}
                             {category ? (
                               category
@@ -90,7 +88,7 @@ const SubCategoryTable = () => {
                               <></>
                             )}
                           </td>
-                          <td className="px-2    py-2   border text-center">
+                          <td className="px-3    py-2   border text-center">
                             {/* {data.service_subcategory_name} */}
                             {subcategory ? (
                               subcategory
@@ -102,10 +100,10 @@ const SubCategoryTable = () => {
                               <></>
                             )}
                           </td>
-                          <td className=" px-2    py-2    border text-center">
+                          <td className=" px-3    py-2    border text-center">
                             {data.remarks}
                           </td>
-                          <td className="px-2    py-2    border text-center  ">
+                          <td className="px-3    py-2    border text-center  ">
                             {Statustest(data.status) && (
                               <>
                                 {Statustest(data.status) === "Canceled" ||
@@ -159,7 +157,7 @@ const SubCategoryTable = () => {
         <div className="text-center">
           <svg
             role="status"
-            className="inline w-20 h-20 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-teal-500"
+            className="inline w-20 h-20 mr-2 text-gray-200 animate-spin dark:text-gray-600"
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
