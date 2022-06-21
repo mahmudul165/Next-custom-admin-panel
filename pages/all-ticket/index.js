@@ -16,7 +16,7 @@ import useAuth from "/hook/useAuth";
 import Link from "next/link";
 import { useTherapitListQuery } from "../../hook/useApi";
 import PagePatientComponentTitle from "../../components/all-ticket/PageTicketComponentTitle";
-function TherapistList() {
+function AllTicketList() {
   const { deleteData, Statustest } = useAuth();
   const { data, error, isError } = useTherapitListQuery();
   console.log("All ticket data ", data);
@@ -252,4 +252,4 @@ function TherapistList() {
   );
 }
 
-export default TherapistList;
+export default AllTicketList;
