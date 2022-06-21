@@ -239,3 +239,10 @@
 // https://rsuitejs.com/components/calendar/
 //https://material-react-table-storybook-qn2ngr0qg-kevinvandy.vercel.app/
 // npm install material-table@1.69.3 --save
+import React from "react";
+
+function table() {
+  return <div>table</div>;
+}
+
+export default table;
