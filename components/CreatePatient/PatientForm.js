@@ -603,9 +603,7 @@ function PaitentForm({ title, data }) {
           <form
             className="w-10/12 m-auto   first-line: "
             type="submit"
-            onSubmit={handleSubmit((d) =>
-              postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)
-            )}
+            onSubmit={handleSubmit((d) => console.log("data patient", d))}
           >
             {/* postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)  console.log("data patient", d)*/}
             <div className=" px-3">

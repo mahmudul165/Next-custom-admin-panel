@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import OperationModal from "../common/OperationModal";
 import Thform from "./Thform";
 
-const PageSubComponentTitle = ({ title, titleDescription, buttonTitle }) => {
+const PageTherapistList = ({ title, titleDescription, buttonTitle }) => {
   const [modal, setModal] = useState(false);
 
   return (
@@ -43,4 +43,4 @@ const PageSubComponentTitle = ({ title, titleDescription, buttonTitle }) => {
   );
 };
 
-export default PageSubComponentTitle;
+export default PageTherapistList;
