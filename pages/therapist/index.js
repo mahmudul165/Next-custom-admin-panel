@@ -173,7 +173,7 @@ function TherapistList() {
               positionGlobalFilter="left"
               muiSearchTextFieldProps={{
                 variant: "outlined",
-                size: "medium",
+                size: "small",
                 placeholder: "Search your data",
                 label: "Search",
                 InputLabelProps: { shrink: true },
