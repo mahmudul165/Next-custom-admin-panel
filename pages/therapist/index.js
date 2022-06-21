@@ -103,12 +103,12 @@ function TherapistList() {
       },
       {
         header: "BNS_number",
-        id: "bns_number",
+        id: "bsn_number",
       },
 
       {
         header: "DOB_number",
-        id: "address",
+        id: "dob_number",
       },
       {
         header: "Insurance",
@@ -203,6 +203,7 @@ function TherapistList() {
               //state={{ showSkeletons: true }}
               positionPagination="both"
               // row actions
+
               enableRowActions
               positionActionsColumn="last"
               renderRowActions={({ row }) => (
@@ -217,15 +218,6 @@ function TherapistList() {
                   >
                     View
                   </button>
-                  {/* <button
-                    variant="contained"
-                    color="error"
-                    onClick={() => {
-                      console.log("Remove", row);
-                    }}
-                  >
-                    Remove
-                  </button> */}
 
                   <button
                     className="text-purple-800 hover:underline"
