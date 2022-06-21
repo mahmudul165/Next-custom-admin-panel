@@ -315,7 +315,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                               {data.medical_history}
                             </td>
                             <td className="border px-2 py-2 text-center ">
-                              {data.blood_group_id}
+                              {/*{data.blood_group_id} */}
                             </td>
                             <td className="border px-2 py-2 text-center ">
                               {data.patient_picture_name}

@@ -32,7 +32,7 @@ function TherapistList() {
         "https://misiapi.lamptechs.com/api/v1/therapist"
       );
       const json = await response.json();
-      setRemoteData(json);
+      setRemoteData(json?.data);
       setIsLoading(false);
     };
     fetchData();
@@ -55,9 +55,9 @@ function TherapistList() {
         gender: userData.gender,
         date_of_birth: userData.date_of_birth,
         status: userData.status,
-        blood_group_id: userData.blood_group_id,
-        state_id: userData.state_id,
-        country_id: userData.country_id,
+        blood_group: userData?.blood_group?.name,
+        state: userData?.state?.name,
+        country: userData?.country?.name,
         // options: (
         //   <Link
         //     href={`/therapist/edit/${userData.id}`}
@@ -133,15 +133,15 @@ function TherapistList() {
       },
       {
         header: "State",
-        id: "state_id",
+        id: "state",
       },
       {
         header: "Country",
-        id: "country_id",
+        id: "country",
       },
       {
         header: "blood_group",
-        id: "blood_group_id",
+        id: "blood_group",
       },
       // {
       //   header: "Options",

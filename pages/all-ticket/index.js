@@ -32,7 +32,7 @@ function AllTicketList() {
         "https://misiapi.lamptechs.com/api/v1/ticket"
       );
       const json = await response.json();
-      setRemoteData(json);
+      setRemoteData(json.data);
       setIsLoading(false);
     };
     fetchData();
@@ -42,9 +42,9 @@ function AllTicketList() {
     () =>
       remoteData.map((userData) => ({
         //     id
-        // patient_id
-        // therapist_id
-        // ticket_department_id
+        // patient_info
+        // therapist_info
+        // ticket_department_info
         // location
         // remarks
         // status
@@ -54,9 +54,9 @@ function AllTicketList() {
         // ticket_history
         // date
         id: `${userData.id}`,
-        patient_id: userData.patient_id,
-        therapist_id: userData.therapist_id,
-        ticket_department_id: userData.ticket_department_id,
+        patient_info: userData.patient_info?.id,
+        therapist_info: userData?.therapist_info?.id,
+        ticket_department_info: userData.ticket_department_info?.name,
         location: userData.location,
         status: userData.status,
         language: userData.language,
@@ -90,15 +90,15 @@ function AllTicketList() {
       },
       {
         header: "Patient ID",
-        id: "patient_id",
+        id: "patient_info",
       },
       {
         header: "Therapist ID",
-        id: "therapist_id",
+        id: "therapist_info",
       },
       {
-        header: "Ticket_department_id",
-        id: "ticket_department_id",
+        header: "ticket_department_info",
+        id: "ticket_department_info",
       },
       {
         header: "Location",

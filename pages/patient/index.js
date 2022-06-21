@@ -27,7 +27,7 @@ import MaterialReactTable from "material-react-table";
 import useAuth from "/hook/useAuth";
 import Link from "next/link";
 import { useTherapitListQuery } from "../../hook/useApi";
-import PagePatientComponentTitle from "../../components/all-ticket/PageTicketComponentTitle";
+import PagePatientComponentTitle from "../../components/CreatePatient/PagePatientComponentTitle";
 function PatientList() {
   const { deleteData, Statustest } = useAuth();
   const { data, error, isError } = useTherapitListQuery();
@@ -44,7 +44,7 @@ function PatientList() {
         "https://misiapi.lamptechs.com/api/v1/patient"
       );
       const json = await response.json();
-      setRemoteData(json);
+      setRemoteData(json.data);
       setIsLoading(false);
     };
     fetchData();
@@ -61,8 +61,8 @@ function PatientList() {
         address: userData.address,
         occupation: userData.occupation,
         age: userData.age,
-        state_id: userData.state_id,
-        country_id: userData.country_id,
+        state: userData?.state?.name,
+        country: userData?.country?.name,
         bsn_number: userData.bsn_number,
         dob_number: userData.dob_number,
         insurance_number: userData.insurance_number,
@@ -71,8 +71,7 @@ function PatientList() {
         gender: userData.gender,
         date_of_birth: userData.date_of_birth,
         remarks: userData.remarks,
-        blood_group_id: userData.blood_group_id,
-
+        blood_group: userData?.blood_group?.name,
         remarks: userData.remarks,
 
         // options: (
@@ -86,7 +85,7 @@ function PatientList() {
       })) ?? [],
     [remoteData]
   );
-  console.log("id ", remoteData);
+  console.log("id data remoteData", remoteData);
   const columns = useMemo(
     () => [
       {
@@ -158,15 +157,15 @@ function PatientList() {
 
       {
         header: "State",
-        id: "state_id",
+        id: "state",
       },
       {
         header: "Country",
-        id: "country_id",
+        id: "country",
       },
       {
         header: "blood_group",
-        id: "blood_group_id",
+        id: "blood_group",
       },
       {
         header: "Remarks",
