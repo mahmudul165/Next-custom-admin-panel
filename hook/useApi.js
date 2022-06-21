@@ -38,6 +38,16 @@ const fetchPatientList = async () => {
 export const usePatientListQuery = () =>
   useQuery(["patientList"], fetchPatientList);
 
+// get therapist list  data
+const fetchTherapitList = async () => {
+  const response = await fetch(
+    "  https://misiapi.lamptechs.com/api/v1/therapist"
+  );
+  return await response.json();
+};
+export const useTherapitListQuery = () =>
+  useQuery(["therapistList"], fetchTherapitList);
+
 // get  All ticket  data
 const fetchAllTicket = async () => {
   const response = await fetch("https://misiapi.lamptechs.com/api/v1/patient");
