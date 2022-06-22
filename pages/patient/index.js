@@ -29,8 +29,8 @@ import Link from "next/link";
 //import { usePatientListQuery } from "../../hook/useApi";
 //import PagePatientComponentTitle from "../../components/CreatePatient/PagePatientComponentTitle";
 import dynamic from "next/dynamic";
-const PagePatientComponentTitle = dynamic(() =>
-  import("../../components/CreatePatient/PagePatientComponentTitle")
+const PatientComponent = dynamic(() =>
+  import("../../components/CreatePatient/PatientComponent")
 );
 
 function PatientList() {
@@ -178,7 +178,7 @@ function PatientList() {
   return (
     <>
       <main className="p-6  space-y-6">
-        <PagePatientComponentTitle
+        <PatientComponent
           title="Patient list"
           buttonTitle="Create new patient"
         />

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 //import OperationModal from "../common/OperationModal";
 import Thform from "./Thform";
 import dynamic from "next/dynamic";
-const OperationModal = dynamic(() => import("../common/OperationModal"));
-
+import OperationModal from "../common/OperationModal";
+//const OperationModal = dynamic(() => import("../common/OperationModal"));
 const PageTherapistList = ({ title, titleDescription, buttonTitle }) => {
   const [modal, setModal] = useState(false);
 
