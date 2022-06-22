@@ -1,7 +1,11 @@
 import React from "react";
-import PageSubComponentTitle from "../common/PageSubComponentTitle";
-import SubCategoryTable from "./SubCategoryTable";
-
+//import PageSubComponentTitle from "../common/PageSubComponentTitle";
+//import SubCategoryTable from "./SubCategoryTable";
+import dynamic from "next/dynamic";
+const PageSubComponentTitle = dynamic(() =>
+  import("../common/PageSubComponentTitle")
+);
+const SubCategoryTable = dynamic(() => import("./SubCategoryTable"));
 const SubCategory = () => {
   return (
     <main className="p-6  space-y-6">

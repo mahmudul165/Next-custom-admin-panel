@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import PatientModal from "../CreatePatient/Patient";
+//import PatientModal from "../CreatePatient/Patient";
+import dynamic from "next/dynamic";
+const PatientModal = dynamic(() => import("./PatientModal"));
 const PatientTitle = () => {
   const [submodal, setSubModal] = useState(false);
   return (

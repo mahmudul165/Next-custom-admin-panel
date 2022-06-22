@@ -10,15 +10,20 @@
 
 // export default index;
 
-import PageTherapistComponentTitle from "/components/therapist-List/PageTherapistComponentTitle";
+//import PageTherapistComponentTitle from "/components/therapist-List/PageTherapistComponentTitle";
+import dynamic from "next/dynamic";
+const PageTherapistComponentTitle = dynamic(() =>
+  import("/components/therapist-List/PageTherapistComponentTitle")
+);
+
 import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable from "material-react-table";
 import useAuth from "/hook/useAuth";
 import Link from "next/link";
-import { useTherapitListQuery } from "../../hook/useApi";
+//import { useTherapitListQuery } from "../../hook/useApi";
 function TherapistList() {
   const { deleteData, Statustest } = useAuth();
-  const { data, error, isError } = useTherapitListQuery();
+  //const { data, error, isError } = useTherapitListQuery();
   //console.log("therapist service data ", data);
 
   const [remoteData, setRemoteData] = useState([]);
@@ -216,7 +221,7 @@ function TherapistList() {
                       console.log("View Profile", row.original);
                     }}
                   >
-                    View
+                    Edit
                   </button>
 
                   <button

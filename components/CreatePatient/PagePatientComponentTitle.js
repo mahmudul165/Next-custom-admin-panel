@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import PatientModal from "./PatientModal";
+//import PatientModal from "./PatientModal";
+import dynamic from "next/dynamic";
+const PatientModal = dynamic(() => import("./PatientModal"));
 const PagePatientComponentTitle = ({
   title,
   titleDescription,

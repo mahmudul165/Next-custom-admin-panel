@@ -26,13 +26,18 @@ import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable from "material-react-table";
 import useAuth from "/hook/useAuth";
 import Link from "next/link";
-import { usePatientListQuery } from "../../hook/useApi";
-import PagePatientComponentTitle from "../../components/CreatePatient/PagePatientComponentTitle";
+//import { usePatientListQuery } from "../../hook/useApi";
+//import PagePatientComponentTitle from "../../components/CreatePatient/PagePatientComponentTitle";
+import dynamic from "next/dynamic";
+const PagePatientComponentTitle = dynamic(() =>
+  import("../../components/CreatePatient/PagePatientComponentTitle")
+);
+
 function PatientList() {
   const { deleteData, Statustest } = useAuth();
-  const { data: patientinfo, error, isError } = usePatientListQuery();
+  //const { data: patientinfo, error, isError } = usePatientListQuery();
 
-  console.log("patient query service data ", patientinfo);
+  //console.log("patient query service data ", patientinfo);
 
   const [remoteData, setRemoteData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -75,7 +80,7 @@ function PatientList() {
         blood_group: userData?.blood_group?.name,
         remarks: userData.remarks,
       })) ?? [],
-    []
+    [remoteData]
   );
   // console.log("id data remoteData", remoteData);
   const columns = useMemo(

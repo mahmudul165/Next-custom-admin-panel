@@ -15,7 +15,12 @@ import MaterialReactTable from "material-react-table";
 import useAuth from "/hook/useAuth";
 import Link from "next/link";
 import { useTherapitListQuery } from "../../hook/useApi";
-import PagePatientComponentTitle from "../../components/all-ticket/PageTicketComponentTitle";
+//import PagePatientComponentTitle from "../../components/all-ticket/PageTicketComponentTitle";
+import dynamic from "next/dynamic";
+const PagePatientComponentTitle = dynamic(() =>
+  import("../../components/all-ticket/PageTicketComponentTitle")
+);
+
 function AllTicketList() {
   const { deleteData, Statustest } = useAuth();
   const { data, error, isError } = useTherapitListQuery();
@@ -228,7 +233,7 @@ function AllTicketList() {
                       console.log("View Profile", row.original.id);
                     }}
                   >
-                    View
+                    Edit
                   </button>
 
                   <button

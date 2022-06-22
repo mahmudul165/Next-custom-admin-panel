@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import TicketModal from "./TicketModal";
+//import TicketModal from "./TicketModal";
+import dynamic from "next/dynamic";
+const TicketModal = dynamic(() => import("./TicketModal"));
+
 const PagePatientComponentTitle = ({
   title,
   titleDescription,

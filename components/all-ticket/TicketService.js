@@ -1,7 +1,11 @@
 import React from "react";
-import PageTicketComponentTitle from "../all-ticket/PageTicketComponentTitle";
-import TicketTable from "./TicketTable";
-
+//import PageTicketComponentTitle from "../all-ticket/PageTicketComponentTitle";
+//import TicketTable from "./TicketTable";
+import dynamic from "next/dynamic";
+const PageTicketComponentTitle = dynamic(() =>
+  import("../all-ticket/PageTicketComponentTitle")
+);
+const TicketTable = dynamic(() => import("./TicketTable"));
 const SubCategory = () => {
   return (
     <main className="p-6  space-y-6">

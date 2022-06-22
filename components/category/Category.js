@@ -1,7 +1,11 @@
 import React from "react";
-import PageComponentTitle from "../common/PageComponentTitle";
-import CategoryTable from "./CategoryTable";
-
+//import PageComponentTitle from "../common/PageComponentTitle";
+//import CategoryTable from "./CategoryTable";
+import dynamic from "next/dynamic";
+const PageComponentTitle = dynamic(() =>
+  import("../common/PageComponentTitle")
+);
+const CategoryTable = dynamic(() => import("./CategoryTable"));
 const Category = () => {
   return (
     <main className="p-6  space-y-6">

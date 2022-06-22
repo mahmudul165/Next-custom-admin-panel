@@ -2,7 +2,9 @@
 import React, { useEffect, useState } from "react";
 import PureModal from "react-pure-modal";
 import "react-pure-modal/dist/react-pure-modal.min.css";
-import TicketForm from "./TicketForm";
+//import TicketForm from "./TicketForm";
+import dynamic from "next/dynamic";
+const TicketForm = dynamic(() => import("./TicketForm"));
 const PatientModal = ({ submodal, setSubModal }) => {
   return (
     <>

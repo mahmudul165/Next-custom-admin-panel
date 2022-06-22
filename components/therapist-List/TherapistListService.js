@@ -1,6 +1,13 @@
+//import PageTherapistComponentTitle from "../therapist-List/PageTherapistComponentTitle";
+//import TherapistTable from "../therapist-List/TherapistTable";
 import React from "react";
-import PageTherapistComponentTitle from "../therapist-List/PageTherapistComponentTitle";
-import TherapistTable from "../therapist-List/TherapistTable";
+import dynamic from "next/dynamic";
+const PageTherapistComponentTitle = dynamic(() =>
+  import("../therapist-List/PageTherapistComponentTitle")
+);
+const TherapistTable = dynamic(() =>
+  import("../therapist-List/TherapistTable")
+);
 
 const SubCategory = () => {
   return (

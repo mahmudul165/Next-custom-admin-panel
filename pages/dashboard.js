@@ -1,6 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import Card from "../components/dashboard/Card";
+//import Card from "../components/dashboard/Card";
+import dynamic from "next/dynamic";
+const Card = dynamic(() => import("../components/dashboard/Card"));
+
 function dashboard() {
   return (
     <>

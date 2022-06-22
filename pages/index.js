@@ -1,7 +1,9 @@
-import Card from "../components/dashboard/Card";
+//import Card from "../components/dashboard/Card";
 import Dashboard from "../components/dashboard/Dashboard";
 import Layout from "../components/layout/Layout";
 import Meta from "/components/seo/Meta";
+import dynamic from "next/dynamic";
+const Card = dynamic(() => import("../components/dashboard/Card"));
 export default function Index() {
   return (
     <>
