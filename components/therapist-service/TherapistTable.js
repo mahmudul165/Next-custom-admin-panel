@@ -14,7 +14,7 @@ import {
   useSubCategoryQuery,
   useTherapistServiceQuery,
 } from "../../hook/useApi";
-import Loading from "../common/loading";
+import Loading from "../common/Loading";
 
 const SubCategoryTable = () => {
   const { deleteData, Statustest } = useAuth();

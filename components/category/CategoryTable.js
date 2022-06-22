@@ -8,7 +8,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useQuery } from "react-query";
 import { useCategoryQuery } from "../../hook/useApi";
-import Loading from "../common/loading";
+import Loading from "../common/Loading";
 
 const CategoryTable = () => {
   const { deleteData, Statustest } = useAuth();

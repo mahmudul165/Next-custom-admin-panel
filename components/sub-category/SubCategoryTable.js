@@ -8,7 +8,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { useQuery } from "react-query";
 import { useCategoryQuery, useSubCategoryQuery } from "../../hook/useApi";
-import Loading from "../common/loading";
+import Loading from "../common/Loading";
 const SubCategoryTable = () => {
   const { categorydata, setCategory, deleteData, Statustest } = useAuth();
   const { data, error, isError, isLoading } = useSubCategoryQuery();
