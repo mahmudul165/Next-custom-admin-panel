@@ -1,6 +1,10 @@
 import React from "react";
 import useAuth from "/hook/useAuth";
-import { useCategoryQuery, useSubCategoryQuery } from "../../hook/useApi";
+import {
+  useCategoryQuery,
+  useSubCategoryQuery,
+  useTherapistServiceQuery,
+} from "../../hook/useApi";
 import { useQuery } from "react-query";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -28,9 +32,10 @@ function TherapistForm() {
     resolver: yupResolver(schema),
   });
 
-  const { data: categoryService } = useCategoryQuery();
-  const { data: subService } = useSubCategoryQuery();
+  // const { data: categoryService } = useCategoryQuery();
+  // const { data: subService } = useSubCategoryQuery();
 
+  const { data: therapistService } = useTherapistServiceQuery();
   return (
     <form
       className="w-full max-w-sm my-3 p-2   m-auto   "
@@ -47,7 +52,7 @@ function TherapistForm() {
       </h2>
       {/* Service Categorey List */}
 
-      {categoryService?.data ? (
+      {therapistService?.data ? (
         <div className="relative my-3">
           <select
             id="service_category_id"
@@ -55,9 +60,9 @@ function TherapistForm() {
             className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
           >
             <option>Select service category</option>
-            {categoryService.data?.map((item) => (
-              <option key={item.id} value={`${item.id}`}>
-                {item.name}
+            {therapistService.data?.map((item) => (
+              <option key={item.id} value={`${item.service_category?.id}`}>
+                {item.service_category?.name}
               </option>
             ))}
           </select>
@@ -77,7 +82,7 @@ function TherapistForm() {
       )}
 
       {/* Service Sub Categorey List */}
-      {subService?.data ? (
+      {therapistService?.data ? (
         <div className="relative my-3">
           <select
             id="service_sub_category_id"
@@ -85,9 +90,9 @@ function TherapistForm() {
             className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
           >
             <option selected>Select service sub-category</option>
-            {subService.data?.map((item) => (
-              <option key={item.id} value={`${item.id}`}>
-                {item.name}
+            {therapistService.data?.map((item) => (
+              <option key={item.id} value={`${item.service_subcategory?.id}`}>
+                {item.service_subcategory?.name}
               </option>
             ))}
           </select>

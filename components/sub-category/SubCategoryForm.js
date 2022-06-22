@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import useAuth from "/hook/useAuth";
 import { useQuery } from "react-query";
-import { useCategoryQuery } from "../../hook/useApi";
+import { useCategoryQuery, useSubCategoryQuery } from "../../hook/useApi";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 const schema = yup
@@ -18,7 +18,7 @@ const schema = yup
 
 function SubCategoryForm() {
   const { postData, categorydata, setCategory } = useAuth();
-  const { data } = useCategoryQuery();
+  const { data } = useSubCategoryQuery();
   //console.log("my categorydata data  is", data);
   const { register, handleSubmit, error } = useForm({
     resolver: yupResolver(schema),
@@ -37,17 +37,17 @@ function SubCategoryForm() {
         </h2>
 
         {/* Service Categorey List */}
-        {data ? (
+        {data?.data ? (
           <div className="relative my-3">
             <select
-              id="service_categorie_id"
-              {...register("service_categorie_id")}
+              id="service_category_id"
+              {...register("service_category_id")}
               className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
             >
               <option>Select service category</option>
               {data.data?.map((item) => (
-                <option key={item.id} value={`${item.id}`}>
-                  {item.name}
+                <option key={item.id} value={`${item.service_category?.id}`}>
+                  {item.service_category?.name}
                 </option>
               ))}
             </select>

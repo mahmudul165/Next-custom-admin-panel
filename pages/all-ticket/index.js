@@ -116,30 +116,6 @@ function AllTicketList() {
         header: "Date",
         id: "date",
       },
-      // {
-      //   header: "Date of birth",
-      //   id: "date_of_birth",
-      // },
-      // {
-      //   header: "Status",
-      //   id: "status",
-      // },
-      // {
-      //   header: "State",
-      //   id: "state_id",
-      // },
-      // {
-      //   header: "Country",
-      //   id: "country_id",
-      // },
-      // {
-      //   header: "blood_group",
-      //   id: "blood_group_id",
-      // },
-      // {
-      //   header: "Options",
-      //   id: "options",
-      // },
     ],
     []
   );
