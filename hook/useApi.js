@@ -7,8 +7,8 @@ const fetchCategoryService = async () => {
 };
 export const useCategoryQuery = () =>
   useQuery(["category"], fetchCategoryService, {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
+    // refetchOnMount: false,
+    // refetchOnWindowFocus: false,
   });
 // get   service sub-category data
 const fetchSubService = async () => {
@@ -19,8 +19,8 @@ const fetchSubService = async () => {
 };
 export const useSubCategoryQuery = () =>
   useQuery(["subcategory"], fetchSubService, {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
+    // refetchOnMount: false,
+    // refetchOnWindowFocus: false,
   });
 
 // get  service therapist data
@@ -32,8 +32,8 @@ const fetchTherapistService = async () => {
 };
 export const useTherapistServiceQuery = () =>
   useQuery(["therapistService"], fetchTherapistService, {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
+    // refetchOnMount: false,
+    // refetchOnWindowFocus: false,
   });
 
 // get  patient list  data
@@ -43,8 +43,8 @@ const fetchPatientList = async () => {
 };
 export const usePatientListQuery = () =>
   useQuery(["patientList"], fetchPatientList, {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
+    // refetchOnMount: false,
+    // refetchOnWindowFocus: false,
   });
 
 // get therapist list  data
@@ -56,8 +56,8 @@ const fetchTherapitList = async () => {
 };
 export const useTherapitListQuery = () =>
   useQuery(["therapistList"], fetchTherapitList, {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
+    // refetchOnMount: false,
+    // refetchOnWindowFocus: false,
   });
 
 // get  All ticket  data
@@ -67,8 +67,8 @@ const fetchAllTicket = async () => {
 };
 export const useAllTicketQuery = () =>
   useQuery(["allticket"], fetchAllTicket, {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
+    // refetchOnMount: false,
+    // refetchOnWindowFocus: false,
   });
 
 // global get data method
