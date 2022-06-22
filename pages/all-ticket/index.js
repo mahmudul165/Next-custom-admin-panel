@@ -59,8 +59,8 @@ function AllTicketList() {
         // ticket_history
         // date
         id: `${userData.id}`,
-        patient_info: userData.patient_info?.id,
-        therapist_info: userData?.therapist_info?.id,
+        patient_info: `${userData.patient_info?.id}`,
+        therapist_info: `${userData?.therapist_info?.id}`,
         ticket_department_info: userData.ticket_department_info?.name,
         location: userData.location,
         status: userData.status,
