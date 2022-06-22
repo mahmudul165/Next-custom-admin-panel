@@ -17,7 +17,7 @@ const schema = yup
   .required();
 
 function SubCategoryForm() {
-  const { postData, categorydata, setCategory } = useAuth();
+  const { postData } = useAuth();
   const { data } = useSubCategoryQuery();
   //console.log("my categorydata data  is", data);
   const { register, handleSubmit, error } = useForm({

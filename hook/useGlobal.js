@@ -13,8 +13,8 @@ const useGlobal = () => {
   // }, [categoryService, subService, therapistService]);
 
   // global post method
-  const postData = (url, data) => {
-    axios.post(url, data).then((response) => {
+  const postData = (url, id) => {
+    axios.post(url, id).then((response) => {
       console.log("post data", response);
       alert("successfully added ");
     });
