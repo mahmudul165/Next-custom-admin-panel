@@ -7,8 +7,8 @@ const fetchCategoryService = async () => {
 };
 export const useCategoryQuery = () =>
   useQuery(["category"], fetchCategoryService, {
-    // refetchOnMount: false,
-    // refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 // get   service sub-category data
 const fetchSubService = async () => {
@@ -18,7 +18,10 @@ const fetchSubService = async () => {
   return await response.json();
 };
 export const useSubCategoryQuery = () =>
-  useQuery(["subcategory"], fetchSubService);
+  useQuery(["subcategory"], fetchSubService, {
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+  });
 
 // get  service therapist data
 const fetchTherapistService = async () => {
@@ -28,7 +31,10 @@ const fetchTherapistService = async () => {
   return await response.json();
 };
 export const useTherapistServiceQuery = () =>
-  useQuery(["therapistService"], fetchTherapistService);
+  useQuery(["therapistService"], fetchTherapistService, {
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+  });
 
 // get  patient list  data
 const fetchPatientList = async () => {
@@ -36,7 +42,10 @@ const fetchPatientList = async () => {
   return await response.json();
 };
 export const usePatientListQuery = () =>
-  useQuery(["patientList"], fetchPatientList);
+  useQuery(["patientList"], fetchPatientList, {
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+  });
 
 // get therapist list  data
 const fetchTherapitList = async () => {
@@ -46,14 +55,21 @@ const fetchTherapitList = async () => {
   return await response.json();
 };
 export const useTherapitListQuery = () =>
-  useQuery(["therapistList"], fetchTherapitList);
+  useQuery(["therapistList"], fetchTherapitList, {
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+  });
 
 // get  All ticket  data
 const fetchAllTicket = async () => {
   const response = await fetch("https://misiapi.lamptechs.com/api/v1/patient");
   return await response.json();
 };
-export const useAllTicketQuery = () => useQuery(["allticket"], fetchAllTicket);
+export const useAllTicketQuery = () =>
+  useQuery(["allticket"], fetchAllTicket, {
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+  });
 
 // global get data method
 // async function fetchCategoryService() {
