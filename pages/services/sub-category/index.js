@@ -5,7 +5,7 @@ const PageSubComponentTitle = dynamic(() =>
   import("/components/sub-category/PageSubComponentTitle.js")
 );
 const SubCategoryTable = dynamic(() =>
-  import("/components/sub-category/SubCategorytable.js")
+  import("/components/sub-category/SubCategoryTable.js")
 );
 function SubCategoryService() {
   return (

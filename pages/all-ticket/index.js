@@ -1,15 +1,3 @@
-// import React from "react";
-// import TherapistListService from "../../components/therapist-List/TherapistListService";
-// function index() {
-//   return (
-//     <>
-//       <TherapistListService />
-//     </>
-//   );
-// }
-
-// export default index;
-
 import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable from "material-react-table";
 import useAuth from "/hook/useAuth";
@@ -20,6 +8,7 @@ import dynamic from "next/dynamic";
 const PagePatientComponentTitle = dynamic(() =>
   import("../../components/all-ticket/PageTicketComponentTitle")
 );
+const Loading = dynamic(() => import("/components/common/Loading"));
 
 function AllTicketList() {
   const { deleteData, Statustest } = useAuth();
@@ -60,12 +49,12 @@ function AllTicketList() {
         // date
         id: `${userData.id}`,
         patient_info: `${userData.patient_info?.id}`,
-        therapist_info: `${userData?.therapist_info?.id}`,
+        therapist_info: `${userData?.therapist_info}`,
         ticket_department_info: userData.ticket_department_info?.name,
         location: userData.location,
         status: userData.status,
         language: userData.language,
-        remarks: userData.remarks,
+        remarks: userData.ticket_department_info?.remarks,
         strike: userData.strike,
         strike_history: userData.strike_history,
         ticket_history: userData.ticket_history,
@@ -164,79 +153,89 @@ function AllTicketList() {
 
         <section className="grid card  md:grid-cols-1 xl:grid-cols-1   ">
           <div className="p-4">
-            <MaterialReactTable
-              columns={columns}
-              data={parsedData}
-              // state={{
-              //   isLoading
-              // }}
-              initialState={{
-                showGlobalFilter: true,
-                pagination: { pageSize: 5 },
-              }}
-              positionGlobalFilter="left"
-              muiSearchTextFieldProps={{
-                variant: "outlined",
-                size: "small",
-                placeholder: "Search your data",
-                label: "Search",
-                InputLabelProps: { shrink: true },
-              }}
-              muiTableBodyRowProps={({ row }) => ({
-                sx: {
-                  backgroundColor:
-                    row.index % 2 === 0 ? "rgba(52, 54, 245, 0.08)" : "",
-                },
-              })}
-              muiTableBodyCellProps={{
-                sx: { border: "none" },
-                //align: "center",
-              }}
-              // muiTableContainerProps={{ sx: { maxHeight: 400 } }}
-              muiTablePaperProps={{
-                sx: {
-                  // maxWidth: "800px",
-                  //m: "auto",
-                },
-              }}
-              muiTableContainerProps={{
-                sx: {
-                  // maxHeight: "500px",
-                },
-              }}
-              //state={{ showSkeletons: true }}
-              positionPagination="both"
-              // row actions
+            {remoteData ? (
+              <MaterialReactTable
+                columns={columns}
+                data={parsedData}
+                // state={{
+                //   isLoading
+                // }}
+                initialState={{
+                  showGlobalFilter: true,
+                  pagination: { pageSize: 5 },
+                }}
+                positionGlobalFilter="left"
+                muiSearchTextFieldProps={{
+                  variant: "outlined",
+                  size: "small",
+                  placeholder: "Search your data",
+                  label: "Search",
+                  InputLabelProps: { shrink: true },
+                }}
+                muiTableBodyRowProps={({ row }) => ({
+                  sx: {
+                    backgroundColor:
+                      row.index % 2 === 0 ? "rgba(52, 54, 245, 0.08)" : "",
+                  },
+                })}
+                muiTableBodyCellProps={{
+                  sx: { border: "none" },
+                  //align: "center",
+                }}
+                // muiTableContainerProps={{ sx: { maxHeight: 400 } }}
+                muiTablePaperProps={{
+                  sx: {
+                    // maxWidth: "800px",
+                    //m: "auto",
+                  },
+                }}
+                muiTableContainerProps={{
+                  sx: {
+                    // maxHeight: "500px",
+                  },
+                }}
+                //state={{ showSkeletons: true }}
+                positionPagination="both"
+                // row actions
 
-              enableRowActions
-              positionActionsColumn="last"
-              renderRowActions={({ row }) => (
-                <div
-                  style={{ display: "flex", flexWrap: "nowrap", gap: "0.5rem" }}
-                >
-                  <button
-                    className="text-purple-800 hover:underline"
-                    onClick={() => {
-                      console.log("View Profile", row.original.id);
+                enableRowActions
+                positionActionsColumn="last"
+                renderRowActions={({ row }) => (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "nowrap",
+                      gap: "0.5rem",
                     }}
                   >
-                    Edit
-                  </button>
+                    <button
+                      className="text-purple-800 hover:underline"
+                      onClick={() => {
+                        console.log("View Profile", row.original.id);
+                      }}
+                    >
+                      Edit
+                    </button>
 
-                  <button
-                    className="text-purple-800 hover:underline"
-                    onClick={() =>
-                      deleteData(
-                        `https://misiapi.lamptechs.com/api/v1/ticket/delete`,
-                        row.original.id
-                      )
-                    }
-                  >
-                    Delete
-                  </button>
-                </div>
-              )}
-            />
+                    <button
+                      className="text-purple-800 hover:underline"
+                      onClick={() =>
+                        deleteData(
+                          `https://misiapi.lamptechs.com/api/v1/ticket/delete`,
+                          row.original.id
+                        )
+                      }
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )}
+              />
+            ) : (
+              <>
+                <Loading />
+              </>
+            )}
           </div>
         </section>
       </main>
