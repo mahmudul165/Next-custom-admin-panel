@@ -1,14 +1,26 @@
-import Category from "../../../components/category/Category";
+import React from "react";
+import dynamic from "next/dynamic";
+const PageComponentTitle = dynamic(() =>
+  import("/components/category/PageComponentTitle.js")
+);
+const CategoryTable = dynamic(() =>
+  import("/components/category/CategoryTable.js")
+);
 
-export default function categoryPage() {
+function CategoryService() {
   return (
     <>
-      <Category />
+      <main className="p-6  space-y-6">
+        <PageComponentTitle
+          title="Service category"
+          buttonTitle="Create new category"
+        />
+        <section className="grid card  md:grid-cols-1 xl:grid-cols-1   ">
+          <CategoryTable />
+        </section>
+      </main>
     </>
   );
 }
-{
-  /* <Layout title='Category'>
-<Category />
-</Layout> */
-}
+
+export default CategoryService;

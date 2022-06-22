@@ -41,7 +41,7 @@ function AllTicketList() {
       setIsLoading(false);
     };
     fetchData();
-  }, []);
+  }, [remoteData]);
 
   const parsedData = useMemo(
     () =>
@@ -70,19 +70,6 @@ function AllTicketList() {
         strike_history: userData.strike_history,
         ticket_history: userData.ticket_history,
         date: userData.date,
-        // date_of_birth: userData.date_of_birth,
-        // status: userData.status,
-        // blood_group_id: userData.blood_group_id,
-        // state_id: userData.state_id,
-        // country_id: userData.country_id,
-        // options: (
-        //   <Link
-        //     href={`/therapist/edit/${userData.id}`}
-        //     class="btn btn-primary btn-sm"
-        //   >
-        //     Edit
-        //   </Link>
-        // ),
       })) ?? [],
     [remoteData]
   );

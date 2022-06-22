@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import PureModal from "react-pure-modal";
 import "react-pure-modal/dist/react-pure-modal.min.css";
-import SubCategoryForm from "../sub-category/SubCategoryForm";
+import SubCategoryForm from "./SubCategoryForm";
 const SubCategoryModal = ({ submodal, setSubModal }) => {
   return (
     <>
