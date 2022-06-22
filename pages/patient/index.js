@@ -26,12 +26,13 @@ import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable from "material-react-table";
 import useAuth from "/hook/useAuth";
 import Link from "next/link";
-import { useTherapitListQuery } from "../../hook/useApi";
+import { usePatientListQuery } from "../../hook/useApi";
 import PagePatientComponentTitle from "../../components/CreatePatient/PagePatientComponentTitle";
 function PatientList() {
   const { deleteData, Statustest } = useAuth();
-  const { data, error, isError } = useTherapitListQuery();
-  //console.log("therapist service data ",userData);
+  const { data: patientinfo, error, isError } = usePatientListQuery();
+
+  console.log("patient query service data ", patientinfo);
 
   const [remoteData, setRemoteData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -48,11 +49,11 @@ function PatientList() {
       setIsLoading(false);
     };
     fetchData();
-  }, []);
+  }, [remoteData]);
 
   const parsedData = useMemo(
     () =>
-      remoteData.map((userData) => ({
+      remoteData?.map((userData) => ({
         id: `${userData.id}`,
         first_name: userData.first_name,
         last_name: userData.last_name,
@@ -73,19 +74,10 @@ function PatientList() {
         remarks: userData.remarks,
         blood_group: userData?.blood_group?.name,
         remarks: userData.remarks,
-
-        // options: (
-        //   <Link
-        //     href={`/therapist/edit/${userData.id}`}
-        //     class="btn btn-primary btn-sm"
-        //   >
-        //     Edit
-        //   </Link>
-        // ),
       })) ?? [],
-    [remoteData]
+    []
   );
-  console.log("id data remoteData", remoteData);
+  // console.log("id data remoteData", remoteData);
   const columns = useMemo(
     () => [
       {
@@ -236,7 +228,11 @@ function PatientList() {
               positionActionsColumn="last"
               renderRowActions={({ row }) => (
                 <div
-                  style={{ display: "flex", flexWrap: "nowrap", gap: "0.5rem" }}
+                  style={{
+                    display: "flex",
+                    flexWrap: "nowrap",
+                    gap: "0.5rem",
+                  }}
                 >
                   <button
                     className="text-purple-800 hover:underline"
@@ -244,7 +240,7 @@ function PatientList() {
                       console.log("View Profile", row.original);
                     }}
                   >
-                    View
+                    Edit
                   </button>
 
                   <button
