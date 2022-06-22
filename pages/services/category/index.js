@@ -1,10 +1,10 @@
 import React from "react";
 import dynamic from "next/dynamic";
 const PageComponentTitle = dynamic(() =>
-  import("/components/category/PageComponentTitle.js")
+  import("/components/category/PageComponentTitle")
 );
 const CategoryTable = dynamic(() =>
-  import("/components/category/CategoryTable.js")
+  import("/components/category/CategoryTable")
 );
 
 function CategoryService() {

@@ -2,10 +2,10 @@ import React from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 const PageSubComponentTitle = dynamic(() =>
-  import("/components/sub-category/PageSubComponentTitle.js")
+  import("/components/sub-category/PageSubComponentTitle")
 );
 const SubCategoryTable = dynamic(() =>
-  import("/components/sub-category/SubCategoryTable.js")
+  import("/components/sub-category/SubCategoryTable")
 );
 function SubCategoryService() {
   return (

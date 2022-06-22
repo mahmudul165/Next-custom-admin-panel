@@ -2,10 +2,10 @@ import React from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 const PageTherapistComponentTitle = dynamic(() =>
-  import("/components/therapist-service/PageTherapistComponentTitle.js")
+  import("/components/therapist-service/PageTherapistComponentTitle")
 );
 const TherapistTable = dynamic(() =>
-  import("/components/therapist-service/TherapistTable.js")
+  import("/components/therapist-service/TherapistTable")
 );
 function TherapistService() {
   return (
