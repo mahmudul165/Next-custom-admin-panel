@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import useAuth from "/hook/useAuth";
 import { useQuery } from "react-query";
 import { useCategoryQuery } from "../../hook/useApi";
+import Skeleton from "@mui/material/Skeleton";
+import Stack from "@mui/material/Stack";
 const schema = yup
   .object()
   .shape({
@@ -57,7 +59,11 @@ function SubCategoryForm() {
             </label>
           </div>
         ) : (
-          <>{/* <Loading /> */}</>
+          <>
+            <Stack spacing={1}>
+              <Skeleton height={40} />
+            </Stack>
+          </>
         )}
 
         {/* SubCategory Name */}
