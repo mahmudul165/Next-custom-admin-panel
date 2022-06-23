@@ -1,5 +1,6 @@
-import React from "react";
 import Link from "next/link";
+import React from "react";
+
 function SignUp() {
   return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -12,18 +13,9 @@ function SignUp() {
             alt="Workflow"
           />
           <h2 className="mt-6 text-center text-2xl font-extrabold text-gray-900">
-            Sign in to your account
+            Sign up to your account
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Or
-            {/* <a
-              href="#"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-              {" "}
-              start your 14-day free trial{" "}
-            </a> */}
-          </p>
+          <p className="mt-2 text-center text-sm text-gray-600">Or</p>
         </div>
         <form className="mt-8 space-y-6" action="#" method="POST">
           <div className="relative">
@@ -59,7 +51,7 @@ function SignUp() {
           </div>
 
           <div className="flex items-start">
-            <div className="flex items-start">
+            {/* <div className="flex items-start">
               <div className="flex items-center h-5">
                 <input
                   id="remember"
@@ -76,27 +68,27 @@ function SignUp() {
               >
                 Remember me
               </label>
-            </div>
-            <a
+            </div> */}
+            {/* <a
               href="#"
               className="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500"
             >
-              Last Password?
-            </a>
+              Forget Password?
+            </a> */}
           </div>
-          <Link href={`/`}>
+          <Link href="/account/login">
             <button
               type="submit"
               className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
-              Login to your account
+              Sign up to your account
             </button>
           </Link>
           <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-            Not registered?{" "}
-            <Link href="/">
-              <a className="text-blue-700 hover:underline dark:text-blue-500">
-                Create account
+            Already registered?
+            <Link href="/account/login">
+              <a className="text-blue-700 hover:underline dark:text-blue-500 ms-1">
+                Login now.
               </a>
             </Link>
           </div>

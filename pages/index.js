@@ -14,6 +14,7 @@ export default function Index() {
         image="test purpose"
       />
       {/* inside of container */}
+
       <main className="p-6  space-y-6">
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           <Card
@@ -81,6 +82,7 @@ export default function Index() {
             bgColor="bg-gradient-to-l from-pink-500   to-pink-400"
           />
         </section>
+
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           <Card
             name="Service Category"
@@ -92,6 +94,7 @@ export default function Index() {
             number="4500"
             bgColor="bg-gradient-to-b from-sky-500 to-sky-400"
           />
+
           {/* <Card
               name="PiB Group"
               number="400"
