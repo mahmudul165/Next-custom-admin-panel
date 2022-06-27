@@ -1,7 +1,73 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import "react-pure-modal/dist/react-pure-modal.min.css";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import useAuth from "../../hook/useGlobal";
+import axios from "axios";
+
+const schema = yup
+  .object()
+  .shape({
+    //name: yup.string().required(),
+  })
+  .required();
 
 function Login() {
+  const { postData } = useAuth();
+  // const testData = async (url, id) => {
+  //   await axios.post(url, id).then((response) => {
+  //  const token = res.data.token;
+  //      localStorage.setItem('token', token);
+  //     console.log("response post data", response);
+  //     alert("successfully added ");
+  //   });
+  // };
+
+  //   axios.post('https://misiapi.lamptechs.com/api/v1/admin/login',data,{ headers: { Authorization:localStorage.getItem('jwtToken') } })
+  //   .then(response=> console.log(response))
+  //   .catch(error => console.log(error));
+  // };
+
+  //   await axios.post(APIbase + '/login', {
+  //     username: username, password: password
+  //  }).then(res=>{
+  //      const token = res.data.token;
+  //      localStorage.setItem('token', token);
+  //  }).catch(err => {
+  //      console.log(err);
+  //   });
+
+  // const token = localStorage.getItem('token');
+  //       const headers = { Authorization: `Bearer ${token}`};
+  //       const detailResult= await axios.get(API.base + API.details, {
+  //       headers:headers});
+
+  //   function logout() {
+  //     // remove user from local storage, publish null to user subscribers and redirect to login page
+  //     localStorage.removeItem('user');
+  //     userSubject.next(null);
+  //     Router.push('/login');
+  // }
+
+  //   function login(username, password) {
+  //     return fetchWrapper.post(`${baseUrl}/authenticate`, { username, password })
+  //         .then(user => {
+  //             localStorage.setItem('user', JSON.stringify(user));
+  //             return user;
+  //         });
+  // }
+
+  // function logout() {
+  //     localStorage.removeItem('user');
+  //     userSubject.next(null);
+  //     Router.push('/login');
+  // }
+
+  const { register, handleSubmit, error } = useForm({
+    resolver: yupResolver(schema),
+  });
   return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -17,58 +83,55 @@ function Login() {
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">Or</p>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form
+          className="mt-8 space-y-6"
+          //method="POST"
+          onSubmit={handleSubmit(
+            (data) =>
+              postData(
+                "https://misiapi.lamptechs.com/api/v1/admin/login",
+
+                data
+              )
+            // console.log("login ", d)
+          )}
+          type="submit"
+          // action="https://misiapi.lamptechs.com/api/v1/admin/login"
+          // action="http://localhost:3000/account/login"
+        >
           <div className="relative">
             <input
               type="text"
-              id="floating_outlined"
+              id="email"
               className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
               placeholder="  "
               required
+              {...register("email")}
             />
             <label
-              htmlFor="floating_outlined"
+              htmlFor="email"
               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
             >
               Your email
             </label>
           </div>
-
           <div className="relative">
             <input
               type="text"
-              id="floating_outlined"
+              id="password"
               className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
               placeholder="••••••••"
               required
+              {...register("password")}
             />
             <label
-              htmlFor="floating_outlined"
+              htmlFor="password"
               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
             >
               Your password
             </label>
           </div>
-
           <div className="flex items-start">
-            {/* <div className="flex items-start">
-              <div className="flex items-center h-5">
-                <input
-                  id="remember"
-                  type="checkbox"
-                  value=""
-                  className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                  required
-                />
-              </div>
-              <label
-                htmlhtml
-                htmlFor="remember"
-                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              >
-                Remember me
-              </label>
-            </div> */}
             <a
               href="#"
               className="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500"

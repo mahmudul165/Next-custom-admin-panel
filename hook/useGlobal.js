@@ -1,7 +1,9 @@
 import axios from "axios";
+// axios.defaults.withCredentials = true;
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 const useGlobal = () => {
+  const axios = require("axios").default;
   const [categorydata, setCategory] = useState("");
   const [subservicedata, setSubservice] = useState("");
   const [therapistservicedata, setTherapistservice] = useState("");
@@ -13,11 +15,32 @@ const useGlobal = () => {
   // }, [categoryService, subService, therapistService]);
 
   // global post method
-  const postData = (url, id) => {
-    axios.post(url, id).then((response) => {
-      console.log("post data", response);
-      alert("successfully added ");
-    });
+
+  // const config = {
+  //   headers: {
+  //     "Access-Control-Allow-Origin": "*",
+  //     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+  //   },
+  // };
+  const postData = (url, data) => {
+    axios
+      .post(url, data, {
+        withCredentials: true,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          // "Access-Control-Allow-Credentials": true,
+          // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+          "Content-Type": "application/json",
+        },
+        // data: "include",
+      })
+      .then((response) => {
+        console.log("post data", response);
+        alert("successfully added ");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
   // global delete data
   const deleteData = (url, id) => {
