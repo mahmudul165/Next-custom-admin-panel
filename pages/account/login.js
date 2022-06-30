@@ -93,7 +93,7 @@ function Login() {
 
                 data
               )
-            // console.log("login ", d)
+            //console.log("login ", data)
           )}
           type="submit"
           // action="https://misiapi.lamptechs.com/api/v1/admin/login"

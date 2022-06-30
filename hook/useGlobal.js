@@ -1,5 +1,7 @@
 import axios from "axios";
-// axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 const useGlobal = () => {
@@ -22,17 +24,27 @@ const useGlobal = () => {
   //     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
   //   },
   // };
+  // let token = document
+  //   .querySelector("meta[name=”csrf-token”]")
+  //   .getAttribute("content");
   const postData = (url, data) => {
     axios
       .post(url, data, {
         withCredentials: true,
+        // headers: {
+        //   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        // },
         headers: {
           "Access-Control-Allow-Origin": "*",
-          // "Access-Control-Allow-Credentials": true,
-          // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+          "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
           "Content-Type": "application/json",
+
+          Accept: "application/json, text-plain, */*",
+          "X-Requested-With": "XMLHttpRequest",
+          // "X-CSRF-TOKEN": token,
         },
-        // data: "include",
+        data: "include",
       })
       .then((response) => {
         console.log("post data", response);
