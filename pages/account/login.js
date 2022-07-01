@@ -6,7 +6,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hook/useGlobal";
 import axios from "axios";
-
+import Router, { useRouter } from "next/router";
 const schema = yup
   .object()
   .shape({
@@ -16,6 +16,17 @@ const schema = yup
 
 function Login() {
   const { postData } = useAuth();
+  const router = useRouter();
+  // const LoginRedirect = () => {
+  //   const router = useRouter();
+  //   useEffect(() => {
+  //     if (localStorage.getItem("token") == null) {
+  //       router.push("/account/login");
+  //     } else {
+  //       router.push("/dashboard");
+  //     }
+  //   }, []);
+  // };
   const testData = async (url, data) => {
     await axios.post(url, data).then((response) => {
       const token = response.data?.access_token;
@@ -23,6 +34,13 @@ function Login() {
       localStorage.setItem("token", token);
       //console.log("response post data", response);
       alert("successfully added ");
+      //LoginRedirect();
+      // redirect to home if already logged in
+      if (localStorage.getItem("token") == null) {
+        router.push("/account/login");
+      } else {
+        router.push("/dashboard");
+      }
     });
   };
 
@@ -168,3 +186,5 @@ export default Login;
 Login.getLayout = function PageLayout(page) {
   return <>{page}</>;
 };
+
+// https://dev.to/shubhamverma/implement-protected-routes-in-nextjs-37ml
