@@ -16,14 +16,14 @@ const schema = yup
 
 function Login() {
   const { postData } = useAuth();
-  // const testData = async (url, id) => {
-  //   await axios.post(url, id).then((response) => {
-  //  const token = res.data.token;
-  //      localStorage.setItem('token', token);
-  //     console.log("response post data", response);
-  //     alert("successfully added ");
-  //   });
-  // };
+  const testData = async (url, data) => {
+    await axios.post(url, data).then((response) => {
+      const token = response.data?.access_token;
+      localStorage.setItem("token", token);
+      console.log("response post data", response);
+      alert("successfully added ");
+    });
+  };
 
   //   axios.post('https://misiapi.lamptechs.com/api/v1/admin/login',data,{ headers: { Authorization:localStorage.getItem('jwtToken') } })
   //   .then(response=> console.log(response))
@@ -88,11 +88,14 @@ function Login() {
           //method="POST"
           onSubmit={handleSubmit(
             (data) =>
-              postData(
+              testData(
                 "https://misiapi.lamptechs.com/api/v1/admin/login",
 
                 data
               )
+            // postData(
+
+            // )
             //console.log("login ", data)
           )}
           type="submit"
