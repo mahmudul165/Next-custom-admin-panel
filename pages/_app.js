@@ -24,8 +24,30 @@ import Meta from "/components/seo/Meta";
 import AuthProvider from "/contexts/AuthProvider";
 import { AnimatePresence } from "framer-motion";
 import Layout from "/components/layout/Layout";
+import { useEffect, useState } from "react";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
+  //const [token, setToken] = useState("");
+  //const [removetoken, setremoveToken] = useState("");
+  //const token = localStorage.getItem("token");
+  // const token = async () => {
+  //   const token = await localStorage.getItem("token");
+  //   return await token;
+  // };
+  // useEffect(() => {
+  //   setToken(localStorage.getItem("token"));
+  //    setter
+  //    localStorage.setItem('myData', data);
+  //     getter
+  //    localStorage.getItem('myData');
+  //     const token = localStorage.getItem("token");
+  //     remove
+  //   setremoveToken(localStorage.removeItem("token"));
+  //   localStorage.removeItem('myData');
+  //    remove all
+  //    localStorage.clear();
+  // }, []);
+  //console.log("my token", token());
   const queryClient = new QueryClient();
   if (Component.getLayout) {
     return Component.getLayout(<Component {...pageProps} />);

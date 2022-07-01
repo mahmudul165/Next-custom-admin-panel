@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 //import { useSubCategoryQuery } from "/hook/useApi";
 const Loading = dynamic(() => import("/components/common/Loading"));
 function TherapistTable() {
-  const { deleteData, Statustest } = useAuth();
+  const { deleteData, Statustest, token } = useAuth();
   // const { data, error, isError } = useSubCategoryQuery();
   //console.log("All subcategory data ", data);
 
@@ -17,14 +17,17 @@ function TherapistTable() {
     const fetchData = async () => {
       setIsLoading(true);
       const response = await fetch(
-        "https://misiapi.lamptechs.com/api/v1/therapistService"
+        "https://misiapi.lamptechs.com/api/v1/therapistService",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       const json = await response.json();
       setRemoteData(json.data);
       setIsLoading(false);
     };
     fetchData();
-  }, [remoteData]);
+  }, [remoteData, token]);
 
   const parsedData = useMemo(
     () =>

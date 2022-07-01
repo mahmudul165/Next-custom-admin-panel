@@ -19,8 +19,9 @@ function Login() {
   const testData = async (url, data) => {
     await axios.post(url, data).then((response) => {
       const token = response.data?.access_token;
+      console.log("response post data", token);
       localStorage.setItem("token", token);
-      console.log("response post data", response);
+      //console.log("response post data", response);
       alert("successfully added ");
     });
   };

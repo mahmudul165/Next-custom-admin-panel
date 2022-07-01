@@ -34,27 +34,44 @@ const PatientComponent = dynamic(() =>
 );
 
 function PatientList() {
-  const { deleteData, Statustest } = useAuth();
+  const { deleteData, Statustest, token } = useAuth();
   //const { data: patientinfo, error, isError } = usePatientListQuery();
 
   //console.log("patient query service data ", patientinfo);
 
   const [remoteData, setRemoteData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  //const [token, setToken] = useState("");
+  // useEffect(() => {
 
+  //   setToken(localStorage.getItem("token"));
+  // }, []);
+
+  // const [token, setToken] = useState("");
+
+  // useEffect(() => {
+  //   const items = localStorage.getItem("token");
+  //   if (items) {
+  //     setToken(items);
+  //   }
+  // }, []);
+
+  console.log("patient token", token);
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       const response = await fetch(
-        // "https://jsonplaceholder.typicode.com/users"
-        "https://misiapi.lamptechs.com/api/v1/patient"
+        "https://misiapi.lamptechs.com/api/v1/patient",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       const json = await response.json();
       setRemoteData(json.data);
       setIsLoading(false);
     };
     fetchData();
-  }, [remoteData]);
+  }, [remoteData, token]);
 
   const parsedData = useMemo(
     () =>

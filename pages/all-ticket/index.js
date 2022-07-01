@@ -11,7 +11,7 @@ const TicketComponent = dynamic(() =>
 const Loading = dynamic(() => import("/components/common/Loading"));
 
 function AllTicketList() {
-  const { deleteData, Statustest } = useAuth();
+  const { deleteData, Statustest, token } = useAuth();
   const { data, error, isError } = useTherapitListQuery();
   console.log("All ticket data ", data);
 
@@ -22,8 +22,10 @@ function AllTicketList() {
     const fetchData = async () => {
       setIsLoading(true);
       const response = await fetch(
-        // "https://jsonplaceholder.typicode.com/users"
-        "https://misiapi.lamptechs.com/api/v1/ticket"
+        "https://misiapi.lamptechs.com/api/v1/ticket",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       const json = await response.json();
       setRemoteData(json.data);

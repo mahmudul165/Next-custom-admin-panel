@@ -22,7 +22,7 @@ import useAuth from "/hook/useAuth";
 import Link from "next/link";
 //import { useTherapitListQuery } from "../../hook/useApi";
 function TherapistList() {
-  const { deleteData, Statustest } = useAuth();
+  const { deleteData, Statustest, token } = useAuth();
   //const { data, error, isError } = useTherapitListQuery();
   //console.log("therapist service data ", data);
 
@@ -34,7 +34,10 @@ function TherapistList() {
       setIsLoading(true);
       const response = await fetch(
         // "https://jsonplaceholder.typicode.com/users"
-        "https://misiapi.lamptechs.com/api/v1/therapist"
+        "https://misiapi.lamptechs.com/api/v1/therapist",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       const json = await response.json();
       setRemoteData(json?.data);

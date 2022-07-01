@@ -29,23 +29,17 @@ const useGlobal = () => {
   //   .getAttribute("content");
   const postData = (url, data) => {
     axios
-      .post(url, data, {
-        withCredentials: true,
-        // headers: {
-        //   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-        // },
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Credentials": true,
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-          "Content-Type": "application/json",
-
-          Accept: "application/json, text-plain, */*",
-          "X-Requested-With": "XMLHttpRequest",
-          // "X-CSRF-TOKEN": token,
-        },
-        data: "include",
-      })
+      .post(
+        url,
+        data,
+        // { headers: { Authorization: localStorage.getItem("jwtToken") } },
+        {
+          withCredentials: true,
+          // headers: {
+          //   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+          // },
+        }
+      )
       .then((response) => {
         console.log("post data", response);
         alert("successfully added ");
@@ -61,7 +55,15 @@ const useGlobal = () => {
       alert("data field deleted  ");
     });
   };
+  // set and get token
+  const [token, setToken] = useState("");
 
+  useEffect(() => {
+    const items = localStorage.getItem("token");
+    if (items) {
+      setToken(items);
+    }
+  }, []);
   // status
   // const Statustest = (status) => {
   //   if (status == "A") {
@@ -101,6 +103,7 @@ const useGlobal = () => {
     therapistservicedata,
     setTherapistservice,
     postData,
+    token,
     deleteData,
     Statustest,
   };

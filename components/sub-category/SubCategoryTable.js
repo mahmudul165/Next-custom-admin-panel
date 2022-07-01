@@ -6,9 +6,9 @@ import dynamic from "next/dynamic";
 //import { useSubCategoryQuery } from "/hook/useApi";
 const Loading = dynamic(() => import("/components/common/Loading"));
 function SubCategoryTable() {
-  const { deleteData, Statustest } = useAuth();
+  const { deleteData, Statustest, token } = useAuth();
   // const { data, error, isError } = useSubCategoryQuery();
-  //console.log("All subcategory data ", data);
+  console.log("All subcategory token", token);
 
   const [remoteData, setRemoteData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -17,14 +17,17 @@ function SubCategoryTable() {
     const fetchData = async () => {
       setIsLoading(true);
       const response = await fetch(
-        "https://misiapi.lamptechs.com/api/v1/subservice"
+        "https://misiapi.lamptechs.com/api/v1/subservice",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       const json = await response.json();
       setRemoteData(json.data);
       setIsLoading(false);
     };
     fetchData();
-  }, [remoteData]);
+  }, [remoteData, token]);
 
   const parsedData = useMemo(
     () =>
