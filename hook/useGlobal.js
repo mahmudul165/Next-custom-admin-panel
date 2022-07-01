@@ -9,6 +9,15 @@ const useGlobal = () => {
   const [categorydata, setCategory] = useState("");
   const [subservicedata, setSubservice] = useState("");
   const [therapistservicedata, setTherapistservice] = useState("");
+  // set and get token
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const items = localStorage.getItem("token");
+    if (items) {
+      setToken(items);
+    }
+  }, [token]);
   // global get data method
   // useEffect(() => {
   //   setCategory(categoryService);
@@ -30,16 +39,14 @@ const useGlobal = () => {
   const postData = (url, data) => {
     axios
       .post(
+        url,
         data,
         {
           headers: { Authorization: `Bearer ${token}` },
         },
-        // { headers: { Authorization: localStorage.getItem("jwtToken") } },
+
         {
           withCredentials: true,
-          // headers: {
-          //   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-          // },
         }
       )
       .then((response) => {
@@ -51,25 +58,29 @@ const useGlobal = () => {
       });
   };
   // global delete data
-  const deleteData = (url, id) => {
-    axios
-      .post(`${url}/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+  const deleteData = async (url, id) => {
+    const deleteUrl = await `${url}/${id}`;
+    const jwt = await token;
+    console.log(`'deleteUrl:' ${deleteUrl},'token:' ${jwt}`);
+    await axios
+      .post(
+        deleteUrl,
+        {
+          headers: { Authorization: `Bearer ${jwt}` },
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         console.log(response);
-        alert("data field deleted  ");
+        alert("data field deleted");
+      })
+      .catch(function (error) {
+        console.log(error);
       });
   };
-  // set and get token
-  const [token, setToken] = useState("");
 
-  useEffect(() => {
-    const items = localStorage.getItem("token");
-    if (items) {
-      setToken(items);
-    }
-  }, []);
   // status
   // const Statustest = (status) => {
   //   if (status == "A") {

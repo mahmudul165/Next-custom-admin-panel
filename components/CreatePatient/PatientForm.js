@@ -32,7 +32,7 @@ function PaitentForm({ title, data }) {
   const { register, handleSubmit, error } = useForm({
     resolver: yupResolver(schema),
   });
-  console.log("edit data from patientlist", data);
+  //console.log("edit data from patientlist", data);
 
   //  mui data
   const documents = [
@@ -48,7 +48,8 @@ function PaitentForm({ title, data }) {
           <form
             className="w-10/12 m-auto   first-line: "
             onSubmit={handleSubmit((d) =>
-              postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)
+              // postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)
+              console.log("form data", d)
             )}
             type="submit"
           >
@@ -120,6 +121,7 @@ function PaitentForm({ title, data }) {
                       Patient source
                     </label>
                   </div>
+                  {/* Patient password */}
 
                   {/* name */}
                   <div className="grid  gap-4 mt-2.5">
@@ -518,7 +520,7 @@ function PaitentForm({ title, data }) {
                     />
                     ;{/*attach file  */}
                     <div className=" relative   ">
-                      {/* <input
+                      <input
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
@@ -526,12 +528,12 @@ function PaitentForm({ title, data }) {
                         // multiple
                         id="file"
                         {...register("file")}
-                      /> */}
+                      />
                       <input
                         placeholder="  "
                         required
                         type="file"
-                        // multiple
+                        multiple
                         id="file"
                         {...register("file")}
                       />
@@ -603,7 +605,9 @@ function PaitentForm({ title, data }) {
           <form
             className="w-10/12 m-auto   first-line: "
             type="submit"
-            onSubmit={handleSubmit((d) => console.log("data patient", d))}
+            onSubmit={handleSubmit((d) =>
+              postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)
+            )}
           >
             {/* postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)  console.log("data patient", d)*/}
             <div className=" px-3">
@@ -649,9 +653,10 @@ function PaitentForm({ title, data }) {
                       <input
                         id="picture"
                         type="file"
-                        //  {...register("picture")}
+                        {...register("picture")}
                         className=" "
-                        // onClick={(e) => setPicture(e.target.value)}
+                        onClick={(e) => setPicture(e.target.value)}
+                        //{...register(`${picture}`)}
                       />
                     </label>
                   </div>
@@ -694,6 +699,24 @@ function PaitentForm({ title, data }) {
                     </label>
                   </div>
 
+                  {/* password */}
+                  <div className="relative my-2   ">
+                    <input
+                      type="text"
+                      id="password"
+                      // value="1"
+                      {...register("password")}
+                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                      placeholder="••••••••"
+                    />
+                    <label
+                      htmlFor="password"
+                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                    >
+                      status
+                    </label>
+                  </div>
+
                   {/* name */}
                   <div className="grid  gap-4 mt-2.5">
                     {/* first Name  */}
@@ -703,7 +726,6 @@ function PaitentForm({ title, data }) {
                         id="first_name"
                         {...register("first_name")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                        placeholder="  "
                         required
                       />
                       <label
@@ -809,14 +831,14 @@ function PaitentForm({ title, data }) {
                     <div className="col-start-1 relative  ">
                       <input
                         type="text"
-                        id="country"
-                        {...register("country")}
+                        id="country_id"
+                        {...register("country_id")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
                       />
                       <label
-                        htmlFor="country"
+                        htmlFor="country_id"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         Country
@@ -848,7 +870,7 @@ function PaitentForm({ title, data }) {
                       <input
                         type="text"
                         id="state_city"
-                        {...register("state")}
+                        {...register("state_id")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
@@ -1064,7 +1086,7 @@ function PaitentForm({ title, data }) {
                   {/* select file  and attach file  */}
                   <div className="grid   grid-cols-2  gap-4 mt-2.5">
                     {/* select file type3 */}
-                    {/* <div className="  relative   ">
+                    <div className="  relative   ">
                       <select
                         id="file_type"
                         {...register("file_type")}
@@ -1081,7 +1103,7 @@ function PaitentForm({ title, data }) {
                       >
                         File Type
                       </label>
-                    </div> */}
+                    </div>
                     <Autocomplete
                       multiple
                       limitTags={2}
@@ -1108,8 +1130,8 @@ function PaitentForm({ title, data }) {
                         type="file"
                         multiple
                         id="file"
-                        // {...register("file")}
                         onClick={(e) => setPicture(e.target.value)}
+                        {...register("file")}
                       />
 
                       {/* <label

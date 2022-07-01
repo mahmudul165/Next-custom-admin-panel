@@ -56,7 +56,7 @@ function PatientList() {
   //   }
   // }, []);
 
-  console.log("patient token", token);
+  //console.log("patient token", token);
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -97,7 +97,7 @@ function PatientList() {
         blood_group: userData?.blood_group?.name,
         remarks: userData.remarks,
       })) ?? [],
-    [remoteData]
+    [remoteData, token]
   );
   // console.log("id data remoteData", remoteData);
   const columns = useMemo(
