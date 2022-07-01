@@ -30,8 +30,10 @@ const useGlobal = () => {
   const postData = (url, data) => {
     axios
       .post(
-        url,
         data,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
         // { headers: { Authorization: localStorage.getItem("jwtToken") } },
         {
           withCredentials: true,
@@ -50,10 +52,14 @@ const useGlobal = () => {
   };
   // global delete data
   const deleteData = (url, id) => {
-    axios.post(`${url}/${id}`).then((response) => {
-      console.log(response);
-      alert("data field deleted  ");
-    });
+    axios
+      .post(`${url}/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log(response);
+        alert("data field deleted  ");
+      });
   };
   // set and get token
   const [token, setToken] = useState("");
