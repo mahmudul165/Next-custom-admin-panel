@@ -72,44 +72,33 @@ export const useTherapistServiceQuery = () =>
 //   console.log(error)
 // });
 const fetchPatientList = async () => {
-  const token = await localStorage.getItem("token");
-  // const headers = await { Authorization: `${localStorage.getItem("token")}` };
-  console.log("token.....", token);
-  const response = await axios.get(
-    "https://misiapi.lamptechs.com/api/v1/patient",
-    {
-      //headers: headers,
-      // Authorization: `${localStorage.getItem("token")}`,
-      //const token = localStorage.getItem("token"),
-      // headers: { Authorization: token },
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
+  const response = await fetch("https://misiapi.lamptechs.com/api/v1/patient", {
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  });
   return await response.json();
 };
 
 export const usePatientListQuery = () =>
-  useQuery(["patientList"], fetchPatientList, {
-    // refetchOnMount: false,
-    // refetchOnWindowFocus: false,
-  });
-
+  useQuery(["patientList"], fetchPatientList, {});
 // get therapist list  data
 const fetchTherapitList = async () => {
   const response = await fetch(
-    "  https://misiapi.lamptechs.com/api/v1/therapist"
+    "  https://misiapi.lamptechs.com/api/v1/therapist",
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
   );
   return await response.json();
 };
 export const useTherapitListQuery = () =>
-  useQuery(["therapistList"], fetchTherapitList, {
-    // refetchOnMount: false,
-    // refetchOnWindowFocus: false,
-  });
+  useQuery(["therapistList"], fetchTherapitList, {});
 
 // get  All ticket  data
 const fetchAllTicket = async () => {
-  const response = await fetch("https://misiapi.lamptechs.com/api/v1/patient");
+  const response = await fetch("https://misiapi.lamptechs.com/api/v1/patient", {
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  });
+
   return await response.json();
 };
 export const useAllTicketQuery = () =>
@@ -117,6 +106,37 @@ export const useAllTicketQuery = () =>
     // refetchOnMount: false,
     // refetchOnWindowFocus: false,
   });
+//ticket dipartment
+// get  All ticket  data
+const fetchAllTicketDepartment = async () => {
+  const response = await fetch(
+    "https://misiapi.lamptechs.com/api/v1/ticket_department",
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+
+  return await response.json();
+};
+export const useAllTicketDepartmentQuery = () =>
+  useQuery(["allDepartment"], fetchAllTicketDepartment, {
+    // refetchOnMount: false,
+    // refetchOnWindowFocus: false,
+  });
+
+// get  single patient data
+const fetchPatient = async (id) => {
+  const response = await fetch(
+    `https://misiapi.lamptechs.com/api/v1/patient/show/${id}`,
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+
+  return await response.json();
+};
+export const usePatientQuery = (id) =>
+  useQuery(["singlepatient"], fetchPatient(id));
 
 // global get data method
 // async function fetchCategoryService() {

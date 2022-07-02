@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import Skeleton from "@mui/material/Skeleton";
+import Stack from "@mui/material/Stack";
+import {
+  usePatientListQuery,
+  usePatientQuery,
+  useTherapitListQuery,
+  useAllTicketDepartmentQuery,
+} from "../../hook/useApi";
 const schema = yup
   .object()
   .shape({
@@ -19,16 +26,66 @@ const schema = yup
     //status: yup.string().required(),
   })
   .required();
+import useAuth from "/hook/useAuth";
 function TicketForm() {
+  const { postData } = useAuth();
+  const [searchInput, setSearchInput] = useState("");
+  console.log("search paitent id from ticket from", searchInput);
   const [startDate, setStartDate] = useState(new Date());
-  const { register, handleSubmit, error } = useForm({
+  const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
+  const { data: patientList } = usePatientListQuery();
+  //const { data: patient } = usePatientQuery(searchInput);
+
+  const { data: therapistList } = usePatientListQuery();
+  const { data: ticketDepartment } = useAllTicketDepartmentQuery();
+  //const { data, error, isError } = useTherapitListQuery();
+  //console.log("All ticket data  from  ", data);
+
+  //console.log("patient list from ticket from", patientList);
+  //console.log(" single patient list from ticket from", patient);
+  //console.log("therapy list  from ticket from", therapistList);
+  //console.log("ticket department list  from ticket from", ticketDepartment);
+  // search
+
+  // search input catch
+
+  const handleSearchChange = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  // useEffect(() => {
+  //   const urls = ["https://misiapi.lamptechs.com/api/v1/patient"];
+
+  //   Promise.all(
+  //     urls.map((url) =>
+  //       fetch(url)
+  //         .then((response) => response.json())
+  //         .then((data) => setResults(data))
+  //         .catch((error) => console.log("There was a problem!", error))
+  //     ),
+  //     []
+  //   );
+  // }, []);
+  // const filterSearch = patientList?.data?.filter((i) =>
+  //   i.id?.includes(searchInput)
+  // );
+  //   const num = 1234;
+  // const result1 = num.toString().includes('3');
+  //const filterText = patientList?.data?.filter((i) => i.id == searchInput);
+  //console.log("filterText  from ticket from", filterText);
+  //console.log("search   id  from ticket from", searchInput);
+
   return (
     <>
       <form
         className="w-10/12 m-auto   first-line: "
-        onSubmit={handleSubmit((d) => console.log("all ticket form data", d))}
+        onSubmit={handleSubmit(
+          (d) =>
+            postData("https://misiapi.lamptechs.com/api/v1/ticket/store", d)
+          // console.log("ticket store data", d)
+        )}
       >
         <div className=" px-3">
           <div className=" card d-flex      justify-center ">
@@ -56,7 +113,8 @@ function TicketForm() {
               Picture
             </label>
           </div> */}
-              <div className="flex justify-center items-center w-full  ">
+              {/* profile patient */}
+              {/* <div className="flex justify-center items-center w-full  ">
                 <label
                   htmlFor="dropzone-file"
                   className="flex flex-col justify-center items-center w-full h-40 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -93,18 +151,27 @@ function TicketForm() {
                     {...register("dropzone-file")}
                   />
                 </label>
-              </div>
+              </div> */}
               {/* Patient Id */}
               <div className="relative my-2">
+                {/* <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Search in Arshi"
+                  onChange={(e) => console.log(e.target.value)}
+                /> */}
                 <input
+                  type="text"
                   className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   id="patient_id"
+                  //onChange={(e) => setSearchInput(e.target.value)}
+                  onChange={handleSearchChange}
                   {...register("patient_id")}
-                  type="text"
-                  placeholder="  "
+                  placeholder=""
+                  required
                 />
                 <label
-                  htmlFor="inline-full-name"
+                  htmlFor="patient_id"
                   className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                 >
                   Patient ID
@@ -151,6 +218,13 @@ function TicketForm() {
                 </div>
               </div>
 
+              {/* paqtient search */}
+              {/* {patientList?.data
+                ?.filter((i) => i?.id?.includes(searchInput))
+                ?.map((patient, index) => {
+                  return <>{console.log(patient)}</>;
+                })} */}
+
               {/* name */}
               <div className="grid  gap-4 mt-2.5">
                 {/* first Name  */}
@@ -161,7 +235,6 @@ function TicketForm() {
                     {...register("firstname")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
-                    required
                   />
                   <label
                     htmlFor="firstname"
@@ -178,7 +251,6 @@ function TicketForm() {
                     {...register("lastname")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
-                    required
                   />
                   <label
                     htmlFor="lastname"
@@ -198,7 +270,6 @@ function TicketForm() {
                     {...register("email")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
-                    required
                   />
                   <label
                     htmlFor="email"
@@ -215,7 +286,6 @@ function TicketForm() {
                     {...register("phone")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
-                    required
                   />
                   <label
                     htmlFor="phone"
@@ -247,14 +317,14 @@ function TicketForm() {
                 <div className="col-start-1 relative  ">
                   <input
                     type="text"
-                    id="state_city"
-                    {...register("state_city")}
+                    id="location"
+                    {...register("location")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
                     required
                   />
                   <label
-                    htmlFor="state_city"
+                    htmlFor="location"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
                     State/City
@@ -267,8 +337,7 @@ function TicketForm() {
                     id="nationality"
                     {...register("nationality")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                    required
+                    placeholder="Natherland  "
                   />
                   <label
                     htmlFor="nationality"
@@ -288,7 +357,6 @@ function TicketForm() {
                     {...register("DOB_Number")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
-                    required
                   />
                   <label
                     htmlFor="DOB_Number"
@@ -305,7 +373,6 @@ function TicketForm() {
                     {...register("BSN_Number")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
-                    required
                   />
                   <label
                     htmlFor="BSN_Number"
@@ -325,7 +392,6 @@ function TicketForm() {
                     {...register("insurance")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
-                    required
                   />
                   <label
                     htmlFor="insurance"
@@ -341,7 +407,6 @@ function TicketForm() {
                     {...register("date-of-birth")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
-                    required
                   />
                   <label
                     htmlFor="date-of-birth"
@@ -381,7 +446,6 @@ function TicketForm() {
                     {...register("Occupation")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     placeholder="  "
-                    required
                   />
                   <label
                     htmlFor="Occupation"
@@ -437,7 +501,6 @@ function TicketForm() {
                   </label>
                 </div>
               </div>
-
               {/* Medical History */}
               <div className="relative  mt-2.5">
                 {/* <input
@@ -462,8 +525,8 @@ function TicketForm() {
                 </label>
               </div>
               {/* select file  and attach file  */}
-              <div className="grid   grid-cols-2  gap-4 mt-2.5">
-                {/* select file type3 */}
+              {/* <div className="grid   grid-cols-2  gap-4 mt-2.5">
+                
                 <div className="  relative   ">
                   <select
                     id="file-type"
@@ -482,7 +545,7 @@ function TicketForm() {
                     File Type
                   </label>
                 </div>
-                {/*attach file  */}
+              
                 <div className=" relative   ">
                   <input
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
@@ -501,46 +564,71 @@ function TicketForm() {
                     Attach file
                   </label>
                 </div>
-              </div>
+              </div> */}
 
               <div className="grid gap-4 grid-cols-2 mt-2.5">
-                {/* Assign To  */}
+                {/* Assign To therapist */}
                 <div className="relative">
-                  <select
-                    id="assign_to"
-                    {...register("assign_toe")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  >
-                    <option selected>Select Assign To</option>
-                    <option value="">Assign to 1</option>
-                    <option value="">Assign to 2</option>
-                    <option value="">Assign to 3</option>
-                  </select>
-                  <label
-                    htmlFor="assign_to"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Assign To
-                  </label>
+                  {therapistList?.data ? (
+                    <div className="relative my-3">
+                      <select
+                        id="therapist_id"
+                        {...register("therapist_id")}
+                        className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                      >
+                        <option selected>Assign to therapist</option>
+                        {therapistList.data?.map((item) => (
+                          <option key={item.id} value={`${item?.id}`}>
+                            {`${item?.first_name} ${item?.last_name}`}
+                          </option>
+                        ))}
+                      </select>
+                      <label
+                        htmlFor="therapist_id"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Assign to therapist
+                      </label>
+                    </div>
+                  ) : (
+                    <>
+                      <Stack spacing={1}>
+                        <Skeleton animation="wave" height={40} />
+                      </Stack>
+                    </>
+                  )}
                 </div>
                 {/* Pass Department  */}
+                {/* Assign To therapist */}
                 <div className="relative">
-                  <select
-                    id="pass_department"
-                    {...register("pass_department")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  >
-                    <option selected>Select Department</option>
-                    <option value="">Department 1</option>
-                    <option value="">Department 2</option>
-                    <option value="">Department 3</option>
-                  </select>
-                  <label
-                    htmlFor="pass_department"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Pass Department
-                  </label>
+                  {ticketDepartment?.data ? (
+                    <div className="relative my-3">
+                      <select
+                        id="ticket_department_id"
+                        {...register("ticket_department_id")}
+                        className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                      >
+                        <option selected>Select department</option>
+                        {ticketDepartment.data?.map((item) => (
+                          <option key={item.id} value={`${item?.id}`}>
+                            {`${item?.name}`}
+                          </option>
+                        ))}
+                      </select>
+                      <label
+                        htmlFor="ticket_department_id"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Pass to department
+                      </label>
+                    </div>
+                  ) : (
+                    <>
+                      <Stack spacing={1}>
+                        <Skeleton animation="wave" height={40} />
+                      </Stack>
+                    </>
+                  )}
                 </div>
               </div>
 
@@ -548,14 +636,14 @@ function TicketForm() {
                 {/* Assign To  */}
                 <div className="relative">
                   <select
-                    id="assign_department"
-                    {...register("assign_department")}
+                    id="strike"
+                    {...register("strike")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   >
                     <option selected>Select Call Strike </option>
-                    <option value="">Call Strike 1</option>
-                    <option value="">Call Strike 2</option>
-                    <option value="">Call Strike 3</option>
+                    <option value="Call Strike 1">Call Strike 1</option>
+                    <option value="Call Strike 2">Call Strike 2</option>
+                    <option value="Call Strike 3">Call Strike 3</option>
                   </select>
                   <label
                     htmlFor="floating_outlined"
@@ -578,6 +666,44 @@ function TicketForm() {
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
                     Remarks
+                  </label>
+                </div>
+              </div>
+
+              {/* strike History */}
+              <div className="relative  mt-2.5">
+                <textarea
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  id="strike_history"
+                  {...register("strike_history")}
+                  type="text"
+                  placeholder="  "
+                />
+                <label
+                  htmlFor="textarea"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Strike history
+                </label>
+              </div>
+
+              {/* age and status */}
+              <div className="grid  gap-4 my-2.5">
+                {/* status */}
+                <div className="  relative   ">
+                  <input
+                    type="number"
+                    id="status"
+                    // value="1"
+                    {...register("status")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="status"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    status
                   </label>
                 </div>
               </div>

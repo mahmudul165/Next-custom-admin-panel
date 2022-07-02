@@ -44,7 +44,7 @@ function TherapistList() {
       setIsLoading(false);
     };
     fetchData();
-  }, [remoteData]);
+  }, [remoteData, token]);
 
   const parsedData = useMemo(
     () =>

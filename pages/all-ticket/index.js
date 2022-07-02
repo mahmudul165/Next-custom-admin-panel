@@ -13,7 +13,7 @@ const Loading = dynamic(() => import("/components/common/Loading"));
 function AllTicketList() {
   const { deleteData, Statustest, token } = useAuth();
   const { data, error, isError } = useTherapitListQuery();
-  console.log("All ticket data ", data);
+  //console.log("All ticket data  from  ", data);
 
   const [remoteData, setRemoteData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +32,7 @@ function AllTicketList() {
       setIsLoading(false);
     };
     fetchData();
-  }, [remoteData]);
+  }, [remoteData, token]);
 
   const parsedData = useMemo(
     () =>
