@@ -869,8 +869,6 @@ function PaitentForm({ title, data }) {
                   {/* state  and area */}
                   <div className="grid   grid-cols-2  gap-4 mt-2.5">
                     {/* State/City */}
-                    {/*  city */}
-
                     <div className="col-start-1 relative">
                       {stateData?.data ? (
                         <div className="relative ">
@@ -1192,7 +1190,7 @@ function PaitentForm({ title, data }) {
                         Age
                       </label>
                     </div>
-                    {/* status */}
+
                     {/* status */}
                     <div className="col-start-2  relative">
                       <select

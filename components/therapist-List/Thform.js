@@ -6,6 +6,15 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import useAuth from "/hook/useAuth";
+import { Skeleton, Stack } from "@mui/material";
+
+import {
+  useCountyListQuery,
+  useBloodGroupQuery,
+  useStateDataQuery,
+  useTherapistTypeQuery,
+} from "../../hook/useApi";
+
 const schema = yup
   .object()
   .shape({
@@ -21,18 +30,24 @@ const schema = yup
   })
   .required();
 function ThForm() {
+  const [picture, setPicture] = useState("");
   const { postData } = useAuth();
   const [startDate, setStartDate] = useState(new Date());
   const { register, handleSubmit, error } = useForm({
     resolver: yupResolver(schema),
   });
+  const { data: countryList } = useCountyListQuery();
+  const { data: bloodGroup } = useBloodGroupQuery();
+  const { data: stateData } = useStateDataQuery();
+  const { data: therapistType } = useTherapistTypeQuery();
+
   return (
     <>
       <form
         className="w-full m-auto  p-1  "
         onSubmit={handleSubmit(
           (d) =>
-            postData(" https://misiapi.lamptechs.com/api/v1/therapist/store", d)
+            postData("https://misiapi.lamptechs.com/api/v1/therapist/store", d)
 
           // console.log("create therapist form data", d)
         )}
@@ -44,7 +59,8 @@ function ThForm() {
             </h2>
             {/*   form */}
             <div className=" m-3 p-3 ">
-              <div className="flex justify-center items-center w-full  ">
+              {/* therapist picture */}
+              {/* <div className="flex justify-center items-center w-full  ">
                 <label
                   htmlFor="picture"
                   className="flex flex-col justify-center items-center w-full h-40 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -81,7 +97,7 @@ function ThForm() {
                     className="hidden"
                   />
                 </label>
-              </div>
+              </div> */}
               {/* therapist id*/}
               <div className="relative my-2">
                 <input
@@ -129,6 +145,41 @@ function ThForm() {
                   Patient source
                 </label>
               </div> */}
+
+              {/* country  and blood  */}
+              <div className="grid  gap-4 mt-2.5">
+                {/* country */}
+                <div className="  relative">
+                  {therapistType?.data ? (
+                    <div className="relative my-3">
+                      <select
+                        id="therapist_type_id"
+                        {...register("therapist_type_id")}
+                        className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                      >
+                        {/* <option selected>Select therapist type</option> */}
+                        {therapistType.data?.map((item) => (
+                          <option key={item.id} value={`${item?.id}`}>
+                            {`${item?.name} `}
+                          </option>
+                        ))}
+                      </select>
+                      <label
+                        htmlFor="therapist_type_id"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Therapist type
+                      </label>
+                    </div>
+                  ) : (
+                    <>
+                      <Stack spacing={1}>
+                        <Skeleton animation="wave" height={40} />
+                      </Stack>
+                    </>
+                  )}
+                </div>
+              </div>
 
               {/* name */}
               <div className="grid  gap-4">
@@ -220,24 +271,121 @@ function ThForm() {
                   Residential address
                 </label>
               </div>
-              {/* country id   */}
-
-              {/* Age */}
-              <div className="col-start-1  relative   ">
-                <input
-                  type="text"
-                  id="country_id"
-                  {...register("country_id")}
-                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  placeholder="  "
-                  required
-                />
-                <label
-                  htmlFor="country_id"
-                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                >
-                  Country id
-                </label>
+              {/* country  and blood  */}
+              <div className="grid  gap-4 mt-2.5">
+                {/* country */}
+                <div className="col-start-1 relative">
+                  {countryList?.data ? (
+                    <div className="relative my-3">
+                      <select
+                        id="country_id"
+                        {...register("country_id")}
+                        className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                      >
+                        <option selected>Country</option>
+                        {countryList.data?.map((item) => (
+                          <option key={item.id} value={`${item?.id}`}>
+                            {`${item?.name} `}
+                          </option>
+                        ))}
+                      </select>
+                      <label
+                        htmlFor="country_id"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Country
+                      </label>
+                    </div>
+                  ) : (
+                    <>
+                      <Stack spacing={1}>
+                        <Skeleton animation="wave" height={40} />
+                      </Stack>
+                    </>
+                  )}
+                </div>
+                {/* blood  */}
+                <div className="col-start-2 relative">
+                  {bloodGroup?.data ? (
+                    <div className="relative my-3">
+                      <select
+                        id="blood_group_id"
+                        {...register("blood_group_id")}
+                        className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                      >
+                        <option selected>Blood group</option>
+                        {bloodGroup.data?.map((item) => (
+                          <option key={item.id} value={`${item?.id}`}>
+                            {`${item?.name} `}
+                          </option>
+                        ))}
+                      </select>
+                      <label
+                        htmlFor="blood_group_id"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Blood group
+                      </label>
+                    </div>
+                  ) : (
+                    <>
+                      <Stack spacing={1}>
+                        <Skeleton animation="wave" height={40} />
+                      </Stack>
+                    </>
+                  )}
+                </div>
+              </div>
+              {/* state  and area */}
+              <div className="grid   grid-cols-2  gap-4 mt-2.5">
+                {/* State/City */}
+                <div className="col-start-1 relative">
+                  {stateData?.data ? (
+                    <div className="relative ">
+                      <select
+                        id="state_id"
+                        {...register("state_id")}
+                        className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                      >
+                        <option selected> Select city/state</option>
+                        {stateData.data?.map((item) => (
+                          <option key={item.id} value={`${item?.id}`}>
+                            {`${item?.name} `}
+                          </option>
+                        ))}
+                      </select>
+                      <label
+                        htmlFor="state_id"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        city/state
+                      </label>
+                    </div>
+                  ) : (
+                    <>
+                      <Stack spacing={1}>
+                        <Skeleton animation="wave" height={40} />
+                      </Stack>
+                    </>
+                  )}
+                </div>
+                {/* area */}
+                <div className="col-start-2  relative  ">
+                  <input
+                    type="text"
+                    id="area"
+                    {...register("area")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                    required
+                  />
+                  <label
+                    htmlFor="area"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Area
+                  </label>
+                </div>
               </div>
 
               {/* Dob and BNS */}
@@ -277,43 +425,7 @@ function ThForm() {
                   </label>
                 </div>
               </div>
-              {/* state id and area */}
-              <div className="grid  gap-4 mt-2.5">
-                {/* State/City */}
-                <div className="col-start-1 relative  ">
-                  <input
-                    type="text"
-                    id="state_id"
-                    {...register("state_id")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                    required
-                  />
-                  <label
-                    htmlFor="state_id"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    State id
-                  </label>
-                </div>
-                {/* Nationality */}
-                <div className="col-start-2  relative  ">
-                  <input
-                    type="text"
-                    id="area"
-                    // {...register("area")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                    required
-                  />
-                  <label
-                    htmlFor="area"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Area
-                  </label>
-                </div>
-              </div>
+
               {/* insurance_number AND DATE OF BIRTH */}
               <div className="grid  gap-4">
                 {/* insurance_number*/}
@@ -352,9 +464,9 @@ function ThForm() {
               </div>
 
               {/* gender and blood_group_id */}
-              <div className="grid gap-4 grid-cols-2">
+              <div className="grid gap-4  ">
                 {/* gender  */}
-                <div className=" relative  my-3">
+                <div className=" relative  ">
                   <select
                     id="gender"
                     {...register("gender")}
@@ -370,30 +482,6 @@ function ThForm() {
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
                     Gender
-                  </label>
-                </div>
-                {/* blood_group_id  */}
-                <div className=" relative  my-3">
-                  {" "}
-                  <select
-                    id="blood_group_id"
-                    {...register("blood_group_id")}
-                    className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  >
-                    <option selected>Select group</option>
-                    <option value="1">A+</option>
-                    <option value="2">A-</option>
-                    <option value="3">B+</option>
-                    <option value="4">B-</option>
-                    <option value="5">AB+</option>
-                    <option value="6">O+</option>
-                    <option value="7">O-</option>
-                  </select>
-                  <label
-                    htmlFor="blood_group_id"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Blood group id
                   </label>
                 </div>
               </div>
@@ -496,20 +584,139 @@ function ThForm() {
                   </label>
                 </div>
               </div>
-              {/* status */}
-              <div className="  relative   ">
+              {/* age and status */}
+              <div className="grid   grid-cols-2  gap-4 mt-2.5">
+                {/* Age */}
+                <div className="col-start-1  relative   ">
+                  <input
+                    type="text"
+                    id="age"
+                    // {...register("age")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                    required
+                  />
+                  <label
+                    htmlFor="age"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Age
+                  </label>
+                </div>
+
+                {/* status */}
+                <div className="col-start-2  relative">
+                  <select
+                    id="status"
+                    className="form-select appearance-none
+block
+w-full
+px-3
+py-1.5
+text-base
+font-normal
+text-gray-700
+bg-white bg-clip-padding bg-no-repeat
+border border-solid border-gray-300
+rounded
+transition
+ease-in-out
+m-0
+focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    aria-label="Default select example"
+                    {...register("status")}
+                  >
+                    {/* <option selected>status</option> */}
+                    <option value="1" selected>
+                      Active
+                    </option>
+                    <option value="2">Inactive</option>
+                    <option value="3">Pending</option>
+                    <option value="4">Cancelled</option>
+                    <option value="5">Deleted</option>
+                  </select>
+                  <label
+                    htmlFor="remarks"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Status
+                  </label>
+                </div>
+              </div>
+              {/* select file  and attach file  */}
+              <div className="grid      gap-4 mt-2.5">
+                {/* select file type3 */}
+                {/* <div className="  relative   ">
+                  <select
+                    id="file_type"
+                    {...register("file_type")}
+                    className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  >
+                    <option selected>Select file type</option>
+                    <option value="NID">Nid</option>
+                    <option value="Passport">Passport</option>
+                    <option value="Others">Others</option>
+                  </select>
+                  <label
+                    htmlFor="file_type"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    File Type
+                  </label>
+                </div> */}
+                {/* <Autocomplete
+                      multiple
+                      limitTags={2}
+                      id="file_type"
+                      options={documents}
+                      getOptionLabel={(option) => option.title}
+                      defaultValue={[documents[0], documents[1]]}
+                      //  {...register("file_type")}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="File Type"
+                          placeholder="Select file type"
+                          size="small"
+                        />
+                      )}
+                       
+                    /> */}
+                {/*attach file  */}
+                <div className=" relative   ">
+                  <input
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                    type="file"
+                    multiple
+                    id="file"
+                    onClick={(e) => setPicture(e.target.value)}
+                    {...register("file")}
+                  />
+
+                  {/* <label
+                        htmlFor="file"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Attach file
+                      </label> */}
+                </div>
+              </div>
+              {/* password */}
+              <div className="relative my-2   ">
                 <input
                   type="text"
-                  id="status"
-                  {...register("status")}
+                  id="password"
+                  // value="1"
+                  {...register("password")}
                   className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  placeholder="  "
+                  placeholder="••••••••"
                 />
                 <label
-                  htmlFor="status"
+                  htmlFor="password"
                   className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                 >
-                  status
+                  Password
                 </label>
               </div>
               {/* button */}

@@ -687,23 +687,44 @@ function TicketForm() {
                 </label>
               </div>
 
-              {/* age and status */}
+              {/*  status */}
               <div className="grid  gap-4 my-2.5">
                 {/* status */}
-                <div className="  relative   ">
-                  <input
-                    type="number"
+                <div className="  relative">
+                  <select
                     id="status"
-                    // value="1"
+                    className="form-select appearance-none
+block
+w-full
+px-3
+py-1.5
+text-base
+font-normal
+text-gray-700
+bg-white bg-clip-padding bg-no-repeat
+border border-solid border-gray-300
+rounded
+transition
+ease-in-out
+m-0
+focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    aria-label="Default select example"
                     {...register("status")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                  />
+                  >
+                    {/* <option selected>status</option> */}
+                    <option value="1" selected>
+                      Active
+                    </option>
+                    <option value="2">Inactive</option>
+                    <option value="3">Pending</option>
+                    <option value="4">Cancelled</option>
+                    <option value="5">Deleted</option>
+                  </select>
                   <label
-                    htmlFor="status"
+                    htmlFor="remarks"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
-                    status
+                    Status
                   </label>
                 </div>
               </div>

@@ -169,6 +169,21 @@ const fetchState = async () => {
   return await response.json();
 };
 export const useStateDataQuery = () => useQuery(["state"], fetchState);
+
+// therapist type
+const fetchTypeTherapist = async () => {
+  const response = await fetch(
+    `https://misiapi.lamptechs.com/api/v1/therapist_type`,
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+
+  return await response.json();
+};
+export const useTherapistTypeQuery = () =>
+  useQuery(["therapistType"], fetchTypeTherapist);
+
 // global get data method
 // async function fetchCategoryService() {
 //   const { data } = await axios.get("https://misiapi.lamptechs.com/api/v1/service");
