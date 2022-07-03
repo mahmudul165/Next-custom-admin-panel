@@ -39,7 +39,7 @@ function Login() {
       if (localStorage.getItem("token") == null) {
         router.push("/account/login");
       } else {
-        router.push("/dashboard");
+        router.push("/");
       }
     });
   };

@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import OutsideClick from "../../../utils/outsideClick";
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineSetting, AiOutlineLogout } from "react-icons/ai";
+import Router, { useRouter } from "next/router";
 const UserMenu = () => {
   const [userMenuStatus, setUserMenuStatus] = useState(false);
   const buttonRef = useRef(null);
@@ -18,6 +19,12 @@ const UserMenu = () => {
     }
   }, [buttonOutsideClick]);
 
+  // logout
+  function logout() {
+    localStorage.removeItem("token");
+    //userSubject.next(null);
+    Router.push("/account/login");
+  }
   //console.log("userbutton", buttonOutsideClick)
   return (
     <button
@@ -61,7 +68,9 @@ const UserMenu = () => {
               <AiOutlineLogout />
             </span>
             <span className="text-sm ml-1">
-              <a className="block rounded-lg  ">Logout</a>
+              <a onClick={logout} className="block rounded-lg  ">
+                Logout
+              </a>
             </span>
           </div>
         </div>

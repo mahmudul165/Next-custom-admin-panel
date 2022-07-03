@@ -3,8 +3,18 @@ import Dashboard from "../components/dashboard/Dashboard";
 import Layout from "../components/layout/Layout";
 import Meta from "/components/seo/Meta";
 import dynamic from "next/dynamic";
+//import { AuthContext } from "../contexts/auth-context";
+//import { useRouter } from "next/router";
+//import React from "react";
 const Card = dynamic(() => import("../components/dashboard/Card"));
 export default function Index() {
+  // const router = useRouter();
+  // const authContext = React.useContext(AuthContext);
+  // React.useEffect(() => {
+  //   authContext?.isUserAuthenticated()
+  //     ? router.push("/")
+  //     : router.push("/account/login");
+  // }, []);
   return (
     <>
       <Meta

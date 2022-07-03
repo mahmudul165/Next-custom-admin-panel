@@ -2,9 +2,19 @@ import React from "react";
 import Link from "next/link";
 //import Card from "../components/dashboard/Card";
 import dynamic from "next/dynamic";
+import { AuthContext } from "../contexts/auth-context";
+import { useRouter } from "next/router";
+
 const Card = dynamic(() => import("../components/dashboard/Card"));
 
-function dashboard() {
+function Dashboard() {
+  // const router = useRouter();
+  // const authContext = React.useContext(AuthContext);
+  // React.useEffect(() => {
+  //   authContext?.isUserAuthenticated()
+  //     ? router.push("/")
+  //     : router.push("/account/login");
+  // }, []);
   return (
     <>
       {/* inside of container */}
@@ -102,4 +112,4 @@ function dashboard() {
   );
 }
 
-export default dashboard;
+export default Dashboard;

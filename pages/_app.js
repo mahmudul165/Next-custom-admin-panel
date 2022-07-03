@@ -25,7 +25,7 @@ import AuthProvider from "/contexts/AuthProvider";
 import { AnimatePresence } from "framer-motion";
 import Layout from "/components/layout/Layout";
 import { useEffect, useState } from "react";
-
+import Router, { useRouter } from "next/router";
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   //const [token, setToken] = useState("");
   //const [removetoken, setremoveToken] = useState("");
@@ -52,6 +52,18 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   if (Component.getLayout) {
     return Component.getLayout(<Component {...pageProps} />);
   }
+
+  const LoginRedirect = () => {
+    const router = useRouter();
+    useEffect(() => {
+      if (localStorage.getItem("token") == null) {
+        return router.push("/account/login");
+      } else {
+        return router.push("/");
+      }
+    }, []);
+  };
+
   return (
     <>
       <Head>
