@@ -23,12 +23,20 @@ const schema = yup
 //  mui design
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+import { Skeleton, Stack } from "@mui/material";
+import {
+  useCountyListQuery,
+  useBloodGroupQuery,
+  useStateDataQuery,
+} from "../../hook/useApi";
 function PaitentForm({ title, data }) {
   const { postData } = useAuth();
   const [startDate, setStartDate] = useState(new Date());
   const [picture, setPicture] = useState("");
   console.log("picture", picture);
-
+  const { data: countryList } = useCountyListQuery();
+  const { data: bloodGroup } = useBloodGroupQuery();
+  const { data: stateData } = useStateDataQuery();
   const { register, handleSubmit, error } = useForm({
     resolver: yupResolver(schema),
   });
@@ -481,25 +489,6 @@ function PaitentForm({ title, data }) {
                   </div>
                   {/* select file  and attach file  */}
                   <div className="grid   grid-cols-2  gap-4 mt-2.5">
-                    {/* select file type3 */}
-                    {/* <div className="  relative   ">
-                      <select
-                        id="file_type"
-                        {...register("file_type")}
-                        className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                      >
-                        <option selected>Select file type</option>
-                        <option value="NID">Nid</option>
-                        <option value="Driving">Driving</option>
-                        <option value="Others">Others</option>
-                      </select>
-                      <label
-                        htmlFor="file_type"
-                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                      >
-                        File Type
-                      </label>
-                    </div> */}
                     <Autocomplete
                       multiple
                       limitTags={2}
@@ -516,9 +505,8 @@ function PaitentForm({ title, data }) {
                           size="small"
                         />
                       )}
-                      // sx={{ width: "500px" }}
                     />
-                    ;{/*attach file  */}
+                    {/*attach file  */}
                     <div className=" relative   ">
                       <input
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
@@ -605,8 +593,13 @@ function PaitentForm({ title, data }) {
           <form
             className="w-10/12 m-auto   first-line: "
             type="submit"
-            onSubmit={handleSubmit((d) =>
-              postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)
+            onSubmit={handleSubmit(
+              (d) =>
+                postData(
+                  "https://misiapi.lamptechs.com/api/v1/patient/store",
+                  d
+                )
+              //  console.log("data patient", d)
             )}
           >
             {/* postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)  console.log("data patient", d)*/}
@@ -698,25 +691,6 @@ function PaitentForm({ title, data }) {
                       Patient source
                     </label>
                   </div>
-
-                  {/* password */}
-                  <div className="relative my-2   ">
-                    <input
-                      type="text"
-                      id="password"
-                      // value="1"
-                      {...register("password")}
-                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                      placeholder="••••••••"
-                    />
-                    <label
-                      htmlFor="password"
-                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                      status
-                    </label>
-                  </div>
-
                   {/* name */}
                   <div className="grid  gap-4 mt-2.5">
                     {/* first Name  */}
@@ -825,64 +799,109 @@ function PaitentForm({ title, data }) {
                       Residential address
                     </label>
                   </div>
-                  {/* country  and city */}
+                  {/* country  and blood  */}
                   <div className="grid  gap-4 mt-2.5">
                     {/* country */}
-                    <div className="col-start-1 relative  ">
-                      <input
-                        type="text"
-                        id="country_id"
-                        {...register("country_id")}
-                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                        placeholder="  "
-                        required
-                      />
-                      <label
-                        htmlFor="country_id"
-                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                      >
-                        Country
-                      </label>
+
+                    <div className="col-start-1 relative">
+                      {countryList?.data ? (
+                        <div className="relative my-3">
+                          <select
+                            id="country_id"
+                            {...register("country_id")}
+                            className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                          >
+                            <option selected>Country</option>
+                            {countryList.data?.map((item) => (
+                              <option key={item.id} value={`${item?.id}`}>
+                                {`${item?.name} `}
+                              </option>
+                            ))}
+                          </select>
+                          <label
+                            htmlFor="country_id"
+                            className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                          >
+                            Country
+                          </label>
+                        </div>
+                      ) : (
+                        <>
+                          <Stack spacing={1}>
+                            <Skeleton animation="wave" height={40} />
+                          </Stack>
+                        </>
+                      )}
                     </div>
-                    {/*  city */}
-                    <div className="col-start-2  relative  ">
-                      <input
-                        type="text"
-                        id="city"
-                        {...register("city")}
-                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                        placeholder="  "
-                        required
-                      />
-                      <label
-                        htmlFor="city"
-                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                      >
-                        City
-                      </label>
+                    {/* blood  */}
+                    <div className="col-start-2 relative">
+                      {bloodGroup?.data ? (
+                        <div className="relative my-3">
+                          <select
+                            id="blood_group_id"
+                            {...register("blood_group_id")}
+                            className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                          >
+                            <option selected>Blood group</option>
+                            {bloodGroup.data?.map((item) => (
+                              <option key={item.id} value={`${item?.id}`}>
+                                {`${item?.name} `}
+                              </option>
+                            ))}
+                          </select>
+                          <label
+                            htmlFor="blood_group_id"
+                            className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                          >
+                            Blood group
+                          </label>
+                        </div>
+                      ) : (
+                        <>
+                          <Stack spacing={1}>
+                            <Skeleton animation="wave" height={40} />
+                          </Stack>
+                        </>
+                      )}
                     </div>
                   </div>
 
                   {/* state  and area */}
-                  <div className="grid  gap-4 mt-2.5">
+                  <div className="grid   grid-cols-2  gap-4 mt-2.5">
                     {/* State/City */}
-                    <div className="col-start-1 relative  ">
-                      <input
-                        type="text"
-                        id="state_city"
-                        {...register("state_id")}
-                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                        placeholder="  "
-                        required
-                      />
-                      <label
-                        htmlFor="state_city"
-                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                      >
-                        State
-                      </label>
+                    {/*  city */}
+
+                    <div className="col-start-1 relative">
+                      {stateData?.data ? (
+                        <div className="relative ">
+                          <select
+                            id="state_id"
+                            {...register("state_id")}
+                            className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                          >
+                            <option selected> Select city/state</option>
+                            {stateData.data?.map((item) => (
+                              <option key={item.id} value={`${item?.id}`}>
+                                {`${item?.name} `}
+                              </option>
+                            ))}
+                          </select>
+                          <label
+                            htmlFor="state_id"
+                            className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                          >
+                            city/state
+                          </label>
+                        </div>
+                      ) : (
+                        <>
+                          <Stack spacing={1}>
+                            <Skeleton animation="wave" height={40} />
+                          </Stack>
+                        </>
+                      )}
                     </div>
-                    {/* Nationality */}
+                    {/* area */}
                     <div className="col-start-2  relative  ">
                       <input
                         type="text"
@@ -1014,7 +1033,7 @@ function PaitentForm({ title, data }) {
                     </div>
                   </div>
                   {/* sex and blood */}
-                  <div className="grid gap-4 grid-cols-2 mt-2.5">
+                  <div className="grid gap-4 grid-cols-1 mt-2.5">
                     {/* sex  */}
                     <div className=" relative   ">
                       <select
@@ -1032,30 +1051,6 @@ function PaitentForm({ title, data }) {
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
                         Sex
-                      </label>
-                    </div>
-                    {/* blood  */}
-                    <div className=" relative   ">
-                      {" "}
-                      <select
-                        id="blood_group"
-                        {...register("blood_group")}
-                        className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                      >
-                        <option selected>Select blood group</option>
-                        <option value="1">A+</option>
-                        <option value="2">A-</option>
-                        <option value="3">B+</option>
-                        <option value="4">B-</option>
-                        <option value="5">AB+</option>
-                        <option value="6">O+</option>
-                        <option value="7">O-</option>
-                      </select>
-                      <label
-                        htmlFor="floating_outlined"
-                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                      >
-                        Blood group
                       </label>
                     </div>
                   </div>
@@ -1104,7 +1099,7 @@ function PaitentForm({ title, data }) {
                         File Type
                       </label>
                     </div>
-                    <Autocomplete
+                    {/* <Autocomplete
                       multiple
                       limitTags={2}
                       id="file_type"
@@ -1120,8 +1115,8 @@ function PaitentForm({ title, data }) {
                           size="small"
                         />
                       )}
-                      // sx={{ width: "500px" }}
-                    />
+                       
+                    /> */}
                     {/*attach file  */}
                     <div className=" relative   ">
                       <input
@@ -1179,7 +1174,7 @@ function PaitentForm({ title, data }) {
                     </div>
                   </div>
                   {/* age and status */}
-                  <div className="grid  gap-4 my-2.5">
+                  <div className="grid   grid-cols-2  gap-4 mt-2.5">
                     {/* Age */}
                     <div className="col-start-1  relative   ">
                       <input
@@ -1198,22 +1193,61 @@ function PaitentForm({ title, data }) {
                       </label>
                     </div>
                     {/* status */}
-                    <div className="col-start-2  relative   ">
-                      <input
-                        type="text"
+                    {/* status */}
+                    <div className="col-start-2  relative">
+                      <select
                         id="status"
-                        // value="1"
+                        className="form-select appearance-none
+block
+w-full
+px-3
+py-1.5
+text-base
+font-normal
+text-gray-700
+bg-white bg-clip-padding bg-no-repeat
+border border-solid border-gray-300
+rounded
+transition
+ease-in-out
+m-0
+focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        aria-label="Default select example"
                         {...register("status")}
-                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                        placeholder="  "
-                      />
+                      >
+                        {/* <option selected>status</option> */}
+                        <option value="1" selected>
+                          Active
+                        </option>
+                        <option value="2">Inactive</option>
+                        <option value="3">Pending</option>
+                        <option value="4">Cancelled</option>
+                        <option value="5">Deleted</option>
+                      </select>
                       <label
-                        htmlFor="status"
+                        htmlFor="remarks"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                       >
-                        status
+                        Status
                       </label>
                     </div>
+                  </div>
+                  {/* password */}
+                  <div className="relative my-2   ">
+                    <input
+                      type="text"
+                      id="password"
+                      // value="1"
+                      {...register("password")}
+                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                      placeholder="••••••••"
+                    />
+                    <label
+                      htmlFor="password"
+                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                    >
+                      Password
+                    </label>
                   </div>
                   {/* button */}
                   <div className=" flex justify-end">

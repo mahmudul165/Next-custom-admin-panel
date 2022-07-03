@@ -138,6 +138,37 @@ const fetchPatient = async (id) => {
 export const usePatientQuery = (id) =>
   useQuery(["singlepatient"], fetchPatient(id));
 
+// get  country data
+const fetchCountyList = async () => {
+  const response = await fetch(`https://misiapi.lamptechs.com/api/v1/country`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  });
+
+  return await response.json();
+};
+export const useCountyListQuery = () => useQuery(["country"], fetchCountyList);
+// get  blood data
+const fetchBloodGroup = async () => {
+  const response = await fetch(
+    `https://misiapi.lamptechs.com/api/v1/blood_group`,
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+
+  return await response.json();
+};
+export const useBloodGroupQuery = () =>
+  useQuery(["bloodGfroup"], fetchBloodGroup);
+// get  state data
+const fetchState = async () => {
+  const response = await fetch(`https://misiapi.lamptechs.com/api/v1/state`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  });
+
+  return await response.json();
+};
+export const useStateDataQuery = () => useQuery(["state"], fetchState);
 // global get data method
 // async function fetchCategoryService() {
 //   const { data } = await axios.get("https://misiapi.lamptechs.com/api/v1/service");
