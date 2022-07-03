@@ -41,11 +41,12 @@ function TicketForm() {
   const { data: patientList } = usePatientListQuery();
   const { data: therapistList } = useTherapitListQuery();
   const { data: ticketDepartment } = useAllTicketDepartmentQuery();
+  // const { data: singlePatient } = usePatientQuery(searchInput);
   //const { data, error, isError } = useTherapitListQuery();
   //console.log("All ticket data  from  ", data);
 
   //console.log("patient list from ticket from", patientList);
-  //console.log(" single patient list from ticket from", patient);
+  //console.log(" single patient list from ticket from", singlePatient);
   //console.log("therapy list  from ticket from", therapistList);
   //console.log("ticket department list  from ticket from", ticketDepartment);
   // search
@@ -184,8 +185,8 @@ function TicketForm() {
                         freeSolo
                         id="free-solo-2-demo"
                         disableClearable
-                        options={patientList?.data?.map((option) => option.id)}
-                        //  getOptionLabel={(option) => option.name || ""}
+                        options={patientList?.data.map((patient) => patient.id)}
+                        // getOptionLabel={(option) => option?.id}
                         renderInput={(params) => (
                           <TextField
                             onChange={handleSearchChange}
