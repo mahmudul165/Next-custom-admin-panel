@@ -36,9 +36,9 @@ function TicketForm() {
     resolver: yupResolver(schema),
   });
   const { data: patientList } = usePatientListQuery();
-  //const { data: patient } = usePatientQuery(searchInput);
 
   const { data: therapistList } = usePatientListQuery();
+
   const { data: ticketDepartment } = useAllTicketDepartmentQuery();
   //const { data, error, isError } = useTherapitListQuery();
   //console.log("All ticket data  from  ", data);
@@ -153,33 +153,42 @@ function TicketForm() {
                 </label>
               </div> */}
               {/* Patient Id */}
-              <div className="relative my-2">
-                {/* <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Search in Arshi"
-                  onChange={(e) => console.log(e.target.value)}
-                /> */}
-                <input
-                  type="text"
-                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  id="patient_id"
-                  //onChange={(e) => setSearchInput(e.target.value)}
-                  onChange={handleSearchChange}
-                  {...register("patient_id")}
-                  placeholder=""
-                  required
-                />
-                <label
-                  htmlFor="patient_id"
-                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                >
-                  Patient ID
-                </label>
+              <div className="grid gap-4  mt-2.5">
+                <div className="relative">
+                  {patientList?.data ? (
+                    <div className="relative my-3">
+                      <select
+                        onChange={handleSearchChange}
+                        id="patient_id"
+                        {...register("patient_id")}
+                        className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                      >
+                        {/* <option selected>Patient id</option> */}
+                        {patientList.data?.map((item) => (
+                          <option key={item.id} value={`${item?.id}`}>
+                            {`${item?.id}`}
+                          </option>
+                        ))}
+                      </select>
+                      <label
+                        htmlFor="patient_id"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Patient id
+                      </label>
+                    </div>
+                  ) : (
+                    <>
+                      <Stack spacing={1}>
+                        <Skeleton animation="wave" height={40} />
+                      </Stack>
+                    </>
+                  )}
+                </div>
               </div>
 
+              {/* Patient Source  */}
               <div className="grid gap-4 grid-cols-2 mt-2.5">
-                {/* Patient Source  */}
                 <div className="relative">
                   <select
                     id="patient_source"
@@ -565,7 +574,6 @@ function TicketForm() {
                   </label>
                 </div>
               </div> */}
-
               <div className="grid gap-4 grid-cols-2 mt-2.5">
                 {/* Assign To therapist */}
                 <div className="relative">
@@ -599,7 +607,6 @@ function TicketForm() {
                   )}
                 </div>
                 {/* Pass Department  */}
-                {/* Assign To therapist */}
                 <div className="relative">
                   {ticketDepartment?.data ? (
                     <div className="relative my-3">
@@ -631,7 +638,6 @@ function TicketForm() {
                   )}
                 </div>
               </div>
-
               <div className="grid gap-4 grid-cols-2 mt-2.5">
                 {/* Assign To  */}
                 <div className="relative">
@@ -669,7 +675,6 @@ function TicketForm() {
                   </label>
                 </div>
               </div>
-
               {/* strike History */}
               <div className="relative  mt-2.5">
                 <textarea
@@ -686,7 +691,6 @@ function TicketForm() {
                   Strike history
                 </label>
               </div>
-
               {/*  status */}
               <div className="grid  gap-4 my-2.5">
                 {/* status */}
@@ -728,7 +732,6 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   </label>
                 </div>
               </div>
-
               <div className=" flex justify-end">
                 <button
                   className="decoration-4 text-xl shadow mt-6   hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
