@@ -193,15 +193,16 @@ function AllTicketList() {
                       gap: "0.5rem",
                     }}
                   >
-                    <button
-                      className="text-purple-800 hover:underline"
-                      onClick={() => {
-                        console.log("View Profile", row.original.id);
-                      }}
-                    >
-                      Edit
-                    </button>
-
+                    <Link passHref href={`all-ticket/edit/${row.original.id}`}>
+                      <button
+                        className="text-purple-800 hover:underline"
+                        // onClick={() => {
+                        //   console.log("View Profile", row.original.id);
+                        // }}
+                      >
+                        Edit
+                      </button>
+                    </Link>
                     <button
                       className="text-purple-800 hover:underline"
                       onClick={() =>
