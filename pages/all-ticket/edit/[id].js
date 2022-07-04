@@ -52,7 +52,7 @@ function EditTicket() {
   return (
     <>
       <form
-        className="w-10/12 m-auto   first-line: "
+        className="w-10/12 m-auto p-10  first-line: "
         onSubmit={handleSubmit(
           (d) =>
             postData("https://misiapi.lamptechs.com/api/v1/ticket/store", d)
@@ -65,7 +65,7 @@ function EditTicket() {
               className="mt-3 text-center text-3xl font-extrabold  "
               style={{ color: "#01a9ac" }}
             >
-              Edit new ticket
+              Edit ticket details
             </h2>
             {/* first portion of the form */}
             <div className=" m-3 p-3 ">

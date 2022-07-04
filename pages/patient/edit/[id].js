@@ -9,19 +9,33 @@ function Edit() {
   const { id } = router.query;
   //console.log("router params id", id);
   //const [data, setdata] = useState();
-  const { data, error } = useSWR(
-    `https://misiapi.lamptechs.com/api/v1/patient/${id}`,
-    {
-      fetcher: async (url) => await fetch(url).then((res) => res.json()),
-    }
-  );
+  // const { data, error } = useSWR(
+  //   `https://misiapi.lamptechs.com/api/v1/patient/show/${id}`,
+  //   {
+  //     fetcher: async (url) => await fetch(url).then((res) => res.json()),
+  //   }
+  // );
+
+  // get  single patient data
+  const fetchSinglePatient = async () => {
+    const response = await fetch(
+      `https://misiapi.lamptechs.com/api/v1/patient/show/${parseInt(id)}`,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }
+    );
+    return await response.json();
+  };
+  const usePatientQuery = () =>
+    useQuery(["fetchSinglePatient"], fetchSinglePatient);
+  const { data } = usePatientQuery();
   console.log("edit props data", data);
   return (
     <>
       {data ? (
         <>
           <PatientForm
-            title="Edit your profile"
+            title="Edit patient profile details"
             data={data}
             className="m-auto"
           />{" "}

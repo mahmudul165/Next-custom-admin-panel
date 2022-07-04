@@ -40,21 +40,21 @@ function PaitentForm({ title, data }) {
   const { register, handleSubmit, error } = useForm({
     resolver: yupResolver(schema),
   });
-  //console.log("edit data from patientlist", data);
+  console.log("edit data from patientlist", data);
 
   //  mui data
   const documents = [
     { title: "Nid" },
-    { title: "Passport" },
+    { title: "Driving" },
     { title: "Others" },
   ];
   return (
     <>
-      {data.data ? (
+      {data?.data ? (
         <>
           {/* edit patient form */}
           <form
-            className="w-10/12 m-auto   first-line: "
+            className="w-10/12 m-auto p-12  first-line: "
             onSubmit={handleSubmit((d) =>
               // postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)
               console.log("form data", d)
