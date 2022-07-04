@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import * as yup from "yup";
@@ -7,11 +7,10 @@ import { useForm } from "react-hook-form";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
-
 import Autocomplete from "@mui/material/Autocomplete";
 import {
   usePatientListQuery,
-  usePatientQuery,
+  //usePatientQuery,
   useTherapitListQuery,
   useAllTicketDepartmentQuery,
 } from "../../hook/useApi";
@@ -30,6 +29,7 @@ const schema = yup
   })
   .required();
 import useAuth from "/hook/useAuth";
+import { useQuery } from "react-query";
 function TicketForm() {
   const { postData } = useAuth();
   const [searchInput, setSearchInput] = useState("");
@@ -52,7 +52,6 @@ function TicketForm() {
   // search
 
   // search input catch
-
   const handleSearchChange = (e) => {
     setSearchInput(e.target.value);
   };
@@ -78,7 +77,49 @@ function TicketForm() {
   //const filterText = patientList?.data?.filter((i) => i.id == searchInput);
   //console.log("filterText  from ticket from", filterText);
   //console.log("search   id  from ticket from", searchInput);
+  // debounce search input
+  const debounce = (fn, delay) => {
+    let timer;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn(...args), delay);
+    };
+  };
 
+  // get  single patient data
+  // const fetchPatient = async () => {
+  //   const response = await fetch(
+  //     `https://misiapi.lamptechs.com/api/v1/patient/show/${searchInput}`,
+  //     {
+  //       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  //     }
+  //   );
+
+  //   return await response.json();
+  // };
+  // if (searchInput !== "" && parseInt(searchInput) >= 10000) {
+  //   const usePatientQuery = () => useQuery(["singlepatient"], fetchPatient);
+  //   const { data: singlePatient } = usePatientQuery();
+  //   return console.log(" single patient list from ticket from", singlePatient);
+  // }
+  const [advice, setAdvice] = useState("");
+  useEffect(() => {
+    const url = `https://misiapi.lamptechs.com/api/v1/patient/show/${searchInput}`;
+    console.log("url", url);
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        const json = await response.json();
+        console.log(json);
+        setAdvice(json);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+
+    fetchData();
+  }, [searchInput]);
+  console.log("advice data", advice);
   return (
     <>
       <form
@@ -181,6 +222,9 @@ function TicketForm() {
                     // </div>
                     <Stack>
                       <Autocomplete
+                        onChange={(event, value) => {
+                          debounce(handleSearchChange, 500);
+                        }}
                         size="small"
                         freeSolo
                         id="free-solo-2-demo"
@@ -189,7 +233,8 @@ function TicketForm() {
                         // getOptionLabel={(option) => option?.id}
                         renderInput={(params) => (
                           <TextField
-                            onChange={handleSearchChange}
+                            // onChange={handleSearchChange}
+                            // onChange={debounce(handleSearchChange, 500)}
                             id="patient_id"
                             {...register("patient_id")}
                             {...params}
@@ -329,22 +374,6 @@ function TicketForm() {
                   </label>
                 </div>
               </div>
-              {/* Residential Address */}
-              <div className="relative mt-2.5">
-                <textarea
-                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  id="address"
-                  {...register("address")}
-                  type="text"
-                  placeholder="  "
-                />
-                <label
-                  htmlFor="inline-full-name"
-                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                >
-                  Residential address
-                </label>
-              </div>
               {/* state  and nationality */}
               <div className="grid  gap-4 mt-2.5">
                 {/* State/City */}
@@ -380,6 +409,22 @@ function TicketForm() {
                     Nationality
                   </label>
                 </div>
+              </div>
+              {/* Residential Address */}
+              <div className="relative mt-2.5">
+                <textarea
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  id="address"
+                  {...register("address")}
+                  type="text"
+                  placeholder="  "
+                />
+                <label
+                  htmlFor="inline-full-name"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Residential address
+                </label>
               </div>
               {/* Dob and BNS */}
               <div className="grid  gap-4 mt-2.5">
@@ -535,6 +580,40 @@ function TicketForm() {
                   </label>
                 </div>
               </div>
+              {/* age AND emergency_contact */}
+              <div className="grid  gap-4 mt-2.5">
+                {/* age*/}
+                <div className="col-start-1 relative  ">
+                  <input
+                    type="text"
+                    id="age"
+                    {...register("age")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="age"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Age
+                  </label>
+                </div>
+                {/* emergency_contact */}
+                <div className="col-start-2 relative  ">
+                  <input
+                    id="emergency_contact"
+                    {...register("emergency_contact")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="emergency_contact"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Emergency contact
+                  </label>
+                </div>
+              </div>
               {/* Medical History */}
               <div className="relative  mt-2.5">
                 {/* <input
@@ -558,6 +637,7 @@ function TicketForm() {
                   Medical history
                 </label>
               </div>
+
               {/* select file  and attach file  */}
               {/* <div className="grid   grid-cols-2  gap-4 mt-2.5">
                 
@@ -750,7 +830,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     <option value="5">Deleted</option>
                   </select>
                   <label
-                    htmlFor="remarks"
+                    htmlFor="status"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
                     Status
@@ -775,3 +855,8 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 }
 
 export default TicketForm;
+
+// useDebounce onchange react
+// patient form separation
+// search api 'singlePatient'
+// 'singlePatient?.data' ? then show data a from :another blank form
