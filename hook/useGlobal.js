@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Router } from "next/router";
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
@@ -36,6 +37,24 @@ const useGlobal = () => {
   // let token = document
   //   .querySelector("meta[name=”csrf-token”]")
   //   .getAttribute("content");
+
+  // function logout() {
+  //   axios
+  //     .post("https://misiapi.lamptechs.com/api/v1/admin/logout", {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     })
+  //     .then((response) => {
+  //       console.log("logout response", response);
+  //       alert("successfully added ");
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  //   //misiapi.lamptechs.com/api/v1/admin/logout
+  //   //userSubject.next(null);
+  //   //localStorage.removeItem("token");
+  //   //Router.push("/account/login");
+  // }
   const postData = (url, data) => {
     axios
       .post(
@@ -58,16 +77,18 @@ const useGlobal = () => {
       });
   };
   // global delete data
-  const deleteData = async (url, id) => {
-    const deleteUrl = await `${url}/${id}`;
-    const jwt = await token;
-    console.log(`'deleteUrl:' ${deleteUrl},'token:' ${jwt}`);
+  const deleteData = async (url, token) => {
+    console.log(`deleteUrl:${url}     token:${token}`);
     await axios
       .post(
-        deleteUrl,
+        url,
         {
-          headers: { Authorization: `Bearer ${jwt}` },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         },
+
         {
           withCredentials: true,
         }
@@ -80,6 +101,28 @@ const useGlobal = () => {
         console.log(error);
       });
   };
+  // const deleteData = async (url, id) => {
+  //   const deleteUrl = await `${url}/${id}`;
+  //   const jwt = await token;
+  //   console.log(`'deleteUrl:'${deleteUrl},'token:'${jwt}`);
+  //   await axios
+  //     .post(
+  //       deleteUrl,
+  //       {
+  //         headers: { Authorization: `Bearer ${jwt}` },
+  //       },
+  //       {
+  //         withCredentials: true,
+  //       }
+  //     )
+  //     .then((response) => {
+  //       console.log(response);
+  //       alert("data field deleted");
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
 
   // status
   // const Statustest = (status) => {
@@ -121,6 +164,7 @@ const useGlobal = () => {
     setTherapistservice,
     postData,
     token,
+    //logout,
     deleteData,
     Statustest,
   };

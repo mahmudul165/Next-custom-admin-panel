@@ -206,8 +206,11 @@ function AllTicketList() {
                       className="text-purple-800 hover:underline"
                       onClick={() =>
                         deleteData(
-                          `https://misiapi.lamptechs.com/api/v1/ticket/delete`,
-                          row.original.id
+                          `https://misiapi.lamptechs.com/api/v1/ticket/delete/${row.original?.id}`,
+                          token
+                          //row?.original?.id
+                          //alert(typeof row?.original?.id)
+                          // parseInt(row.original?.id)
                         )
                       }
                     >

@@ -269,8 +269,9 @@ function PatientList() {
                     className="text-purple-800 hover:underline"
                     onClick={() =>
                       deleteData(
-                        `https://misiapi.lamptechs.com/api/v1/patient/delete`,
-                        row.original.id
+                        `https://misiapi.lamptechs.com/api/v1/patient/delete/${row?.original?.id}`,
+                        token
+                        //row.original.id
                       )
                     }
                   >
