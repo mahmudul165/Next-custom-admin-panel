@@ -10,19 +10,19 @@ function Edit() {
   //console.log("router params id", id);
   //const [data, setdata] = useState();
   const { data, error } = useSWR(
-    `https://misiapi.lamptechs.com/api/v1/patient/${data?.id}`,
+    `https://misiapi.lamptechs.com/api/v1/patient/${id}`,
     {
       fetcher: async (url) => await fetch(url).then((res) => res.json()),
     }
   );
-  console.log("edit props data", data.data);
+  console.log("edit props data", data);
   return (
     <>
-      {data?.data ? (
+      {data ? (
         <>
           <PatientForm
             title="Edit your profile"
-            data={data.data}
+            data={data}
             className="m-auto"
           />{" "}
         </>

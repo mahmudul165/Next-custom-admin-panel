@@ -256,14 +256,24 @@ function PatientList() {
                     gap: "0.5rem",
                   }}
                 >
-                  <button
+                  <Link passHref href={`/patient/edit/${row.original.id}`}>
+                    <button
+                      className="text-purple-800 hover:underline"
+                      // onClick={() => {
+                      //   console.log("View Profile", row.original.id);
+                      // }}
+                    >
+                      Edit
+                    </button>
+                  </Link>
+                  {/* <button
                     className="text-purple-800 hover:underline"
                     onClick={() => {
                       console.log("View Profile", row.original);
                     }}
                   >
                     Edit
-                  </button>
+                  </button> */}
 
                   <button
                     className="text-purple-800 hover:underline"
