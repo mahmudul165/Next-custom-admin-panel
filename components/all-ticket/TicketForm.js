@@ -102,16 +102,18 @@ function TicketForm() {
   //   const { data: singlePatient } = usePatientQuery();
   //   return console.log(" single patient list from ticket from", singlePatient);
   // }
-  const [advice, setAdvice] = useState("");
+  const [singlepatient, setPatient] = useState("");
   useEffect(() => {
     const url = `https://misiapi.lamptechs.com/api/v1/patient/show/${searchInput}`;
     console.log("url", url);
     const fetchData = async () => {
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        });
         const json = await response.json();
-        console.log(json);
-        setAdvice(json);
+        // console.log(json);
+        setPatient(json?.data);
       } catch (error) {
         console.log("error", error);
       }
@@ -119,7 +121,7 @@ function TicketForm() {
 
     fetchData();
   }, [searchInput]);
-  console.log("advice data", advice);
+  //console.log("singlepatient data", singlepatient);
   return (
     <>
       <form
@@ -127,7 +129,7 @@ function TicketForm() {
         onSubmit={handleSubmit(
           (d) =>
             postData("https://misiapi.lamptechs.com/api/v1/ticket/store", d)
-          // console.log("ticket store data", d)
+          //console.log("ticket store data", d)
         )}
       >
         <div className=" px-3">
@@ -199,35 +201,16 @@ function TicketForm() {
               <div className="grid gap-4  mt-2.5">
                 <div className="relative">
                   {patientList?.data ? (
-                    // <div className="relative my-3">
-                    //   <select
-                    //     onChange={handleSearchChange}
-                    //     id="patient_id"
-                    //     {...register("patient_id")}
-                    //     className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    //   >
-                    //     {/* <option selected>Patient id</option> */}
-                    //     {patientList.data?.map((item) => (
-                    //       <option key={item.id} value={`${item?.id}`}>
-                    //         {`${item?.id}`}
-                    //       </option>
-                    //     ))}
-                    //   </select>
-                    //   <label
-                    //     htmlFor="patient_id"
-                    //     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    //   >
-                    //     Patient id
-                    //   </label>
-                    // </div>
                     <Stack>
                       <Autocomplete
                         onChange={(event, value) => {
-                          debounce(handleSearchChange, 500);
+                          //setSearchInput(value);
+                          debounce(setSearchInput(value), 500);
                         }}
+                        // onChange={(event, value) => setMovie(value)}
                         size="small"
                         freeSolo
-                        id="free-solo-2-demo"
+                        // id="free-solo-2-demo"
                         disableClearable
                         options={patientList?.data.map((patient) => patient.id)}
                         // getOptionLabel={(option) => option?.id}
@@ -256,387 +239,379 @@ function TicketForm() {
                   )}
                 </div>
               </div>
+              {singlepatient ? (
+                <>
+                  {/* patient source  and language  */}
+                  <div className="grid  gap-4 mt-2.5">
+                    {/* patient_source   */}
+                    <div className="col-start-1 relative   ">
+                      <input
+                        type="text"
+                        id="patient_source"
+                        {...register("patient_source")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        value={singlepatient?.source}
+                      />
+                      <label
+                        htmlFor="patient_source"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Patient source
+                      </label>
+                    </div>
+                    {/* area  */}
+                    <div className="col-start-2  relative   ">
+                      <input
+                        type="text"
+                        id="area"
+                        {...register("area")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        value={singlepatient?.area}
+                      />
+                      <label
+                        htmlFor="area"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Area
+                      </label>
+                    </div>
+                  </div>
 
-              {/* Patient Source  */}
-              <div className="grid gap-4 grid-cols-2 mt-2.5">
-                <div className="relative">
-                  <select
-                    id="patient_source"
-                    {...register("patient_source")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  >
-                    <option selected>Select patient source</option>
-                    <option value="male">ZD</option>
-                    <option value="female">Own</option>
-                    <option value="others">Others</option>
-                  </select>
-                  <label
-                    htmlFor="patient_source"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Patient source
-                  </label>
-                </div>
-                {/* Language Select  */}
-                <div className="relative">
-                  <select
-                    id="language"
-                    {...register("language")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  >
-                    <option selected>Select Language</option>
-                    <option value="English">English</option>
-                    <option value="Dutch">Dutch</option>
-                  </select>
-                  <label
-                    htmlFor="language"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Language
-                  </label>
-                </div>
-              </div>
-
-              {/* paqtient search */}
-              {/* {patientList?.data
-                ?.filter((i) => i?.id?.includes(searchInput))
-                ?.map((patient, index) => {
-                  return <>{console.log(patient)}</>;
-                })} */}
-
-              {/* name */}
-              <div className="grid  gap-4 mt-2.5">
-                {/* first Name  */}
-                <div className="col-start-1 relative   ">
-                  <input
-                    type="text"
-                    id="firstname"
-                    {...register("firstname")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                  />
-                  <label
-                    htmlFor="firstname"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    First Name
-                  </label>
-                </div>
-                {/* last Name  */}
-                <div className="col-start-2  relative   ">
-                  <input
-                    type="text"
-                    id="lastname"
-                    {...register("lastname")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                  />
-                  <label
-                    htmlFor="lastname"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Last Name
-                  </label>
-                </div>
-              </div>
-              {/* email  and phone  */}
-              <div className="grid  gap-4 mt-2.5">
-                {/* email   */}
-                <div className="col-start-1 relative   ">
-                  <input
-                    type="email"
-                    id="email"
-                    {...register("email")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                  />
-                  <label
-                    htmlFor="email"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Email
-                  </label>
-                </div>
-                {/* phone  */}
-                <div className="col-start-2  relative   ">
-                  <input
-                    type="tel"
-                    id="phone"
-                    {...register("phone")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                  />
-                  <label
-                    htmlFor="phone"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Phone number
-                  </label>
-                </div>
-              </div>
-              {/* state  and nationality */}
-              <div className="grid  gap-4 mt-2.5">
-                {/* State/City */}
-                <div className="col-start-1 relative  ">
-                  <input
-                    type="text"
-                    id="location"
-                    {...register("location")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                    required
-                  />
-                  <label
-                    htmlFor="location"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    State/City
-                  </label>
-                </div>
-                {/* Nationality */}
-                <div className="col-start-2  relative  ">
-                  <input
-                    type="text"
-                    id="nationality"
-                    {...register("nationality")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="Natherland  "
-                  />
-                  <label
-                    htmlFor="nationality"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Nationality
-                  </label>
-                </div>
-              </div>
-              {/* Residential Address */}
-              <div className="relative mt-2.5">
-                <textarea
-                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  id="address"
-                  {...register("address")}
-                  type="text"
-                  placeholder="  "
-                />
-                <label
-                  htmlFor="inline-full-name"
-                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                >
-                  Residential address
-                </label>
-              </div>
-              {/* Dob and BNS */}
-              <div className="grid  gap-4 mt-2.5">
-                {/* DOB Number */}
-                <div className="col-start-1 relative  ">
-                  <input
-                    type="text"
-                    id="DOB_Number"
-                    {...register("DOB_Number")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                  />
-                  <label
-                    htmlFor="DOB_Number"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    DOB number
-                  </label>
-                </div>
-                {/* BSN Number */}
-                <div className="col-start-2 relative  ">
-                  <input
-                    type="text"
-                    id="BSN_Number"
-                    {...register("BSN_Number")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                  />
-                  <label
-                    htmlFor="BSN_Number"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    BSN number
-                  </label>
-                </div>
-              </div>
-              {/* INSURANCE AND DATE OF BIRTH */}
-              <div className="grid  gap-4 mt-2.5">
-                {/* INSURANCE*/}
-                <div className="col-start-1 relative  ">
-                  <input
-                    type="text"
-                    id="insurance"
-                    {...register("insurance")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                  />
-                  <label
-                    htmlFor="insurance"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Insurance number
-                  </label>
-                </div>
-                {/* DATE OF birth */}
-                <div className="col-start-2 relative  ">
-                  <input
-                    id="date-of-birth"
-                    {...register("date-of-birth")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                  />
-                  <label
-                    htmlFor="date-of-birth"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Date of birth
-                  </label>
-                </div>
-              </div>
-              {/* Marital status and occupation */}
-              <div className="grid   grid-cols-2  gap-4 mt-2.5">
-                {/* Marital status*/}
-                <div className="  relative  ">
-                  <select
-                    id="marital-status"
-                    {...register("marital-status")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  >
-                    <option selected>Select status</option>
-                    <option value="">Single</option>
-                    <option value="">Married</option>
-                    <option value="">Divorced</option>
-                    <option value="">Engaged</option>
-                  </select>
-                  <label
-                    htmlFor="marital-status"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Marital status
-                  </label>
-                </div>
-                {/* occupation */}
-                <div className="  relative  ">
-                  <input
-                    type="text"
-                    id="Occupation"
-                    {...register("Occupation")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                  />
-                  <label
-                    htmlFor="Occupation"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Occupation
-                  </label>
-                </div>
-              </div>
-              {/* sex and blood */}
-              <div className="grid gap-4 grid-cols-2 mt-2.5">
-                {/* sex  */}
-                <div className=" relative   ">
-                  <select
-                    id="sex"
-                    {...register("sex")}
-                    className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  >
-                    <option selected>Select sex</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="others">Others</option>
-                  </select>
-                  <label
-                    htmlFor="Sex"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Sex
-                  </label>
-                </div>
-                {/* blood  */}
-                <div className=" relative   ">
-                  {" "}
-                  <select
-                    id="blood_group"
-                    {...register("blood_group")}
-                    className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  >
-                    <option selected>Select blood group</option>
-                    <option value="a+">A+</option>
-                    <option value="a-">A-</option>
-                    <option value="b+">B+</option>
-                    <option value="b-">B-</option>
-                    <option value="ab+">AB+</option>
-                    <option value="o+">O+</option>
-                    <option value="o-">O-</option>
-                  </select>
-                  <label
-                    htmlFor="blood_group"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Blood group
-                  </label>
-                </div>
-              </div>
-              {/* age AND emergency_contact */}
-              <div className="grid  gap-4 mt-2.5">
-                {/* age*/}
-                <div className="col-start-1 relative  ">
-                  <input
-                    type="text"
-                    id="age"
-                    {...register("age")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                  />
-                  <label
-                    htmlFor="age"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Age
-                  </label>
-                </div>
-                {/* emergency_contact */}
-                <div className="col-start-2 relative  ">
-                  <input
-                    id="emergency_contact"
-                    {...register("emergency_contact")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder="  "
-                  />
-                  <label
-                    htmlFor="emergency_contact"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Emergency contact
-                  </label>
-                </div>
-              </div>
-              {/* Medical History */}
-              <div className="relative  mt-2.5">
-                {/* <input
-              type="text-area"
-              id="floating_outlined"
-              className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-              placeholder="  "
-              required
-            />  */}
-                <textarea
-                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  id="medical_history"
-                  {...register("medical_history")}
-                  type="text"
-                  placeholder="  "
-                />
-                <label
-                  htmlFor="textarea"
-                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                >
-                  Medical history
-                </label>
-              </div>
+                  {/* name */}
+                  <div className="grid  gap-4 mt-2.5">
+                    {/* first Name  */}
+                    <div className="col-start-1 relative   ">
+                      <input
+                        type="text"
+                        id="firstname"
+                        {...register("firstname")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        value={singlepatient.first_name}
+                      />
+                      <label
+                        htmlFor="firstname"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        First Name
+                      </label>
+                    </div>
+                    {/* last Name  */}
+                    <div className="col-start-2  relative   ">
+                      <input
+                        type="text"
+                        id="lastname"
+                        {...register("lastname")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        value={singlepatient.last_name}
+                      />
+                      <label
+                        htmlFor="lastname"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Last Name
+                      </label>
+                    </div>
+                  </div>
+                  {/* email  and phone  */}
+                  <div className="grid  gap-4 mt-2.5">
+                    {/* email   */}
+                    <div className="col-start-1 relative   ">
+                      <input
+                        type="email"
+                        id="email"
+                        {...register("email")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        value={singlepatient.email}
+                      />
+                      <label
+                        htmlFor="email"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Email
+                      </label>
+                    </div>
+                    {/* phone  */}
+                    <div className="col-start-2  relative   ">
+                      <input
+                        type="text"
+                        id="phone"
+                        {...register("phone")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        value={singlepatient?.phone}
+                      />
+                      <label
+                        htmlFor="phone"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Phone number
+                      </label>
+                    </div>
+                  </div>
+                  {/* state  and nationality */}
+                  <div className="grid  gap-4 mt-2.5">
+                    {/* State/City */}
+                    <div className="col-start-1 relative  ">
+                      <input
+                        type="text"
+                        id="location"
+                        {...register("location")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        required
+                        value={singlepatient?.city}
+                      />
+                      <label
+                        htmlFor="location"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        State/City
+                      </label>
+                    </div>
+                    {/* Nationality */}
+                    <div className="col-start-2  relative  ">
+                      <input
+                        type="text"
+                        id="country_id"
+                        {...register("country_id")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="   "
+                        value={singlepatient?.country?.name}
+                      />
+                      <label
+                        htmlFor="country_id"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Nationality
+                      </label>
+                    </div>
+                  </div>
+                  {/* Residential Address */}
+                  <div className="relative mt-2.5">
+                    <textarea
+                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                      id="address"
+                      {...register("address")}
+                      type="text"
+                      placeholder="  "
+                      value={singlepatient?.address}
+                    />
+                    <label
+                      htmlFor="inline-full-name"
+                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                    >
+                      Residential address
+                    </label>
+                  </div>
+                  {/* Dob and BNS */}
+                  <div className="grid  gap-4 mt-2.5">
+                    {/* DOB Number */}
+                    <div className="col-start-1 relative  ">
+                      <input
+                        type="text"
+                        id="DOB_Number"
+                        {...register("DOB_Number")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        value={singlepatient?.dob_number}
+                      />
+                      <label
+                        htmlFor="DOB_Number"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        DOB number
+                      </label>
+                    </div>
+                    {/* BSN Number */}
+                    <div className="col-start-2 relative  ">
+                      <input
+                        type="text"
+                        id="BSN_Number"
+                        {...register("BSN_Number")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        value={singlepatient?.bsn_number}
+                      />
+                      <label
+                        htmlFor="BSN_Number"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        BSN number
+                      </label>
+                    </div>
+                  </div>
+                  {/* INSURANCE AND DATE OF BIRTH */}
+                  <div className="grid  gap-4 mt-2.5">
+                    {/* INSURANCE*/}
+                    <div className="col-start-1 relative  ">
+                      <input
+                        type="text"
+                        id="insurance"
+                        {...register("insurance")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        value={singlepatient?.insurance_number}
+                      />
+                      <label
+                        htmlFor="insurance"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Insurance number
+                      </label>
+                    </div>
+                    {/* DATE OF birth */}
+                    <div className="col-start-2 relative  ">
+                      <input
+                        id="date-of-birth"
+                        {...register("date-of-birth")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        value={singlepatient?.date_of_birth}
+                      />
+                      <label
+                        htmlFor="date-of-birth"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Date of birth
+                      </label>
+                    </div>
+                  </div>
+                  {/* Marital status and occupation */}
+                  <div className="grid   grid-cols-2  gap-4 mt-2.5">
+                    {/* Marital status*/}
+                    <div className=" relative   ">
+                      <input
+                        type="text"
+                        id="marital_status"
+                        {...register("marital_status")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        value={singlepatient?.marital_status}
+                      />
+                      <label
+                        htmlFor="marital_status"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Marital status
+                      </label>
+                    </div>
+                    {/* occupation */}
+                    <div className="  relative  ">
+                      <input
+                        type="text"
+                        id="Occupation"
+                        {...register("Occupation")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        value={singlepatient?.occupation}
+                      />
+                      <label
+                        htmlFor="Occupation"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Occupation
+                      </label>
+                    </div>
+                  </div>
+                  {/* state and blood */}
+                  <div className="grid gap-4 grid-cols-2 mt-2.5">
+                    {/* state*/}
+                    <div className=" relative   ">
+                      <input
+                        type="text"
+                        id="state"
+                        {...register("state")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        value={singlepatient?.state?.name}
+                      />
+                      <label
+                        htmlFor="state"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        State
+                      </label>
+                    </div>
+                    {/* blood  */}
+                    <div className=" relative   ">
+                      <input
+                        type="text"
+                        id="blood_group"
+                        {...register("blood_group")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        value={singlepatient?.blood_group?.name}
+                      />
+                      <label
+                        htmlFor="blood_group"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Blood group
+                      </label>
+                    </div>
+                  </div>
+                  {/* age AND emergency_contact */}
+                  <div className="grid  gap-4 mt-2.5">
+                    {/* age*/}
+                    <div className="col-start-1 relative  ">
+                      <input
+                        type="text"
+                        id="age"
+                        {...register("age")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        value={singlepatient?.age}
+                      />
+                      <label
+                        htmlFor="age"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Age
+                      </label>
+                    </div>
+                    {/* emergency_contact */}
+                    <div className="col-start-2 relative  ">
+                      <input
+                        id="emergency_contact"
+                        {...register("emergency_contact")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        value={singlepatient?.emergency_contact}
+                      />
+                      <label
+                        htmlFor="emergency_contact"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Emergency contact
+                      </label>
+                    </div>
+                  </div>
+                  {/* Medical History */}
+                  <div className="relative  mt-2.5">
+                    <textarea
+                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                      id="medical_history"
+                      {...register("medical_history")}
+                      type="text"
+                      placeholder="  "
+                      value={singlepatient?.medical_history}
+                    />
+                    <label
+                      htmlFor="textarea"
+                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                    >
+                      Medical history
+                    </label>
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
 
               {/* select file  and attach file  */}
               {/* <div className="grid   grid-cols-2  gap-4 mt-2.5">
@@ -797,7 +772,7 @@ function TicketForm() {
                 </label>
               </div>
               {/*  status */}
-              <div className="grid  gap-4 my-2.5">
+              <div className="grid grid-cols-2 gap-4 my-2.5">
                 {/* status */}
                 <div className="  relative">
                   <select
@@ -834,6 +809,24 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
                     Status
+                  </label>
+                </div>
+                {/* Language Select  */}
+                <div className="relative">
+                  <select
+                    id="language"
+                    {...register("language")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  >
+                    <option selected>Select Language</option>
+                    <option value="English">English</option>
+                    <option value="Dutch">Dutch</option>
+                  </select>
+                  <label
+                    htmlFor="language"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Language
                   </label>
                 </div>
               </div>
