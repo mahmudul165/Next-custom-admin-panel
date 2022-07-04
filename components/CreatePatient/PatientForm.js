@@ -1087,7 +1087,7 @@ function PaitentForm({ title, data }) {
                       >
                         <option selected>Select file type</option>
                         <option value="NID">Nid</option>
-                        <option value="Passport">Passport</option>
+                        <option value="Driving">Driving</option>
                         <option value="Others">Others</option>
                       </select>
                       <label
