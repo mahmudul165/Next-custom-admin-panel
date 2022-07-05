@@ -9,6 +9,7 @@ import {
 import { BsFillQuestionOctagonFill } from "react-icons/bs";
 import { BiCategoryAlt } from "react-icons/bi";
 import { RiPsychotherapyLine } from "react-icons/ri";
+import { SiTodoist } from "react-icons/si";
 TbPhysotherapist;
 import { TbPhysotherapist } from "react-icons/tb";
 import React, { useEffect, useState } from "react";
@@ -111,11 +112,11 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="/pib-formula"
           // sidebarStatus={sidebarStatus}
-          menuTitle="PIB formula"
+          menuTitle="PIB formulier"
           subMenu={false}
           subMenuArray={null}
         >
-          <BsFillQuestionOctagonFill className=" h-6" />
+          <SiTodoist className=" h-6" />
         </NavItem>
         <NavItem
           hrefLink="/appointment"
@@ -126,7 +127,6 @@ const Nav = ({ sidebarOutsideClick }) => {
         >
           <MdAssignmentTurnedIn className=" h-6" />
         </NavItem>
-
         <NavItem
           hrefLink="/services/category"
           // sidebarStatus={sidebarStatus}
