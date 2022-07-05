@@ -114,45 +114,21 @@ const useGlobal = () => {
         console.log(error);
       });
   };
-  // const deleteData = async (url, id) => {
-  //   const deleteUrl = await `${url}/${id}`;
-  //   const jwt = await token;
-  //   console.log(`'deleteUrl:'${deleteUrl},'token:'${jwt}`);
-  //   await axios
-  //     .post(
-  //       deleteUrl,
-  //       {
-  //         headers: { Authorization: `Bearer ${jwt}` },
-  //       },
+
+  //  function deleteData(url){
+  //   fetch(url,   {
+  //     headers: { Authorization: `Bearer ${token}` },
+  //   },
   //       {
   //         withCredentials: true,
-  //       }
-  //     )
-  //     .then((response) => {
-  //       console.log(response);
-  //       alert("data field deleted");
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // };
+  //       },{
+  //     method: 'DELETE'
+  //   }).then(() => {
+  //      console.log('deleteData');
+  //   }).catch(err => {
+  //     console.error(err)
+  //   });
 
-  // status
-  // const Statustest = (status) => {
-  //   if (status == "A") {
-  //     return " Active";
-  //   } else if (status == "I") {
-  //     return "Inactive";
-  //   } else if (status == "P") {
-  //     return "Pending";
-  //   } else if (status == "C") {
-  //     return "Canceled";
-  //   } else if (status == "D") {
-  //     return "Deleted";
-  //   } else {
-  //     return " ";
-  //   }
-  // };
   const Statustest = (status) => {
     if (status == "1") {
       return " Active";

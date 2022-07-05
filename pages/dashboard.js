@@ -96,6 +96,16 @@ function Dashboard() {
             number="4500"
             bgColor="bg-gradient-to-b from-sky-500 to-sky-400"
           />
+          <Card
+            name="Following up"
+            number="100"
+            bgColor="bg-gradient-to-r from-green-500  to-green-400"
+          />
+          <Card
+            name="ZD patient"
+            number="200"
+            bgColor="bg-gradient-to-b from-cyan-500 to-cyan-400"
+          />
           {/* <Card
               name="PiB Group"
               number="400"
