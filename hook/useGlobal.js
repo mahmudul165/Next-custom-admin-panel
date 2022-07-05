@@ -76,6 +76,19 @@ const useGlobal = () => {
         console.log(error);
       });
   };
+
+  // Add a 401 response interceptor
+  axios.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    (error) => {
+      if (error.response.status === 401) {
+        //place your reentry code
+      }
+      return error;
+    }
+  );
   // global delete data
   const deleteData = async (url, token) => {
     console.log(`deleteUrl:${url}     token:${token}`);
@@ -155,6 +168,7 @@ const useGlobal = () => {
       return " ";
     }
   };
+
   return {
     categorydata,
     setCategory,
