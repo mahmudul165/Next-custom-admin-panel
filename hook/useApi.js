@@ -160,6 +160,21 @@ const fetchBloodGroup = async () => {
 };
 export const useBloodGroupQuery = () =>
   useQuery(["bloodGfroup"], fetchBloodGroup);
+
+// therapist schedule
+const fetchTherapistSchedule = async () => {
+  const response = await fetch(
+    `https://misiapi.lamptechs.com/api/v1/therapist_schedule`,
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+
+  return await response.json();
+};
+export const useTherapistScheduleQuery = () =>
+  useQuery(["therapistSchedule"], fetchTherapistSchedule);
+
 // get  state data
 const fetchState = async () => {
   const response = await fetch(`https://misiapi.lamptechs.com/api/v1/state`, {

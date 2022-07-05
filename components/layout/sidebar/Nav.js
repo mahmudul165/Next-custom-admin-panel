@@ -4,8 +4,9 @@ import {
   MdOutlineCategory,
   MdCategory,
   MdList,
+  MdAssignmentTurnedIn,
 } from "react-icons/md";
-
+import { BsFillQuestionOctagonFill } from "react-icons/bs";
 import { BiCategoryAlt } from "react-icons/bi";
 import { RiPsychotherapyLine } from "react-icons/ri";
 TbPhysotherapist;
@@ -108,6 +109,25 @@ const Nav = ({ sidebarOutsideClick }) => {
           <HiOutlineTicket className=" h-6" />
         </NavItem>
         <NavItem
+          hrefLink="/pib-formula"
+          // sidebarStatus={sidebarStatus}
+          menuTitle="PIB formula"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          <BsFillQuestionOctagonFill className=" h-6" />
+        </NavItem>
+        <NavItem
+          hrefLink="/appointment"
+          // sidebarStatus={sidebarStatus}
+          menuTitle="Appointment"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          <MdAssignmentTurnedIn className=" h-6" />
+        </NavItem>
+
+        <NavItem
           hrefLink="/services/category"
           // sidebarStatus={sidebarStatus}
           menuTitle="Service Category"
@@ -172,7 +192,7 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="#"
           // sidebarStatus={sidebarStatus}
-          menuTitle="Appointment"
+          menuTitle="Schedule"
           subMenu={true}
           subMenuArray={childMenu}
         >
