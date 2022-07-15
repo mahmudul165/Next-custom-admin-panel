@@ -90,44 +90,66 @@ const useGlobal = () => {
     }
   );
   // global delete data
-  const deleteData = async (url, token) => {
-    console.log(`deleteUrl:${url}     token:${token}`);
-    await axios
-      .post(
-        url,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        },
+  // const deleteData = async (url, token) => {
+  //   console.log(`deleteUrl:${url}     token:${token}`);
+  //   await axios
+  //     .post(
+  //       url,
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       },
 
-        {
-          withCredentials: true,
-        }
-      )
-      .then((response) => {
-        console.log(response);
-        alert("data field deleted");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  //  function deleteData(url){
-  //   fetch(url,   {
-  //     headers: { Authorization: `Bearer ${token}` },
-  //   },
   //       {
   //         withCredentials: true,
-  //       },{
-  //     method: 'DELETE'
-  //   }).then(() => {
-  //      console.log('deleteData');
-  //   }).catch(err => {
-  //     console.error(err)
-  //   });
+  //       }
+  //     )
+  //     .then((response) => {
+  //       console.log(response);
+  //       alert("data field deleted");
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
+
+  function deleteData(url) {
+    console.log(
+      `deleteUrl:${url}     token:Bearer ${localStorage.getItem("token")}`
+    );
+    fetch(
+      url,
+
+      {
+        Method: "POST",
+        Headers: {
+          Accept: "application.json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        // Body: body,
+        Cache: "default",
+      },
+
+      // {
+      //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      // },
+      // {
+      //   headers: { Authorization: `Bearer ${token}` },
+      // },
+      {
+        withCredentials: true,
+      }
+    )
+      .then(() => {
+        console.log("deleteData succesfully");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 
   const Statustest = (status) => {
     if (status == "1") {
