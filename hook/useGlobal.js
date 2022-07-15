@@ -125,6 +125,8 @@ const useGlobal = () => {
       {
         Method: "POST",
         Headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
           Accept: "application.json",
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
