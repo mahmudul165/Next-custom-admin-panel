@@ -56,27 +56,6 @@ function TicketForm() {
     setSearchInput(e.target.value);
   };
 
-  // useEffect(() => {
-  //   const urls = ["https://misiapi.lamptechs.com/api/v1/patient"];
-
-  //   Promise.all(
-  //     urls.map((url) =>
-  //       fetch(url)
-  //         .then((response) => response.json())
-  //         .then((data) => setResults(data))
-  //         .catch((error) => console.log("There was a problem!", error))
-  //     ),
-  //     []
-  //   );
-  // }, []);
-  // const filterSearch = patientList?.data?.filter((i) =>
-  //   i.id?.includes(searchInput)
-  // );
-  //   const num = 1234;
-  // const result1 = num.toString().includes('3');
-  //const filterText = patientList?.data?.filter((i) => i.id == searchInput);
-  //console.log("filterText  from ticket from", filterText);
-  //console.log("search   id  from ticket from", searchInput);
   // debounce search input
   const debounce = (fn, delay) => {
     let timer;
@@ -86,22 +65,6 @@ function TicketForm() {
     };
   };
 
-  // get  single patient data
-  // const fetchPatient = async () => {
-  //   const response = await fetch(
-  //     `https://misiapi.lamptechs.com/api/v1/patient/show/${searchInput}`,
-  //     {
-  //       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-  //     }
-  //   );
-
-  //   return await response.json();
-  // };
-  // if (searchInput !== "" && parseInt(searchInput) >= 10000) {
-  //   const usePatientQuery = () => useQuery(["singlepatient"], fetchPatient);
-  //   const { data: singlePatient } = usePatientQuery();
-  //   return console.log(" single patient list from ticket from", singlePatient);
-  // }
   const [singlepatient, setPatient] = useState("");
   useEffect(() => {
     const url = `https://misiapi.lamptechs.com/api/v1/patient/show/${searchInput}`;

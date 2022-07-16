@@ -4,6 +4,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { AuthContext } from "../contexts/auth-context";
 import { useRouter } from "next/router";
+import { useAllTicketQuery, usePatientListQuery } from "../hook/useApi";
 
 const Card = dynamic(() => import("../components/dashboard/Card"));
 
@@ -15,6 +16,11 @@ function Dashboard() {
   //     ? router.push("/")
   //     : router.push("/account/login");
   // }, []);
+
+  const { data: allPatient } = usePatientListQuery();
+  const { data: ticket } = useAllTicketQuery();
+
+  console.log("all ticket number", ticket?.data);
   return (
     <>
       {/* inside of container */}
@@ -32,12 +38,14 @@ function Dashboard() {
           />
           <Card
             name="All Tickets"
-            number="6"
+            number={ticket?.data?.length}
+            path="/all-ticket"
             bgColor="bg-gradient-to-l from-purple-500   to-purple-400"
           />
           <Card
             name="All Patients"
-            number="65"
+            number={allPatient?.data?.length}
+            path="/patient"
             bgColor="bg-gradient-to-l from-pink-500   to-pink-400"
           />
         </section>

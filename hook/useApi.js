@@ -96,7 +96,7 @@ export const useTherapitListQuery = () =>
 
 // get  All ticket  data
 const fetchAllTicket = async () => {
-  const response = await fetch("https://misiapi.lamptechs.com/api/v1/patient", {
+  const response = await fetch("https://misiapi.lamptechs.com/api/v1/ticket", {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   });
 

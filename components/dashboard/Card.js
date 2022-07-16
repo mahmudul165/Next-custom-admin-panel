@@ -1,14 +1,15 @@
 import React from "react";
-
-function Card({ name, number, bgColor }) {
+import Link from "next/link";
+function Card({ name, number, bgColor, path }) {
   console.log("first bg", bgColor);
   return (
     <>
       {bgColor ? (
-        <div
-          className={`  items-center   grid grid-cols-1 divide-y  shadow rounded-lg ${bgColor}`}
-        >
-          {/* <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
+        <Link passHref href={`${path ? path : "/dashboard"}`}>
+          <div
+            className={`  items-center   grid grid-cols-1 divide-y  shadow rounded-lg ${bgColor}`}
+          >
+            {/* <div className="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
         <svg
           aria-hidden="true"
           fill="none"
@@ -25,20 +26,21 @@ function Card({ name, number, bgColor }) {
         </svg>
       </div> */}
 
-          <div className="p-3">
-            <span className="block text-lg font-bold text-white py-1">
-              {number}
-            </span>
-            <span className="block text-white   text-base  font-normal">
-              {name}
-            </span>
+            <div className="p-3">
+              <span className="block text-lg font-bold text-white py-1">
+                {number}
+              </span>
+              <span className="block text-white   text-base  font-normal">
+                {name}
+              </span>
+            </div>
+            <div className="p-2.5  ">
+              <span className="block text-slate-800  text-base font-normal text-center">
+                {name}
+              </span>
+            </div>
           </div>
-          <div className="p-2.5  ">
-            <span className="block text-slate-800  text-base font-normal text-center">
-              {name}
-            </span>
-          </div>
-        </div>
+        </Link>
       ) : (
         <>empty</>
       )}

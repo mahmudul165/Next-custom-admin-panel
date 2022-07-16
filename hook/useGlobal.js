@@ -223,7 +223,7 @@ const useGlobal = () => {
       list: "/api/v1/ticket",
       create: "/api/v1/ticket/store",
       delete: "/api/v1/ticket/delete",
-      edit: "",
+      edit: "/api/v1/ticket/update",
     },
     therapist_degree: {
       list: "/api/v1/therapist_degree",
