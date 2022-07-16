@@ -8,7 +8,7 @@ const Loading = dynamic(() => import("/components/common/Loading"));
 function SubCategoryTable() {
   const { deleteData, Statustest, token } = useAuth();
   // const { data, error, isError } = useSubCategoryQuery();
-  console.log("All subcategory token", token);
+  // console.log("All subcategory token", token);
 
   const [remoteData, setRemoteData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -139,8 +139,7 @@ function SubCategoryTable() {
                   className="text-purple-800 hover:underline"
                   onClick={() =>
                     deleteData(
-                      `https://misiapi.lamptechs.com/api/v1/subservice/delete`,
-                      row.original.id
+                      `${apiRootUrl}${apiEndpoint?.subservice?.delete}/${row?.original?.id}`
                     )
                   }
                 >

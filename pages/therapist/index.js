@@ -242,8 +242,7 @@ function TherapistList() {
                     className="text-purple-800 hover:underline"
                     onClick={() =>
                       deleteData(
-                        `https://misiapi.lamptechs.com/api/v1/therapist/delete`,
-                        row.original.id
+                        `https://misiapi.lamptechs.com/api/v1/therapist/delete/${row?.original?.id}`
                       )
                     }
                   >

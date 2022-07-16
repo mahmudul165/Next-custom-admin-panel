@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 //import { useSubCategoryQuery } from "/hook/useApi";
 const Loading = dynamic(() => import("/components/common/Loading"));
 function TherapistTable() {
-  const { deleteData, Statustest, token } = useAuth();
+  const { deleteData, Statustest, token, apiRootUrl, apiEndpoint } = useAuth();
   // const { data, error, isError } = useSubCategoryQuery();
   //console.log("All subcategory data ", data);
 
@@ -144,8 +144,9 @@ function TherapistTable() {
                   className="text-purple-800 hover:underline"
                   onClick={() =>
                     deleteData(
-                      `https://misiapi.lamptechs.com/api/v1/therapistService/delete`,
-                      row.original.id
+                      `${apiRootUrl}${apiEndpoint?.therapistService?.delete}/${row?.original?.id}`
+                      // `https://misiapi.lamptechs.com/api/v1/therapistService/delete`,
+                      // row.original.id
                     )
                   }
                 >

@@ -1,27 +1,3 @@
-// import React from "react";
-// import PatientService from "/components/CreatePatient/PatientService";
-// function index() {
-//   return (
-//     <>
-//       <PatientService />
-//     </>
-//   );
-// }
-
-// export default index;
-
-// import React from "react";
-// import TherapistListService from "../../components/therapist-List/TherapistListService";
-// function index() {
-//   return (
-//     <>
-//       <TherapistListService />
-//     </>
-//   );
-// }
-
-// export default index;
-
 import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable from "material-react-table";
 import useAuth from "/hook/useAuth";

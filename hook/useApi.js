@@ -22,6 +22,7 @@ export const useCategoryQuery = () =>
     }
   );
 // get   service sub-category data
+
 const fetchSubService = async () => {
   console.log("test tok", token);
   // get category service data
@@ -83,7 +84,7 @@ export const usePatientListQuery = () =>
 // get therapist list  data
 const fetchTherapitList = async () => {
   const response = await fetch(
-    "  https://misiapi.lamptechs.com/api/v1/therapist",
+    "https://misiapi.lamptechs.com/api/v1/therapist",
     {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }

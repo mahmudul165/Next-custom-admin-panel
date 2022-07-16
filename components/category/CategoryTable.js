@@ -7,7 +7,7 @@ import { useCategoryQuery } from "../../hook/useApi";
 const Loading = dynamic(() => import("/components/common/Loading"));
 
 function CategoryTable() {
-  const { deleteData, Statustest } = useAuth();
+  const { deleteData, Statustest, token, apiRootUrl, apiEndpoint } = useAuth();
   const { data, error, isError } = useCategoryQuery();
 
   const columns = useMemo(
@@ -105,8 +105,7 @@ function CategoryTable() {
                   className="text-purple-800 hover:underline"
                   onClick={() =>
                     deleteData(
-                      `https://misiapi.lamptechs.com/api/v1/service/delete`,
-                      row.original.id
+                      `${apiRootUrl}${apiEndpoint?.service?.delete}/${row?.original?.id}`
                     )
                   }
                 >

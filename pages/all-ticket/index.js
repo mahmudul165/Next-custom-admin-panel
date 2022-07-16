@@ -11,7 +11,7 @@ const TicketComponent = dynamic(() =>
 const Loading = dynamic(() => import("/components/common/Loading"));
 
 function AllTicketList() {
-  const { deleteData, Statustest, token } = useAuth();
+  const { deleteData, Statustest, token, apiRootUrl, apiEndpoint } = useAuth();
   const { data, error, isError } = useTherapitListQuery();
   //console.log("All ticket data  from  ", data);
 
@@ -22,7 +22,8 @@ function AllTicketList() {
     const fetchData = async () => {
       setIsLoading(true);
       const response = await fetch(
-        "https://misiapi.lamptechs.com/api/v1/ticket",
+        `${apiRootUrl}${apiEndpoint?.ticket?.list}`,
+        //"https://misiapi.lamptechs.com/api/v1/ticket",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -207,10 +208,8 @@ function AllTicketList() {
                       className="text-purple-800 hover:underline"
                       onClick={() =>
                         deleteData(
-                          `https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`
-                          //row?.original?.id
-                          //alert(typeof row?.original?.id)
-                          // parseInt(row.original?.id)
+                          //`https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`
+                          `${apiRootUrl}${apiEndpoint?.ticket?.delete}/${row?.original?.id}`
                         )
                       }
                     >

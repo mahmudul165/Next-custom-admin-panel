@@ -12,7 +12,6 @@ const useGlobal = () => {
   const [therapistservicedata, setTherapistservice] = useState("");
   // set and get token
   const [token, setToken] = useState("");
-
   useEffect(() => {
     const items = localStorage.getItem("token");
     if (items) {
@@ -90,68 +89,65 @@ const useGlobal = () => {
     }
   );
   // global delete data
-  // const deleteData = async (url, token) => {
-  //   console.log(`deleteUrl:${url}     token:${token}`);
-  //   await axios
-  //     .post(
-  //       url,
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       },
-
-  //       {
-  //         withCredentials: true,
-  //       }
-  //     )
-  //     .then((response) => {
-  //       console.log(response);
-  //       alert("data field deleted");
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // };
-
-  function deleteData(url) {
-    console.log(
-      `deleteUrl:${url}     token:Bearer ${localStorage.getItem("token")}`
-    );
-    fetch(
-      url,
-
-      {
-        Method: "POST",
-        Headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-          Accept: "application.json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+  const headers = {
+    "Content-Type": "application/json",
+    //Authorization: "JWT fefege...",
+    Authorization: `Bearer ${token}`,
+  };
+  const deleteData = (url) => {
+    console.log(`deleteUrl:${url}    token:${token}`);
+    axios
+      .post(
+        url,
+        {},
+        {
+          headers: headers,
         },
-        // Body: body,
-        Cache: "default",
-      },
 
-      // {
-      //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      // },
-      // {
-      //   headers: { Authorization: `Bearer ${token}` },
-      // },
-      {
-        withCredentials: true,
-      }
-    )
-      .then(() => {
-        console.log("deleteData succesfully");
+        {
+          withCredentials: true,
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        alert("data field deleted");
       })
-      .catch((err) => {
-        console.error(err);
+      .catch(function (error) {
+        console.log(error);
       });
-  }
+  };
+
+  // function deleteData(url) {
+  //   console.log(
+  //     `deleteUrl:${url}     token:Bearer ${localStorage.getItem("token")}`
+  //   );
+  //   fetch(
+  //     url,
+
+  //     {
+  //       Method: "POST",
+  //       Headers: {
+  //         "Access-Control-Allow-Origin": "*",
+  //         "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+  //         Accept: "application.json",
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //       },
+  //       // Body: body,
+  //       Cache: "default",
+  //     },
+
+  //     {
+  //       withCredentials: true,
+  //     }
+  //   )
+  //     .then(() => {
+  //       console.log("deleteData succesfully");
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // }
 
   const Statustest = (status) => {
     if (status == "1") {
@@ -169,7 +165,107 @@ const useGlobal = () => {
     }
   };
 
+  // apiPath Url
+  const apiRootUrl = "https://misiapi.lamptechs.com";
+  const apiEndpoint = {
+    patientLogin: {
+      list: "/api/v1/patient/login",
+      login: "/api/v1/patient/login",
+    },
+    therapistLogin: {
+      list: "/api/v1/therapist/login",
+      login: "/api/v1/therapist/login",
+    },
+    adminLogin: {
+      list: "/api/v1/admin/login",
+      login: "/api/v1/admin/login",
+    },
+    service: {
+      list: "/api/v1/service",
+      create: "/api/v1/service/store",
+      delete: "/api/v1/service/delete",
+      edit: "",
+    },
+    subservice: {
+      list: "/api/v1/subservice",
+      create: "/api/v1/subservice/store",
+      delete: "/api/v1/service/delete",
+      edit: "",
+    },
+    therapist: {
+      list: "/api/v1/therapist",
+      create: "/api/v1/therapist/store",
+      delete: "/api/v1/therapist/delete",
+      edit: "",
+    },
+    therapistService: {
+      list: "/api/v1/therapistService",
+      create: "/api/v1/therapistService/store",
+      delete: "/api/v1/therapistService/delete",
+      edit: "",
+    },
+
+    therapist_type: {
+      list: "/api/v1/therapist_type",
+      create: "/api/v1/therapist_type/store",
+      delete: "/api/v1/therapist_type/delete",
+      edit: "",
+    },
+
+    patient: {
+      list: "/api/v1/patient",
+      create: "/api/v1/patient/store",
+      delete: "/api/v1/patient/delete",
+      edit: "",
+    },
+
+    ticket: {
+      list: "/api/v1/ticket",
+      create: "/api/v1/ticket/store",
+      delete: "/api/v1/ticket/delete",
+      edit: "",
+    },
+    therapist_degree: {
+      list: "/api/v1/therapist_degree",
+      create: "/api/v1/therapist_degree/store",
+      delete: "api/v1/therapist_degree/delete",
+      edit: "",
+    },
+    appointment: {
+      list: "/api/v1/appointment",
+      create: "/api/v1/appointment/store",
+      delete: "/api/v1/appointment/delete",
+      edit: "",
+    },
+    blood_group: {
+      list: "/api/v1/blood_group",
+      create: "/api/v1/blood_group/store",
+      delete: "/api/v1/blood_group/delete",
+      edit: "",
+    },
+    ticket_department: {
+      list: "/api/v1/ticket_department",
+      create: "/api/v1/ticket_department/store",
+      delete: "/api/v1/ticket_department/delete",
+      edit: "",
+    },
+    state: {
+      list: "/api/v1/state",
+      create: "/api/v1/state/store",
+      delete: "/api/v1/state/delete",
+      edit: "",
+    },
+
+    occupation: {
+      list: "/api/v1/occupation",
+      create: "/api/v1/occupation/store",
+      delete: "/api/v1/occupation/delete",
+      edit: "",
+    },
+  };
+
   return {
+    headers,
     categorydata,
     setCategory,
     subservicedata,
@@ -178,6 +274,8 @@ const useGlobal = () => {
     setTherapistservice,
     postData,
     token,
+    apiRootUrl,
+    apiEndpoint,
     //logout,
     deleteData,
     Statustest,

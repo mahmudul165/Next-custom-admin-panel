@@ -4,9 +4,9 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import useAuth from "/hook/useAuth";
 import { useQuery } from "react-query";
-import { useCategoryQuery, useSubCategoryQuery } from "../../hook/useApi";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
+import { useSubCategoryQuery } from "../../hook/useApi";
 const schema = yup
   .object()
   .shape({
@@ -19,7 +19,7 @@ const schema = yup
 function SubCategoryForm() {
   const { postData } = useAuth();
   const { data } = useSubCategoryQuery();
-  //console.log("my categorydata data  is", data);
+  console.log("my useSubCategoryQuery data  is", data);
   const { register, handleSubmit, error } = useForm({
     resolver: yupResolver(schema),
   });

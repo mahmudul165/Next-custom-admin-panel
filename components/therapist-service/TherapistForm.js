@@ -1,8 +1,8 @@
 import React from "react";
 import useAuth from "/hook/useAuth";
 import {
-  useCategoryQuery,
-  useSubCategoryQuery,
+  // useCategoryQuery,
+  // useSubCategoryQuery,
   useTherapistServiceQuery,
 } from "../../hook/useApi";
 import { useQuery } from "react-query";
