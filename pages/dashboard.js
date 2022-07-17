@@ -19,8 +19,41 @@ function Dashboard() {
 
   const { data: allPatient } = usePatientListQuery();
   const { data: ticket } = useAllTicketQuery();
-
+  const zdPatient = allPatient?.data?.filter(
+    (patient) => patient.source === "ZD"
+  );
+  console.log("zdPatient result", zdPatient?.length);
   console.log("all ticket number", ticket?.data);
+
+  const Accounts = ticket?.data?.filter(
+    (item) => item?.ticket_department_info?.name === "Accounts"
+  );
+  console.log("Accounts", Accounts?.length);
+
+  const ScreenerGroup = ticket?.data?.filter(
+    (item) => item?.ticket_department_info?.name === "Screener Group"
+  );
+  console.log("screenerGroup", ScreenerGroup?.length);
+
+  const PiBGroupModerate = ticket?.data?.filter(
+    (item) => item?.ticket_department_info?.name === "PiB Group(Moderate)"
+  );
+  console.log("PiBGroupModerate", PiBGroupModerate?.length);
+  const PiBGroupSpecialist = ticket?.data?.filter(
+    (item) => item?.ticket_department_info?.name === "PiT Group(Specialist)"
+  );
+  console.log("PiBGroupSpecialist", PiBGroupSpecialist?.length);
+
+  const Heraanmelding = ticket?.data?.filter(
+    (item) => item?.ticket_department_info?.name === "Heraanmelding"
+  );
+  console.log("Heraanmelding", Heraanmelding?.length);
+
+  const AppointmentGroup = ticket?.data?.filter(
+    (item) => item?.ticket_department_info?.name === "Appointment Group"
+  );
+  console.log("AppointmentGroup", AppointmentGroup?.length);
+
   return (
     <>
       {/* inside of container */}
@@ -28,12 +61,14 @@ function Dashboard() {
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           <Card
             name="Create New Patient"
-            number="6"
+            path="/patient/create-new-patient"
+            //number="6"
             bgColor="bg-gradient-to-r from-violet-300 to-violet-400 "
           />
           <Card
             name="Create New Tickets"
-            number="55"
+            path="/all-ticket/create-new-ticket"
+            //number="55"
             bgColor="bg-gradient-to-l from-cyan-500 to-cyan-400"
           />
           <Card
@@ -57,7 +92,7 @@ function Dashboard() {
           />
           <Card
             name="Screener Group"
-            number="19"
+            number={ScreenerGroup?.length}
             bgColor="bg-gradient-to-b from-sky-500 to-sky-400"
           />
           <Card
@@ -74,22 +109,22 @@ function Dashboard() {
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           <Card
             name="Appointment Group"
-            number="72"
+            number={AppointmentGroup?.length}
             bgColor="bg-gradient-to-l from-violet-500 to-violet-400"
           />
           <Card
             name="PiT Group(Specialist)"
-            number="280"
+            number={PiBGroupSpecialist?.length}
             bgColor="bg-gradient-to-l from-cyan-500 to-cyan-400"
           />
           <Card
             name="PiB Group(Moderate)"
-            number="250"
+            number={PiBGroupModerate?.length}
             bgColor="bg-gradient-to-l from-purple-500   to-purple-400"
           />
           <Card
             name="Heraanmelding"
-            number="350"
+            number={Heraanmelding?.length}
             bgColor="bg-gradient-to-l from-pink-500   to-pink-400"
           />
         </section>
@@ -101,7 +136,7 @@ function Dashboard() {
           />
           <Card
             name="Accounts"
-            number="4500"
+            number={Accounts?.length}
             bgColor="bg-gradient-to-b from-sky-500 to-sky-400"
           />
           <Card
@@ -111,7 +146,7 @@ function Dashboard() {
           />
           <Card
             name="ZD patient"
-            number="200"
+            number={zdPatient?.length}
             bgColor="bg-gradient-to-b from-cyan-500 to-cyan-400"
           />
           {/* <Card

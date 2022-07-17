@@ -168,7 +168,14 @@ function TicketForm() {
                       <Autocomplete
                         onChange={(event, value) => {
                           //setSearchInput(value);
-                          debounce(setSearchInput(value), 500);
+                          debounce(
+                            setSearchInput(
+                              value
+
+                              //substring(0, value.indexOf(" "))
+                            ),
+                            500
+                          );
                         }}
                         // onChange={(event, value) => setMovie(value)}
                         size="small"
@@ -176,6 +183,10 @@ function TicketForm() {
                         // id="free-solo-2-demo"
                         disableClearable
                         options={patientList?.data.map((patient) => patient.id)}
+                        // options={patientList?.data.map(
+                        //   (patient) =>
+                        //     `${patient.id} ${patient.first_name} ${patient.last_name}`
+                        // )}
                         // getOptionLabel={(option) => option?.id}
                         renderInput={(params) => (
                           <TextField

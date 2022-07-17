@@ -104,8 +104,8 @@ const fetchAllTicket = async () => {
 };
 export const useAllTicketQuery = () =>
   useQuery(["allticket"], fetchAllTicket, {
-    // refetchOnMount: false,
-    // refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 //ticket dipartment
 // get  All ticket  data
@@ -121,8 +121,8 @@ const fetchAllTicketDepartment = async () => {
 };
 export const useAllTicketDepartmentQuery = () =>
   useQuery(["allDepartment"], fetchAllTicketDepartment, {
-    // refetchOnMount: false,
-    // refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 
 // get  single patient data
