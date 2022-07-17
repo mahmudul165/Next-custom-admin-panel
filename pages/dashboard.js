@@ -53,7 +53,15 @@ function Dashboard() {
     (item) => item?.ticket_department_info?.name === "Appointment Group"
   );
   console.log("AppointmentGroup", AppointmentGroup?.length);
-
+  // missing info group
+  const missingInfoGroup = allPatient?.data?.filter(
+    (item) =>
+      item?.emergency_contact === null ||
+      item?.age === null ||
+      item?.city === null ||
+      item?.occupation === null
+  );
+  console.log("missingInfoGroup", missingInfoGroup?.length);
   return (
     <>
       {/* inside of container */}
@@ -87,7 +95,7 @@ function Dashboard() {
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           <Card
             name="Missing-Info Lists"
-            number="129"
+            number={missingInfoGroup?.length}
             bgColor="bg-gradient-to-b from-indigo-500  to-indigo-400  "
           />
           <Card
