@@ -194,6 +194,7 @@ function TicketForm() {
                             // onChange={debounce(handleSearchChange, 500)}
                             id="patient_id"
                             {...register("patient_id")}
+                            required
                             {...params}
                             label="Search patient id"
                             InputProps={{
@@ -337,7 +338,7 @@ function TicketForm() {
                         {...register("location")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
-                        required
+                        //required
                         value={singlepatient?.city}
                       />
                       <label
