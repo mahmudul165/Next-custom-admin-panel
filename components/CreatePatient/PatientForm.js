@@ -1154,7 +1154,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         {...register("occupation")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
-                        required
+                        //required
                       />
                       <label
                         htmlFor="occupation"
@@ -1279,7 +1279,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         {...register("emergency_contact")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
-                        required
+                        //  required
                       />
                       <label
                         htmlFor="emergency_contact"
@@ -1315,7 +1315,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         {...register("age")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
-                        required
+                        // required
                       />
                       <label
                         htmlFor="age"
