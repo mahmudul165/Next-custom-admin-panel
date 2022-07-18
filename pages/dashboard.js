@@ -118,7 +118,7 @@ function Dashboard() {
           <Card
             name="Appointment Group"
             number={AppointmentGroup?.length}
-            path="/appointment/create-new-appointment"
+            // path="/appointment/create-new-appointment"
             bgColor="bg-gradient-to-l from-violet-500 to-violet-400"
           />
           <Card

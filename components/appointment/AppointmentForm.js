@@ -94,7 +94,7 @@ function AppointmentForm() {
         // console.log("appointment data", d)
       )}
     >
-      <div className="m-4 p-8">
+      <div className="">
         <div className="px-8 card d-flex      justify-center ">
           <h2
             className="mt-3 text-center text-3xl font-extrabold  "
