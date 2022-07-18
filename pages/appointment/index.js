@@ -56,14 +56,18 @@ function AllTicketList() {
         patient_name: `${userData.patient_info?.first_name} ${userData.patient_info?.last_name}`,
         therapist_id: `${userData?.therapist_info?.id}`,
         therapist_name: `${userData.therapist_info?.first_name} ${userData.therapist_info?.last_name}`,
-        ticket_department_info: userData?.ticket_department_info?.name,
-        location: userData.location,
+        appointment_type: userData?.type,
+        therapist_schedule: userData?.therapist_schedule?.schedule_day,
+        start_time: userData?.therapist_schedule?.start_time,
+        end_time: userData?.therapist_schedule?.end_time,
+        consulting_time: userData?.therapist_schedule?.consulting_time,
+        time: userData.time,
         status: userData.status,
         language: userData.language,
         remarks: userData?.ticket_department_info?.remarks,
-        strike: userData.strike,
-        strike_history: userData.strike_history,
-        ticket_history: userData.ticket_history,
+        therapist_comment: userData?.therapist_comment,
+        fee: userData.fee,
+        //ticket_history: userData.ticket_history,
         date: userData.date,
       })) ?? [],
     [remoteData]
@@ -92,12 +96,29 @@ function AllTicketList() {
         id: "therapist_name",
       },
       {
-        header: "ticket_department_info",
-        id: "ticket_department_info",
+        header: "Appointment_type",
+        id: "appointment_type",
       },
       {
-        header: "Location",
-        id: "location",
+        header: "Therapist_schedule",
+        id: "therapist_schedule",
+      },
+      {
+        header: "start_time",
+        id: "start_time",
+      },
+      {
+        header: "end_time",
+        id: "end_time",
+      },
+      {
+        header: "consulting_time",
+        id: "consulting_time",
+      },
+
+      {
+        header: "time",
+        id: "time",
       },
 
       {
@@ -114,16 +135,12 @@ function AllTicketList() {
       },
 
       {
-        header: "Strike",
-        id: "strike",
+        header: "Therapist_comment",
+        id: "therapist_comment",
       },
       {
-        header: "Strike_history",
-        id: "strike_history",
-      },
-      {
-        header: "Tickets_history",
-        id: "ticket_history",
+        header: "fee",
+        id: "fee",
       },
 
       {
