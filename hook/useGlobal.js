@@ -55,6 +55,7 @@ const useGlobal = () => {
   //   //Router.push("/account/login");
   // }
   const postData = (url, data) => {
+    console.log(`postData:${url}  data: ${data.patient_id} `);
     axios
       .post(
         url,
@@ -111,6 +112,31 @@ const useGlobal = () => {
       .then((response) => {
         console.log(response);
         alert("data field deleted");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // global update data
+
+  const updateData = (url) => {
+    console.log(`updateData:${url}    token:${token}`);
+    axios
+      .post(
+        url,
+        {},
+        {
+          headers: headers,
+        },
+
+        {
+          withCredentials: true,
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        alert("data field updated");
       })
       .catch(function (error) {
         console.log(error);
@@ -278,6 +304,7 @@ const useGlobal = () => {
     apiEndpoint,
     //logout,
     deleteData,
+    updateData,
     Statustest,
   };
 };
