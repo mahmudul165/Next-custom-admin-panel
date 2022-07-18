@@ -89,8 +89,9 @@ function AppointmentForm() {
     <form
       className="w-10/12 m-auto   first-line: "
       onSubmit={handleSubmit(
-        (d) => postData("https://misiapi.lamptechs.com/api/v1/ticket/store", d)
-        //console.log("ticket store data", d)
+        (d) =>
+          postData("https://misiapi.lamptechs.com/api/v1/appointment/store", d)
+        // console.log("appointment data", d)
       )}
     >
       <div className="m-4 p-8">
@@ -184,7 +185,7 @@ function AppointmentForm() {
                 {therapistSchedule?.data ? (
                   <div className="relative my-3">
                     <select
-                      id="therapist_schedule"
+                      id="therapist_schedule_id"
                       {...register("therapist_schedule_id")}
                       className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     >
@@ -196,7 +197,7 @@ function AppointmentForm() {
                       ))}
                     </select>
                     <label
-                      htmlFor="therapist_id"
+                      htmlFor="therapist_schedule_id"
                       className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                     >
                       Therapist schedule
@@ -210,18 +211,19 @@ function AppointmentForm() {
                   </>
                 )}
               </div>
-              {/* last Name  */}
+              {/* appointment_number */}
               <div className="col-start-2  relative my-3  ">
                 <input
                   type="text"
-                  id="appointment_number"
-                  {...register("appointment_number")}
+                  id="number"
+                  required
+                  {...register("number")}
                   className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   placeholder="  "
                   //  value={singlepatient.last_name}
                 />
                 <label
-                  htmlFor="appointment_number"
+                  htmlFor="number"
                   className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                 >
                   Appointment Number
@@ -266,14 +268,15 @@ function AppointmentForm() {
               <div className="col-start-2  relative   ">
                 <input
                   type="text"
-                  id="appointment_time"
-                  {...register("appointment_time")}
+                  id="time"
+                  {...register("time")}
+                  required
                   className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   placeholder="  "
                   //value={singlepatient.last_name}
                 />
                 <label
-                  htmlFor="appointment_time"
+                  htmlFor="time"
                   className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                 >
                   Appointment time
@@ -283,17 +286,18 @@ function AppointmentForm() {
 
             {/*appointment fee and appointment language */}
             <div className="grid grid-cols-2  gap-4 mt-2.5">
-              {/* appointment fee  */}
+              {/* appointment_fee  */}
               <div className="col-span-1 relative   ">
                 <input
                   type="text"
-                  id="appointment_fee"
-                  {...register("appointment_fee")}
+                  id="fee"
+                  {...register("fee")}
+                  required
                   className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   placeholder="  "
                 />
                 <label
-                  htmlFor="appointment_fee"
+                  htmlFor="fee"
                   className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                 >
                   Appointment fee
@@ -305,6 +309,7 @@ function AppointmentForm() {
                 <select
                   id="language"
                   {...register("language")}
+                  required
                   className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                 >
                   <option selected>Select Language</option>
@@ -377,6 +382,7 @@ m-0
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   aria-label="Default select example"
                   {...register("status")}
+                  required
                 >
                   {/* <option selected>status</option> */}
                   <option value="1" selected>
@@ -396,18 +402,20 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               </div>
             </div>
             {/* appointment_type */}
-            {/* <!-- Appointment Type --> */}
+            {/* <!-- appointment_type --> */}
             <div className="  relative  my-3 ">
               <select
                 className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                id="appointment_type"
+                id="type"
+                {...register("type")}
+                // required
               >
                 <option selected>Select appointment type</option>
                 <option value="Online">Online</option>
                 <option value="Physical">Physical</option>
               </select>
               <label
-                htmlFor="floating_outlined"
+                htmlFor="type"
                 className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
               >
                 Appointment type
