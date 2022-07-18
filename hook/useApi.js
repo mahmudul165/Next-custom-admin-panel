@@ -107,6 +107,7 @@ export const useAllTicketQuery = () =>
     refetchOnMount: false,
     refetchOnWindowFocus: false,
   });
+
 //ticket dipartment
 // get  All ticket  data
 const fetchAllTicketDepartment = async () => {
@@ -124,6 +125,20 @@ export const useAllTicketDepartmentQuery = () =>
     refetchOnMount: false,
     refetchOnWindowFocus: false,
   });
+// get  single ticket data
+const fetchSingleTicket = async (id) => {
+  const response = await fetch(
+    `https://misiapi.lamptechs.com/api/v1/ticket/show?id=${id}`,
+
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+
+  return await response.json();
+};
+export const useSingleTicket = (id) =>
+  useQuery(["singleTicket"], fetchSingleTicket(id));
 
 // get  single patient data
 const fetchPatient = async (id) => {

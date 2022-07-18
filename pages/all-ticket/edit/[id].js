@@ -39,6 +39,7 @@ function EditTicket() {
   const { data: patientList } = usePatientListQuery();
   const { data: therapistList } = useTherapitListQuery();
   const { data: ticketDepartment } = useAllTicketDepartmentQuery();
+
   // const { data: singlePatient } = usePatientQuery(searchInput);
   //const { data, error, isError } = useTherapitListQuery();
   //console.log("All ticket data  from  ", data);
@@ -47,6 +48,22 @@ function EditTicket() {
   //console.log(" single patient list from ticket from", singlePatient);
   //console.log("therapy list  from ticket from", therapistList);
   //console.log("ticket department list  from ticket from", ticketDepartment);
+
+  // get  single ticket data
+  // const fetchSingleTicket = async (id) => {
+  //   const response = await fetch(
+  //     `https://misiapi.lamptechs.com/api/v1/ticket/show?id=${id}`,
+
+  //     {
+  //       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  //     }
+  //   );
+
+  //   return await response.json();
+  // };
+  // const useSingleTicket = (id) =>
+  //   useQuery(["singleTicket"], fetchSingleTicket(id));
+
   const [value, setValue] = React.useState();
   const [inputValue, setInputValue] = React.useState("");
 

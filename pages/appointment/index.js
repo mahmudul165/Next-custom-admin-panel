@@ -215,7 +215,7 @@ function AllTicketList() {
                       gap: "0.5rem",
                     }}
                   >
-                    <Link passHref href={`all-ticket/edit/${row.original.id}`}>
+                    <Link passHref href={`appointment/edit/${row.original.id}`}>
                       <button
                         className="text-purple-800 hover:underline"
                         // onClick={() => {
