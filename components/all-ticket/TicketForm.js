@@ -171,11 +171,11 @@ function TicketForm() {
                         }}
                         disablePortal
                         id="combo-box-demo"
-                        //  options={patientList?.data.map((patient) => patient.id)}
-                        options={patientList?.data.map(
-                          (patient) =>
-                            `${patient.id} ${patient.first_name} ${patient.last_name}`
-                        )}
+                        options={patientList?.data.map((patient) => patient.id)}
+                        // options={patientList?.data.map(
+                        //   (patient) =>
+                        //     `${patient.id} ${patient.first_name} ${patient.last_name}`
+                        // )}
                         size="small"
                         renderInput={(params) => (
                           <TextField
@@ -754,6 +754,22 @@ function TicketForm() {
                   className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                 >
                   Strike history
+                </label>
+              </div>
+              {/* ticket History */}
+              <div className="relative  mt-2.5">
+                <textarea
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  id="strike_history"
+                  {...register("ticket_history")}
+                  type="text"
+                  placeholder="  "
+                />
+                <label
+                  htmlFor="textarea"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Ticket history
                 </label>
               </div>
               {/*  status */}
