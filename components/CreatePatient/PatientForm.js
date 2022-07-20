@@ -1217,6 +1217,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       <select
                         id="file_type"
                         {...register("file_type")}
+                        required
                         className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                       >
                         <option selected>Select file type</option>

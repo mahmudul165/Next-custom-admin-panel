@@ -67,7 +67,7 @@ function TicketForm() {
 
   const [singlepatient, setPatient] = useState("");
   useEffect(() => {
-    const url = `https://misiapi.lamptechs.com/api/v1/patient/show/${searchInput}`;
+    const url = `https://misiapi.lamptechs.com/api/v1/patient/show?id=${searchInput}`;
     console.log("url", url);
     const fetchData = async () => {
       try {
