@@ -176,7 +176,7 @@ function PibFormFormula() {
                           </th>
                           <td className="px-6 py-4">{`${singlepatient.id}`}</td>
                         </tr>
-                        <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+                        {/* <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
                           <th
                             scope="row"
                             className="whitespace-normal px-2 py-4 font-medium text-gray-900 dark:text-white"
@@ -184,7 +184,7 @@ function PibFormFormula() {
                             Patient email:
                           </th>
                           <td className="px-6 py-4">{`${singlepatient.email}`}</td>
-                        </tr>
+                        </tr> */}
                         <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
                           <th
                             scope="row"
