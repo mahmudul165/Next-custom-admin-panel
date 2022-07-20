@@ -19,7 +19,7 @@ function Edit() {
   // get  single patient data
   const fetchSinglePatient = async () => {
     const response = await fetch(
-      `https://misiapi.lamptechs.com/api/v1/patient/show/${parseInt(id)}`,
+      `https://misiapi.lamptechs.com/api/v1/patient/show?id=${id}}`,
       {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       }
@@ -38,7 +38,7 @@ function Edit() {
             title="Edit patient profile details"
             data={data}
             className="m-auto"
-          />{" "}
+          />
         </>
       ) : (
         <>

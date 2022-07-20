@@ -733,7 +733,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   "https://misiapi.lamptechs.com/api/v1/patient/store",
                   d
                 )
-              //  console.log("data patient", d)
+              // console.log("data patient", d)
             )}
           >
             {/* postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)  console.log("data patient", d)*/}
@@ -942,7 +942,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         <div className="relative my-3">
                           <select
                             id="country_id"
-                            {...register("country_id")}
+                            //  {...register("country_id")}
                             className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                           >
                             <option selected>Country</option>
@@ -973,7 +973,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         <div className="relative my-3">
                           <select
                             id="blood_group_id"
-                            {...register("blood_group_id")}
+                            //  {...register("blood_group_id")}
                             className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                           >
                             <option selected>Blood group</option>
@@ -1008,7 +1008,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         <div className="relative ">
                           <select
                             id="state_id"
-                            {...register("state_id")}
+                            // {...register("state_id")}
                             className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                           >
                             <option selected> Select city/state</option>

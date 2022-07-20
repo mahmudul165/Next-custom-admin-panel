@@ -167,31 +167,43 @@ function TicketForm() {
                     <Stack>
                       <Autocomplete
                         onChange={(event, value) => {
-                          //setSearchInput(value);
-                          debounce(
-                            setSearchInput(
-                              value
-
-                              //substring(0, value.indexOf(" "))
-                            ),
-                            500
-                          );
+                          debounce(setSearchInput(value), 500);
                         }}
-                        // onChange={(event, value) => setMovie(value)}
-                        size="small"
-                        freeSolo
-                        // id="free-solo-2-demo"
-                        disableClearable
+                        disablePortal
+                        id="combo-box-demo"
                         options={patientList?.data.map((patient) => patient.id)}
                         // options={patientList?.data.map(
                         //   (patient) =>
                         //     `${patient.id} ${patient.first_name} ${patient.last_name}`
                         // )}
-                        // getOptionLabel={(option) => option?.id}
+
+                        size="small"
                         renderInput={(params) => (
                           <TextField
-                            // onChange={handleSearchChange}
-                            // onChange={debounce(handleSearchChange, 500)}
+                            id="patient_id"
+                            {...register("patient_id")}
+                            required
+                            {...params}
+                            label="Search patient id"
+                          />
+                        )}
+                      />
+                      {/* 
+<Autocomplete
+ onChange={(event, value) => {
+                          
+                          debounce(
+                            setSearchInput(
+                              value 
+                            ),
+                            500
+                          );
+                        }}
+      disablePortal
+      id="combo-box-demo"
+     options={patientList?.data.map((patient) => patient.id)}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField 
                             id="patient_id"
                             {...register("patient_id")}
                             required
@@ -201,9 +213,8 @@ function TicketForm() {
                               ...params.InputProps,
                               type: "search",
                             }}
-                          />
-                        )}
-                      />
+                          />}
+    /> */}
                     </Stack>
                   ) : (
                     <>
@@ -642,7 +653,7 @@ function TicketForm() {
                         <option selected>Assign to therapist</option>
                         {therapistList.data?.map((item) => (
                           <option key={item.id} value={`${item?.id}`}>
-                            {`${item?.first_name} ${item?.last_name}`}
+                            {`${item?.id} ${item?.first_name} ${item?.last_name}`}
                           </option>
                         ))}
                       </select>
