@@ -29,7 +29,12 @@ function AllTicketList() {
         }
       );
       const json = await response.json();
-      setRemoteData(json.data);
+      setRemoteData(
+        json.data.filter(
+          (item) =>
+            item?.ticket_department_info?.name === "Waiting for 'YES' Approval"
+        )
+      );
       setIsLoading(false);
     };
     fetchData();

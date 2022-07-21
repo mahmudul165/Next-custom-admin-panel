@@ -100,16 +100,19 @@ function Dashboard() {
           />
           <Card
             name="Screener Group"
+            path="/screener-group"
             number={ScreenerGroup?.length}
             bgColor="bg-gradient-to-b from-sky-500 to-sky-400"
           />
           <Card
             name="Waiting for 'YES' Approval"
+            path="/yes-approval"
             number="30"
             bgColor="bg-gradient-to-r from-green-500  to-green-400"
           />
           <Card
             name="Waiting for 'NO' Approval"
+            path="/no-approval"
             number="60"
             bgColor="bg-gradient-to-b from-cyan-500 to-cyan-400"
           />
@@ -118,21 +121,24 @@ function Dashboard() {
           <Card
             name="Appointment Group"
             number={AppointmentGroup?.length}
-            // path="/appointment/create-new-appointment"
+            path="/appointment-group"
             bgColor="bg-gradient-to-l from-violet-500 to-violet-400"
           />
           <Card
             name="PiT Group(Specialist)"
+            path="/pit-group"
             number={PiBGroupSpecialist?.length}
             bgColor="bg-gradient-to-l from-cyan-500 to-cyan-400"
           />
           <Card
             name="PiB Group(Moderate)"
+            path="/pib-group"
             number={PiBGroupModerate?.length}
             bgColor="bg-gradient-to-l from-purple-500   to-purple-400"
           />
           <Card
             name="Heraanmelding"
+            path="/heraanmelding-group"
             number={Heraanmelding?.length}
             bgColor="bg-gradient-to-l from-pink-500   to-pink-400"
           />

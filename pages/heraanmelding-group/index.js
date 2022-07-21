@@ -29,7 +29,11 @@ function AllTicketList() {
         }
       );
       const json = await response.json();
-      setRemoteData(json.data);
+      setRemoteData(
+        json.data.filter(
+          (item) => item?.ticket_department_info?.name === "Heraanmelding"
+        )
+      );
       setIsLoading(false);
     };
     fetchData();

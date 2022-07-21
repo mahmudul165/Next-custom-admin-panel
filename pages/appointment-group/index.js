@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable from "material-react-table";
 import useAuth from "/hook/useAuth";
 import Link from "next/link";
-import { useTherapitListQuery } from "../../hook/useApi";
+import { useTherapitListQuery, useAllTicketQuery } from "../../hook/useApi";
 //import PagePatientComponentTitle from "../../components/all-ticket/PageTicketComponentTitle";
 import dynamic from "next/dynamic";
 const TicketComponent = dynamic(() =>
@@ -29,15 +29,25 @@ function AllTicketList() {
         }
       );
       const json = await response.json();
-      setRemoteData(json.data);
+      setRemoteData(
+        json.data?.filter(
+          (item) => item?.ticket_department_info?.name === "Appointment Group"
+        )
+      );
       setIsLoading(false);
     };
     fetchData();
   }, [remoteData, token]);
 
+  // const { data: ticket } = useAllTicketQuery();
+  // const AppointmentGroup = remoteData?.data?.filter(
+  //   (item) => item?.ticket_department_info?.name === "Appointment Group"
+  // );
+  // console.log("AppointmentGroup", AppointmentGroup);
+
   const parsedData = useMemo(
     () =>
-      remoteData.map((userData) => ({
+      remoteData?.map((userData) => ({
         //     id
         // patient_info
         // therapist_info
@@ -51,7 +61,7 @@ function AllTicketList() {
         // ticket_history
         // date
 
-        // id: `${userData.id}`,
+        id: `${userData.id}`,
         patient_info: `${userData.patient_info?.id}`,
         patient_name: `${userData.patient_info?.first_name} ${userData.patient_info?.last_name}`,
         // therapist_id: `${userData?.therapist_info?.id}`,
@@ -71,10 +81,10 @@ function AllTicketList() {
 
   const columns = useMemo(
     () => [
-      // {
-      //   header: "Ticket_id",
-      //   id: "id",
-      // },
+      {
+        header: "Ticket_id",
+        id: "id",
+      },
       {
         header: "Patient_id",
         id: "patient_info",
@@ -195,7 +205,10 @@ function AllTicketList() {
                       gap: "0.5rem",
                     }}
                   >
-                    <Link passHref href={`all-ticket/edit/${row.original.id}`}>
+                    <Link
+                      passHref
+                      href={`all-ticket/edit/${row?.original?.id}`}
+                    >
                       <button
                         className="text-purple-800 hover:underline"
                         // onClick={() => {
@@ -211,6 +224,8 @@ function AllTicketList() {
                         deleteData(
                           //`https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`
                           `${apiRootUrl}${apiEndpoint?.ticket?.delete}/${row?.original?.id}`
+
+                          //console.log("id delete", `${row?.original?.id}`)
                         )
                       }
                     >

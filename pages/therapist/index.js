@@ -49,7 +49,7 @@ function TherapistList() {
   const parsedData = useMemo(
     () =>
       remoteData.map((userData) => ({
-        id: `${userData.id}`,
+        //id: `${userData.id}`,
         first_name: userData.first_name,
         last_name: userData.last_name,
         email: userData.email,
@@ -80,10 +80,10 @@ function TherapistList() {
 
   const columns = useMemo(
     () => [
-      {
-        header: "Therapist_id",
-        id: "id",
-      },
+      // {
+      //   header: "Therapist_id",
+      //   id: "id",
+      // },
       {
         header: "First name",
         id: "first_name",

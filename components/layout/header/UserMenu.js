@@ -35,7 +35,7 @@ const UserMenu = () => {
       <span className="sr-only">User Menu</span>
       <div className="  hidden     md:flex md:flex-col md:items-end md:leading-tight">
         <span className="font-semibold text-white">Mahmud Hasan</span>
-        <span className="text-sm text-slate-300">Developer</span>
+        <span className="text-sm text-slate-300">Super admin</span>
       </div>
       <span className="h-12 w-12 ml-2 sm:ml-3 mr-2 bg-gray-100 rounded-full overflow-hidden">
         <img
@@ -44,7 +44,6 @@ const UserMenu = () => {
           className="h-full w-full object-cover"
         />
       </span>
-
       {userMenuStatus && (
         <div className=" card   grid justify-items-start   -mb-12 rounded-lg absolute p-1   sm:-bottom-12  bg-white       text-gray-600    font-medium   w-full -bottom-16">
           <div className="   inline-flex items-center justify-start px-0.5  py-1     rounded-lg   cursor-pointer relative group">

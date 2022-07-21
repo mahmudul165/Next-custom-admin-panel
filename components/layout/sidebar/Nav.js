@@ -6,6 +6,12 @@ import {
   MdList,
   MdAssignmentTurnedIn,
 } from "react-icons/md";
+
+import { CgScreen } from "react-icons/cg";
+import { MdAppRegistration } from "react-icons/md";
+import { FcApprove } from "react-icons/fc";
+import { FcDisapprove } from "react-icons/fc";
+import { CgNotes } from "react-icons/cg";
 import { BsFillQuestionOctagonFill } from "react-icons/bs";
 import { BiCategoryAlt } from "react-icons/bi";
 import { RiPsychotherapyLine } from "react-icons/ri";
@@ -110,14 +116,69 @@ const Nav = ({ sidebarOutsideClick }) => {
           <HiOutlineTicket className=" h-6" />
         </NavItem>
         <NavItem
-          hrefLink="/pib-formula"
+          hrefLink="/appointment-group"
           // sidebarStatus={sidebarStatus}
-          menuTitle="PIB formulier"
+          menuTitle="Appointment Group"
           subMenu={false}
           subMenuArray={null}
         >
-          <SiTodoist className=" h-6" />
+          <HiOutlineTicket className=" h-6" />
         </NavItem>
+        <NavItem
+          hrefLink="/screener-group"
+          // sidebarStatus={sidebarStatus}
+          menuTitle="Screener Group"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          <CgScreen className=" h-6" />
+        </NavItem>
+        <NavItem
+          hrefLink="/heraanmelding-group"
+          // sidebarStatus={sidebarStatus}
+          menuTitle="Heraanmelding Group"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          <MdAppRegistration className=" h-6" />
+        </NavItem>
+        <NavItem
+          hrefLink="/yes-approval"
+          // sidebarStatus={sidebarStatus}
+          menuTitle="Waiting for 'YES' Approval"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          <FcApprove className=" h-6" />
+        </NavItem>
+        <NavItem
+          hrefLink="/no-approval"
+          // sidebarStatus={sidebarStatus}
+          menuTitle="Waiting for 'NO' Approval"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          <FcDisapprove className=" h-6" />
+        </NavItem>
+        <NavItem
+          hrefLink="/pib-group"
+          // sidebarStatus={sidebarStatus}
+          menuTitle="PiB Group"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          <CgNotes className=" h-6" />
+        </NavItem>
+        <NavItem
+          hrefLink="/pit-group"
+          // sidebarStatus={sidebarStatus}
+          menuTitle="PiT Group"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          <CgNotes className=" h-6" />
+        </NavItem>
+
         <NavItem
           hrefLink="/appointment"
           // sidebarStatus={sidebarStatus}
