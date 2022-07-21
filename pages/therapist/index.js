@@ -81,7 +81,7 @@ function TherapistList() {
   const columns = useMemo(
     () => [
       {
-        header: "#",
+        header: "Therapist_id",
         id: "id",
       },
       {

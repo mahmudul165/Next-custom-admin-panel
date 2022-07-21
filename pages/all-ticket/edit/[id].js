@@ -33,7 +33,8 @@ import useAuth from "/hook/useAuth";
 import { useQuery } from "react-query";
 import { useRouter } from "next/router";
 function EditTicket() {
-  const { postData, updateData } = useAuth();
+  const { postData, updateData, Statustest } = useAuth();
+
   const [startDate, setStartDate] = useState(new Date());
   const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema),
@@ -130,49 +131,103 @@ function EditTicket() {
                       htmlFor="patient_id"
                       className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                     >
-                      {`${singleTicket?.data?.patient_info?.id} ${singleTicket?.data?.patient_info?.first_name} ${singleTicket?.data?.patient_info?.last_name}`}
+                      {`${singleTicket?.data?.patient_info?.first_name} ${singleTicket?.data?.patient_info?.last_name}`}
                     </label>
                   </div>
                 </div>
                 {/* Assign To therapist and pass department */}
                 <div className="grid gap-4 grid-cols-2 mt-2.5">
-                  <div className="relative my-3">
-                    <input
-                      type="text"
-                      id="therapist_id"
-                      {...register("therapist_id")}
-                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                      placeholder={`${singleTicket?.data?.therapist_info?.id} ${singleTicket?.data?.therapist_info?.first_name} ${singleTicket?.data?.therapist_info?.last_name}`}
-                      required
-                    />
-                    <label
-                      htmlFor="therapist_id"
-                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                      {/* {`${singleTicket?.data?.therapist_info?.id} ${singleTicket?.data?.therapist_info?.first_name} ${singleTicket?.data?.therapist_info?.last_name}`} */}
-                    </label>
+                  {/* Assign To therapist */}
+                  <div className="col-start-1  relative ">
+                    {therapistList?.data ? (
+                      <div className="relative my-3">
+                        <select
+                          id="therapist_id"
+                          {...register("therapist_id")}
+                          className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        >
+                          <option
+                            selected
+                          >{`${singleTicket?.data?.therapist_info?.id} ${singleTicket?.data?.therapist_info?.first_name} ${singleTicket?.data?.therapist_info?.last_name}`}</option>
+                          {therapistList.data?.map((item) => (
+                            <option key={item.id} value={`${item?.id}`}>
+                              {`${item?.id} ${item?.first_name} ${item?.last_name}`}
+                            </option>
+                          ))}
+                        </select>
+                        <label
+                          htmlFor="therapist_id"
+                          className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                        >
+                          Assign to therapist
+                        </label>
+                      </div>
+                    ) : (
+                      <>
+                        <Stack spacing={1}>
+                          <Skeleton animation="wave" height={40} />
+                        </Stack>
+                      </>
+                    )}
                   </div>
-                  <div className="relative my-3">
-                    <input
-                      type="text"
-                      id="ticket_department_id"
-                      {...register("ticket_department_id")}
-                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                      placeholder={
-                        singleTicket?.data?.ticket_department_info?.name
-                      }
-                      required
-                    />
-                    <label
-                      htmlFor="ticket_department_id"
-                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    ></label>
+                  {/* Pass Department  */}
+                  <div className="col-start-2 relative ">
+                    {ticketDepartment?.data ? (
+                      <div className="relative my-3">
+                        <select
+                          id="ticket_department_id"
+                          {...register("ticket_department_id")}
+                          className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        >
+                          <option selected>
+                            {singleTicket?.data?.ticket_department_info?.name}
+                          </option>
+                          {ticketDepartment.data?.map((item) => (
+                            <option key={item.id} value={`${item?.id}`}>
+                              {`${item?.name}`}
+                            </option>
+                          ))}
+                        </select>
+                        <label
+                          htmlFor="ticket_department_id"
+                          className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                        >
+                          Pass to department
+                        </label>
+                      </div>
+                    ) : (
+                      <>
+                        <Stack spacing={1}>
+                          <Skeleton animation="wave" height={40} />
+                        </Stack>
+                      </>
+                    )}
                   </div>
-                </div>{" "}
+                </div>
                 {/* call strike  and location*/}
                 <div className="grid gap-4 grid-cols-2 mt-2.5">
                   {/* call strike  */}
-                  <div className="col-start-1  relative  ">
+                  {/*call strike  */}
+                  <div className="col-start-1 relative">
+                    <select
+                      id="strike"
+                      {...register("strike")}
+                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    >
+                      <option selected>{singleTicket?.data?.strike} </option>
+                      <option value="Call Strike 1">Call Strike 1</option>
+                      <option value="Call Strike 2">Call Strike 2</option>
+                      <option value="Call Strike 3">Call Strike 3</option>
+                    </select>
+                    <label
+                      htmlFor="floating_outlined"
+                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                    >
+                      Call Strike
+                    </label>
+                  </div>
+
+                  {/* <div className="col-start-1  relative  ">
                     <input
                       type="text"
                       id="strike"
@@ -185,7 +240,7 @@ function EditTicket() {
                       htmlFor="strike"
                       className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                     ></label>
-                  </div>
+                  </div> */}
                   {/* location  */}
                   <div className="col-start-2  relative  ">
                     <input
@@ -194,12 +249,14 @@ function EditTicket() {
                       {...register("location")}
                       className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                       placeholder={singleTicket?.data?.location}
-                      required
+                      //required
                     />
                     <label
                       htmlFor="location"
                       className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    ></label>
+                    >
+                      Location
+                    </label>
                   </div>
                 </div>
                 {/* strike History */}
@@ -207,14 +264,16 @@ function EditTicket() {
                   <textarea
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                     id="strike_history"
-                    // {...register("strike_history")}
+                    {...register("strike_history")}
                     type="text"
                     placeholder={singleTicket?.data?.strike_history}
                   />
                   <label
                     htmlFor="textarea"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  ></label>
+                  >
+                    Strike history
+                  </label>
                 </div>
                 {/* ticket History */}
                 <div className="relative  mt-2.5">
@@ -228,41 +287,74 @@ function EditTicket() {
                   <label
                     htmlFor="textarea"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  ></label>
+                  >
+                    Ticket history
+                  </label>
                 </div>
-                {/*  status and Language */}
+
+                {/*  language and status */}
                 <div className="grid grid-cols-2 gap-4 my-2.5">
-                  {/* status  */}
-                  <div className="col-start-1  relative  ">
-                    <input
-                      type="text"
+                  {/* status */}
+                  <div className="  relative">
+                    <select
                       id="status"
+                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                      aria-label="Default select example"
                       {...register("status")}
-                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                      placeholder={singleTicket?.data?.status}
-                      required
-                    />
+                    >
+                      <option selected>
+                        {Statustest(singleTicket?.data?.status)}
+                      </option>
+                      <option value="1">Active</option>
+                      <option value="2">Inactive</option>
+                      <option value="3">Pending</option>
+                      <option value="4">Cancelled</option>
+                      <option value="5">Deleted</option>
+                    </select>
                     <label
                       htmlFor="status"
                       className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    ></label>
+                    >
+                      Status
+                    </label>
                   </div>
-                  {/* Language  */}
-                  <div className="col-start-2  relative  ">
-                    <input
-                      type="text"
+                  {/* Language Select  */}
+                  <div className="relative">
+                    <select
                       id="language"
                       {...register("language")}
-                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                      placeholder={singleTicket?.data?.language}
-                      required
-                    />
+                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    >
+                      <option selected>{singleTicket?.data?.language}</option>
+                      <option value="English">English</option>
+                      <option value="Dutch">Dutch</option>
+                    </select>
                     <label
                       htmlFor="language"
                       className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    ></label>
+                    >
+                      Language
+                    </label>
                   </div>
                 </div>
+                {/* remarks */}
+                <div className="relative my-2.5 ">
+                  <input
+                    type="text"
+                    id="remarks"
+                    {...register("remarks")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder={singleTicket?.data?.remarks}
+                    // required
+                  />
+                  <label
+                    htmlFor="remarks"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Remarks
+                  </label>
+                </div>
+
                 {/* select file  and attach file  */}
                 {/* <div className="grid   grid-cols-2  gap-4 mt-2.5">
               
@@ -310,7 +402,7 @@ function EditTicket() {
                     type="submit"
                     style={{ backgroundColor: "#01a9ac" }}
                   >
-                    Save
+                    Update
                   </button>
                 </div>
               </div>

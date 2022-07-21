@@ -79,7 +79,7 @@ function PatientList() {
   const columns = useMemo(
     () => [
       {
-        header: "#",
+        header: "Patient_id",
         id: "id",
       },
 

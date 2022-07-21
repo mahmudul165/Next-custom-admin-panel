@@ -263,7 +263,6 @@ function TicketForm() {
                       </label>
                     </div>
                   </div>
-
                   {/* name */}
                   <div className="grid  gap-4 mt-2.5">
                     {/* first Name  */}
@@ -704,8 +703,8 @@ function TicketForm() {
                 </div>
               </div>
               <div className="grid gap-4 grid-cols-2 mt-2.5">
-                {/* Assign To  */}
-                <div className="relative">
+                {/*call strike  */}
+                <div className="col-start-1 relative">
                   <select
                     id="strike"
                     {...register("strike")}
@@ -723,6 +722,7 @@ function TicketForm() {
                     Call Strike
                   </label>
                 </div>
+                {/* remarks */}
                 <div className="col-start-2  relative  ">
                   <input
                     type="text"
@@ -772,7 +772,7 @@ function TicketForm() {
                   Ticket history
                 </label>
               </div>
-              {/*  status */}
+              {/*  language and status */}
               <div className="grid grid-cols-2 gap-4 my-2.5">
                 {/* status */}
                 <div className="  relative">

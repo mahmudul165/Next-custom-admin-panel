@@ -55,11 +55,11 @@ function AllTicketList() {
         patient_name: `${userData.patient_info?.first_name} ${userData.patient_info?.last_name}`,
         therapist_id: `${userData?.therapist_info?.id}`,
         therapist_name: `${userData.therapist_info?.first_name} ${userData.therapist_info?.last_name}`,
-        ticket_department_info: userData?.ticket_department_info?.name,
+        ticket_department: userData?.ticket_department_info?.name,
         location: userData.location,
-        status: userData.status,
+        status: `${Statustest(userData.status)}`,
         language: userData.language,
-        remarks: userData?.ticket_department_info?.remarks,
+        remarks: userData?.remarks,
         strike: userData.strike,
         strike_history: userData.strike_history,
         ticket_history: userData.ticket_history,
@@ -71,7 +71,7 @@ function AllTicketList() {
   const columns = useMemo(
     () => [
       {
-        header: "id",
+        header: "Ticket_id",
         id: "id",
       },
       {
@@ -91,8 +91,8 @@ function AllTicketList() {
         id: "therapist_name",
       },
       {
-        header: "ticket_department_info",
-        id: "ticket_department_info",
+        header: "ticket_department",
+        id: "ticket_department",
       },
       {
         header: "Location",
