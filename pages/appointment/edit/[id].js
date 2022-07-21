@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import PatientForm from "/components/CreatePatient/PatientForm";
+import AppointmentForm from "/components/appointment/AppointmentForm";
 import useSWR from "swr";
 import { useQuery } from "react-query";
 import axios from "axios";
@@ -16,29 +16,25 @@ function Edit() {
   //   }
   // );
 
-  // get  single patient data
-  const fetchSinglePatient = async () => {
+  // get  single appointment data
+  const fetchSingleAppointment = async () => {
     const response = await fetch(
-      `https://misiapi.lamptechs.com/api/v1/patient/show/${parseInt(id)}`,
+      `https://misiapi.lamptechs.com/api/v1/appointment/show?id=${id}`,
       {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       }
     );
     return await response.json();
   };
-  const usePatientQuery = () =>
-    useQuery(["fetchSinglePatient"], fetchSinglePatient);
-  const { data } = usePatientQuery();
-  console.log("edit props data", data);
+  const useAppointmentQuery = () =>
+    useQuery(["fetchSingleAppointment"], fetchSingleAppointment);
+  const { data } = useAppointmentQuery();
+  console.log("edit single appointment data data", data);
   return (
     <>
       {data ? (
         <>
-          <PatientForm
-            title="Edit patient profile details"
-            data={data}
-            className="m-auto"
-          />{" "}
+          <AppointmentForm className="m-auto" />{" "}
         </>
       ) : (
         <>

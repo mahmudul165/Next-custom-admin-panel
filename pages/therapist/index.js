@@ -62,7 +62,7 @@ function TherapistList() {
         emergency_contact: userData.emergency_contact,
         gender: userData.gender,
         date_of_birth: userData.date_of_birth,
-        status: userData.status,
+        status: `${Statustest(userData.status)}`,
         blood_group: userData?.blood_group?.name,
         state: userData?.state?.name,
         country: userData?.country?.name,

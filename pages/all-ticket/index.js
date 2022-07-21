@@ -75,7 +75,7 @@ function AllTicketList() {
         id: "id",
       },
       {
-        header: "Patient ID",
+        header: "Patient_id",
         id: "patient_info",
       },
       {
@@ -83,7 +83,7 @@ function AllTicketList() {
         id: "patient_name",
       },
       {
-        header: "Therapist ID",
+        header: "Therapist_id",
         id: "therapist_id",
       },
       {
@@ -91,7 +91,7 @@ function AllTicketList() {
         id: "therapist_name",
       },
       {
-        header: "ticket_department",
+        header: "Ticket_department",
         id: "ticket_department",
       },
       {
