@@ -76,16 +76,16 @@ function AllTicketList() {
   const columns = useMemo(
     () => [
       {
-        header: "id",
+        header: "Appointment id",
         id: "id",
-        muiTableHeadCellProps: {
-          sx: {
-            display: "none",
-          },
-        },
+        // muiTableHeadCellProps: {
+        //   sx: {
+        //     display: "none",
+        //   },
+        // },
       },
       {
-        header: "Patient ID",
+        header: "Patient id",
         id: "patient_info",
       },
       {
@@ -93,7 +93,7 @@ function AllTicketList() {
         id: "patient_name",
       },
       {
-        header: "Therapist ID",
+        header: "Therapist id",
         id: "therapist_id",
       },
       {
@@ -101,23 +101,23 @@ function AllTicketList() {
         id: "therapist_name",
       },
       {
-        header: "Appointment_type",
+        header: "Appointment type",
         id: "appointment_type",
       },
       {
-        header: "Therapist_schedule",
+        header: "Therapist schedule",
         id: "therapist_schedule",
       },
       {
-        header: "start_time",
+        header: "start time",
         id: "start_time",
       },
       {
-        header: "end_time",
+        header: "end time",
         id: "end_time",
       },
       {
-        header: "consulting_time",
+        header: "consulting  time",
         id: "consulting_time",
       },
 
@@ -140,7 +140,7 @@ function AllTicketList() {
       },
 
       {
-        header: "Therapist_comment",
+        header: "Therapist comment",
         id: "therapist_comment",
       },
       {

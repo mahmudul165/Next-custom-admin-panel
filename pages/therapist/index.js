@@ -83,11 +83,11 @@ function TherapistList() {
       {
         header: "Therapist_id",
         id: "id",
-        muiTableHeadCellProps: {
-          sx: {
-            display: "none",
-          },
-        },
+        // muiTableHeadCellProps: {
+        //   sx: {
+        //     display: "none",
+        //   },
+        // },
       },
       {
         header: "First name",
@@ -115,7 +115,7 @@ function TherapistList() {
         id: "language",
       },
       {
-        header: "BNS_number",
+        header: "BNS number",
         id: "bsn_number",
       },
 
@@ -153,7 +153,7 @@ function TherapistList() {
         id: "country",
       },
       {
-        header: "blood_group",
+        header: "Blood group",
         id: "blood_group",
       },
       // {

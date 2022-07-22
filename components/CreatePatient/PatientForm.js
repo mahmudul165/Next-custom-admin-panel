@@ -556,7 +556,7 @@ function PaitentForm({ title, data }) {
                         File Type
                       </label>
                     </div>
-                    {/* <Autocomplete
+                    <Autocomplete
                       multiple
                       limitTags={2}
                       id="file_type"
@@ -572,8 +572,7 @@ function PaitentForm({ title, data }) {
                           size="small"
                         />
                       )}
-                       
-                    /> */}
+                    />
                     {/*attach file  */}
                     <div className=" relative   ">
                       <input

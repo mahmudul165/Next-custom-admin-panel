@@ -79,13 +79,13 @@ function PatientList() {
   const columns = useMemo(
     () => [
       {
-        header: "Patient_id",
+        header: "Patient id",
         id: "id",
-        muiTableHeadCellProps: {
-          sx: {
-            display: "none",
-          },
-        },
+        // muiTableHeadCellProps: {
+        //   sx: {
+        //     display: "none",
+        //   },
+        // },
       },
 
       {
@@ -119,12 +119,12 @@ function PatientList() {
       },
 
       {
-        header: "BNS_number",
+        header: "BNS number",
         id: "bsn_number",
       },
 
       {
-        header: "DOB_number",
+        header: "DOB number",
         id: "dob_number",
       },
       {
@@ -132,7 +132,7 @@ function PatientList() {
         id: "insurance_number",
       },
       {
-        header: "Medical History",
+        header: "Medical history",
         id: "medical_history",
       },
 
@@ -159,7 +159,7 @@ function PatientList() {
         id: "country",
       },
       {
-        header: "blood_group",
+        header: "blood group",
         id: "blood_group",
       },
       {
