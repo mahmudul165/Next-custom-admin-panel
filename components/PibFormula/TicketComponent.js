@@ -50,7 +50,7 @@
 import React, { useState } from "react";
 //import OperationModal from "../common/OperationModal";
 import dynamic from "next/dynamic";
-import TicketForm from "./TicketForm";
+
 import OperationModal from "../common/OperationModal";
 import Link from "next/link";
 //const OperationModal = dynamic(() => import("../common/OperationModal"));
@@ -64,7 +64,7 @@ const TicketComponentTitle = ({ title, titleDescription, buttonTitle }) => {
           <h1 className="text-4xl font-semibold mb-2">{title}</h1>
           <h2 className="text-gray-600 ml-0.5">{titleDescription}</h2>
         </div>{" "}
-        <Link href="/pit-group/create-new-pit-group">
+        <Link href="/pib-group/create-new-pib-group">
           <div className="flex flex-wrap items-start justify-end -mb-3">
             <button
               className="inline-flex px-2 py-2 text-white   hover:bg-teal-300 focus:bg-teal-400 rounded-md ml-6 mb-3"

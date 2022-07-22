@@ -7,6 +7,15 @@ import {
   MdAssignmentTurnedIn,
 } from "react-icons/md";
 
+//Patient List
+import { GiPerson } from "react-icons/gi";
+//Therapist
+import { RiMentalHealthLine } from "react-icons/ri";
+//All Tikcets
+import { IoTicketSharp } from "react-icons/io5";
+//Appointment Group
+import { MdOutlineScreenShare } from "react-icons/md";
+
 import { CgScreen } from "react-icons/cg";
 import { MdAppRegistration } from "react-icons/md";
 import { FcApprove } from "react-icons/fc";
@@ -95,7 +104,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenu={false}
           subMenuArray={null}
         >
-          <MdList className=" h-6" />
+          <GiPerson className=" h-6" />
         </NavItem>
         <NavItem
           hrefLink="/therapist"
@@ -104,7 +113,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenu={false}
           subMenuArray={null}
         >
-          <TbPhysotherapist className=" h-6" />
+          <RiMentalHealthLine className=" h-6" />
         </NavItem>
         <NavItem
           hrefLink="/all-ticket"
@@ -113,7 +122,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenu={false}
           subMenuArray={null}
         >
-          <HiOutlineTicket className=" h-6" />
+          <IoTicketSharp className=" h-6" />
         </NavItem>
         <NavItem
           hrefLink="/appointment-group"
@@ -122,7 +131,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenu={false}
           subMenuArray={null}
         >
-          <HiOutlineTicket className=" h-6" />
+          <MdOutlineScreenShare className=" h-6" />
         </NavItem>
         <NavItem
           hrefLink="/screener-group"

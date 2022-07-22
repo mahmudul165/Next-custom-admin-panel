@@ -78,6 +78,11 @@ function AllTicketList() {
       {
         header: "id",
         id: "id",
+        muiTableHeadCellProps: {
+          sx: {
+            display: "none",
+          },
+        },
       },
       {
         header: "Patient ID",
@@ -206,7 +211,7 @@ function AllTicketList() {
                 // row actions
 
                 enableRowActions
-                positionActionsColumn="last"
+                positionActionsColumn="first"
                 renderRowActions={({ row }) => (
                   <div
                     style={{

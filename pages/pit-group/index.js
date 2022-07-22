@@ -10,7 +10,7 @@ const TicketComponent = dynamic(() =>
 );
 const Loading = dynamic(() => import("/components/common/Loading"));
 
-function AllTicketList() {
+function PitGroup() {
   const { deleteData, Statustest, token, apiRootUrl, apiEndpoint } = useAuth();
   const { data, error, isError } = useTherapitListQuery();
   //console.log("All ticket data  from  ", data);
@@ -148,7 +148,7 @@ function AllTicketList() {
       <main className="p-6  space-y-6">
         <TicketComponent
           title="PiT Group (Specialist)"
-          buttonTitle="Create new ticket"
+          buttonTitle="Create new"
         />
 
         <section className="grid card  md:grid-cols-1 xl:grid-cols-1   ">
@@ -244,4 +244,4 @@ function AllTicketList() {
   );
 }
 
-export default AllTicketList;
+export default PitGroup;

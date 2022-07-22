@@ -1,5 +1,5 @@
 import React from "react";
-import TicketForm from "../../components/all-ticket/TicketForm";
+import TicketForm from "../../components/PibFormula/PibFormulaForm";
 
 function CreateNewTicket() {
   return (
