@@ -53,6 +53,18 @@ function Dashboard() {
     (item) => item?.ticket_department_info?.name === "Appointment Group"
   );
   console.log("AppointmentGroup", AppointmentGroup?.length);
+
+  const yesApprovalGroup = ticket?.data?.filter(
+    (item) =>
+      item?.ticket_department_info?.name === "Waiting for 'YES' Approval"
+  );
+  console.log("yesApprovalGroup", yesApprovalGroup?.length);
+
+  const noApprovalGroup = ticket?.data?.filter(
+    (item) => item?.ticket_department_info?.name === "Waiting for 'NO' Approval"
+  );
+  console.log("noApprovalGroup", noApprovalGroup?.length);
+
   // missing info group
   const missingInfoGroup = allPatient?.data?.filter(
     (item) =>
@@ -107,13 +119,13 @@ function Dashboard() {
           <Card
             name="Waiting for 'YES' Approval"
             path="/yes-approval"
-            number="30"
+            number={yesApprovalGroup?.length}
             bgColor="bg-gradient-to-r from-green-500  to-green-400"
           />
           <Card
             name="Waiting for 'NO' Approval"
             path="/no-approval"
-            number="60"
+            number={noApprovalGroup?.length}
             bgColor="bg-gradient-to-b from-cyan-500 to-cyan-400"
           />
         </section>

@@ -6,7 +6,7 @@ import { useTherapitListQuery, useAllTicketQuery } from "../../hook/useApi";
 //import PagePatientComponentTitle from "../../components/all-ticket/PageTicketComponentTitle";
 import dynamic from "next/dynamic";
 const TicketComponent = dynamic(() =>
-  import("../../components/all-ticket/TicketComponent")
+  import("../../components/appointment-group/TicketComponent")
 );
 const Loading = dynamic(() => import("/components/common/Loading"));
 
@@ -84,6 +84,11 @@ function AllTicketList() {
       {
         header: "Ticket_id",
         id: "id",
+        muiTableHeadCellProps: {
+          sx: {
+            display: "none",
+          },
+        },
       },
       {
         header: "Patient_id",
@@ -146,7 +151,7 @@ function AllTicketList() {
   return (
     <>
       <main className="p-6  space-y-6">
-        <TicketComponent title="All ticket" buttonTitle="Create new ticket" />
+        <TicketComponent title="Appointment Group" />
 
         <section className="grid card  md:grid-cols-1 xl:grid-cols-1   ">
           <div className="p-4">
@@ -207,7 +212,7 @@ function AllTicketList() {
                   >
                     <Link
                       passHref
-                      href={`all-ticket/edit/${row?.original?.id}`}
+                      href={`appointment-group/edit/${row?.original?.id}`}
                     >
                       <button
                         className="text-purple-800 hover:underline"

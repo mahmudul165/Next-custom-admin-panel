@@ -51,7 +51,7 @@ function AllTicketList() {
         // ticket_history
         // date
 
-        // id: `${userData.id}`,
+        id: `${userData.id}`,
         patient_info: `${userData.patient_info?.id}`,
         patient_name: `${userData.patient_info?.first_name} ${userData.patient_info?.last_name}`,
         // therapist_id: `${userData?.therapist_info?.id}`,
@@ -71,10 +71,15 @@ function AllTicketList() {
 
   const columns = useMemo(
     () => [
-      // {
-      //   header: "Ticket_id",
-      //   id: "id",
-      // },
+      {
+        header: "Ticket_id",
+        id: "id",
+        muiTableHeadCellProps: {
+          sx: {
+            display: "none",
+          },
+        },
+      },
       {
         header: "Patient_id",
         id: "patient_info",
@@ -147,6 +152,7 @@ function AllTicketList() {
                 // state={{
                 //   isLoading
                 // }}
+
                 initialState={{
                   showGlobalFilter: true,
                   pagination: { pageSize: 5 },

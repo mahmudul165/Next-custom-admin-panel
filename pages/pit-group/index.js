@@ -6,7 +6,7 @@ import { useTherapitListQuery } from "../../hook/useApi";
 //import PagePatientComponentTitle from "../../components/all-ticket/PageTicketComponentTitle";
 import dynamic from "next/dynamic";
 const TicketComponent = dynamic(() =>
-  import("../../components/all-ticket/TicketComponent")
+  import("../../components/PiTFormula/TicketComponent")
 );
 const Loading = dynamic(() => import("/components/common/Loading"));
 
@@ -56,7 +56,7 @@ function AllTicketList() {
         // ticket_history
         // date
 
-        // id: `${userData.id}`,
+        id: `${userData.id}`,
         patient_info: `${userData.patient_info?.id}`,
         patient_name: `${userData.patient_info?.first_name} ${userData.patient_info?.last_name}`,
         // therapist_id: `${userData?.therapist_info?.id}`,
@@ -76,10 +76,15 @@ function AllTicketList() {
 
   const columns = useMemo(
     () => [
-      // {
-      //   header: "Ticket_id",
-      //   id: "id",
-      // },
+      {
+        header: "Ticket_id",
+        id: "id",
+        muiTableHeadCellProps: {
+          sx: {
+            display: "none",
+          },
+        },
+      },
       {
         header: "Patient_id",
         id: "patient_info",
@@ -141,7 +146,10 @@ function AllTicketList() {
   return (
     <>
       <main className="p-6  space-y-6">
-        <TicketComponent title="All ticket" buttonTitle="Create new ticket" />
+        <TicketComponent
+          title="PiT Group (Specialist)"
+          buttonTitle="Create new ticket"
+        />
 
         <section className="grid card  md:grid-cols-1 xl:grid-cols-1   ">
           <div className="p-4">
@@ -200,7 +208,7 @@ function AllTicketList() {
                       gap: "0.5rem",
                     }}
                   >
-                    <Link passHref href={`all-ticket/edit/${row.original.id}`}>
+                    <Link passHref href={`pit-group/edit/${row.original.id}`}>
                       <button
                         className="text-purple-800 hover:underline"
                         // onClick={() => {

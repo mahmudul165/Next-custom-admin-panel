@@ -64,7 +64,7 @@ const TicketComponentTitle = ({ title, titleDescription, buttonTitle }) => {
           <h2 className="text-gray-600 ml-0.5">{titleDescription}</h2>
         </div>
         <div className="flex flex-wrap items-start justify-end -mb-3">
-          <button
+          {/* <button
             className="inline-flex px-2 py-2 text-white   hover:bg-teal-300 focus:bg-teal-400 rounded-md ml-6 mb-3"
             onClick={() => setModal(true)}
             style={{ backgroundColor: "#01a9ac" }}
@@ -87,7 +87,7 @@ const TicketComponentTitle = ({ title, titleDescription, buttonTitle }) => {
           </button>
           <OperationModal modal={modal} setModal={setModal}>
             {<TicketForm className="m-auto" />}
-          </OperationModal>
+          </OperationModal> */}
         </div>
       </div>
     </>

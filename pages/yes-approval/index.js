@@ -6,7 +6,7 @@ import { useTherapitListQuery } from "../../hook/useApi";
 //import PagePatientComponentTitle from "../../components/all-ticket/PageTicketComponentTitle";
 import dynamic from "next/dynamic";
 const TicketComponent = dynamic(() =>
-  import("../../components/all-ticket/TicketComponent")
+  import("../../components/yes-approval/TicketComponent")
 );
 const Loading = dynamic(() => import("/components/common/Loading"));
 
@@ -76,10 +76,15 @@ function AllTicketList() {
 
   const columns = useMemo(
     () => [
-      // {
-      //   header: "Ticket_id",
-      //   id: "id",
-      // },
+      {
+        header: "Ticket_id",
+        id: "id",
+        muiTableHeadCellProps: {
+          sx: {
+            display: "none",
+          },
+        },
+      },
       {
         header: "Patient_id",
         id: "patient_info",
@@ -141,7 +146,10 @@ function AllTicketList() {
   return (
     <>
       <main className="p-6  space-y-6">
-        <TicketComponent title="All ticket" buttonTitle="Create new ticket" />
+        <TicketComponent
+          title="Waiting for 'YES' Approval"
+          buttonTitle="Create new ticket"
+        />
 
         <section className="grid card  md:grid-cols-1 xl:grid-cols-1   ">
           <div className="p-4">
@@ -200,7 +208,10 @@ function AllTicketList() {
                       gap: "0.5rem",
                     }}
                   >
-                    <Link passHref href={`all-ticket/edit/${row.original.id}`}>
+                    <Link
+                      passHref
+                      href={`yes-approval/edit/${row.original.id}`}
+                    >
                       <button
                         className="text-purple-800 hover:underline"
                         // onClick={() => {
