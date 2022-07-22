@@ -76,7 +76,7 @@ function PibGroup() {
   const columns = useMemo(
     () => [
       {
-        header: "Ticket_id",
+        header: "Ticket id",
         id: "id",
         // muiTableHeadCellProps: {
         //   sx: {
@@ -85,7 +85,7 @@ function PibGroup() {
         // },
       },
       {
-        header: "Patient_id",
+        header: "Patient id",
         id: "patient_info",
       },
       {
@@ -101,7 +101,7 @@ function PibGroup() {
         id: "therapist_name",
       },
       {
-        header: "Ticket_department",
+        header: "Department",
         id: "ticket_department",
       },
       {
@@ -127,11 +127,11 @@ function PibGroup() {
         id: "strike",
       },
       {
-        header: "Strike_history",
+        header: "Strike history",
         id: "strike_history",
       },
       {
-        header: "Tickets_history",
+        header: "Ticket history",
         id: "ticket_history",
       },
 

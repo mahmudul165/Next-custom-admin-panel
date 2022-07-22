@@ -92,7 +92,7 @@ function PibFormFormula() {
               className="mt-3 text-center text-3xl font-extrabold  "
               style={{ color: "#01a9ac" }}
             >
-              PIB formula
+              PIT formula
             </h2>
             {/* table */}
             <div className=" mx-3 px-3 ">
@@ -144,7 +144,7 @@ function PibFormFormula() {
                       <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                           <th scope="col" className="py-3 fs-5 fw-bolder">
-                            Pre intake beoordeling (PIB)
+                            Pre intake beoordeling (PIT)
                           </th>
                         </tr>
                       </thead>
