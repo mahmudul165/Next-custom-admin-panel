@@ -228,7 +228,7 @@ function PatientList() {
               // row actions
 
               enableRowActions
-              positionActionsColumn="last"
+              positionActionsColumn="first"
               renderRowActions={({ row }) => (
                 <div
                   style={{

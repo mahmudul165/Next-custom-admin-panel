@@ -218,7 +218,7 @@ function TherapistList() {
               // row actions
 
               enableRowActions
-              positionActionsColumn="last"
+              positionActionsColumn="first"
               renderRowActions={({ row }) => (
                 <div
                   style={{ display: "flex", flexWrap: "nowrap", gap: "0.5rem" }}
