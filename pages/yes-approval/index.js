@@ -56,7 +56,7 @@ function AllTicketList() {
         // ticket_history
         // date
 
-        // id: `${userData.id}`,
+        id: `${userData.id}`,
         patient_info: `${userData.patient_info?.id}`,
         patient_name: `${userData.patient_info?.first_name} ${userData.patient_info?.last_name}`,
         // therapist_id: `${userData?.therapist_info?.id}`,
@@ -199,7 +199,7 @@ function AllTicketList() {
                 // row actions
 
                 enableRowActions
-                positionActionsColumn="last"
+                positionActionsColumn="first"
                 renderRowActions={({ row }) => (
                   <div
                     style={{
