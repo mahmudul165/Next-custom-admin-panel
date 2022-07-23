@@ -34,12 +34,12 @@ const UserMenu = () => {
     >
       <span className="sr-only">User Menu</span>
       <div className="  hidden     md:flex md:flex-col md:items-end md:leading-tight">
-        <span className="font-semibold text-white">Mahmud Hasan</span>
+        <span className="font-semibold text-white">Roman</span>
         <span className="text-sm text-slate-300">Super admin</span>
       </div>
       <span className="h-12 w-12 ml-2 sm:ml-3 mr-2 bg-gray-100 rounded-full overflow-hidden">
         <img
-          src="/admin/Group 4887.png"
+          src="/admin/roman.png"
           alt="user profile photo"
           className="h-full w-full object-cover"
         />

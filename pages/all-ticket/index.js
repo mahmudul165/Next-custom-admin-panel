@@ -16,6 +16,7 @@ function AllTicketList() {
   //console.log("All ticket data  from  ", data);
 
   const [remoteData, setRemoteData] = useState([]);
+  //const [ticketid, setTicketid] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -30,6 +31,7 @@ function AllTicketList() {
       );
       const json = await response.json();
       setRemoteData(json.data);
+
       setIsLoading(false);
     };
     fetchData();
@@ -74,6 +76,7 @@ function AllTicketList() {
       {
         header: "Ticket_id",
         id: "id",
+
         // muiTableHeadCellProps: {
         //   sx: {
         //     display: "none",
@@ -138,6 +141,7 @@ function AllTicketList() {
     ],
     []
   );
+
   return (
     <>
       <main className="p-6  space-y-6">
@@ -148,6 +152,9 @@ function AllTicketList() {
               <MaterialReactTable
                 enablePinning
                 enableColumnOrdering
+                enableRowOrdering
+                // enableRowVirtualization
+                // virtualizerProps={{ enableSmoothScroll: true }}
                 columns={columns}
                 data={parsedData}
                 // state={{
@@ -173,7 +180,7 @@ function AllTicketList() {
                 })}
                 muiTableBodyCellProps={{
                   sx: { border: "none" },
-                  //align: "center",
+                  //  align: "center",
                 }}
                 // muiTableContainerProps={{ sx: { maxHeight: 400 } }}
                 muiTablePaperProps={{

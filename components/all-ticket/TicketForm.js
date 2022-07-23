@@ -175,7 +175,7 @@ function TicketForm() {
                         options={patientList?.data.map((patient) => patient.id)}
                         // options={patientList?.data.map(
                         //   (patient) =>
-                        //     `${patient.id}-${patient.first_name} ${patient.last_name}`
+                        //     `${patient.id}-${patient.first_name} ${patient.last_name} - ${patient.phone}`
                         // )}
                         size="small"
                         renderInput={(params) => (

@@ -33,14 +33,14 @@ function PaitentForm({ title, data }) {
   const { postData } = useAuth();
   const [startDate, setStartDate] = useState(new Date());
   const [picture, setPicture] = useState("");
-  console.log("picture", picture);
+  console.log("picture upload", picture);
   const { data: countryList } = useCountyListQuery();
   const { data: bloodGroup } = useBloodGroupQuery();
   const { data: stateData } = useStateDataQuery();
   const { register, handleSubmit, error } = useForm({
     resolver: yupResolver(schema),
   });
-  console.log("edit data from patientlist", data);
+  //console.log("edit data from patientlist", data);
 
   //  mui data
   const documents = [
@@ -748,7 +748,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 <div className=" m-3 p-3 ">
                   <div className="flex justify-center items-center w-full  ">
                     <label
-                      htmlFor="picture"
+                      htmlFor="image"
                       className="flex flex-col justify-center items-center w-full h-40 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                     >
                       <div className="flex flex-col justify-center items-center pt-5 pb-6">
@@ -777,12 +777,12 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         </p>
                       </div>
                       <input
-                        id="picture"
+                        id="image"
                         type="file"
-                        {...register("picture")}
+                        //   {...register("image")}
                         className=" "
-                        onClick={(e) => setPicture(e.target.value)}
-                        //{...register(`${picture}`)}
+                        // onClick={(e) => setPicture(e.target.files[0])}
+                        // {...register(`${image}`)}
                       />
                     </label>
                   </div>
