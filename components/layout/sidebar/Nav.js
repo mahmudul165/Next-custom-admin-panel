@@ -226,7 +226,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           <RiPsychotherapyLine className=" h-6" />
         </NavItem>
 
-        <NavItem
+        {/* <NavItem
           hrefLink="/services/therapist-doctor"
           // sidebarStatus={sidebarStatus}
           menuTitle="Therapist/Doctor"
@@ -234,7 +234,7 @@ const Nav = ({ sidebarOutsideClick }) => {
           subMenuArray={null}
         >
           <HiAdjustments className=" h-6" />
-        </NavItem>
+        </NavItem> */}
 
         {/* test end */}
 
