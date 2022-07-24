@@ -35,7 +35,7 @@ import { useRouter } from "next/router";
 function EditTicket() {
   const { postData, updateData, Statustest, token } = useAuth();
   const [pathId, setId] = useState("");
-  //const [singleTicket, setRemoteData] = useState({});
+  const [singleTicket, setRemoteData] = useState({});
   //console.log("single ticket data  from  ", singleTicket);
   const [startDate, setStartDate] = useState(new Date());
   const { register, handleSubmit } = useForm({
@@ -66,22 +66,38 @@ function EditTicket() {
     setId(router.query?.id || localStorage.getItem("lastId"));
   }, [pathId]);
 
-  const fetchSingleTicket = async () => {
-    const response = await fetch(
-      `https://misiapi.lamptechs.com/api/v1/ticket/show?id=${pathId}`,
-      {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      }
-    );
-    return await response.json();
-  };
-  const useSingleTicketQuery = () =>
-    useQuery(["fetchSingleTicket"], fetchSingleTicket, {
-      refetchOnMount: true,
-      refetchOnWindowFocus: true,
-      refetchInterval: 1000,
-    });
-  const { data: singleTicket } = useSingleTicketQuery();
+  useEffect(() => {
+    setId(router.query?.id);
+    const fetchData = async () => {
+      const response = await fetch(
+        `https://misiapi.lamptechs.com/api/v1/ticket/show?id=${pathId}`,
+
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      const json = await response.json();
+      setRemoteData(json);
+    };
+    fetchData();
+  }, [pathId, singleTicket]);
+
+  // const fetchSingleTicket = async () => {
+  //   const response = await fetch(
+  //     `https://misiapi.lamptechs.com/api/v1/ticket/show?id=${pathId}`,
+  //     {
+  //       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  //     }
+  //   );
+  //   return await response.json();
+  // };
+  // const useSingleTicketQuery = () =>
+  //   useQuery(["fetchSingleTicket"], fetchSingleTicket, {
+  //     refetchOnMount: true,
+  //     refetchOnWindowFocus: true,
+  //     refetchInterval: 1000,
+  //   });
+  // const { data: singleTicket } = useSingleTicketQuery();
 
   return (
     <>
