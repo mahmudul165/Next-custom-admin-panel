@@ -22,45 +22,6 @@ function Dashboard() {
   const { data: ticket } = useAllTicketQuery();
 
   const { deleteData, Statustest, token, apiRootUrl, apiEndpoint } = useAuth();
-  // all ticket real time show
-  // const [ticket, setTicket] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setIsLoading(true);
-  //     const response = await fetch(
-  //       `${apiRootUrl}${apiEndpoint?.ticket?.list}`,
-  //       // "https://misiapi.lamptechs.com/api/v1/ticket",
-  //       {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       }
-  //     );
-  //     const json = await response.json();
-  //     setTicket(json);
-  //     setIsLoading(false);
-  //   };
-  //   fetchData();
-  // }, [ticket, token]);
-
-  // All patients
-  // const [allPatient, setPatient] = useState([]);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setIsLoading(true);
-  //     const response = await fetch(
-  //       `${apiRootUrl}${apiEndpoint?.patient?.list}`,
-  //       // "https://misiapi.lamptechs.com/api/v1/ticket",
-  //       {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       }
-  //     );
-  //     const json = await response.json();
-  //     setPatient(json);
-  //     setIsLoading(false);
-  //   };
-  //   fetchData();
-  // }, [allPatient, token]);
-  // console.log("allPatient", allPatient);
 
   const zdPatient = allPatient?.data?.filter(
     (patient) => patient.source === "ZD"

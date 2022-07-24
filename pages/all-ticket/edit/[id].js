@@ -33,8 +33,10 @@ import useAuth from "/hook/useAuth";
 import { useQuery } from "react-query";
 import { useRouter } from "next/router";
 function EditTicket() {
-  const { postData, updateData, Statustest } = useAuth();
-
+  const { postData, updateData, Statustest, token } = useAuth();
+  const [pathId, setId] = useState("");
+  //const [singleTicket, setRemoteData] = useState({});
+  //console.log("single ticket data  from  ", singleTicket);
   const [startDate, setStartDate] = useState(new Date());
   const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema),
@@ -54,12 +56,19 @@ function EditTicket() {
 
   // get  single patient data
   const router = useRouter();
-  const { id } = router.query;
+
+  //const { id } = router.query;
+
   console.log("single ticket id", typeof id);
+  // localStorage.setItem("lastId", router.query?.id);
+  router.query?.id && localStorage.setItem("lastId", router.query?.id);
+  useEffect(() => {
+    setId(router.query?.id || localStorage.getItem("lastId"));
+  }, [pathId]);
 
   const fetchSingleTicket = async () => {
     const response = await fetch(
-      `https://misiapi.lamptechs.com/api/v1/ticket/show?id=${id}`,
+      `https://misiapi.lamptechs.com/api/v1/ticket/show?id=${pathId}`,
       {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       }
@@ -67,16 +76,16 @@ function EditTicket() {
     return await response.json();
   };
   const useSingleTicketQuery = () =>
-    useQuery(["fetchSingleTicket"], fetchSingleTicket);
+    useQuery(["fetchSingleTicket"], fetchSingleTicket, {
+      refetchOnMount: true,
+      refetchOnWindowFocus: true,
+      refetchInterval: 1000,
+    });
   const { data: singleTicket } = useSingleTicketQuery();
-  // console.log("edit  singleTicket data", singleTicket);
-
-  const [value, setValue] = React.useState();
-  const [inputValue, setInputValue] = React.useState("");
 
   return (
     <>
-      {singleTicket ? (
+      {singleTicket?.data ? (
         <form
           className="w-10/12 m-auto p-10  first-line: "
           onSubmit={handleSubmit(

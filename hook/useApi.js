@@ -80,7 +80,10 @@ const fetchPatientList = async () => {
 };
 
 export const usePatientListQuery = () =>
-  useQuery(["patientList"], fetchPatientList, {});
+  useQuery(["patientList"], fetchPatientList, {
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
+  });
 // get therapist list  data
 const fetchTherapitList = async () => {
   const response = await fetch(
@@ -104,8 +107,8 @@ const fetchAllTicket = async () => {
 };
 export const useAllTicketQuery = () =>
   useQuery(["allticket"], fetchAllTicket, {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
   });
 
 //ticket dipartment
