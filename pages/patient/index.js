@@ -78,15 +78,15 @@ function PatientList() {
   // console.log("id data remoteData", remoteData);
   const columns = useMemo(
     () => [
-      {
-        header: "Patient id",
-        id: "id",
-        // muiTableHeadCellProps: {
-        //   sx: {
-        //     display: "none",
-        //   },
-        // },
-      },
+      // {
+      //   header: "Patient id",
+      //   id: "id",
+      //   // muiTableHeadCellProps: {
+      //   //   sx: {
+      //   //     display: "none",
+      //   //   },
+      //   // },
+      // },
 
       {
         header: "First name",
@@ -159,7 +159,7 @@ function PatientList() {
         id: "country",
       },
       {
-        header: "blood group",
+        header: "Blood group",
         id: "blood_group",
       },
       {
