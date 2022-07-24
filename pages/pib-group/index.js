@@ -154,6 +154,9 @@ function PibGroup() {
           <div className="p-4">
             {remoteData ? (
               <MaterialReactTable
+                enablePinning
+                enableColumnOrdering
+                enableRowOrdering
                 columns={columns}
                 data={parsedData}
                 // state={{

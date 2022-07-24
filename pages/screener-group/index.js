@@ -76,7 +76,7 @@ function AllTicketList() {
   const columns = useMemo(
     () => [
       {
-        header: "Ticket_id",
+        header: "Ticket id",
         id: "id",
         // muiTableHeadCellProps: {
         //   sx: {
@@ -93,7 +93,7 @@ function AllTicketList() {
         id: "patient_name",
       },
       // {
-      //   header: "Therapist_id",
+      //   header: "Therapist id",
       //   id: "therapist_id",
       // },
       {
@@ -154,6 +154,9 @@ function AllTicketList() {
           <div className="p-4">
             {remoteData ? (
               <MaterialReactTable
+                enablePinning
+                enableColumnOrdering
+                enableRowOrdering
                 columns={columns}
                 data={parsedData}
                 // state={{

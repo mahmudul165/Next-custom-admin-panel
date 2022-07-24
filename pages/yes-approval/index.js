@@ -86,7 +86,7 @@ function AllTicketList() {
         // },
       },
       {
-        header: "Patient_id",
+        header: "Patient id",
         id: "patient_info",
       },
       {
@@ -94,7 +94,7 @@ function AllTicketList() {
         id: "patient_name",
       },
       // {
-      //   header: "Therapist_id",
+      //   header: "Therapist id",
       //   id: "therapist_id",
       // },
       {
@@ -102,7 +102,7 @@ function AllTicketList() {
         id: "therapist_name",
       },
       {
-        header: "Ticket_department",
+        header: "Department",
         id: "ticket_department",
       },
       {
@@ -128,11 +128,11 @@ function AllTicketList() {
         id: "strike",
       },
       {
-        header: "Strike_history",
+        header: "Strike history",
         id: "strike_history",
       },
       {
-        header: "Tickets_history",
+        header: "Tickets history",
         id: "ticket_history",
       },
 
@@ -155,6 +155,9 @@ function AllTicketList() {
           <div className="p-4">
             {remoteData ? (
               <MaterialReactTable
+                enablePinning
+                enableColumnOrdering
+                enableRowOrdering
                 columns={columns}
                 data={parsedData}
                 // state={{
