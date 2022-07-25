@@ -75,7 +75,7 @@ function TherapistList() {
         //   </Link>
         // ),
       })) ?? [],
-    [remoteData]
+    [remoteData, token]
   );
 
   const columns = useMemo(

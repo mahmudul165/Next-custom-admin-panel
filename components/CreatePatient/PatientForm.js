@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import useAuth from "/hook/useAuth";
+//import DatePicker from "react-multi-date-picker";
+
 const schema = yup
   .object()
   .shape({
@@ -28,6 +30,7 @@ import {
   useCountyListQuery,
   useBloodGroupQuery,
   useStateDataQuery,
+  useOccupationQuery,
 } from "../../hook/useApi";
 function PaitentForm({ title, data }) {
   const { postData } = useAuth();
@@ -37,9 +40,12 @@ function PaitentForm({ title, data }) {
   const { data: countryList } = useCountyListQuery();
   const { data: bloodGroup } = useBloodGroupQuery();
   const { data: stateData } = useStateDataQuery();
-  const { register, handleSubmit, error } = useForm({
+  const { data: occupation } = useOccupationQuery();
+  const { register, handleSubmit, error, control } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const [submittedDate, setSubmittedDate] = useState();
   //console.log("edit data from patientlist", data);
 
   //  mui data
@@ -48,6 +54,12 @@ function PaitentForm({ title, data }) {
     { title: "Driving" },
     { title: "Others" },
   ];
+  const [date, setDate] = useState(new Date());
+  console.log("date is", date);
+  const [deadline, setDeadline] = useState(new Date());
+  const handleCalendarClose = () => console.log("Calendar closed");
+  const handleCalendarOpen = () => console.log("Calendar opened");
+
   return (
     <>
       {data?.data ? (
@@ -434,12 +446,19 @@ function PaitentForm({ title, data }) {
                     </div>
                     {/* DATE OF birth */}
                     <div className="col-start-2 relative  ">
-                      <input
+                      {/* <input
                         id="date_of_birth"
                         // {...register("date_of_birth")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
+                      /> */}
+                      <DatePicker
+                        className="form-control"
+                        selected={date}
+                        onChange={(date) => setDate(date)}
+                        onCalendarClose={handleCalendarClose}
+                        onCalendarOpen={handleCalendarOpen}
                       />
                       <label
                         htmlFor="date_of_birth"
@@ -732,7 +751,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   "https://misiapi.lamptechs.com/api/v1/patient/store",
                   d
                 )
-              // console.log("data patient", d)
+              //  console.log("data patient", d)
             )}
           >
             {/* postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)  console.log("data patient", d)*/}
@@ -933,7 +952,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     </label>
                   </div>
                   {/* country  and blood  */}
-                  <div className="grid  gap-4 mt-2.5">
+                  <div className="grid grid-cols-2  gap-4 mt-2.5">
                     {/* country */}
 
                     <div className="col-start-1 relative">
@@ -998,7 +1017,6 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       )}
                     </div>
                   </div>
-
                   {/* state  and area */}
                   <div className="grid   grid-cols-2  gap-4 mt-2.5">
                     {/* State/City */}
@@ -1088,7 +1106,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     </div>
                   </div>
                   {/* insurance_number insurance_number_number_number AND DATE OF BIRTH */}
-                  <div className="grid  gap-4 mt-2.5">
+                  <div className="grid grid-cols-2 gap-4 mt-2.5">
                     {/* insurance_number_number*/}
                     <div className="col-start-1 relative  ">
                       <input
@@ -1109,12 +1127,14 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     {/* DATE OF birth */}
                     <div className="col-start-2 relative  ">
                       <input
+                        type="date"
                         id="date_of_birth"
-                        // {...register("date_of_birth")}
+                        {...register("date_of_birth")}
                         className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                         placeholder="  "
                         required
                       />
+
                       <label
                         htmlFor="date_of_birth"
                         className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
@@ -1146,22 +1166,34 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       </label>
                     </div>
                     {/* occupation */}
-                    <div className="  relative  ">
-                      <input
-                        type="text"
-                        id="occupation"
-                        {...register("occupation")}
-                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                        placeholder="  "
-                        //required
-                      />
-                      <label
-                        htmlFor="occupation"
-                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                      >
-                        Occupation
-                      </label>
-                    </div>
+                    {occupation?.data ? (
+                      <div className="relative  ">
+                        <select
+                          id="occupation"
+                          {...register("occupation")}
+                          className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        >
+                          <option selected>select occupation</option>
+                          {occupation.data?.map((item) => (
+                            <option key={item.id} value={`${item?.id}`}>
+                              {`${item?.name} `}
+                            </option>
+                          ))}
+                        </select>
+                        <label
+                          htmlFor="occupation"
+                          className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                        >
+                          Occupation
+                        </label>
+                      </div>
+                    ) : (
+                      <>
+                        <Stack spacing={1}>
+                          <Skeleton animation="wave" height={40} />
+                        </Stack>
+                      </>
+                    )}
                   </div>
                   {/* sex and blood */}
                   <div className="grid gap-4 grid-cols-1 mt-2.5">

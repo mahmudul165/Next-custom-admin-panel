@@ -80,7 +80,10 @@ const fetchPatientList = async () => {
 };
 
 export const usePatientListQuery = () =>
-  useQuery(["patientList"], fetchPatientList, {});
+  useQuery(["patientList"], fetchPatientList, {
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
+  });
 // get therapist list  data
 const fetchTherapitList = async () => {
   const response = await fetch(
@@ -104,8 +107,8 @@ const fetchAllTicket = async () => {
 };
 export const useAllTicketQuery = () =>
   useQuery(["allticket"], fetchAllTicket, {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
   });
 
 //ticket dipartment
@@ -200,6 +203,20 @@ const fetchState = async () => {
   return await response.json();
 };
 export const useStateDataQuery = () => useQuery(["state"], fetchState);
+
+// get  occupation data
+const fetchOccupation = async () => {
+  const response = await fetch(
+    `https://misiapi.lamptechs.com/api/v1/occupation`,
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+
+  return await response.json();
+};
+export const useOccupationQuery = () =>
+  useQuery(["fetchOccupation"], fetchOccupation);
 
 // therapist type
 const fetchTypeTherapist = async () => {

@@ -59,6 +59,8 @@ function AllTicketList() {
         // therapist_id: `${userData?.therapist_info?.id}`,
         therapist_name: `${userData.therapist_info?.first_name} ${userData.therapist_info?.last_name}`,
         ticket_department: userData?.ticket_department_info?.name,
+        source: `${userData.patient_info?.source}`,
+
         location: userData.location,
         status: `${Statustest(userData.status)}`,
         language: userData.language,
@@ -104,14 +106,14 @@ function AllTicketList() {
         id: "ticket_department",
       },
       {
+        header: "Own",
+        id: "source",
+      },
+      {
         header: "Location",
         id: "location",
       },
 
-      {
-        header: "Status",
-        id: "status",
-      },
       {
         header: "Language",
         id: "language",
@@ -137,6 +139,10 @@ function AllTicketList() {
       {
         header: "Date",
         id: "date",
+      },
+      {
+        header: "Status",
+        id: "status",
       },
     ],
     []

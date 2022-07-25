@@ -149,7 +149,7 @@ function Dashboard() {
         </section>
         <section className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           <Card
-            name="Missing-Info Lists"
+            name="Missing-Info List"
             number={missingInfoGroup?.length}
             path="/missing-info-list"
             bgColor="bg-gradient-to-b from-indigo-500  to-indigo-400  "
