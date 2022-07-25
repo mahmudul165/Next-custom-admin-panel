@@ -6,7 +6,7 @@ import Link from "next/link";
 //import PagePatientComponentTitle from "../../components/CreatePatient/PagePatientComponentTitle";
 import dynamic from "next/dynamic";
 const PatientComponent = dynamic(() =>
-  import("../../components/CreatePatient/PatientComponent")
+  import("../../components/zd patient/PatientComponent")
 );
 
 function PatientList() {
@@ -43,7 +43,7 @@ function PatientList() {
         }
       );
       const json = await response.json();
-      setRemoteData(json.data);
+      setRemoteData(json.data.filter((patient) => patient.source === "ZD"));
       setIsLoading(false);
     };
     fetchData();
@@ -177,7 +177,7 @@ function PatientList() {
     <>
       <main className="p-6  space-y-6">
         <PatientComponent
-          title="Patient list"
+          title="ZD patient list"
           buttonTitle="Create new patient"
         />
 

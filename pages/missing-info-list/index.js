@@ -6,7 +6,7 @@ import Link from "next/link";
 //import PagePatientComponentTitle from "../../components/CreatePatient/PagePatientComponentTitle";
 import dynamic from "next/dynamic";
 const PatientComponent = dynamic(() =>
-  import("../../components/CreatePatient/PatientComponent")
+  import("../../components/missing-info/PatientComponent")
 );
 
 function PatientList() {
@@ -43,7 +43,15 @@ function PatientList() {
         }
       );
       const json = await response.json();
-      setRemoteData(json.data);
+      setRemoteData(
+        json.data?.filter(
+          (item) =>
+            item?.emergency_contact === null ||
+            item?.age === null ||
+            item?.city === null ||
+            item?.occupation === null
+        )
+      );
       setIsLoading(false);
     };
     fetchData();
@@ -177,7 +185,7 @@ function PatientList() {
     <>
       <main className="p-6  space-y-6">
         <PatientComponent
-          title="Patient list"
+          title="Missing-Info Lists"
           buttonTitle="Create new patient"
         />
 

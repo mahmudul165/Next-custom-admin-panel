@@ -80,15 +80,15 @@ function TherapistList() {
 
   const columns = useMemo(
     () => [
-      {
-        header: "Therapist_id",
-        id: "id",
-        // muiTableHeadCellProps: {
-        //   sx: {
-        //     display: "none",
-        //   },
-        // },
-      },
+      // {
+      //   header: "Therapist_id",
+      //   id: "id",
+      //   // muiTableHeadCellProps: {
+      //   //   sx: {
+      //   //     display: "none",
+      //   //   },
+      //   // },
+      // },
       {
         header: "First name",
         id: "first_name",

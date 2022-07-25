@@ -76,17 +76,17 @@ function AllTicketList() {
 
   const columns = useMemo(
     () => [
+      // {
+      //   header: "Ticket id",
+      //   id: "id",
+      //   // muiTableHeadCellProps: {
+      //   //   sx: {
+      //   //     display: "none",
+      //   //   },
+      //   // },
+      // },
       {
-        header: "Ticket id",
-        id: "id",
-        // muiTableHeadCellProps: {
-        //   sx: {
-        //     display: "none",
-        //   },
-        // },
-      },
-      {
-        header: "Patient_id",
+        header: "Patient id",
         id: "patient_info",
       },
       {
@@ -102,7 +102,7 @@ function AllTicketList() {
         id: "therapist_name",
       },
       {
-        header: "Ticket_department",
+        header: "Department",
         id: "ticket_department",
       },
       {
@@ -128,11 +128,11 @@ function AllTicketList() {
         id: "strike",
       },
       {
-        header: "Strike_history",
+        header: "Strike history",
         id: "strike_history",
       },
       {
-        header: "Tickets_history",
+        header: "Tickets history",
         id: "ticket_history",
       },
 
