@@ -82,9 +82,13 @@ function AllTicketList() {
   const columns = useMemo(
     () => [
       // {
-      //   header: "Ticket id",
+      //   header: "Ticket_id",
       //   id: "id",
-
+      //   // muiTableHeadCellProps: {
+      //   //   sx: {
+      //   //     display: "none",
+      //   //   },
+      //   // },
       // },
       {
         header: "Patient id",

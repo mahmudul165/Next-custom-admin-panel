@@ -72,6 +72,8 @@ export const useTherapistServiceQuery = () =>
 // .catch((error) => {
 //   console.log(error)
 // });
+
+// all patient data
 const fetchPatientList = async () => {
   const response = await fetch("https://misiapi.lamptechs.com/api/v1/patient", {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -203,6 +205,20 @@ const fetchState = async () => {
   return await response.json();
 };
 export const useStateDataQuery = () => useQuery(["state"], fetchState);
+
+// get  occupation data
+const fetchOccupation = async () => {
+  const response = await fetch(
+    `https://misiapi.lamptechs.com/api/v1/occupation`,
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+
+  return await response.json();
+};
+export const useOccupationQuery = () =>
+  useQuery(["fetchOccupation"], fetchOccupation);
 
 // therapist type
 const fetchTypeTherapist = async () => {

@@ -187,6 +187,24 @@ const Nav = ({ sidebarOutsideClick }) => {
         >
           <CgNotes className=" h-6" />
         </NavItem>
+        <NavItem
+          hrefLink="/missing-info-list"
+          // sidebarStatus={sidebarStatus}
+          menuTitle="Missing-Info List"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          <MdList className=" h-6" />
+        </NavItem>
+        <NavItem
+          hrefLink="/zd-patient"
+          // sidebarStatus={sidebarStatus}
+          menuTitle="ZD Patient List"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          <GiPerson className=" h-6" />
+        </NavItem>
 
         <NavItem
           hrefLink="/appointment"

@@ -70,7 +70,7 @@ function AllTicketList() {
         //ticket_history: userData.ticket_history,
         date: userData.date,
       })) ?? [],
-    [remoteData]
+    [remoteData, token]
   );
 
   const columns = useMemo(
@@ -109,20 +109,20 @@ function AllTicketList() {
         id: "therapist_schedule",
       },
       {
-        header: "start time",
+        header: "Start time",
         id: "start_time",
       },
       {
-        header: "end time",
+        header: "End time",
         id: "end_time",
       },
       {
-        header: "consulting  time",
+        header: "Consulting  time",
         id: "consulting_time",
       },
 
       {
-        header: "time",
+        header: "Time",
         id: "time",
       },
 
@@ -144,7 +144,7 @@ function AllTicketList() {
         id: "therapist_comment",
       },
       {
-        header: "fee",
+        header: "Fee",
         id: "fee",
       },
 

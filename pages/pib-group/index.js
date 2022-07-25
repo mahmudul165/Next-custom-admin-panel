@@ -231,6 +231,19 @@ function PibGroup() {
                     >
                       Delete
                     </button>
+                    <Link
+                      passHref
+                      href={`/pib-group/pib-form/${row?.original?.id}`}
+                    >
+                      <button
+                        className="text-purple-800 hover:underline"
+                        // onClick={() => {
+                        //   console.log("View Profile", row.original.id);
+                        // }}
+                      >
+                        Create PiB
+                      </button>
+                    </Link>
                   </div>
                 )}
               />

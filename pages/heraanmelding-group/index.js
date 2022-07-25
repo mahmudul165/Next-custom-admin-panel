@@ -101,7 +101,7 @@ function AllTicketList() {
         id: "therapist_name",
       },
       {
-        header: "Ticket department",
+        header: "Department",
         id: "ticket_department",
       },
       {

@@ -78,15 +78,15 @@ function PatientList() {
   // console.log("id data remoteData", remoteData);
   const columns = useMemo(
     () => [
-      // {
-      //   header: "Patient id",
-      //   id: "id",
-      //   // muiTableHeadCellProps: {
-      //   //   sx: {
-      //   //     display: "none",
-      //   //   },
-      //   // },
-      // },
+      {
+        header: "Patient id",
+        id: "id",
+        // muiTableHeadCellProps: {
+        //   sx: {
+        //     display: "none",
+        //   },
+        // },
+      },
 
       {
         header: "First name",
@@ -117,6 +117,10 @@ function PatientList() {
         header: "Age",
         id: "age",
       },
+      {
+        header: "Date of birth",
+        id: "date_of_birth",
+      },
 
       {
         header: "BNS number",
@@ -144,10 +148,6 @@ function PatientList() {
       {
         header: "Gender",
         id: "gender",
-      },
-      {
-        header: "Date of birth",
-        id: "date_of_birth",
       },
 
       {
