@@ -35,7 +35,7 @@ import { useRouter } from "next/router";
 function EditTicket() {
   const { postData, updateData, Statustest, token } = useAuth();
   const [pathId, setId] = useState("");
-  const [singleTicket, setRemoteData] = useState({});
+  //const [singleTicket, setRemoteData] = useState({});
   //console.log("single ticket data  from  ", singleTicket);
   const [startDate, setStartDate] = useState(new Date());
   const { register, handleSubmit } = useForm({
@@ -57,7 +57,7 @@ function EditTicket() {
   // get  single patient data
   const router = useRouter();
 
-  //const { id } = router.query;
+  const { id } = router.query;
 
   console.log("single ticket id", typeof id);
   // localStorage.setItem("lastId", router.query?.id);
@@ -66,38 +66,39 @@ function EditTicket() {
     setId(router.query?.id || localStorage.getItem("lastId"));
   }, [pathId]);
 
-  useEffect(() => {
-    setId(router.query?.id);
-    const fetchData = async () => {
-      const response = await fetch(
-        `https://misiapi.lamptechs.com/api/v1/ticket/show?id=${pathId}`,
+  // edit with id in real time request
+  // useEffect(() => {
+  //   setId(router.query?.id);
+  //   const fetchData = async () => {
+  //     const response = await fetch(
+  //       `https://misiapi.lamptechs.com/api/v1/ticket/show?id=${pathId}`,
 
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      const json = await response.json();
-      setRemoteData(json);
-    };
-    fetchData();
-  }, [pathId, singleTicket]);
+  //       {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       }
+  //     );
+  //     const json = await response.json();
+  //     setRemoteData(json);
+  //   };
+  //   fetchData();
+  // }, [pathId, singleTicket]);
 
-  // const fetchSingleTicket = async () => {
-  //   const response = await fetch(
-  //     `https://misiapi.lamptechs.com/api/v1/ticket/show?id=${pathId}`,
-  //     {
-  //       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-  //     }
-  //   );
-  //   return await response.json();
-  // };
-  // const useSingleTicketQuery = () =>
-  //   useQuery(["fetchSingleTicket"], fetchSingleTicket, {
-  //     refetchOnMount: true,
-  //     refetchOnWindowFocus: true,
-  //     refetchInterval: 1000,
-  //   });
-  // const { data: singleTicket } = useSingleTicketQuery();
+  const fetchSingleTicket = async () => {
+    const response = await fetch(
+      `https://misiapi.lamptechs.com/api/v1/ticket/show?id=${id}`,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }
+    );
+    return await response.json();
+  };
+  const useSingleTicketQuery = () =>
+    useQuery(["fetchSingleTicket"], fetchSingleTicket, {
+      refetchOnMount: true,
+      refetchOnWindowFocus: true,
+      refetchInterval: 1000,
+    });
+  const { data: singleTicket } = useSingleTicketQuery();
 
   return (
     <>
