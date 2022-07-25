@@ -70,7 +70,7 @@ function AllTicketList() {
         //ticket_history: userData.ticket_history,
         date: userData.date,
       })) ?? [],
-    [remoteData]
+    [remoteData, token]
   );
 
   const columns = useMemo(

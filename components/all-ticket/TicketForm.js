@@ -172,11 +172,11 @@ function TicketForm() {
                         }}
                         disablePortal
                         id="combo-box-demo"
-                        options={patientList?.data.map((patient) => patient.id)}
-                        // options={patientList?.data.map(
-                        //   (patient) =>
-                        //     `${patient.id}-${patient.first_name} ${patient.last_name} - ${patient.phone}`
-                        // )}
+                        // options={patientList?.data.map((patient) => patient.id)}
+                        options={patientList?.data.map(
+                          (patient) =>
+                            `${patient.id}-${patient.first_name} ${patient.last_name} - ${patient.phone}`
+                        )}
                         size="small"
                         renderInput={(params) => (
                           <TextField
@@ -826,7 +826,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     htmlFor="language"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
-                    Language
+                    Language treatment
                   </label>
                 </div>
               </div>

@@ -229,6 +229,19 @@ function PitGroup() {
                     >
                       Delete
                     </button>
+                    <Link
+                      passHref
+                      href={`/pit-group/pit-form/${row?.original?.id}`}
+                    >
+                      <button
+                        className="text-purple-800 hover:underline"
+                        // onClick={() => {
+                        //   console.log("View Profile", row.original.id);
+                        // }}
+                      >
+                        Create PiT
+                      </button>
+                    </Link>
                   </div>
                 )}
               />
