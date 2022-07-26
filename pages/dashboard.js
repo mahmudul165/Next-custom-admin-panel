@@ -28,6 +28,7 @@ function Dashboard() {
   );
   console.log("zdPatient result", zdPatient?.length);
   console.log("all ticket number", ticket?.data);
+  console.log("all patient data", allPatient?.data);
 
   const Accounts = ticket?.data?.filter(
     (item) => item?.ticket_department_info?.name === "Accounts"
