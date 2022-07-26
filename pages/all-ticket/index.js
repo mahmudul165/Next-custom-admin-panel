@@ -115,7 +115,7 @@ function AllTicketList() {
       },
 
       {
-        header: "Language",
+        header: "Language treatment",
         id: "language",
       },
       {
