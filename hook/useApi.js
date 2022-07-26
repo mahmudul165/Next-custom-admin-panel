@@ -112,7 +112,7 @@ export const useAllTicketQuery = () =>
   useQuery(["allticket"], fetchAllTicket, {
     refetchOnMount: true,
     refetchOnWindowFocus: true,
-    refetchInterval: 3,
+    //refetchInterval: 3,
   });
 
 //ticket dipartment
