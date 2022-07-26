@@ -637,11 +637,11 @@ function TicketForm() {
                   </label>
                 </div>
               </div> */}
-              <div className="grid gap-4 grid-cols-2 mt-2.5">
+              <div className="grid gap-4 grid-cols-2 my-2.5">
                 {/* Assign To therapist */}
                 <div className="relative">
                   {therapistList?.data ? (
-                    <div className="relative my-3">
+                    <div className="relative  ">
                       <select
                         id="therapist_id"
                         {...register("therapist_id")}
@@ -672,7 +672,7 @@ function TicketForm() {
                 {/* Pass Department  */}
                 <div className="relative">
                   {ticketDepartment?.data ? (
-                    <div className="relative my-3">
+                    <div className="relative  ">
                       <select
                         id="ticket_department_id"
                         {...register("ticket_department_id")}
@@ -701,6 +701,283 @@ function TicketForm() {
                   )}
                 </div>
               </div>
+              {/* start new field */}
+              {/*  Mono/Multi ZD ANDMono/Multi screening */}
+              <div className="grid  gap-4 mt-2.5">
+                {/*  Mono/Multi ZD*/}
+                <div className="col-start-1 relative  ">
+                  <input
+                    type="text"
+                    id="mono-zd"
+                    // {...register("mono-zde")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="mono-zd"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Mono/Multi ZD
+                  </label>
+                </div>
+                {/*  Mono/Multi screening */}
+                <div className="col-start-2 relative  ">
+                  <input
+                    id="mono-screening"
+                    // {...register("mono-screening")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="mono-screening"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Mono/Multi screening
+                  </label>
+                </div>
+              </div>
+              {/*  Intakes/therapist AND tresonit nummer */}
+              <div className="grid  gap-4 mt-2.5">
+                {/* Intakes/therapist*/}
+                <div className="col-start-1 relative  ">
+                  <input
+                    type="text"
+                    id="intakes"
+                    // {...register("intakes")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="intakes"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Intakes/therapist
+                  </label>
+                </div>
+                {/*  Tresonit nummer  */}
+                <div className="col-start-2 relative  ">
+                  <input
+                    id="tresonit-nummer"
+                    // {...register("tresonit-nummer")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="tresonit-nummer"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Tresonit nummer
+                  </label>
+                </div>
+              </div>
+              {/*  Datum intake AND Datum intake 2 */}
+              <div className="grid  gap-4 mt-2.5">
+                {/* Datum intake*/}
+                <div className="col-start-1 relative  ">
+                  <input
+                    type="text"
+                    id="datum-intake"
+                    // {...register("datum-intake")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="datum-intake"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Datum intake
+                  </label>
+                </div>
+                {/*  Datum intake 2  */}
+                <div className="col-start-2 relative  ">
+                  <input
+                    id="datum-intake-2"
+                    // {...register("datum-intake-2")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="datum-intake-2"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Datum intake 2
+                  </label>
+                </div>
+              </div>
+              {/*  ND account AND AvC/AlfmVm/SBG */}
+              <div className="grid  gap-4 mt-2.5">
+                {/* ND account*/}
+                <div className="col-start-1 relative  ">
+                  <input
+                    type="text"
+                    id="nd-account"
+                    // {...register("nd-account")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="nd-account"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    ND account
+                  </label>
+                </div>
+                {/*  AvC/AlfmVm/SBG  */}
+                <div className="col-start-2 relative  ">
+                  <input
+                    id="AvC/AlfmVm/SBG"
+                    // {...register("AvC/AlfmVm/SBG")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="AvC/AlfmVm/SBG"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    AvC/AlfmVm/SBG
+                  </label>
+                </div>
+              </div>
+              {/*  HoNOS+ AND Berha intake */}
+              <div className="grid  gap-4 mt-2.5">
+                {/* HoNOS+*/}
+                <div className="col-start-1 relative  ">
+                  <input
+                    type="text"
+                    id="HoNOS+"
+                    // {...register("HoNOS+")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="HoNOS+"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    HoNOS+
+                  </label>
+                </div>
+                {/*  Berha intake  */}
+                <div className="col-start-2 relative  ">
+                  <input
+                    id="Berha intake"
+                    // {...register("Berha intake")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="Berha intake"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Berha intake
+                  </label>
+                </div>
+              </div>
+              {/*  ROM start AND ROM eind */}
+              <div className="grid  gap-4 mt-2.5">
+                {/*  ROM start*/}
+                <div className="col-start-1 relative  ">
+                  <input
+                    type="date"
+                    id="ROM start"
+                    // {...register("ROM start")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="ROM start"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    ROM start
+                  </label>
+                </div>
+                {/*  ROM eind */}
+                <div className="col-start-2 relative  ">
+                  <input
+                    type="date"
+                    id="ROM eind"
+                    // {...register("ROM eind")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="ROM eind"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    ROM eind
+                  </label>
+                </div>
+              </div>
+              {/*  Berha eind AND VTCB date */}
+              <div className="grid  gap-4 mt-2.5">
+                {/* Berha eind*/}
+                <div className="col-start-1 relative  ">
+                  <input
+                    type="date"
+                    id="Berha eind"
+                    // {...register("Berha eind")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="Berha eind"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Berha eind
+                  </label>
+                </div>
+                {/*  VTCB date */}
+                <div className="col-start-2 relative  ">
+                  <input
+                    type="date"
+                    id="VTCB date"
+                    // {...register("VTCB date")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="VTCB date"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    VTCB date
+                  </label>
+                </div>
+              </div>
+              {/*  Closure AND Aanm-intake 1 (dagentussen) */}
+              <div className="grid grid-cols-2  gap-4 mt-2.5">
+                {/* Closure*/}
+                <div className="col-start-1 relative  ">
+                  <input
+                    type="date"
+                    id="Closure"
+                    // {...register("Closure")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="Closure"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Closure
+                  </label>
+                </div>
+                {/* Aanm-intake 1 (dagentussen) */}
+                <div className="col-start-2 relative  ">
+                  <input
+                    //type="date"
+                    id="Aanm-intake 1 (dagentussen)"
+                    // {...register("Aanm-intake 1 (dagentussen)")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                  />
+                  <label
+                    htmlFor="Aanm-intake 1 (dagentussen)"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Aanm-intake 1 (dagentussen)
+                  </label>
+                </div>
+              </div>
+              {/* end new field  */}
               <div className="grid gap-4 grid-cols-2 mt-2.5">
                 {/*call strike  */}
                 <div className="col-start-1 relative">
@@ -773,7 +1050,7 @@ function TicketForm() {
               </div>
               {/*  language and status */}
               <div className="grid grid-cols-2 gap-4 my-2.5">
-                {/* status */}
+                {/* status treatment*/}
                 <div className="  relative">
                   <select
                     id="status"
@@ -808,7 +1085,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     htmlFor="status"
                     className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                   >
-                    Status
+                    Status treatment
                   </label>
                 </div>
                 {/* Language Select  */}

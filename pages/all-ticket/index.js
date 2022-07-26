@@ -56,6 +56,7 @@ function AllTicketList() {
         id: `${userData.id}`,
         patient_info: `${userData.patient_info?.id}`,
         patient_name: `${userData.patient_info?.first_name} ${userData.patient_info?.last_name}`,
+        insurance_number: `${userData.patient_info?.insurance_number}`,
         // therapist_id: `${userData?.therapist_info?.id}`,
         therapist_name: `${userData.therapist_info?.first_name} ${userData.therapist_info?.last_name}`,
         ticket_department: userData?.ticket_department_info?.name,
@@ -92,6 +93,10 @@ function AllTicketList() {
       {
         header: "Patient name",
         id: "patient_name",
+      },
+      {
+        header: "Patient insurance",
+        id: "insurance_number",
       },
       // {
       //   header: "Therapist_id",
@@ -141,7 +146,7 @@ function AllTicketList() {
         id: "date",
       },
       {
-        header: "Status",
+        header: "Status Treatment",
         id: "status",
       },
     ],
