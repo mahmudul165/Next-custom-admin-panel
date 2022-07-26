@@ -130,7 +130,7 @@ export const useAllTicketDepartmentQuery = () =>
   useQuery(["allDepartment"], fetchAllTicketDepartment, {
     refetchOnMount: false,
     refetchOnWindowFocus: false,
-    refetchInterval: 5,
+    refetchInterval: 3,
   });
 // get  single ticket data
 const fetchSingleTicket = async (id) => {
