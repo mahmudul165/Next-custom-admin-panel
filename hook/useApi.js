@@ -112,6 +112,7 @@ export const useAllTicketQuery = () =>
   useQuery(["allticket"], fetchAllTicket, {
     refetchOnMount: true,
     refetchOnWindowFocus: true,
+    refetchInterval: 3,
   });
 
 //ticket dipartment
@@ -128,9 +129,8 @@ const fetchAllTicketDepartment = async () => {
 };
 export const useAllTicketDepartmentQuery = () =>
   useQuery(["allDepartment"], fetchAllTicketDepartment, {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchInterval: 3,
+    // refetchOnMount: true,
+    //refetchOnWindowFocus: true,
   });
 // get  single ticket data
 const fetchSingleTicket = async (id) => {
