@@ -751,7 +751,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   "https://misiapi.lamptechs.com/api/v1/patient/store",
                   d
                 )
-              // console.log("data patient", d)
+              //console.log("post data patient ", d)
             )}
           >
             {/* postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)  console.log("data patient", d)*/}
@@ -798,6 +798,8 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       <input
                         id="image"
                         type="file"
+                        // name="image"
+                        //  ref={register}
                         //   {...register("image")}
                         className=" "
                         // onClick={(e) => setPicture(e.target.files[0])}

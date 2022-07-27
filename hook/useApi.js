@@ -112,11 +112,10 @@ export const useAllTicketQuery = () =>
   useQuery(["allticket"], fetchAllTicket, {
     refetchOnMount: true,
     refetchOnWindowFocus: true,
-    //refetchInterval: 3,
+    refetchInterval: 3,
   });
 
 //ticket dipartment
-// get  All ticket  data
 const fetchAllTicketDepartment = async () => {
   const response = await fetch(
     "https://misiapi.lamptechs.com/api/v1/ticket_department",
