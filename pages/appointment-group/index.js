@@ -82,7 +82,7 @@ function AllTicketList() {
   const columns = useMemo(
     () => [
       {
-        header: "Ticket_id",
+        header: "Ticket id",
         id: "id",
         // muiTableHeadCellProps: {
         //   sx: {
@@ -116,7 +116,7 @@ function AllTicketList() {
       },
 
       {
-        header: "Status",
+        header: "Status treatment",
         id: "status",
       },
       {

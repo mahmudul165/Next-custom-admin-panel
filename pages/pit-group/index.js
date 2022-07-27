@@ -111,7 +111,7 @@ function PitGroup() {
       },
 
       {
-        header: "Status",
+        header: "Status treatment",
         id: "status",
       },
       {

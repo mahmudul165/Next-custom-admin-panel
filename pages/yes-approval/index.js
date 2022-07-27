@@ -111,7 +111,7 @@ function AllTicketList() {
       },
 
       {
-        header: "Status",
+        header: "Status treatment",
         id: "status",
       },
       {

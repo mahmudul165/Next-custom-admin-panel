@@ -12,12 +12,7 @@ const useGlobal = () => {
   const [therapistservicedata, setTherapistservice] = useState("");
   // set and get token
   const [token, setToken] = useState("");
-  useEffect(() => {
-    const items = localStorage.getItem("token");
-    if (items) {
-      setToken(items);
-    }
-  }, [token]);
+
   // global get data method
   // useEffect(() => {
   //   setCategory(categoryService);
@@ -150,7 +145,12 @@ const useGlobal = () => {
         console.log(error);
       });
   };
-
+  useEffect(() => {
+    const items = localStorage.getItem("token");
+    if (items) {
+      setToken(items);
+    }
+  }, [token, deleteData, updateData, postData]);
   // function deleteData(url) {
   //   console.log(
   //     `deleteUrl:${url}     token:Bearer ${localStorage.getItem("token")}`

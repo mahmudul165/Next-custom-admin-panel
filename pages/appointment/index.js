@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable from "material-react-table";
 import useAuth from "/hook/useAuth";
 import Link from "next/link";
-import { useTherapitListQuery } from "../../hook/useApi";
+//import { useTherapitListQuery } from "../../hook/useApi";
 //import PagePatientComponentTitle from "../../components/all-ticket/PageTicketComponentTitle";
 import dynamic from "next/dynamic";
 
@@ -13,7 +13,7 @@ const Loading = dynamic(() => import("/components/common/Loading"));
 
 function AllTicketList() {
   const { deleteData, Statustest, token, apiRootUrl, apiEndpoint } = useAuth();
-  const { data, error, isError } = useTherapitListQuery();
+  //const { data, error, isError } = useTherapitListQuery();
   //console.log("All ticket data  from  ", data);
 
   const [remoteData, setRemoteData] = useState([]);
@@ -24,7 +24,7 @@ function AllTicketList() {
       setIsLoading(true);
       const response = await fetch(
         `${apiRootUrl}${apiEndpoint?.appointment?.list}`,
-        //"https://misiapi.lamptechs.com/api/v1/ticket",
+        // "https://misiapi.lamptechs.com/api/v1/appointment",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -237,8 +237,8 @@ function AllTicketList() {
                       className="text-purple-800 hover:underline"
                       onClick={() =>
                         deleteData(
-                          //`https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`
-                          `${apiRootUrl}${apiEndpoint?.appointment?.delete}/${row?.original?.id}`
+                          `https://misiapi.lamptechs.com/api/v1/appointment/delete/${row?.original?.id}`
+                          //`${apiRootUrl}${apiEndpoint?.appointment?.delete}/${row?.original?.id}`
                         )
                       }
                     >
