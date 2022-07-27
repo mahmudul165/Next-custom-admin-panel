@@ -76,15 +76,15 @@ function PitGroup() {
 
   const columns = useMemo(
     () => [
-      // {
-      //   header: "Ticket_id",
-      //   id: "id",
-      //   // muiTableHeadCellProps: {
-      //   //   sx: {
-      //   //     display: "none",
-      //   //   },
-      //   // },
-      // },
+      {
+        header: "Ticket_id",
+        id: "id",
+        // muiTableHeadCellProps: {
+        //   sx: {
+        //     display: "none",
+        //   },
+        // },
+      },
       {
         header: "Patient id",
         id: "patient_info",
