@@ -96,18 +96,26 @@ const useGlobal = () => {
     Authorization: `Bearer ${token}`,
   };
   const deleteData = (url) => {
-    console.log(`deleteUrl:${url}    token:${token}`);
+    console.log(`deleteUrl:${url}  token:${token}`);
     axios
       .post(
         url,
         {},
+
         {
-          headers: headers,
+          headers: { Authorization: `Bearer ${token}` },
         },
 
         {
           withCredentials: true,
         }
+        // {
+        //   headers: headers,
+        // },
+
+        // {
+        //   withCredentials: true,
+        // }
       )
       .then((response) => {
         console.log(response);

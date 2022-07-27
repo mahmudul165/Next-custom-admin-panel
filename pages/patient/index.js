@@ -11,6 +11,7 @@ const PatientComponent = dynamic(() =>
 
 function PatientList() {
   const { deleteData, Statustest, token } = useAuth();
+
   //const { data: patientinfo, error, isError } = usePatientListQuery();
 
   //console.log("patient query service data ", patientinfo);
@@ -263,8 +264,8 @@ function PatientList() {
                     className="text-purple-800 hover:underline"
                     onClick={() =>
                       deleteData(
-                        `https://misiapi.lamptechs.com/api/v1/patient/delete/${row?.original?.id}`,
-                        token
+                        `https://misiapi.lamptechs.com/api/v1/patient/delete/${row?.original?.id}`
+                        //token
                         //row.original.id
                       )
                     }
