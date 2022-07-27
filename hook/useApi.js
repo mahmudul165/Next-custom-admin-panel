@@ -100,7 +100,7 @@ export const useAllTicketQuery = () =>
   useQuery(["allticket"], fetchAllTicket, {
     refetchOnMount: true,
     refetchOnWindowFocus: true,
-    refetchInterval: 7000,
+    refetchInterval: 9000,
   });
 
 // get therapist list  data
