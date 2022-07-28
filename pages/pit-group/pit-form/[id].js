@@ -55,7 +55,7 @@ function CreatePit() {
   // get  single patient data
   const router = useRouter();
   const { id } = router.query;
-  console.log("single ticket id", typeof id);
+  //console.log("single ticket id", typeof id);
 
   const fetchSingleTicket = async () => {
     const response = await fetch(
@@ -70,19 +70,17 @@ function CreatePit() {
     useQuery(["fetchSingleTicket"], fetchSingleTicket);
 
   const { data: singleTicket } = useSingleTicketQuery();
-  console.log("  singleTicket data", singleTicket);
+  // console.log("  singleTicket data", singleTicket);
 
   return (
     <>
       {" "}
       <form
         className="w-10/12 m-auto p-12  first-line: "
-        onSubmit={
-          handleSubmit()
-          //   (d) =>
+        onSubmit={handleSubmit((d) =>
           //     postData("https://misiapi.lamptechs.com/api/v1/ticket/store", d)
-          //console.log("ticket store data", d)
-        }
+          console.log("ticket store data", d)
+        )}
       >
         <div className=" px-3 ">
           <div className="card d-flex justify-center ">
@@ -152,16 +150,16 @@ function CreatePit() {
                             scope="row"
                             className="whitespace-normal px-2 py-4 font-medium text-gray-900 dark:text-white"
                           >
-                            Name PiB-er:
+                            Name PIT-er:
                           </th>
                           <td className="px-6 py-4">
                             <input
-                              // {...register("name")}
+                              {...register("name")}
                               type="text"
                               id="name"
                               className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                               placeholder="  "
-                              required
+                              // required
                             />
                             <label
                               htmlFor="name"
@@ -176,7 +174,17 @@ function CreatePit() {
                           >
                             Patient name:
                           </th>
-                          <td className="px-6 py-4">{`${singleTicket.data?.patient_info?.first_name} ${singleTicket.data?.patient_info?.last_name} `}</td>
+                          <td className="px-6 py-4">
+                            <input
+                              {...register("name")}
+                              type="text"
+                              id="name"
+                              value={`${singleTicket.data?.patient_info?.first_name} ${singleTicket.data?.patient_info?.last_name}`}
+                              className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                              placeholder={`${singleTicket.data?.patient_info?.first_name} ${singleTicket.data?.patient_info?.last_name}`}
+                              // required
+                            />
+                          </td>
                         </tr>
                         <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
                           <th
@@ -185,7 +193,17 @@ function CreatePit() {
                           >
                             Patient Code:
                           </th>
-                          <td className="px-6 py-4">{`${singleTicket.data?.patient_info?.id}`}</td>
+                          <td className="px-6 py-4">
+                            <input
+                              {...register("id")}
+                              type="text"
+                              id="id"
+                              value={`${singleTicket.data?.patient_info?.id}`}
+                              className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                              placeholder={`${singleTicket.data?.patient_info?.id}`}
+                              // required
+                            />
+                          </td>
                         </tr>
                         {/* <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
                     <th
@@ -204,16 +222,17 @@ function CreatePit() {
                             Type of Legitimation:
                           </th>
                           <td className="px-6 py-4">
+                            {" "}
                             <input
-                              // {...register("name")}
                               type="text"
-                              id="name"
+                              id="legitimation"
                               className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                               placeholder="  "
-                              required
+                              //required
+                              {...register("legitimation")}
                             />
                             <label
-                              htmlFor="name"
+                              htmlFor="legitimation"
                               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             ></label>
                           </td>
@@ -226,16 +245,17 @@ function CreatePit() {
                             Document number:
                           </th>
                           <td className="px-6 py-4">
+                            {" "}
                             <input
-                              // {...register("name")}
+                              {...register("document")}
                               type="text"
-                              id="name"
+                              id="document"
                               className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                               placeholder="  "
-                              required
+                              // required
                             />
                             <label
-                              htmlFor="name"
+                              htmlFor="document"
                               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             ></label>
                           </td>
@@ -248,16 +268,17 @@ function CreatePit() {
                             Identification expiration date:
                           </th>
                           <td className="px-6 py-4">
+                            {" "}
                             <input
-                              // {...register("name")}
+                              {...register("expiration-date")}
                               type="date"
-                              id="name"
+                              id="expiration-date"
                               className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                               placeholder="  "
-                              required
+                              // required
                             />
                             <label
-                              htmlFor="name"
+                              htmlFor="expiration-date"
                               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             ></label>
                           </td>
@@ -326,15 +347,15 @@ function CreatePit() {
                           {" "}
                           <div className="relative   ">
                             <input
-                              // {...register("name")}
+                              {...register("question-1")}
                               type="text"
-                              id="name"
+                              id="question-1"
                               className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                               placeholder="  "
-                              required
+                              // required
                             />
                             <label
-                              htmlFor="name"
+                              htmlFor="question-1"
                               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             ></label>
                           </div>
@@ -351,12 +372,12 @@ function CreatePit() {
                           {" "}
                           <div className="relative   ">
                             <input
-                              // {...register("name")}
+                              {...register("question-2")}
                               type="text"
-                              id="name"
+                              id="question-2"
                               className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                               placeholder="  "
-                              required
+                              //required
                             />
                             <label
                               htmlFor="name"
@@ -377,15 +398,15 @@ function CreatePit() {
                           {" "}
                           <div className="relative   ">
                             <input
-                              // {...register("name")}
+                              {...register("question-3")}
                               type="text"
-                              id="name"
+                              id="question-3"
                               className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                               placeholder="  "
                               required
                             />
                             <label
-                              htmlFor="name"
+                              htmlFor="question-3"
                               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             ></label>
                           </div>
@@ -403,15 +424,15 @@ function CreatePit() {
                           {" "}
                           <div className="relative   ">
                             <input
-                              // {...register("name")}
+                              {...register("question-4")}
                               type="text"
-                              id="name"
+                              id="question-4"
                               className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                               placeholder="  "
                               required
                             />
                             <label
-                              htmlFor="name"
+                              htmlFor="question-4"
                               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             ></label>
                           </div>
@@ -430,15 +451,15 @@ function CreatePit() {
                           {" "}
                           <div className="relative   ">
                             <input
-                              // {...register("name")}
+                              {...register("question-5")}
                               type="text"
-                              id="name"
+                              id="question-5"
                               className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                               placeholder="  "
-                              required
+                              // required
                             />
                             <label
-                              htmlFor="name"
+                              htmlFor="question-5"
                               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             ></label>
                           </div>
@@ -455,15 +476,15 @@ function CreatePit() {
                           {" "}
                           <div className="relative   ">
                             <input
-                              // {...register("name")}
+                              {...register("question-6")}
                               type="text"
-                              id="name"
+                              id="question-6"
                               className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                               placeholder="  "
-                              required
+                              // required
                             />
                             <label
-                              htmlFor="name"
+                              htmlFor="question-6"
                               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             ></label>
                           </div>
@@ -481,15 +502,15 @@ function CreatePit() {
                           {" "}
                           <div className="relative   ">
                             <input
-                              // {...register("name")}
+                              {...register("question-7")}
                               type="text"
-                              id="name"
+                              id="question-7"
                               className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                               placeholder="  "
-                              required
+                              //required
                             />
                             <label
-                              htmlFor="name"
+                              htmlFor="question-7"
                               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             ></label>
                           </div>
@@ -506,15 +527,15 @@ function CreatePit() {
                           {" "}
                           <div className="relative   ">
                             <input
-                              // {...register("name")}
+                              {...register("question-8")}
                               type="text"
-                              id="name"
+                              id="question-8"
                               className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                               placeholder="  "
-                              required
+                              // required
                             />
                             <label
-                              htmlFor="name"
+                              htmlFor="question-8"
                               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             ></label>
                           </div>
@@ -532,15 +553,15 @@ function CreatePit() {
                           {" "}
                           <div className="relative   ">
                             <input
-                              // {...register("name")}
+                              {...register("question-9")}
                               type="text"
-                              id="name"
+                              id="question-9"
                               className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                               placeholder="  "
-                              required
+                              //  required
                             />
                             <label
-                              htmlFor="name"
+                              htmlFor="question-9"
                               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             ></label>
                           </div>
@@ -557,15 +578,15 @@ function CreatePit() {
                           {" "}
                           <div className="relative   ">
                             <input
-                              // {...register("name")}
+                              {...register("question-10")}
                               type="text"
-                              id="name"
+                              id="question-10"
                               className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                               placeholder="  "
-                              required
+                              // required
                             />
                             <label
-                              htmlFor="name"
+                              htmlFor="question-10"
                               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             ></label>
                           </div>

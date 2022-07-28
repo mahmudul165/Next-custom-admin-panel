@@ -192,6 +192,9 @@ function PatientList() {
         <section className="grid card  md:grid-cols-1 xl:grid-cols-1   ">
           <div className="p-4">
             <MaterialReactTable
+              enablePinning
+              enableColumnOrdering
+              enableRowOrdering
               columns={columns}
               data={parsedData}
               // state={{
