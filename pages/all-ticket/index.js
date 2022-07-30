@@ -5,13 +5,19 @@ import Link from "next/link";
 import { useTherapitListQuery } from "../../hook/useApi";
 //import PagePatientComponentTitle from "../../components/all-ticket/PageTicketComponentTitle";
 import dynamic from "next/dynamic";
+import OperationModal from "../../components/common/OperationModal";
+import TicketForm from "../../components/all-ticket/TicketForm";
+import ResponsiveDialog from "../../components/common/DeleteModal";
 const TicketComponent = dynamic(() =>
   import("../../components/all-ticket/TicketComponent")
 );
 const Loading = dynamic(() => import("/components/common/Loading"));
 
 function AllTicketList() {
-  const { deleteData, Statustest, token, apiRootUrl, apiEndpoint } = useAuth();
+  const [modal, setModal] = useState(false);
+  const { status, deleteData, Statustest, token, apiRootUrl, apiEndpoint } =
+    useAuth();
+  console.log("all ticket status", status);
   const { data, error, isError } = useTherapitListQuery();
   //console.log("All ticket data  from  ", data);
 
@@ -229,17 +235,31 @@ function AllTicketList() {
                         Edit
                       </button>
                     </Link>
-                    <button
-                      className="text-purple-800 hover:underline"
-                      onClick={() =>
+                    <ResponsiveDialog
+                      title="Delete"
+                      deleteFunction={() =>
                         deleteData(
                           //`https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`
                           `${apiRootUrl}${apiEndpoint?.ticket?.delete}/${row?.original?.id}`
                         )
                       }
+                    />
+                    {/* <button
+                      className="text-purple-800 hover:underline"
+                      onClick={() => {
+                        deleteData(
+                          //`https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`
+                          `${apiRootUrl}${apiEndpoint?.ticket?.delete}/${row?.original?.id}`
+                        );
+                        status == true && setModal(true);
+                      }}
                     >
                       Delete
-                    </button>
+                    </button> */}
+
+                    {/* <OperationModal modal={modal} setModal={setModal}>
+                      {<TicketForm className="m-auto" />}
+                    </OperationModal> */}
                   </div>
                 )}
               />

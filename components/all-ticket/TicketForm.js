@@ -30,8 +30,9 @@ const schema = yup
   .required();
 import useAuth from "/hook/useAuth";
 import { useQuery } from "react-query";
+import ResponsiveDialog from "../common/PostModal";
 function TicketForm() {
-  const { postData } = useAuth();
+  const { postData, status, setStatus } = useAuth();
   const [searchInput, setSearchInput] = useState("");
   console.log("searchInput", searchInput);
   const [startDate, setStartDate] = useState(new Date());
@@ -87,11 +88,16 @@ function TicketForm() {
   //console.log("singlepatient data", singlepatient);
   return (
     <>
+      {/* {status == true && <ResponsiveDialog title="save" />} */}
+      {/* <OperationModal modal={modal} setModal={setModal}>
+                      {<TicketForm className="m-auto" />}
+                    </OperationModal> */}
       <form
         className="w-10/12 m-auto   first-line: "
         onSubmit={handleSubmit(
           (d) =>
             postData("https://misiapi.lamptechs.com/api/v1/ticket/store", d)
+
           //console.log("ticket store data", d)
         )}
       >

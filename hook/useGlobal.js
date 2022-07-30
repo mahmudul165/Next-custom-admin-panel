@@ -1,3 +1,4 @@
+import { data } from "autoprefixer";
 import axios from "axios";
 import { Router } from "next/router";
 axios.defaults.withCredentials = true;
@@ -5,11 +6,19 @@ axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
+import PostModal from "../components/common/PostModal";
+
 const useGlobal = () => {
   const axios = require("axios").default;
+  const [refreshing, setRefreshing] = useState(false);
+  const [status, setStatus] = useState(false);
   const [categorydata, setCategory] = useState("");
   const [subservicedata, setSubservice] = useState("");
   const [therapistservicedata, setTherapistservice] = useState("");
+  const wait = (timeout) => {
+    return new Promise((resolve) => setTimeout(resolve, timeout));
+  };
+
   // set and get token
   const [token, setToken] = useState("");
 
@@ -65,7 +74,10 @@ const useGlobal = () => {
       )
       .then((response) => {
         console.log("post data", response);
-        alert("successfully added ");
+        //alert("successfully added ");
+        console.log("global status", status);
+        response?.status == 200 && alert("Your successfully added.");
+        // alert("Your successfully added.");
       })
       .catch(function (error) {
         console.log(error);
@@ -104,19 +116,16 @@ const useGlobal = () => {
         {
           withCredentials: true,
         }
-        // {
-        //   headers: headers,
-        // },
-
-        // {
-        //   withCredentials: true,
-        // }
       )
       .then((response) => {
-        console.log(response);
-        alert("data field deleted");
+        // response.status == 200 && alert("data field deleted");
+        //setRefreshing(true);
+        //wait(100).then(() => setRefreshing(false));
+        // console.log("global status", status);
+        // setStatus(true);
       })
       .catch(function (error) {
+        //alert(error);
         console.log(error);
       });
   };
@@ -314,6 +323,7 @@ const useGlobal = () => {
     deleteData,
     updateData,
     Statustest,
+    status,
   };
 };
 
