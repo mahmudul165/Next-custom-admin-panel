@@ -7,6 +7,9 @@ axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import PostModal from "../components/common/PostModal";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const useGlobal = () => {
   const axios = require("axios").default;
@@ -58,6 +61,7 @@ const useGlobal = () => {
   //   //localStorage.removeItem("token");
   //   //Router.push("/account/login");
   // }
+
   const postData = (url, data) => {
     console.log(`postData:${url}  data: ${data.patient_id} `);
     axios
@@ -73,11 +77,17 @@ const useGlobal = () => {
         }
       )
       .then((response) => {
-        console.log("post data", response);
-        //alert("successfully added ");
-        console.log("global status", status);
-        response?.status == 200 && alert("Your successfully added.");
+        //console.log("post data", response);
+        //alert("user created succcessfully");
+        // console.log("global status", status);
+        // response?.status == 200 && toast.success("u r Success");
+        response?.status == 200 && alert("user created succcessfully");
+        // response?.status == 200 && alert(<showDisplay />);
         // alert("Your successfully added.");
+        // if (response.status == 200) {
+        //   return toast.success("Success!");
+        // }
+        //history.push("/all-ticket");
       })
       .catch(function (error) {
         console.log(error);
