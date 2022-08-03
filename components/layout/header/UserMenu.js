@@ -45,7 +45,7 @@ const UserMenu = () => {
         />
       </span>
       {userMenuStatus && (
-        <div className=" card   grid justify-items-start   -mb-12 rounded-lg absolute p-1   sm:-bottom-12  bg-white       text-gray-600    font-medium   w-full -bottom-16">
+        <div className="  card   grid justify-items-start   -mb-12 rounded-lg absolute p-1   sm:-bottom-12  bg-white       text-gray-600    font-medium   w-full -bottom-16">
           <div className="   inline-flex items-center justify-start px-0.5  py-1     rounded-lg   cursor-pointer relative group">
             <span className="text-base">
               <CgProfile />
@@ -78,7 +78,7 @@ const UserMenu = () => {
       {userMenuStatus ? (
         <ChevronDownIcon
           className="hidden sm:block h-
-         w-6 text-slate-50"
+         w-12 text-slate-50"
         />
       ) : (
         <ChevronUpIcon className="hidden sm:block h-6 w-12 text-slate-50" />
