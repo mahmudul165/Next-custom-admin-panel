@@ -4,6 +4,7 @@ import {
   MdOutlineCategory,
   MdCategory,
   MdList,
+  MdSupervisorAccount,
   MdAssignmentTurnedIn,
 } from "react-icons/md";
 
@@ -25,6 +26,7 @@ import { BsFillQuestionOctagonFill } from "react-icons/bs";
 import { BiCategoryAlt } from "react-icons/bi";
 import { RiPsychotherapyLine } from "react-icons/ri";
 import { SiTodoist } from "react-icons/si";
+import { GrUserAdd } from "react-icons/gr";
 TbPhysotherapist;
 import { TbPhysotherapist } from "react-icons/tb";
 import React, { useEffect, useState } from "react";
@@ -49,13 +51,13 @@ const Nav = ({ sidebarOutsideClick }) => {
   //if menu has chile menu then  use seperate array
   const childMenu = [
     {
-      subMenuTitle: "Menu one",
-      linkHref: "/services/testtable",
+      subMenuTitle: "Admin List",
+      linkHref: "/admin",
     },
-    {
-      subMenuTitle: "List two",
-      linkHref: "/services/category",
-    },
+    // {
+    //   subMenuTitle: "Admin Archive",
+    //   linkHref: "/archive-list",
+    // },
     // {
     //   subMenuTitle: "Menu Three",
     //   linkHref: "/",
@@ -280,11 +282,21 @@ const Nav = ({ sidebarOutsideClick }) => {
         <NavItem
           hrefLink="#"
           // sidebarStatus={sidebarStatus}
-          menuTitle="Schedule"
+          menuTitle="Admin"
           subMenu={true}
           subMenuArray={childMenu}
         >
-          <HiOutlineMenu className=" h-6" />
+          <GrUserAdd className=" h-6" />
+        </NavItem>
+        <NavItem
+          hrefLink="/group-permission"
+          // sidebarStatus={sidebarStatus}
+          menuTitle="Group Permission"
+          subMenu={false}
+          subMenuArray={null}
+        >
+          {" "}
+          <MdSupervisorAccount className=" h-6" />
         </NavItem>
       </nav>
     </>
