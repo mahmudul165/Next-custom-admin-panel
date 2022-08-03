@@ -114,7 +114,7 @@ function TicketForm() {
             {/* first portion of the form */}
             <div className=" m-3 p-3 ">
               {/* name */}
-              <div className="grid  gap-4 mt-2.5">
+              <div className="grid  gap-4 mt-3">
                 {/* first Name  */}
                 <div className="col-start-1 relative   ">
                   <input
@@ -151,7 +151,7 @@ function TicketForm() {
                 </div>
               </div>
               {/* email  and phone  */}
-              <div className="grid  gap-4 mt-2.5">
+              <div className="grid  gap-4 mt-3">
                 {/* email   */}
                 <div className="col-start-1 relative   ">
                   <input
@@ -188,7 +188,7 @@ function TicketForm() {
                 </div>
               </div>
               {/*Address*/}
-              <div className="relative  mt-2.5">
+              <div className="relative  mt-3">
                 <textarea
                   className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   id="address"
@@ -204,7 +204,7 @@ function TicketForm() {
                 </label>
               </div>
               {/*Biography */}
-              <div className="relative  mt-2.5">
+              <div className="relative  mt-3">
                 <textarea
                   className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   id="biography"
@@ -220,7 +220,7 @@ function TicketForm() {
                 </label>
               </div>
               {/*  image and group-access */}
-              <div className="grid grid-cols-2 gap-4 my-2.5">
+              <div className="grid grid-cols-2 gap-4 my-3">
                 {/*attach file  */}
                 <div className=" relative   ">
                   <input

@@ -114,7 +114,7 @@ function TicketForm() {
             {/* first portion of the form */}
             <div className=" m-3 p-3 ">
               {/* name */}
-              <div className="grid  gap-4 mt-2.5">
+              <div className="grid  gap-4 mt-3">
                 {/*  Group Name */}
                 <div className=" relative   ">
                   <input
@@ -133,9 +133,8 @@ function TicketForm() {
                   </label>
                 </div>
               </div>
-
               {/*Description*/}
-              <div className="relative  mt-2.5">
+              <div className="relative  mt-3">
                 <textarea
                   className="block px-2.5 pb-2 pt-3 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                   id="description"
@@ -150,9 +149,8 @@ function TicketForm() {
                   Description
                 </label>
               </div>
-
               {/*Access Level */}
-              <div className="grid   gap-4 my-2.5">
+              <div className="grid   gap-4 my-3">
                 {/* Access Level  */}
                 <div className="relative">
                   <select
