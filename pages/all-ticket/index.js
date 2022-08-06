@@ -67,8 +67,7 @@ function AllTicketList() {
         therapist_name: `${userData.therapist_info?.first_name} ${userData.therapist_info?.last_name}`,
         ticket_department: userData?.ticket_department_info?.name,
         source: `${userData.patient_info?.source}`,
-
-        location: userData.location,
+        location: userData.patient_info?.area,
         status: `${Statustest(userData.status)}`,
         language: userData.language,
         remarks: userData?.remarks,
@@ -233,6 +232,16 @@ function AllTicketList() {
                         // }}
                       >
                         Edit
+                      </button>
+                    </Link>
+                    <Link passHref href={`all-ticket/view/${row.original.id}`}>
+                      <button
+                        className="text-purple-800 hover:underline"
+                        // onClick={() => {
+                        //   console.log("View Profile", row.original.id);
+                        // }}
+                      >
+                        View
                       </button>
                     </Link>
                     <ResponsiveDialog
