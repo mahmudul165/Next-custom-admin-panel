@@ -427,9 +427,9 @@ function ThForm() {
               </div>
 
               {/* insurance_number AND DATE OF BIRTH */}
-              <div className="grid  gap-4">
+              <div className="grid   grid-cols-2  gap-4 mb-3">
                 {/* insurance_number*/}
-                <div className="col-start-1 relative my-3">
+                <div className="col-start-1 relative  ">
                   <input
                     type="text"
                     id="insurance_number"
@@ -446,8 +446,9 @@ function ThForm() {
                   </label>
                 </div>
                 {/* DATE OF birth */}
-                <div className="col-start-2 relative my-3">
+                <div className="col-start-2 relative  ">
                   <input
+                    type="date"
                     id="date_of_birth"
                     {...register("date_of_birth")}
                     className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"

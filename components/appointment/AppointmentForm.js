@@ -183,7 +183,7 @@ function AppointmentForm() {
               {/* therapist schedule */}
               <div className="relative">
                 {therapistSchedule?.data ? (
-                  <div className="relative my-3">
+                  <div className="relative  ">
                     <select
                       id="therapist_schedule_id"
                       {...register("therapist_schedule_id")}
@@ -212,7 +212,7 @@ function AppointmentForm() {
                 )}
               </div>
               {/* appointment_number */}
-              <div className="col-start-2  relative my-3  ">
+              <div className="col-start-2  relative   ">
                 <input
                   type="text"
                   id="number"
@@ -246,12 +246,12 @@ function AppointmentForm() {
                 Appointment history
               </label>
             </div>
-            {/*appoint date and time */}
+            {/*appointment date and time */}
             <div className="grid  gap-4 mt-2.5">
               {/* first Name  */}
               <div className="col-start-1 relative   ">
                 <input
-                  type="text"
+                  type="date"
                   id="appointment_date"
                   {...register("appointment_date")}
                   className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"

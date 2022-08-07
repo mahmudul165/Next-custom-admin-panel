@@ -1,17 +1,26 @@
 import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable from "material-react-table";
+import { CSVLink, CSVDownload } from "react-csv";
+import Pdf from "react-to-pdf";
+const ref = React.createRef();
 import useAuth from "/hook/useAuth";
 import Link from "next/link";
 import { useTherapitListQuery } from "../../hook/useApi";
 //import PagePatientComponentTitle from "../../components/all-ticket/PageTicketComponentTitle";
 import dynamic from "next/dynamic";
+import OperationModal from "../../components/common/OperationModal";
+import TicketForm from "../../components/all-ticket/TicketForm";
+import ResponsiveDialog from "../../components/common/DeleteModal";
 const TicketComponent = dynamic(() =>
   import("../../components/all-ticket/TicketComponent")
 );
 const Loading = dynamic(() => import("/components/common/Loading"));
 
 function AllTicketList() {
-  const { deleteData, Statustest, token, apiRootUrl, apiEndpoint } = useAuth();
+  const [modal, setModal] = useState(false);
+  const { status, deleteData, Statustest, token, apiRootUrl, apiEndpoint } =
+    useAuth();
+  console.log("all ticket status", status);
   const { data, error, isError } = useTherapitListQuery();
   //console.log("All ticket data  from  ", data);
 
@@ -40,26 +49,15 @@ function AllTicketList() {
   const parsedData = useMemo(
     () =>
       remoteData.map((userData) => ({
-        //     id
-        // patient_info
-        // therapist_info
-        // ticket_department_info
-        // location
-        // remarks
-        // status
-        // language
-        // strike
-        // strike_history
-        // ticket_history
-        // date
-
         id: `${userData.id}`,
         patient_info: `${userData.patient_info?.id}`,
         patient_name: `${userData.patient_info?.first_name} ${userData.patient_info?.last_name}`,
+        insurance_number: `${userData.patient_info?.insurance_number}`,
         // therapist_id: `${userData?.therapist_info?.id}`,
         therapist_name: `${userData.therapist_info?.first_name} ${userData.therapist_info?.last_name}`,
         ticket_department: userData?.ticket_department_info?.name,
-        location: userData.location,
+        source: `${userData.patient_info?.source}`,
+        location: userData.patient_info?.area,
         status: `${Statustest(userData.status)}`,
         language: userData.language,
         remarks: userData?.remarks,
@@ -68,21 +66,21 @@ function AllTicketList() {
         ticket_history: userData.ticket_history,
         date: userData.date,
       })) ?? [],
-    [remoteData]
+    [remoteData, token]
   );
 
   const columns = useMemo(
     () => [
-      // {
-      //   header: "Ticket id",
-      //   id: "id",
+      {
+        header: "Ticket id",
+        id: "id",
 
-      //   muiTableHeadCellProps: {
-      //     sx: {
-      //       display: "none",
-      //     },
-      //   },
-      // },
+        //   muiTableHeadCellProps: {
+        //     sx: {
+        //       display: "none",
+        //     },
+        //   },
+      },
       {
         header: "Patient id",
         id: "patient_info",
@@ -90,6 +88,10 @@ function AllTicketList() {
       {
         header: "Patient name",
         id: "patient_name",
+      },
+      {
+        header: "Patient insurance",
+        id: "insurance_number",
       },
       // {
       //   header: "Therapist_id",
@@ -104,16 +106,16 @@ function AllTicketList() {
         id: "ticket_department",
       },
       {
+        header: "Own",
+        id: "source",
+      },
+      {
         header: "Location",
         id: "location",
       },
 
       {
-        header: "Status",
-        id: "status",
-      },
-      {
-        header: "Language",
+        header: "Language treatment",
         id: "language",
       },
       {
@@ -138,6 +140,10 @@ function AllTicketList() {
         header: "Date",
         id: "date",
       },
+      {
+        header: "Status treatment",
+        id: "status",
+      },
     ],
     []
   );
@@ -148,90 +154,145 @@ function AllTicketList() {
         <TicketComponent title="All ticket" buttonTitle="Create new ticket" />
         <section className="grid card  md:grid-cols-1 xl:grid-cols-1   ">
           <div className="p-4">
-            {remoteData ? (
-              <MaterialReactTable
-                enablePinning
-                enableColumnOrdering
-                enableRowOrdering
-                // enableRowVirtualization
-                // virtualizerProps={{ enableSmoothScroll: true }}
-                columns={columns}
-                data={parsedData}
-                // state={{
-                //   isLoading
-                // }}
-                initialState={{
-                  showGlobalFilter: true,
-                  pagination: { pageSize: 5 },
-                }}
-                positionGlobalFilter="left"
-                muiSearchTextFieldProps={{
-                  variant: "outlined",
-                  size: "small",
-                  placeholder: "Search your data",
-                  label: "Search",
-                  InputLabelProps: { shrink: true },
-                }}
-                muiTableBodyRowProps={({ row }) => ({
-                  sx: {
-                    backgroundColor:
-                      row.index % 2 === 0 ? "rgba(52, 54, 245, 0.08)" : "",
-                  },
-                })}
-                muiTableBodyCellProps={{
-                  sx: { border: "none" },
-                  //  align: "center",
-                }}
-                // muiTableContainerProps={{ sx: { maxHeight: 400 } }}
-                muiTablePaperProps={{
-                  sx: {
-                    // maxWidth: "800px",
-                    //m: "auto",
-                  },
-                }}
-                muiTableContainerProps={{
-                  sx: {
-                    // maxHeight: "500px",
-                  },
-                }}
-                //state={{ showSkeletons: true }}
-                positionPagination="both"
-                // row actions
+            {/* <Pdf targetRef={ref} filename="code-example.pdf">
+              {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+            </Pdf> */}
 
-                enableRowActions
-                positionActionsColumn="first"
-                renderRowActions={({ row }) => (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexWrap: "nowrap",
-                      gap: "0.5rem",
-                    }}
-                  >
-                    <Link passHref href={`all-ticket/edit/${row.original.id}`}>
+            {remoteData ? (
+              <>
+                {remoteData?.length && (
+                  <div className="flex items-end justify-end">
+                    <CSVLink
+                      filename="all-ticket.csv"
+                      data={parsedData}
+                      // headers={columns.map((c) => c?.header)}
+                      //className="mb-32 pb-12"
+                    >
                       <button
-                        className="text-purple-800 hover:underline"
-                        // onClick={() => {
-                        //   console.log("View Profile", row.original.id);
-                        // }}
+                        type="button"
+                        className="mb-32 pb-12 inline-flex px-2 py-2 text-white   hover:bg-teal-300 focus:bg-teal-400 rounded-md  mb-3"
+                        style={{ backgroundColor: "#01a9ac" }}
                       >
-                        Edit
+                        Download Now
                       </button>
-                    </Link>
-                    <button
+                    </CSVLink>
+                  </div>
+                )}
+                <MaterialReactTable
+                  //ref={ref}
+                  enablePinning
+                  enableColumnOrdering
+                  enableRowOrdering
+                  // enableRowVirtualization
+                  // virtualizerProps={{ enableSmoothScroll: true }}
+                  columns={columns}
+                  data={parsedData}
+                  // state={{
+                  //   isLoading
+                  // }}
+                  initialState={{
+                    showGlobalFilter: true,
+                    pagination: { pageSize: 5 },
+                  }}
+                  positionGlobalFilter="left"
+                  muiSearchTextFieldProps={{
+                    variant: "outlined",
+                    size: "small",
+                    placeholder: "Search your data",
+                    label: "Search",
+                    InputLabelProps: { shrink: true },
+                  }}
+                  muiTableBodyRowProps={({ row }) => ({
+                    sx: {
+                      backgroundColor:
+                        row.index % 2 === 0 ? "rgba(52, 54, 245, 0.08)" : "",
+                    },
+                  })}
+                  muiTableBodyCellProps={{
+                    sx: { border: "none" },
+                    //  align: "center",
+                  }}
+                  // muiTableContainerProps={{ sx: { maxHeight: 400 } }}
+                  muiTablePaperProps={{
+                    sx: {
+                      // maxWidth: "800px",
+                      //m: "auto",
+                    },
+                  }}
+                  muiTableContainerProps={{
+                    sx: {
+                      // maxHeight: "500px",
+                    },
+                  }}
+                  //state={{ showSkeletons: true }}
+                  positionPagination="both"
+                  // row actions
+
+                  enableRowActions
+                  positionActionsColumn="first"
+                  renderRowActions={({ row }) => (
+                    <div
+                      style={{
+                        display: "flex",
+                        flexWrap: "nowrap",
+                        gap: "0.5rem",
+                      }}
+                    >
+                      <Link
+                        passHref
+                        href={`all-ticket/edit/${row.original.id}`}
+                      >
+                        <button
+                          className="text-purple-800 hover:underline"
+                          // onClick={() => {
+                          //   console.log("View Profile", row.original.id);
+                          // }}
+                        >
+                          Edit
+                        </button>
+                      </Link>
+                      <Link
+                        passHref
+                        href={`all-ticket/view/${row.original.id}`}
+                      >
+                        <button
+                          className="text-purple-800 hover:underline"
+                          // onClick={() => {
+                          //   console.log("View Profile", row.original.id);
+                          // }}
+                        >
+                          View
+                        </button>
+                      </Link>
+                      <ResponsiveDialog
+                        title="Delete"
+                        deleteFunction={() =>
+                          deleteData(
+                            //`https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`
+                            `${apiRootUrl}${apiEndpoint?.ticket?.delete}/${row?.original?.id}`
+                          )
+                        }
+                      />
+                      {/* <button
                       className="text-purple-800 hover:underline"
-                      onClick={() =>
+                      onClick={() => {
                         deleteData(
                           //`https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`
                           `${apiRootUrl}${apiEndpoint?.ticket?.delete}/${row?.original?.id}`
-                        )
-                      }
+                        );
+                        status == true && setModal(true);
+                      }}
                     >
                       Delete
-                    </button>
-                  </div>
-                )}
-              />
+                    </button> */}
+
+                      {/* <OperationModal modal={modal} setModal={setModal}>
+                      {<TicketForm className="m-auto" />}
+                    </OperationModal> */}
+                    </div>
+                  )}
+                />
+              </>
             ) : (
               <>
                 <Loading />

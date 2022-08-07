@@ -1,3 +1,4 @@
+import { data } from "autoprefixer";
 import axios from "axios";
 import { Router } from "next/router";
 axios.defaults.withCredentials = true;
@@ -5,19 +6,25 @@ axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
+import PostModal from "../components/common/PostModal";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+
 const useGlobal = () => {
   const axios = require("axios").default;
+  const [refreshing, setRefreshing] = useState(false);
+  const [status, setStatus] = useState(false);
   const [categorydata, setCategory] = useState("");
   const [subservicedata, setSubservice] = useState("");
   const [therapistservicedata, setTherapistservice] = useState("");
+  const wait = (timeout) => {
+    return new Promise((resolve) => setTimeout(resolve, timeout));
+  };
+
   // set and get token
   const [token, setToken] = useState("");
-  useEffect(() => {
-    const items = localStorage.getItem("token");
-    if (items) {
-      setToken(items);
-    }
-  }, [token]);
+
   // global get data method
   // useEffect(() => {
   //   setCategory(categoryService);
@@ -54,6 +61,7 @@ const useGlobal = () => {
   //   //localStorage.removeItem("token");
   //   //Router.push("/account/login");
   // }
+
   const postData = (url, data) => {
     console.log(`postData:${url}  data: ${data.patient_id} `);
     axios
@@ -69,8 +77,17 @@ const useGlobal = () => {
         }
       )
       .then((response) => {
-        console.log("post data", response);
-        alert("successfully added ");
+        //console.log("post data", response);
+        //alert("user created succcessfully");
+        // console.log("global status", status);
+        // response?.status == 200 && toast.success("u r Success");
+        response?.status == 200 && alert("user created succcessfully");
+        // response?.status == 200 && alert(<showDisplay />);
+        // alert("Your successfully added.");
+        // if (response.status == 200) {
+        //   return toast.success("Success!");
+        // }
+        //history.push("/all-ticket");
       })
       .catch(function (error) {
         console.log(error);
@@ -96,13 +113,14 @@ const useGlobal = () => {
     Authorization: `Bearer ${token}`,
   };
   const deleteData = (url) => {
-    console.log(`deleteUrl:${url}    token:${token}`);
+    console.log(`deleteUrl:${url}  token:${token}`);
     axios
       .post(
         url,
         {},
+
         {
-          headers: headers,
+          headers: { Authorization: `Bearer ${token}` },
         },
 
         {
@@ -110,10 +128,14 @@ const useGlobal = () => {
         }
       )
       .then((response) => {
-        console.log(response);
-        alert("data field deleted");
+        // response.status == 200 && alert("data field deleted");
+        //setRefreshing(true);
+        //wait(100).then(() => setRefreshing(false));
+        // console.log("global status", status);
+        // setStatus(true);
       })
       .catch(function (error) {
+        //alert(error);
         console.log(error);
       });
   };
@@ -142,7 +164,12 @@ const useGlobal = () => {
         console.log(error);
       });
   };
-
+  useEffect(() => {
+    const items = localStorage.getItem("token");
+    if (items) {
+      setToken(items);
+    }
+  }, [token, deleteData, updateData, postData]);
   // function deleteData(url) {
   //   console.log(
   //     `deleteUrl:${url}     token:Bearer ${localStorage.getItem("token")}`
@@ -306,6 +333,7 @@ const useGlobal = () => {
     deleteData,
     updateData,
     Statustest,
+    status,
   };
 };
 
