@@ -8,6 +8,7 @@ import dynamic from "next/dynamic";
 import OperationModal from "../../components/common/OperationModal";
 import PermissionForm from "../../components/group-permission/PermissionForm";
 import ResponsiveDialog from "../../components/common/DeleteModal";
+
 const PermissionComponent = dynamic(() =>
   import("../../components/group-permission/PermissionComponent.js")
 );

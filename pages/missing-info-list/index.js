@@ -5,6 +5,7 @@ import Link from "next/link";
 //import { usePatientListQuery } from "../../hook/useApi";
 //import PagePatientComponentTitle from "../../components/CreatePatient/PagePatientComponentTitle";
 import dynamic from "next/dynamic";
+import { CSVLink } from "react-csv";
 const PatientComponent = dynamic(() =>
   import("../../components/missing-info/PatientComponent")
 );
@@ -191,74 +192,93 @@ function PatientList() {
 
         <section className="grid card  md:grid-cols-1 xl:grid-cols-1   ">
           <div className="p-4">
-            <MaterialReactTable
-              enablePinning
-              enableColumnOrdering
-              enableRowOrdering
-              columns={columns}
-              data={parsedData}
-              // state={{
-              //   isLoading
-              // }}
-              initialState={{
-                showGlobalFilter: true,
-                pagination: { pageSize: 5 },
-              }}
-              positionGlobalFilter="left"
-              muiSearchTextFieldProps={{
-                variant: "outlined",
-                size: "small",
-                placeholder: "Search your data",
-                label: "Search",
-                InputLabelProps: { shrink: true },
-              }}
-              muiTableBodyRowProps={({ row }) => ({
-                sx: {
-                  backgroundColor:
-                    row.index % 2 === 0 ? "rgba(52, 54, 245, 0.08)" : "",
-                },
-              })}
-              muiTableBodyCellProps={{
-                sx: { border: "none" },
-                //align: "center",
-              }}
-              // muiTableContainerProps={{ sx: { maxHeight: 400 } }}
-              muiTablePaperProps={{
-                sx: {
-                  // maxWidth: "800px",
-                  //m: "auto",
-                },
-              }}
-              muiTableContainerProps={{
-                sx: {
-                  // maxHeight: "500px",
-                },
-              }}
-              //state={{ showSkeletons: true }}
-              positionPagination="both"
-              // row actions
-
-              enableRowActions
-              positionActionsColumn="first"
-              renderRowActions={({ row }) => (
-                <div
-                  style={{
-                    display: "flex",
-                    flexWrap: "nowrap",
-                    gap: "0.5rem",
-                  }}
-                >
-                  <Link passHref href={`/patient/edit/${row.original.id}`}>
+            <>
+              {remoteData?.length && (
+                <div className="flex items-end justify-end">
+                  <CSVLink
+                    filename="pib-group.csv"
+                    data={parsedData}
+                    // headers={columns.map((c) => c?.header)}
+                    //className="mb-32 pb-12"
+                  >
                     <button
-                      className="text-purple-800 hover:underline"
-                      // onClick={() => {
-                      //   console.log("View Profile", row.original.id);
-                      // }}
+                      type="button"
+                      className="mb-32 pb-12 inline-flex px-2 py-2 text-white   hover:bg-teal-300 focus:bg-teal-400 rounded-md  mb-3"
+                      style={{ backgroundColor: "#01a9ac" }}
                     >
-                      Edit
+                      Download Now
                     </button>
-                  </Link>
-                  {/* <button
+                  </CSVLink>
+                </div>
+              )}
+              <MaterialReactTable
+                enablePinning
+                enableColumnOrdering
+                enableRowOrdering
+                columns={columns}
+                data={parsedData}
+                // state={{
+                //   isLoading
+                // }}
+                initialState={{
+                  showGlobalFilter: true,
+                  pagination: { pageSize: 5 },
+                }}
+                positionGlobalFilter="left"
+                muiSearchTextFieldProps={{
+                  variant: "outlined",
+                  size: "small",
+                  placeholder: "Search your data",
+                  label: "Search",
+                  InputLabelProps: { shrink: true },
+                }}
+                muiTableBodyRowProps={({ row }) => ({
+                  sx: {
+                    backgroundColor:
+                      row.index % 2 === 0 ? "rgba(52, 54, 245, 0.08)" : "",
+                  },
+                })}
+                muiTableBodyCellProps={{
+                  sx: { border: "none" },
+                  //align: "center",
+                }}
+                // muiTableContainerProps={{ sx: { maxHeight: 400 } }}
+                muiTablePaperProps={{
+                  sx: {
+                    // maxWidth: "800px",
+                    //m: "auto",
+                  },
+                }}
+                muiTableContainerProps={{
+                  sx: {
+                    // maxHeight: "500px",
+                  },
+                }}
+                //state={{ showSkeletons: true }}
+                positionPagination="both"
+                // row actions
+
+                enableRowActions
+                positionActionsColumn="first"
+                renderRowActions={({ row }) => (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "nowrap",
+                      gap: "0.5rem",
+                    }}
+                  >
+                    <Link passHref href={`/patient/edit/${row.original.id}`}>
+                      <button
+                        className="text-purple-800 hover:underline"
+                        // onClick={() => {
+                        //   console.log("View Profile", row.original.id);
+                        // }}
+                      >
+                        Edit
+                      </button>
+                    </Link>
+                    {/* <button
                     className="text-purple-800 hover:underline"
                     onClick={() => {
                       console.log("View Profile", row.original);
@@ -267,21 +287,22 @@ function PatientList() {
                     Edit
                   </button> */}
 
-                  <button
-                    className="text-purple-800 hover:underline"
-                    onClick={() =>
-                      deleteData(
-                        `https://misiapi.lamptechs.com/api/v1/patient/delete/${row?.original?.id}`,
-                        token
-                        //row.original.id
-                      )
-                    }
-                  >
-                    Delete
-                  </button>
-                </div>
-              )}
-            />
+                    <button
+                      className="text-purple-800 hover:underline"
+                      onClick={() =>
+                        deleteData(
+                          `https://misiapi.lamptechs.com/api/v1/patient/delete/${row?.original?.id}`,
+                          token
+                          //row.original.id
+                        )
+                      }
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )}
+              />{" "}
+            </>
           </div>
         </section>
       </main>

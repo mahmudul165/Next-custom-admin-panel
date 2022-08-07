@@ -5,6 +5,7 @@ import Link from "next/link";
 //import { usePatientListQuery } from "../../hook/useApi";
 //import PagePatientComponentTitle from "../../components/CreatePatient/PagePatientComponentTitle";
 import dynamic from "next/dynamic";
+import { CSVLink } from "react-csv";
 const PatientComponent = dynamic(() =>
   import("../../components/CreatePatient/PatientComponent")
 );
@@ -181,9 +182,26 @@ function PatientList() {
           title="Patient list"
           buttonTitle="Create new patient"
         />
-
         <section className="grid card  md:grid-cols-1 xl:grid-cols-1   ">
           <div className="p-4">
+            {/* start download */}
+            <div className="flex items-end justify-end">
+              <CSVLink
+                filename="patient.csv"
+                data={parsedData}
+                // headers={columns.map((c) => c?.header)}
+                //className="mb-32 pb-12"
+              >
+                <button
+                  type="button"
+                  className="mb-32 pb-12 inline-flex px-2 py-2 text-white   hover:bg-teal-300 focus:bg-teal-400 rounded-md  mb-3"
+                  style={{ backgroundColor: "#01a9ac" }}
+                >
+                  Download Now
+                </button>
+              </CSVLink>
+            </div>
+            {/* end download */}
             <MaterialReactTable
               enablePinning
               enableColumnOrdering
