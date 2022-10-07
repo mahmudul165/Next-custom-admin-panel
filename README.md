@@ -1,12 +1,10 @@
-# An autometic system for therapist center.
+## An autometic system for therapist center.Multi vendor group user and patient and therapist
 
-# Multi vendor group user and patient and therapist
+## Install
 
-# Install
+### npm install
 
-## npm install
-
-## npm run dev
+### npm run dev
 
 # Misi Website Url:
 
