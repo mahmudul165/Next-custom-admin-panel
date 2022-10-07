@@ -8,7 +8,7 @@
 
 ## Misi Website Url:
 
-https://misi-frontend-next-js-pp8d.vercel.app/
+https://misi-lamptechs-bd.vercel.app/
 
 ## Super Admin User:
 
@@ -42,7 +42,7 @@ password: admin@admin.com
 
 ## Patient login url:
 
-https://misi-frontend-next-js-pp8d.vercel.app/account/patient-login
+https://misi-lamptechs-bd.vercel.app/account/patient-login
 
 user: fuad123@gmail.com
 password: fuad123@gmail.com
