@@ -1,47 +1,48 @@
-## An autometic system for therapist center.
+# An autometic system for therapist center.
 
-## Multi vendor group user and patient and therapist
+# Multi vendor group user and patient and therapist
 
-## Install
+# Install
 
-npm install
-npm run dev
+## npm install
 
-## Misi Website Url:
+## npm run dev
+
+# Misi Website Url:
 
 https://misi-frontend-next-js-pp8d.vercel.app/
 
-# Super Admin User:
+## Super Admin User:
 
 user: kazi@gmail.com
 password: admin@admin.com
 
-# Super Admin User:
+## Super Admin User:
 
 user: sahab@gmail.com
 password: admin@admin.com
 
-# Herannmelding Group User
+## Herannmelding Group User
 
 user: mahmudul.4918@gmail.com
 password: admin@admin.com
 
-# Screener Group User
+## Screener Group User
 
 user: Screener@gmail.com
 password: admin@admin.com
 
-# Pit Group User
+## Pit Group User
 
 user: pit@gmail.com
 password: admin@admin.com
 
-# Pib Group user
+## Pib Group user
 
 user: pib@gmail.com
 password: admin@admin.com
 
-## Patient login url:
+# Patient login url:
 
 https://misi-frontend-next-js-pp8d.vercel.app/account/patient-login
 
