@@ -15,6 +15,7 @@ import {
   //usePatientQuery,
   useTherapitListQuery,
   useAllTicketDepartmentQuery,
+  usePibQuestion,
 } from "../../hook/useApi";
 const schema = yup
   .object()
@@ -43,14 +44,14 @@ function PibFormFormula() {
   const { data: patientList } = usePatientListQuery();
   const { data: therapistList } = useTherapitListQuery();
   const { data: ticketDepartment } = useAllTicketDepartmentQuery();
-
+  const { data: pibQuestion } = usePibQuestion();
   const handleSearchChange = (e) => {
     setSearchInput(e.target.value);
   };
 
   const debounce = (fn, delay) => {
     let timer;
-    return function (...args) {
+    return function(...args) {
       clearTimeout(timer);
       timer = setTimeout(() => fn(...args), delay);
     };
@@ -80,10 +81,9 @@ function PibFormFormula() {
     <>
       <form
         className="w-10/12 m-auto p-12  first-line: "
-        onSubmit={handleSubmit(
-          (d) =>
-            postData("https://misiapi.lamptechs.com/api/v1/ticket/store", d)
-          //console.log("ticket store data", d)
+        onSubmit={handleSubmit((d) =>
+          //postData("https://misiapi.lamptechs.com/api/v1/ticket/store", d)
+          console.log("pit store data", d)
         )}
       >
         <div className=" px-3 ">
@@ -110,7 +110,11 @@ function PibFormFormula() {
                         freeSolo
                         // id="free-solo-2-demo"
                         disableClearable
-                        options={patientList?.data.map((patient) => patient.id)}
+                        //options={patientList?.data.map((patient) => patient.id)}
+                        options={patientList?.data.map(
+                          (patient) =>
+                            `${patient?.id}-${patient?.first_name} ${patient?.last_name} - ${patient?.phone}`
+                        )}
                         // getOptionLabel={(option) => option?.id}
                         renderInput={(params) => (
                           <TextField
@@ -154,7 +158,7 @@ function PibFormFormula() {
                             scope="row"
                             className="whitespace-normal px-2 py-4 font-medium text-gray-900 dark:text-white"
                           >
-                            Name PiB-er:
+                            Name Pit-er:
                           </th>
                           <td className="px-6 py-4">data will coming</td>
                         </tr>
@@ -264,263 +268,35 @@ function PibFormFormula() {
                     </thead>
 
                     <tbody>
-                      <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
-                        <th
-                          scope="row"
-                          className="whitespace-normal px-2 py-4 font-medium text-gray-900 dark:text-white"
-                        >
-                          1.What do you think is going on with you? What are the
-                          current complaints? What bothers you the most?
-                        </th>
-                        <td className="px-6 py-4">
-                          {" "}
-                          <div className="relative   ">
-                            <input
-                              // {...register("name")}
-                              type="text"
-                              id="name"
-                              className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                              placeholder="  "
-                              required
-                            />
-                            <label
-                              htmlFor="name"
-                              className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                            ></label>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
-                        <th
-                          scope="row"
-                          className="whitespace-normal px-2 py-4 font-medium text-gray-900 dark:text-white"
-                        >
-                          2.What would you like to get rid of?
-                        </th>
-                        <td className="px-6 py-4">
-                          {" "}
-                          <div className="relative   ">
-                            <input
-                              // {...register("name")}
-                              type="text"
-                              id="name"
-                              className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                              placeholder="  "
-                              required
-                            />
-                            <label
-                              htmlFor="name"
-                              className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                            ></label>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
-                        <th
-                          scope="row"
-                          className="whitespace-normal px-2 py-4 font-medium text-gray-900 dark:text-white"
-                        >
-                          3.Have you had treatment before (where, when and
-                          what)?
-                        </th>
-                        <td className="px-6 py-4">
-                          {" "}
-                          <div className="relative   ">
-                            <input
-                              // {...register("name")}
-                              type="text"
-                              id="name"
-                              className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                              placeholder="  "
-                              required
-                            />
-                            <label
-                              htmlFor="name"
-                              className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                            ></label>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
-                        <th
-                          scope="row"
-                          className="whitespace-normal px-2 py-4 font-medium text-gray-900 dark:text-white"
-                        >
-                          4.Would you also like medication for this do you
-                          think? What medication are you currently taking?
-                        </th>
-                        <td className="px-6 py-4">
-                          {" "}
-                          <div className="relative   ">
-                            <input
-                              // {...register("name")}
-                              type="text"
-                              id="name"
-                              className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                              placeholder="  "
-                              required
-                            />
-                            <label
-                              htmlFor="name"
-                              className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                            ></label>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
-                        <th
-                          scope="row"
-                          className="whitespace-normal px-2 py-4 font-medium text-gray-900 dark:text-white"
-                        >
-                          5.Are you able to contribute to your treatment (if you
-                          are in treatment, can you work on the assignments you
-                          receive between sessions)?
-                        </th>
-                        <td className="px-6 py-4">
-                          {" "}
-                          <div className="relative   ">
-                            <input
-                              // {...register("name")}
-                              type="text"
-                              id="name"
-                              className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                              placeholder="  "
-                              required
-                            />
-                            <label
-                              htmlFor="name"
-                              className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                            ></label>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
-                        <th
-                          scope="row"
-                          className="whitespace-normal px-2 py-4 font-medium text-gray-900 dark:text-white"
-                        >
-                          6.Do you suffer from addiction?
-                        </th>
-                        <td className="px-6 py-4">
-                          {" "}
-                          <div className="relative   ">
-                            <input
-                              // {...register("name")}
-                              type="text"
-                              id="name"
-                              className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                              placeholder="  "
-                              required
-                            />
-                            <label
-                              htmlFor="name"
-                              className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                            ></label>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
-                        <th
-                          scope="row"
-                          className="whitespace-normal px-2 py-4 font-medium text-gray-900 dark:text-white"
-                        >
-                          7.Do you ever see or hear things that others would not
-                          see or hear?
-                        </th>
-                        <td className="px-6 py-4">
-                          {" "}
-                          <div className="relative   ">
-                            <input
-                              // {...register("name")}
-                              type="text"
-                              id="name"
-                              className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                              placeholder="  "
-                              required
-                            />
-                            <label
-                              htmlFor="name"
-                              className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                            ></label>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
-                        <th
-                          scope="row"
-                          className="whitespace-normal px-2 py-4 font-medium text-gray-900 dark:text-white"
-                        >
-                          8.How is your home/work/study situation?
-                        </th>
-                        <td className="px-6 py-4">
-                          {" "}
-                          <div className="relative   ">
-                            <input
-                              // {...register("name")}
-                              type="text"
-                              id="name"
-                              className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                              placeholder="  "
-                              required
-                            />
-                            <label
-                              htmlFor="name"
-                              className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                            ></label>
-                          </div>
-                        </td>
-                      </tr>{" "}
-                      <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
-                        <th
-                          scope="row"
-                          className="whitespace-normal px-2 py-4 font-medium text-gray-900 dark:text-white"
-                        >
-                          9.Have you ever thought life is no longer necessary
-                          for me? If yes, ask about suicidal thoughts.
-                        </th>
-                        <td className="px-6 py-4">
-                          {" "}
-                          <div className="relative   ">
-                            <input
-                              // {...register("name")}
-                              type="text"
-                              id="name"
-                              className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                              placeholder="  "
-                              required
-                            />
-                            <label
-                              htmlFor="name"
-                              className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                            ></label>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
-                        <th
-                          scope="row"
-                          className="whitespace-normal px-2 py-4 font-medium text-gray-900 dark:text-white"
-                        >
-                          10.Do you ever damage yourself?
-                        </th>
-                        <td className="px-6 py-4">
-                          {" "}
-                          <div className="relative   ">
-                            <input
-                              // {...register("name")}
-                              type="text"
-                              id="name"
-                              className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                              placeholder="  "
-                              required
-                            />
-                            <label
-                              htmlFor="name"
-                              className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                            ></label>
-                          </div>
-                        </td>
-                      </tr>
+                      {pibQuestion?.data?.map((question) => (
+                        <>
+                          <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+                            <th
+                              scope="row"
+                              className="whitespace-normal px-2 py-4 font-medium text-gray-900 dark:text-white"
+                            >
+                              {question?.question}
+                            </th>
+                            <td className="px-6 py-4">
+                              {" "}
+                              <div className="relative   ">
+                                <input
+                                  // {...register("name")}
+                                  type="text"
+                                  id="name"
+                                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                                  placeholder="  "
+                                  required
+                                />
+                                <label
+                                  htmlFor="name"
+                                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                                ></label>
+                              </div>
+                            </td>
+                          </tr>
+                        </>
+                      ))}
                     </tbody>
                   </table>
                 </div>

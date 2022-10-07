@@ -5,7 +5,13 @@ function Card({ name, number, bgColor, path }) {
   return (
     <>
       {bgColor ? (
-        <Link passHref href={`${path ? path : "/dashboard"}`}>
+        <a
+          passHref
+          href={`${path ? path : "/dashboard"}`}
+          className="text-decoration-none hover:bg-stone-200"
+        >
+          {/* target={"_blank"} */}
+          {/* <a className="text-decoration-none hover:bg-stone-200"> */}
           <div
             className={`  items-center   grid grid-cols-1 divide-y  shadow rounded-lg ${bgColor}`}
           >
@@ -27,9 +33,16 @@ function Card({ name, number, bgColor, path }) {
       </div> */}
 
             <div className="p-3">
-              <span className="block text-lg font-bold text-white py-1">
-                {number}
-              </span>
+              {number ? (
+                <span className="block text-lg font-bold text-white py-1">
+                  {number}
+                </span>
+              ) : (
+                <span className="invisible block text-lg font-bold text-white py-1">
+                  {/* {number} */} {0}
+                </span>
+              )}
+
               <span className="block text-white   text-base  font-normal">
                 {name}
               </span>
@@ -40,7 +53,8 @@ function Card({ name, number, bgColor, path }) {
               </span>
             </div>
           </div>
-        </Link>
+          {/* </a> */}
+        </a>
       ) : (
         <>empty</>
       )}

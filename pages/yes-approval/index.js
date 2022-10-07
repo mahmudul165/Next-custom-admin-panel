@@ -6,14 +6,33 @@ import { useTherapitListQuery } from "../../hook/useApi";
 //import PagePatientComponentTitle from "../../components/all-ticket/PageTicketComponentTitle";
 import dynamic from "next/dynamic";
 import { CSVLink } from "react-csv";
+import { MdMode, MdOutlineDelete, MdRemoveRedEye } from "react-icons/md";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { Tooltip } from "@mui/material";
+import { ToastContainer } from "react-toastify/lib";
+import View from "../../components/common/crud-button/View";
+import Edit from "../../components/common/crud-button/Edit";
+import Assigned from "../../components/common/crud-button/Assigned";
+import Cancel from "../../components/common/crud-button/Cancel";
+import Delete from "../../components/common/crud-button/Delete";
 const TicketComponent = dynamic(() =>
   import("../../components/yes-approval/TicketComponent")
 );
 const Loading = dynamic(() => import("/components/common/Loading"));
 
 function AllTicketList() {
-  const { deleteData, Statustest, token, apiRootUrl, apiEndpoint } = useAuth();
+  const {
+    deleteData,
+    Statustest,
+    token,
+    name,
+    group_id,
+    apiRootUrl,
+    apiEndpoint,
+  } = useAuth();
+  console.log("  ", name, group_id);
   const { data, error, isError } = useTherapitListQuery();
+  console.log("waiting group localstroage data  from  ", name, group_id);
   //console.log("All ticket data  from  ", data);
 
   const [remoteData, setRemoteData] = useState([]);
@@ -31,10 +50,15 @@ function AllTicketList() {
       );
       const json = await response.json();
       setRemoteData(
-        json.data.filter(
-          (item) =>
-            item?.ticket_department_info?.name === "Waiting for 'YES' Approval"
-        )
+        json.data.filter((item) => {
+          return (
+            item?.ticket_status !== "Cancelled" &&
+            (item?.department?.name !== "Waiting for 'YES' Approval"
+              ? item?.ticket_department_info?.name ===
+                "Waiting for 'YES' Approval"
+              : item?.department?.name === "Waiting for 'YES' Approval")
+          );
+        })
       );
       setIsLoading(false);
     };
@@ -58,11 +82,22 @@ function AllTicketList() {
         // date
 
         id: `${userData.id}`,
+        assign_to_user: `${
+          !userData?.assign_to_user ? "Not Assigned" : userData?.assign_to_user
+        }`,
+        ticket_department: `${
+          !userData?.department?.name
+            ? userData?.ticket_department_info?.name
+            : userData?.department?.name
+        }`,
+        assign_to_user_status: !userData.assign_to_user_status
+          ? "Open"
+          : userData.assign_to_user_status,
         patient_info: `${userData.patient_info?.id}`,
         patient_name: `${userData.patient_info?.first_name} ${userData.patient_info?.last_name}`,
         // therapist_id: `${userData?.therapist_info?.id}`,
         therapist_name: `${userData.therapist_info?.first_name} ${userData.therapist_info?.last_name}`,
-        ticket_department: userData?.ticket_department_info?.name,
+        // ticket_department: userData?.ticket_department_info?.name,
         location: userData.location,
         status: `${Statustest(userData.status)}`,
         language: userData.language,
@@ -71,6 +106,22 @@ function AllTicketList() {
         strike_history: userData.strike_history,
         ticket_history: userData.ticket_history,
         date: userData.date,
+        mono_multi_zd: userData.mono_multi_zd,
+        mono_multi_screeing: userData.mono_multi_screeing,
+        intakes_therapist: userData.intakes_therapist,
+        tresonit_nummer: userData.tresonit_nummer,
+        datum_intake: userData.datum_intake,
+        datum_intake_2: userData.datum_intake_2,
+        nd_account: userData.nd_account,
+        avc_alfmvm_sbg: userData.avc_alfmvm_sbg,
+        honos: userData.honos,
+        berha_intake: userData.berha_intake,
+        rom_start: userData.rom_start,
+        rom_eind: userData.rom_eind,
+        berha_eind: userData.berha_eind,
+        vtcb_date: userData.vtcb_date,
+        closure: userData.closure,
+        aanm_intake_1: userData.aanm_intake_1,
       })) ?? [],
     [remoteData]
   );
@@ -80,11 +131,24 @@ function AllTicketList() {
       {
         header: "Ticket id",
         id: "id",
-        // muiTableHeadCellProps: {
-        //   sx: {
-        //     display: "none",
+
+        //   muiTableHeadCellProps: {
+        //     sx: {
+        //       display: "none",
+        //     },
         //   },
-        // },
+      },
+      {
+        header: "Assigned user",
+        id: "assign_to_user",
+      },
+      {
+        header: "User status",
+        id: "assign_to_user_status",
+      },
+      {
+        header: "Department",
+        id: "ticket_department",
       },
       {
         header: "Patient id",
@@ -94,17 +158,25 @@ function AllTicketList() {
         header: "Patient name",
         id: "patient_name",
       },
+      {
+        header: "Patient insurance",
+        id: "insurance_number",
+      },
       // {
-      //   header: "Therapist id",
+      //   header: "Therapist_id",
       //   id: "therapist_id",
       // },
       {
         header: "Therapist name",
         id: "therapist_name",
       },
+      // {
+      //   header: "Department",
+      //   id: "ticket_department",
+      // },
       {
-        header: "Department",
-        id: "ticket_department",
+        header: "Own",
+        id: "source",
       },
       {
         header: "Location",
@@ -112,11 +184,7 @@ function AllTicketList() {
       },
 
       {
-        header: "Status treatment",
-        id: "status",
-      },
-      {
-        header: "Language",
+        header: "Language treatment",
         id: "language",
       },
       {
@@ -128,6 +196,71 @@ function AllTicketList() {
         header: "Strike",
         id: "strike",
       },
+      {
+        header: "Mono/Multi ZD",
+        id: "mono_multi_zd",
+      },
+      {
+        header: "Mono/Multi screening",
+        id: "mono_multi_screeing",
+      },
+      {
+        header: "Intakes/therapist",
+        id: "intakes_therapist",
+      },
+      {
+        header: "Tresonit nummer",
+        id: "tresonit_nummer",
+      },
+      {
+        header: "Datum intake",
+        id: "datum_intake",
+      },
+      {
+        header: "Datum intake 2",
+        id: "datum_intake_2",
+      },
+      {
+        header: "ND account",
+        id: "nd_account",
+      },
+      {
+        header: "AvC/AlfmVm/SBG",
+        id: "avc_alfmvm_sbg",
+      },
+      {
+        header: "HoNOS+",
+        id: "honos",
+      },
+      {
+        header: "Berha intake",
+        id: "berha_intake",
+      },
+      {
+        header: "ROM start",
+        id: "rom_start",
+      },
+      {
+        header: "ROM eind",
+        id: "rom_eind",
+      },
+      {
+        header: "Berha eind",
+        id: "berha_eind",
+      },
+      {
+        header: "VTCB date",
+        id: "vtcb_date",
+      },
+      {
+        header: "Closure",
+        id: "closure",
+      },
+      {
+        header: "Aanm-intake 1",
+        id: "aanm_intake_1",
+      },
+
       {
         header: "Strike history",
         id: "strike_history",
@@ -141,11 +274,26 @@ function AllTicketList() {
         header: "Date",
         id: "date",
       },
+      {
+        header: "Status treatment",
+        id: "status",
+      },
     ],
     []
   );
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <main className="p-6  space-y-6">
         <TicketComponent
           title="Waiting for 'YES' Approval"
@@ -185,6 +333,7 @@ function AllTicketList() {
                   initialState={{
                     showGlobalFilter: true,
                     pagination: { pageSize: 5 },
+                    sorting: [{ id: "id", desc: true }],
                   }}
                   positionGlobalFilter="left"
                   muiSearchTextFieldProps={{
@@ -230,30 +379,60 @@ function AllTicketList() {
                         gap: "0.5rem",
                       }}
                     >
+                      {/* <Link
+                        passHref
+                        href={`yes-approval/view/${row.original.id}`}
+                      >
+                        <Tooltip title="View">
+                          <button className="text-black  hover:underline border-solid border-2 border-gray-350      btn-info  ">
+                            <MdRemoveRedEye className="text-xl h-4.5 text-white " />
+                          </button>
+                        </Tooltip>
+                      </Link>
                       <Link
                         passHref
                         href={`yes-approval/edit/${row.original.id}`}
                       >
-                        <button
-                          className="text-purple-800 hover:underline"
-                          // onClick={() => {
-                          //   console.log("View Profile", row.original.id);
-                          // }}
-                        >
-                          Edit
-                        </button>
+                        <Tooltip title="Edit">
+                          <button className=" hover:underline border-solid border-2 border-gray-350      btn-success">
+                            <FaEdit className="text-xl h-3 " />
+                          </button>
+                        </Tooltip>
                       </Link>
-                      <button
-                        className="text-purple-800 hover:underline"
-                        onClick={() =>
-                          deleteData(
-                            //`https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`
-                            `${apiRootUrl}${apiEndpoint?.ticket?.delete}/${row?.original?.id}`
-                          )
-                        }
-                      >
-                        Delete
-                      </button>
+                      <Tooltip title="Delete">
+                        <button
+                          className="  hover:underline   border-solid border-2 border-gray-350     btn-danger"
+                          onClick={() =>
+                            deleteData(
+                              //`https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`
+                              `${apiRootUrl}${apiEndpoint?.ticket?.delete}/${row?.original?.id}`
+
+                              //console.log("id delete", `${row?.original?.id}`)
+                            )
+                          }
+                        >
+                          <FaTrashAlt className="text-xl h-3" />
+                        </button>
+                      </Tooltip> */}
+
+                      <View url={`yes-approval/view/${row.original.id}`} />
+                      <Edit url={`yes-approval/edit/${row.original.id}`} />
+                      <Assigned
+                        url={`https://misiapi.lamptechs.com/api/v1/ticket/assignedupdate`}
+                        data={{
+                          id: `${row?.original?.id}`,
+                        }}
+                      ></Assigned>
+                      <Cancel
+                        url={`https://misiapi.lamptechs.com/api/v1/ticket/ticketstatus`}
+                        data={{
+                          id: `${row?.original?.id}`,
+                          ticket_status: "Cancelled",
+                        }}
+                      />
+                      <Delete
+                        url={`https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`}
+                      />
                     </div>
                   )}
                 />

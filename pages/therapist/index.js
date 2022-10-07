@@ -21,6 +21,10 @@ import MaterialReactTable from "material-react-table";
 import useAuth from "/hook/useAuth";
 import Link from "next/link";
 import { CSVLink } from "react-csv";
+import { MdMode, MdOutlineDelete, MdRemoveRedEye } from "react-icons/md";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import Tooltip from "@mui/material/Tooltip";
+import { ToastContainer } from "react-toastify";
 //import { useTherapitListQuery } from "../../hook/useApi";
 function TherapistList() {
   const { deleteData, Statustest, token } = useAuth();
@@ -166,6 +170,17 @@ function TherapistList() {
   );
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <main className="p-6  space-y-6">
         <PageTherapistComponentTitle
           title="Therapist list"
@@ -207,6 +222,7 @@ function TherapistList() {
               initialState={{
                 showGlobalFilter: true,
                 pagination: { pageSize: 5 },
+                sorting: [{ id: "id", desc: true }],
               }}
               positionGlobalFilter="left"
               muiSearchTextFieldProps={{
@@ -248,36 +264,45 @@ function TherapistList() {
                 <div
                   style={{ display: "flex", flexWrap: "nowrap", gap: "0.5rem" }}
                 >
-                  <Link passHref href={`therapist/edit/${row.original.id}`}>
-                    <button
-                      className="text-purple-800 hover:underline"
-                      // onClick={() => {
-                      //   console.log("View Profile", row.original.id);
-                      // }}
-                    >
-                      Edit
-                    </button>
+                  <Link passHref href={`therapist/view/${row.original.id}`}>
+                    <Tooltip title="View">
+                      <button
+                        className="text-black  hover:underline border-solid border-2 border-gray-350      btn-info  "
+                        // onClick={() => {
+                        //   console.log("View Profile", row.original.id);
+                        // }}
+                      >
+                        <MdRemoveRedEye className="text-xl h-4.5 text-white " />
+                      </button>
+                    </Tooltip>
                   </Link>
+                  <Link passHref href={`therapist/edit/${row.original.id}`}>
+                    <Tooltip title="Edit">
+                      <button
+                        className=" hover:underline border-solid border-2 border-gray-350      btn-success"
+                        // onClick={() => {
+                        //   console.log("View Profile", row.original.id);
+                        // }}
+                      >
+                        <FaEdit className="text-xl h-3 " />
+                      </button>
+                    </Tooltip>
+                  </Link>
+                  <Tooltip title="Delete">
+                    <button
+                      className="  hover:underline   border-solid border-2 border-gray-350     btn-danger"
+                      onClick={() =>
+                        deleteData(
+                          //`https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`
+                          `https://misiapi.lamptechs.com/api/v1/therapist/delete/${row?.original?.id}`
 
-                  {/* <button
-                    className="text-purple-800 hover:underline"
-                    onClick={() => {
-                      console.log("View Profile", row.original);
-                    }}
-                  >
-                    Edit
-                  </button> */}
-
-                  <button
-                    className="text-purple-800 hover:underline"
-                    onClick={() =>
-                      deleteData(
-                        `https://misiapi.lamptechs.com/api/v1/therapist/delete/${row?.original?.id}`
-                      )
-                    }
-                  >
-                    Delete
-                  </button>
+                          //console.log("id delete", `${row?.original?.id}`)
+                        )
+                      }
+                    >
+                      <FaTrashAlt className="text-xl h-3" />
+                    </button>
+                  </Tooltip>
                 </div>
               )}
             />

@@ -6,6 +6,10 @@ import Link from "next/link";
 //import PagePatientComponentTitle from "../../components/CreatePatient/PagePatientComponentTitle";
 import dynamic from "next/dynamic";
 import { CSVLink } from "react-csv";
+import { Tooltip } from "@mui/material";
+import { MdMode, MdOutlineDelete, MdRemoveRedEye } from "react-icons/md";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { ToastContainer } from "react-toastify";
 const PatientComponent = dynamic(() =>
   import("../../components/zd patient/PatientComponent")
 );
@@ -176,6 +180,17 @@ function PatientList() {
   );
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <main className="p-6  space-y-6">
         <PatientComponent
           title="ZD patient list"
@@ -215,6 +230,7 @@ function PatientList() {
                 initialState={{
                   showGlobalFilter: true,
                   pagination: { pageSize: 5 },
+                  sorting: [{ id: "id", desc: true }],
                 }}
                 positionGlobalFilter="left"
                 muiSearchTextFieldProps={{
@@ -260,37 +276,44 @@ function PatientList() {
                       gap: "0.5rem",
                     }}
                   >
-                    <Link passHref href={`/patient/edit/${row.original.id}`}>
-                      <button
-                        className="text-purple-800 hover:underline"
-                        // onClick={() => {
-                        //   console.log("View Profile", row.original.id);
-                        // }}
-                      >
-                        Edit
-                      </button>
+                    <Link passHref href={`zd-patient/view/${row.original.id}`}>
+                      <Tooltip title="View">
+                        <button
+                          className="text-black  hover:underline border-solid border-2 border-gray-350      btn-info  "
+                          // onClick={() => {
+                          //   console.log("View Profile", row.original.id);
+                          // }}
+                        >
+                          <MdRemoveRedEye className="text-xl h-4.5 text-white " />
+                        </button>
+                      </Tooltip>
                     </Link>
-                    {/* <button
-                    className="text-purple-800 hover:underline"
-                    onClick={() => {
-                      console.log("View Profile", row.original);
-                    }}
-                  >
-                    Edit
-                  </button> */}
+                    <Link passHref href={`zd-patient/edit/${row.original.id}`}>
+                      <Tooltip title="Edit">
+                        <button
+                          className=" hover:underline border-solid border-2 border-gray-350      btn-success"
+                          // onClick={() => {
+                          //   console.log("View Profile", row.original.id);
+                          // }}
+                        >
+                          <FaEdit className="text-xl h-3 " />
+                        </button>
+                      </Tooltip>
+                    </Link>
+                    <Tooltip title="Delete">
+                      <button
+                        className="  hover:underline   border-solid border-2 border-gray-350     btn-danger"
+                        onClick={() =>
+                          deleteData(
+                            `https://misiapi.lamptechs.com/api/v1/patient/delete/${row?.original?.id}`
 
-                    <button
-                      className="text-purple-800 hover:underline"
-                      onClick={() =>
-                        deleteData(
-                          `https://misiapi.lamptechs.com/api/v1/patient/delete/${row?.original?.id}`,
-                          token
-                          //row.original.id
-                        )
-                      }
-                    >
-                      Delete
-                    </button>
+                            //console.log("id delete", `${row?.original?.id}`)
+                          )
+                        }
+                      >
+                        <FaTrashAlt className="text-xl h-3" />
+                      </button>
+                    </Tooltip>
                   </div>
                 )}
               />{" "}

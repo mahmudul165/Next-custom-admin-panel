@@ -57,7 +57,7 @@
 
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+//import "react-datepicker/dist/react-datepicker.css";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
@@ -89,17 +89,18 @@ import {
   useStateDataQuery,
   useOccupationQuery,
 } from "../../hook/useApi";
+//import { DropzoneArea } from "material-ui-dropzone";
 function PaitentForm({ title, data }) {
   const { postData } = useAuth();
   const [startDate, setStartDate] = useState(new Date());
   const [avater, setAvater] = React.useState(null);
-
+  const [selectedFile, setSelectedFile] = useState();
   //const [file, setFile] = React.useState("");
   const [picture, setPicture] = useState("");
   //console.log("picture upload", picture);
   //const formData = new FormData();
   // formData.append("image", avater);
-  console.log("image upload", avater);
+  // console.log("image upload", avater);
   const { data: countryList } = useCountyListQuery();
   const { data: bloodGroup } = useBloodGroupQuery();
   const { data: stateData } = useStateDataQuery();
@@ -117,27 +118,41 @@ function PaitentForm({ title, data }) {
     { title: "Driving" },
     { title: "Others" },
   ];
-  // const [date, setDate] = useState(new Date());
-  //console.log("date is", date);
-  //const [deadline, setDeadline] = useState(new Date());
-  //const handleCalendarClose = () => console.log("Calendar closed");
-  // const handleCalendarOpen = () => console.log("Calendar opened");
 
+  // const handleCalendarOpen = () => console.log("Calendar opened");
+  // const changeHandler = (event) => {
+  //   setSelectedFile(event.target.files[0]);
+  //   // setIsSelected(true);
+  // };
   const uploadPicture = (e) => {
-    setAvater({
-      picturePreview: URL.createObjectURL(e.target.files[0]),
-      pictureAsFile: e.target.files[0],
-    });
+    e.preventDefault();
+    let formData = new FormData();
+    // the image shoud be same {image,file direction}
+    formData.append("image", e.target.image.files[0]);
+    //  console.log("file name", e.target.files[0]);
+    setSelectedFile(formData);
   };
+  // const onSubmit = (e) => {
+  //   // e.preventDefault();
+  //   let formData = new FormData();
+  //   // the image shoud be same {image,file direction}
+  //   formData.append("image", e.target?.image?.files[0]);
+  //   // formData.append("key", `${"b0dc26bb96f8354ddda579bf02d8d178"}`);
+  //   setSelectedFile(formData);
+  //   console.log("img ", selectedFile);
+  //   postData("https://misiapi.lamptechs.com/api/v1/patient/store", d);
+  // };
   return (
     <>
       {/* create patient form */}
       <form
         className="w-10/12 m-auto   first-line: "
         type="submit"
-        onSubmit={handleSubmit((d) =>
-          //  postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)
-          console.log("post data patient ", d)
+        onSubmit={handleSubmit(
+          // onSubmit
+          (d) =>
+            postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)
+          //console.log("post data patient ", d)
         )}
       >
         {/* postData("https://misiapi.lamptechs.com/api/v1/patient/store", d)  console.log("data patient", d)*/}
@@ -150,8 +165,16 @@ function PaitentForm({ title, data }) {
               Create new patient
             </h2>
             {/*form */}
-            <div className=" m-3 p-3 ">
-              <div className="flex justify-center items-center w-full  ">
+            <div className=" my-5 p-3 ">
+              <input
+                id="image"
+                type="file"
+                name="image"
+                value={selectedFile}
+                onChange={uploadPicture}
+                {...register("image")}
+              />
+              {/* <div className="flex justify-center items-center w-full  ">
                 <label
                   htmlFor="image"
                   className="flex flex-col justify-center items-center w-full h-40 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -185,19 +208,17 @@ function PaitentForm({ title, data }) {
                     id="image"
                     type="file"
                     name="image"
-                    //ref={register}
-                    // value={avater}
-
+                    value={selectedFile}
                     className=" "
                     // onChange={(e) => setAvater(e.target?.files)}
                     onChange={uploadPicture}
+                    // onChange={(e) => console.log("Files:", e.target.files[0])}
                     //uploadPicture
                     // {...register(`${image}`)}
                     {...register("image")}
                   />
                 </label>
-              </div>
-
+              </div> */}
               {/* Patient id*/}
               <div className="relative my-2">
                 <input
@@ -824,3 +845,68 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 }
 
 export default PaitentForm;
+
+// test
+
+// import React, { useState } from "react";
+
+// function FileUploadPage() {
+//   const [selectedFile, setSelectedFile] = useState();
+//   // const [isFilePicked, setIsFilePicked] = useState(false);
+
+//   const changeHandler = (event) => {
+//     setSelectedFile(event.target.files[0]);
+//     // setIsSelected(true);
+//   };
+//   const handleSubmission = () => {
+//     const formData = new FormData();
+
+//     formData.append("File", selectedFile);
+//     console.log("img is", selectedFile);
+
+//     fetch(
+//       "https://freeimage.host/api/1/upload?key=6d207e02198a847aa98d0a2a901485a5",
+//       {
+//         method: "POST",
+//         body: formData,
+//         Headers: {
+//           "Access-Control-Allow-Origin": "*",
+//           "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+//           Accept: "application.json",
+//           "Content-Type": "application/json",
+//           // Authorization: `Bearer ${localStorage.getItem("token")}`,
+//         },
+//       }
+//     )
+//       .then((response) => response.json())
+//       .then((result) => {
+//         console.log("Success:", result);
+//       })
+//       .catch((error) => {
+//         console.error("Error:", error);
+//       });
+//   };
+
+//   return (
+//     <div>
+//       <input type="file" name="file" onChange={changeHandler} />
+//       {/* {isSelected ? (
+//         <div>
+//           <p>Filename: {selectedFile.name}</p>
+//           <p>Filetype: {selectedFile.type}</p>
+//           <p>Size in bytes: {selectedFile.size}</p>
+//           <p>
+//             lastModifiedDate:{" "}
+//             {selectedFile.lastModifiedDate.toLocaleDateString()}
+//           </p>
+//         </div>
+//       ) : (
+//         <p>Select a file to show details</p>
+//       )} */}
+//       <div>
+//         <button onClick={handleSubmission}>Submit</button>
+//       </div>
+//     </div>
+//   );
+// }
+// export default FileUploadPage;

@@ -26,6 +26,7 @@ import { AnimatePresence } from "framer-motion";
 import Layout from "/components/layout/Layout";
 import { useEffect, useState } from "react";
 import Router, { useRouter } from "next/router";
+import PrivateRoute from "../contexts/PrivateRoute";
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   //const [token, setToken] = useState("");
   //const [removetoken, setremoveToken] = useState("");
@@ -109,16 +110,22 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
       <SessionProvider session={session}>
         <QueryClientProvider client={queryClient}>
+          {/* <PrivateRoute> */}
           <AuthProvider>
             <Layout>
-              <AnimatePresence exitBeforeEnter>
-                <Component {...pageProps} />
-              </AnimatePresence>
+              <Component {...pageProps} />
             </Layout>
           </AuthProvider>
+          {/* </PrivateRoute> */}
         </QueryClientProvider>
       </SessionProvider>
     </>
   );
 }
 export default MyApp;
+
+{
+  /* https://stackoverflow.com/questions/64662486/how-do-you-deal-with-public-and-private-routes-in-a-nextjs-app
+https://gist.github.com/alieslamifard/dd81ce85e20dc47c57ed6825ff153288
+https://medium.com/@eslamifard.ali/how-to-simply-create-a-private-route-in-next-js-38cab204a99c */
+}

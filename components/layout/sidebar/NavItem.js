@@ -25,13 +25,20 @@ const NavItem = ({
   //console.log('submenu', sidebarStatus)
   return (
     <>
-      <Link href={hrefLink}>
+      <a
+        href={hrefLink}
+        passHref
+        className="text-decoration-none hover:bg-stone-200"
+        // className="text-decoration-none hover:bg-stone-200"
+      >
+        {/* <a target="_blank" className="text-decoration-none hover:bg-stone-200"> */}
         <span
           className="   inline-flex items-center justify-start px-2 py-1  hover:text-teal-500 hover:bg-stone-200 focus:text-gray-400 focus:bg-gray-700 rounded-lg   cursor-pointer relative group"
           onClick={subMenuToggle}
         >
           <span className="text-lg"> {children}</span>
           <span className={`${!sidebarStatus ? "text-sm ml-2" : "sr-only"}`}>
+            {/* className={`${!sidebarStatus ? "text-sm ml-2" : "sr-only"}`} */}
             {menuTitle}
           </span>
 
@@ -49,7 +56,8 @@ const NavItem = ({
             </span>
           )}
         </span>
-      </Link>
+        {/* </a> */}
+      </a>
 
       {/* Chile Menu */}
       {subMenu && (

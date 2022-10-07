@@ -70,7 +70,7 @@ function CreatePit() {
     useQuery(["fetchSingleTicket"], fetchSingleTicket);
 
   const { data: singleTicket } = useSingleTicketQuery();
-  //  console.log("  singleTicket data", singleTicket);
+  //console.log("singleTicket data", singleTicket?.data);
 
   return (
     <>
@@ -146,6 +146,45 @@ function CreatePit() {
                       </thead>
                       <tbody>
                         <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+                          <td className="hidden px-6 py-4">
+                            <input
+                              type="text"
+                              id="ticket_id"
+                              {...register("ticket_id")}
+                              className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                              value={`${singleTicket.data?.id}`}
+                            />
+                          </td>
+                        </tr>
+                        <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+                          <td className="hidden px-6 py-4">
+                            <input
+                              type="text"
+                              id="patient_id"
+                              {...register("patient_id")}
+                              className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                              value={`${singleTicket.data?.patient_info?.id}`}
+                            />
+                          </td>
+                        </tr>
+                        <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+                          <th
+                            scope="row"
+                            className="whitespace-normal px-2 py-4 font-medium text-gray-900 dark:text-white"
+                          >
+                            Pib name:
+                          </th>
+                          <td className="px-6 py-4 ">
+                            <input
+                              type="text"
+                              id="pib_name"
+                              {...register("pib_name")}
+                              className="   block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                              placeholder="  "
+                            />
+                          </td>
+                        </tr>
+                        {/* <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
                           <th
                             scope="row"
                             className="whitespace-normal px-2 py-4 font-medium text-gray-900 dark:text-white"
@@ -166,7 +205,7 @@ function CreatePit() {
                               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             ></label>
                           </td>
-                        </tr>
+                        </tr> */}
                         <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
                           <th
                             scope="row"
@@ -174,7 +213,8 @@ function CreatePit() {
                           >
                             Patient name:
                           </th>
-                          <td className="px-6 py-4">
+                          <td className="px-6 py-4 ">{`${singleTicket.data?.patient_info?.first_name} ${singleTicket.data?.patient_info?.last_name} `}</td>
+                          {/* <td className="px-6 py-4">
                             <input
                               {...register("name")}
                               type="text"
@@ -184,8 +224,9 @@ function CreatePit() {
                               placeholder={`${singleTicket.data?.patient_info?.first_name} ${singleTicket.data?.patient_info?.last_name}`}
                               // required
                             />
-                          </td>
+                          </td> */}
                         </tr>
+
                         <tr className="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
                           <th
                             scope="row"
@@ -195,12 +236,12 @@ function CreatePit() {
                           </th>
                           <td className="px-6 py-4">
                             <input
-                              {...register("id")}
+                              {...register("patient_code")}
                               type="text"
-                              id="id"
-                              value={`${singleTicket.data?.patient_info?.id}`}
+                              id="patient_code"
+                              //defaultValue={`${singleTicket.data?.patient_info?.id}`}
                               className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                              placeholder={`${singleTicket.data?.patient_info?.id}`}
+                              //placeholder={`${singleTicket.data?.patient_info?.id}`}
                               // required
                             />
                           </td>
@@ -225,11 +266,11 @@ function CreatePit() {
                             {" "}
                             <input
                               type="text"
-                              id="legitimation"
+                              id="type_of_legitimation"
                               className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                               placeholder="  "
                               //required
-                              {...register("legitimation")}
+                              {...register("type_of_legitimation")}
                             />
                             <label
                               htmlFor="legitimation"
@@ -247,15 +288,15 @@ function CreatePit() {
                           <td className="px-6 py-4">
                             {" "}
                             <input
-                              {...register("document")}
+                              {...register("document_number")}
                               type="text"
-                              id="document"
+                              id="document_number"
                               className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                               placeholder="  "
                               // required
                             />
                             <label
-                              htmlFor="document"
+                              htmlFor="document_number"
                               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             ></label>
                           </td>
@@ -270,15 +311,15 @@ function CreatePit() {
                           <td className="px-6 py-4">
                             {" "}
                             <input
-                              {...register("expiration-date")}
+                              {...register("identify_expire_date")}
                               type="date"
-                              id="expiration-date"
+                              id="identify_expire_date"
                               className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
                               placeholder="  "
                               // required
                             />
                             <label
-                              htmlFor="expiration-date"
+                              htmlFor="identify_expire_date"
                               className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             ></label>
                           </td>

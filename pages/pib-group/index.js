@@ -6,13 +6,37 @@ import { useTherapitListQuery } from "../../hook/useApi";
 //import PagePatientComponentTitle from "../../components/all-ticket/PageTicketComponentTitle";
 import dynamic from "next/dynamic";
 import { CSVLink } from "react-csv";
+import { Tooltip } from "@mui/material";
+import {
+  MdMode,
+  MdOutlineDelete,
+  MdRemoveRedEye,
+  MdOutlineCreateNewFolder,
+} from "react-icons/md";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { ToastContainer } from "react-toastify";
+import View from "../../components/common/crud-button/View";
+import Edit from "../../components/common/crud-button/Edit";
+import Assigned from "../../components/common/crud-button/Assigned";
+import Cancel from "../../components/common/crud-button/Cancel";
+import Delete from "../../components/common/crud-button/Delete";
 const TicketComponent = dynamic(() =>
   import("../../components/PibFormula/TicketComponent")
 );
 const Loading = dynamic(() => import("/components/common/Loading"));
 
 function PibGroup() {
-  const { deleteData, Statustest, token, apiRootUrl, apiEndpoint } = useAuth();
+  const {
+    deleteData,
+    Statustest,
+    token,
+    group_id,
+    name,
+    department,
+    apiRootUrl,
+    apiEndpoint,
+  } = useAuth();
+  console.log("screener assign user  ", group_id, name, department);
   const { data, error, isError } = useTherapitListQuery();
   //console.log("All ticket data  from  ", data);
 
@@ -31,9 +55,14 @@ function PibGroup() {
       );
       const json = await response.json();
       setRemoteData(
-        json.data.filter(
-          (item) => item?.ticket_department_info?.name === "PiB Group(Moderate)"
-        )
+        json.data.filter((item) => {
+          return (
+            item?.ticket_status !== "Cancelled" &&
+            (item?.department?.name !== "PiB Group(Moderate)"
+              ? item?.ticket_department_info?.name === "PiB Group(Moderate)"
+              : item?.department?.name === "PiB Group(Moderate)")
+          );
+        })
       );
       setIsLoading(false);
     };
@@ -57,11 +86,23 @@ function PibGroup() {
         // date
 
         id: `${userData.id}`,
+        assign_to_user: `${
+          !userData?.assign_to_user ? "Not Assigned" : userData?.assign_to_user
+        }`,
+
+        ticket_department: `${
+          !userData?.department?.name
+            ? userData?.ticket_department_info?.name
+            : userData?.department?.name
+        }`,
+        assign_to_user_status: !userData.assign_to_user_status
+          ? "Open"
+          : userData.assign_to_user_status,
         patient_info: `${userData.patient_info?.id}`,
         patient_name: `${userData.patient_info?.first_name} ${userData.patient_info?.last_name}`,
         // therapist_id: `${userData?.therapist_info?.id}`,
         therapist_name: `${userData.therapist_info?.first_name} ${userData.therapist_info?.last_name}`,
-        ticket_department: userData?.ticket_department_info?.name,
+        // ticket_department: userData?.ticket_department_info?.name,
         location: userData.location,
         status: `${Statustest(userData.status)}`,
         language: userData.language,
@@ -85,6 +126,19 @@ function PibGroup() {
         //   },
         // },
       },
+
+      {
+        header: "Assigned user",
+        id: "assign_to_user",
+      },
+      {
+        header: "User status",
+        id: "assign_to_user_status",
+      },
+      {
+        header: "Department",
+        id: "ticket_department",
+      },
       {
         header: "Patient id",
         id: "patient_info",
@@ -101,10 +155,7 @@ function PibGroup() {
         header: "Therapist name",
         id: "therapist_name",
       },
-      {
-        header: "Department",
-        id: "ticket_department",
-      },
+
       {
         header: "Location",
         id: "location",
@@ -145,6 +196,17 @@ function PibGroup() {
   );
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <main className="p-6  space-y-6">
         <TicketComponent
           title="PiB Group (Moderate)"
@@ -185,6 +247,7 @@ function PibGroup() {
                   initialState={{
                     showGlobalFilter: true,
                     pagination: { pageSize: 5 },
+                    sorting: [{ id: "id", desc: true }],
                   }}
                   positionGlobalFilter="left"
                   muiSearchTextFieldProps={{
@@ -230,40 +293,73 @@ function PibGroup() {
                         gap: "0.5rem",
                       }}
                     >
-                      <Link passHref href={`pit-group/edit/${row.original.id}`}>
-                        <button
-                          className="text-purple-800 hover:underline"
-                          // onClick={() => {
-                          //   console.log("View Profile", row.original.id);
-                          // }}
-                        >
-                          Edit
-                        </button>
-                      </Link>
-                      <button
-                        className="text-purple-800 hover:underline"
-                        onClick={() =>
-                          deleteData(
-                            //`https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`
-                            `${apiRootUrl}${apiEndpoint?.ticket?.delete}/${row?.original?.id}`
-                          )
-                        }
-                      >
-                        Delete
-                      </button>
+                      <View url={`pib-group/view/${row.original.id}`} />
+                      <Edit url={`pib-group/edit/${row.original.id}`} />
+                      <Assigned
+                        url={`https://misiapi.lamptechs.com/api/v1/ticket/assignedupdate`}
+                        data={{
+                          id: `${row?.original?.id}`,
+                        }}
+                      ></Assigned>
+                      <Cancel
+                        url={`https://misiapi.lamptechs.com/api/v1/ticket/ticketstatus`}
+                        data={{
+                          id: `${row?.original?.id}`,
+                          ticket_status: "Cancelled",
+                        }}
+                      />
                       <Link
                         passHref
                         href={`/pib-group/pib-form/${row?.original?.id}`}
                       >
-                        <button
-                          className="text-purple-800 hover:underline"
-                          // onClick={() => {
-                          //   console.log("View Profile", row.original.id);
-                          // }}
-                        >
-                          Create PiB
-                        </button>
+                        <Tooltip title="Create PiB">
+                          <button className="  hover:underline   border-solid border-3 border-purple-600  p-1    btn-transparent">
+                            <MdOutlineCreateNewFolder className="text-xl h-6" />
+                          </button>
+                        </Tooltip>
                       </Link>
+                      <Delete
+                        url={`https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`}
+                      />
+                      {/* <Link passHref href={`pib-group/view/${row.original.id}`}>
+                        <Tooltip title="View">
+                          <button className="text-black  hover:underline border-solid border-2 border-gray-350  p-1    btn-info">
+                            <MdRemoveRedEye className="text-xl h-4.5 text-white " />
+                          </button>
+                        </Tooltip>
+                      </Link>
+                      <Link passHref href={`pib-group/edit/${row.original.id}`}>
+                        <Tooltip title="Edit">
+                          <button className=" hover:underline border-solid border-2 border-gray-350 p-1   btn-success">
+                            <FaEdit className="text-xl h-3.5" />
+                          </button>
+                        </Tooltip>
+                      </Link>
+                      <Link
+                        passHref
+                        href={`/pib-group/pib-form/${row?.original?.id}`}
+                      >
+                        <Tooltip title="Create PiB">
+                          <button className="  hover:underline   border-solid border-3 border-purple-600  p-1    btn-transparent">
+                            <MdOutlineCreateNewFolder className="text-xl h-6" />
+                          </button>
+                        </Tooltip>
+                      </Link>
+                      <Tooltip title="Delete">
+                        <button
+                          className="  hover:underline   border-solid border-2 border-gray-350 p-1   btn-danger "
+                          onClick={() =>
+                            deleteData(
+                              //`https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`
+                              `${apiRootUrl}${apiEndpoint?.ticket?.delete}/${row?.original?.id}`
+
+                              //console.log("id delete", `${row?.original?.id}`)
+                            )
+                          }
+                        >
+                          <FaTrashAlt className="text-xl h-4" />
+                        </button>
+                      </Tooltip> */}
                     </div>
                   )}
                 />

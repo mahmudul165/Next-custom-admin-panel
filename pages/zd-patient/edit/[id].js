@@ -4,6 +4,7 @@ import PatientForm from "/components/CreatePatient/PatientForm";
 import useSWR from "swr";
 import { useQuery } from "react-query";
 import axios from "axios";
+import { ToastContainer } from "react-toastify/lib";
 function Edit() {
   const router = useRouter();
   const { id } = router.query;
@@ -32,6 +33,18 @@ function Edit() {
   console.log("edit props data", data);
   return (
     <>
+      {" "}
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {data ? (
         <>
           <PatientForm

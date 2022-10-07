@@ -6,6 +6,10 @@ import Link from "next/link";
 //import PagePatientComponentTitle from "../../components/CreatePatient/PagePatientComponentTitle";
 import dynamic from "next/dynamic";
 import { CSVLink } from "react-csv";
+import { MdMode, MdOutlineDelete, MdRemoveRedEye } from "react-icons/md";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { Tooltip } from "@mui/material";
+import { ToastContainer } from "react-toastify";
 const PatientComponent = dynamic(() =>
   import("../../components/CreatePatient/PatientComponent")
 );
@@ -59,6 +63,7 @@ function PatientList() {
         last_name: userData.last_name,
         email: userData.email,
         phone: userData.phone,
+        source: userData.source,
         address: userData.address,
         occupation: userData.occupation,
         age: userData.age,
@@ -89,7 +94,6 @@ function PatientList() {
         //   },
         // },
       },
-
       {
         header: "First name",
         id: "first_name",
@@ -106,7 +110,10 @@ function PatientList() {
         header: "Phone",
         id: "phone",
       },
-
+      {
+        header: "Source",
+        id: "source",
+      },
       {
         header: "Address",
         id: "address",
@@ -123,12 +130,10 @@ function PatientList() {
         header: "Date of birth",
         id: "date_of_birth",
       },
-
       {
         header: "BNS number",
         id: "bsn_number",
       },
-
       {
         header: "DOB number",
         id: "dob_number",
@@ -141,17 +146,14 @@ function PatientList() {
         header: "Medical history",
         id: "medical_history",
       },
-
       {
         header: "Emergency contact",
         id: "emergency_contact",
       },
-
       {
         header: "Gender",
         id: "gender",
       },
-
       {
         header: "State",
         id: "state",
@@ -177,6 +179,17 @@ function PatientList() {
   );
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <main className="p-6  space-y-6">
         <PatientComponent
           title="Patient list"
@@ -214,6 +227,7 @@ function PatientList() {
               initialState={{
                 showGlobalFilter: true,
                 pagination: { pageSize: 5 },
+                sorting: [{ id: "id", desc: true }],
               }}
               positionGlobalFilter="left"
               muiSearchTextFieldProps={{
@@ -259,37 +273,45 @@ function PatientList() {
                     gap: "0.5rem",
                   }}
                 >
-                  <Link passHref href={`/patient/edit/${row.original.id}`}>
-                    <button
-                      className="text-purple-800 hover:underline"
-                      // onClick={() => {
-                      //   console.log("View Profile", row.original.id);
-                      // }}
-                    >
-                      Edit
-                    </button>
+                  <Link passHref href={`patient/view/${row.original.id}`}>
+                    <Tooltip title="View">
+                      <button
+                        className="text-black  hover:underline border-solid border-2 border-gray-350      btn-info  "
+                        // onClick={() => {
+                        //   console.log("View Profile", row.original.id);
+                        // }}
+                      >
+                        <MdRemoveRedEye className="text-xl h-4.5 text-white " />
+                      </button>
+                    </Tooltip>
                   </Link>
-                  {/* <button
-                    className="text-purple-800 hover:underline"
-                    onClick={() => {
-                      console.log("View Profile", row.original);
-                    }}
-                  >
-                    Edit
-                  </button> */}
+                  <Link passHref href={`patient/edit/${row.original.id}`}>
+                    <Tooltip title="Edit">
+                      <button
+                        className=" hover:underline border-solid border-2 border-gray-350      btn-success"
+                        // onClick={() => {
+                        //   console.log("View Profile", row.original.id);
+                        // }}
+                      >
+                        <FaEdit className="text-xl h-3 " />
+                      </button>
+                    </Tooltip>
+                  </Link>
+                  <Tooltip title="Delete">
+                    <button
+                      className="  hover:underline   border-solid border-2 border-gray-350     btn-danger"
+                      onClick={() =>
+                        deleteData(
+                          //`https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`
+                          `https://misiapi.lamptechs.com/api/v1/patient/delete/${row?.original?.id}`
 
-                  <button
-                    className="text-purple-800 hover:underline"
-                    onClick={() =>
-                      deleteData(
-                        `https://misiapi.lamptechs.com/api/v1/patient/delete/${row?.original?.id}`
-                        //token
-                        //row.original.id
-                      )
-                    }
-                  >
-                    Delete
-                  </button>
+                          //console.log("id delete", `${row?.original?.id}`)
+                        )
+                      }
+                    >
+                      <FaTrashAlt className="text-xl h-3" />
+                    </button>
+                  </Tooltip>
                 </div>
               )}
             />

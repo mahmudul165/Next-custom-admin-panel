@@ -58,7 +58,7 @@ const TicketComponentTitle = ({ title, titleDescription, buttonTitle }) => {
 
   return (
     <>
-      <div className="grid grid-cols-3 card  rounded-lg py-3 px-2 border-b-2 border-slate-200">
+      <div className=" grid grid-cols-3 card  rounded-lg py-3 px-2 border-b-2 border-slate-200">
         <div className="col-span-2">
           <h1 className="text-4xl font-semibold mb-2">{title}</h1>
           <h2 className="text-gray-600 ml-0.5">{titleDescription}</h2>

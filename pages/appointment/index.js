@@ -6,14 +6,26 @@ import Link from "next/link";
 //import PagePatientComponentTitle from "../../components/all-ticket/PageTicketComponentTitle";
 import dynamic from "next/dynamic";
 import { CSVLink } from "react-csv";
-
+import { ToastContainer } from "react-toastify/lib";
+import { Tooltip } from "@mui/material";
+import { MdMode, MdOutlineDelete, MdRemoveRedEye } from "react-icons/md";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import Cancel from "../../components/common/crud-button/Cancel";
+import { ImCancelCircle } from "react-icons/im";
 const AppointmentComponent = dynamic(() =>
   import("../../components/appointment/AppointmentComponent")
 );
 const Loading = dynamic(() => import("/components/common/Loading"));
 
 function AllTicketList() {
-  const { deleteData, Statustest, token, apiRootUrl, apiEndpoint } = useAuth();
+  const {
+    deleteData,
+    cancelData,
+    Statustest,
+    token,
+    apiRootUrl,
+    apiEndpoint,
+  } = useAuth();
   //const { data, error, isError } = useTherapitListQuery();
   //console.log("All ticket data  from  ", data);
 
@@ -31,11 +43,21 @@ function AllTicketList() {
         }
       );
       const json = await response.json();
-      setRemoteData(json.data);
+      setRemoteData(
+        json.data.filter(
+          (item) => item?.appointment_cancel_status !== "Cancelled"
+        )
+      );
       setIsLoading(false);
     };
     fetchData();
   }, [remoteData, token]);
+  //     const json = await response.json();
+  //     setRemoteData(json.data);
+  //     setIsLoading(false);
+  //   };
+  //   fetchData();
+  // }, [remoteData, token]);
 
   const parsedData = useMemo(
     () =>
@@ -65,6 +87,7 @@ function AllTicketList() {
         time: userData.time,
         status: userData.status,
         language: userData.language,
+        history: userData.history,
         remarks: userData?.ticket_department_info?.remarks,
         therapist_comment: userData?.therapist_comment,
         fee: userData.fee,
@@ -139,6 +162,10 @@ function AllTicketList() {
         header: "Remarks",
         id: "remarks",
       },
+      {
+        header: "History",
+        id: "history",
+      },
 
       {
         header: "Therapist comment",
@@ -158,6 +185,17 @@ function AllTicketList() {
   );
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <main className="p-6  space-y-6">
         <AppointmentComponent
           title="All appointment"
@@ -198,6 +236,7 @@ function AllTicketList() {
                   initialState={{
                     showGlobalFilter: true,
                     pagination: { pageSize: 5 },
+                    sorting: [{ id: "id", desc: true }],
                   }}
                   positionGlobalFilter="left"
                   muiSearchTextFieldProps={{
@@ -245,28 +284,66 @@ function AllTicketList() {
                     >
                       <Link
                         passHref
+                        href={`appointment/view/${row.original.id}`}
+                      >
+                        <Tooltip title="View">
+                          <button
+                            className="text-black  hover:underline border-solid border-2 border-gray-350      btn-info  "
+                            // onClick={() => {
+                            //   console.log("View Profile", row.original.id);
+                            // }}
+                          >
+                            <MdRemoveRedEye className="text-xl h-4.5 text-white " />
+                          </button>
+                        </Tooltip>
+                      </Link>
+                      <Link
+                        passHref
                         href={`appointment/edit/${row.original.id}`}
                       >
-                        <button
-                          className="text-purple-800 hover:underline"
-                          // onClick={() => {
-                          //   console.log("View Profile", row.original.id);
-                          // }}
-                        >
-                          Edit
-                        </button>
+                        <Tooltip title="Edit">
+                          <button
+                            className=" hover:underline border-solid border-2 border-gray-350      btn-success"
+                            // onClick={() => {
+                            //   console.log("View Profile", row.original.id);
+                            // }}
+                          >
+                            <FaEdit className="text-xl h-3 " />
+                          </button>
+                        </Tooltip>
                       </Link>
-                      <button
-                        className="text-purple-800 hover:underline"
-                        onClick={() =>
-                          deleteData(
-                            `https://misiapi.lamptechs.com/api/v1/appointment/delete/${row?.original?.id}`
-                            //`${apiRootUrl}${apiEndpoint?.appointment?.delete}/${row?.original?.id}`
-                          )
-                        }
-                      >
-                        Delete
-                      </button>
+                      <Tooltip title="Cancel">
+                        <button
+                          className="text-danger  hover:underline   border-solid border-2 border-gray-350     btn-warning"
+                          onClick={async () =>
+                            await cancelData(
+                              "https://misiapi.lamptechs.com/api/v1/appointmentticketstatus",
+                              await {
+                                id: `${row?.original?.id}`,
+                                appointment_ticket_status: "Cancelled",
+                              }
+                            )
+                          }
+                        >
+                          <ImCancelCircle className="text-2xl h-4" />
+                        </button>
+                      </Tooltip>
+                      {/* <Cancel
+                        url={`https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`}
+                      /> */}
+                      <Tooltip title="Delete">
+                        <button
+                          className="  hover:underline   border-solid border-2 border-gray-350     btn-danger"
+                          onClick={() =>
+                            deleteData(
+                              `https://misiapi.lamptechs.com/api/v1/appointment/delete/${row?.original?.id}`
+                              //console.log("id delete", `${row?.original?.id}`)
+                            )
+                          }
+                        >
+                          <FaTrashAlt className="text-xl h-3" />
+                        </button>
+                      </Tooltip>
                     </div>
                   )}
                 />{" "}

@@ -3,7 +3,18 @@ import axios from "axios";
 import useAuth from "/hook/useAuth";
 
 // set and get token
+// get login data
+const fetchLoginData = async () => {
+  const response = await fetch(
+    "https://misiapi.lamptechs.com/api/v1/admin/login",
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+  return await response.json();
+};
 
+export const useLoginQuery = () => useQuery(["logininfo"], fetchLoginData);
 // get category service data
 const fetchCategoryService = async () => {
   const response = await fetch("https://misiapi.lamptechs.com/api/v1/service", {
@@ -11,18 +22,14 @@ const fetchCategoryService = async () => {
   });
   return await response.json();
 };
+
 export const useCategoryQuery = () =>
-  useQuery(
-    ["category"],
-    fetchCategoryService,
+  useQuery(["category"], fetchCategoryService, {
+    // refetchOnMount: false,
+    // refetchOnWindowFocus: false,
+  });
 
-    {
-      // refetchOnMount: false,
-      // refetchOnWindowFocus: false,
-    }
-  );
 // get   service sub-category data
-
 const fetchSubService = async () => {
   console.log("test tok", token);
   // get category service data
@@ -102,6 +109,40 @@ export const useAllTicketQuery = () =>
     refetchOnWindowFocus: true,
     refetchInterval: 9000,
   });
+// get  ticket  history
+const fetchAllTicketHistory = async () => {
+  const response = await fetch(
+    "https://misiapi.lamptechs.com/api/v1/tickethistory",
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+
+  return await response.json();
+};
+export const useAllTicketHistoryQuery = () =>
+  useQuery(["alltickethistory"], fetchAllTicketHistory, {
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
+    refetchInterval: 9000,
+  });
+// get  All appointment  data
+const fetchAllAppointment = async () => {
+  const response = await fetch(
+    "https://misiapi.lamptechs.com/api/v1/appointment",
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+
+  return await response.json();
+};
+export const useAllAppointmentQuery = () =>
+  useQuery(["allappointment"], fetchAllAppointment, {
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
+    refetchInterval: 9000,
+  });
 
 // get therapist list  data
 const fetchTherapitList = async () => {
@@ -160,7 +201,6 @@ const fetchPatient = async (id) => {
 };
 export const usePatientQuery = (id) =>
   useQuery(["singlepatient"], fetchPatient(id));
-
 // get  country data
 const fetchCountyList = async () => {
   const response = await fetch(`https://misiapi.lamptechs.com/api/v1/country`, {
@@ -235,7 +275,51 @@ const fetchTypeTherapist = async () => {
 };
 export const useTherapistTypeQuery = () =>
   useQuery(["therapistType"], fetchTypeTherapist);
+// group get data
+const fetchGroupInfo = async () => {
+  const response = await fetch(` https://misiapi.lamptechs.com/api/v1/groups`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  });
 
+  return await response.json();
+};
+export const useGroupInfo = () => useQuery(["GroupInfo"], fetchGroupInfo);
+
+// pib get data
+const fetchPib = async () => {
+  const response = await fetch(`https://misiapi.lamptechs.com/api/v1/pib`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  });
+
+  return await response.json();
+};
+export const usePibDataInfo = () => useQuery(["PibDataInfo"], fetchPib);
+// pib question  get data
+const fetchPibQuestion = async () => {
+  const response = await fetch(
+    `https://misiapi.lamptechs.com/api/v1/question`,
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+
+  return await response.json();
+};
+export const usePibQuestion = () =>
+  useQuery(["fetchPibQuestion"], fetchPibQuestion);
+// pib question  get data
+// const fetchPitQuestion = async () => {
+//   const response = await fetch(
+//     `https://misiapi.lamptechs.com/api/v1/question`,
+//     {
+//       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+//     }
+//   );
+
+//   return await response.json();
+// };
+// export const usePitQuestion = () =>
+//   useQuery(["fetchPitQuestion"], fetchPitQuestion);
 // global get data method
 // async function fetchCategoryService() {
 //   const { data } = await axios.get("https://misiapi.lamptechs.com/api/v1/service");

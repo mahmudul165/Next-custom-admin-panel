@@ -10,7 +10,7 @@
   li.js-li {
     display: inline-block;
     padding: 7px;
-    font-size: 18px;
+    font-size: 28px;
   }
 
   li.js-li.active {
@@ -40,3 +40,22 @@
 .global-color {
   background-color: "#0184ac";
 }
+
+/* profile image */
+
+/* emailform text editor */
+.wrapper-class {
+  padding: 1rem;
+  border: 1px solid #ccc;
+}
+.editor-class {
+  background-color: lightgray;
+  padding: 1rem;
+  border: 1px solid #ccc;
+}
+.toolbar-class {
+  border: 1px solid #ccc;
+}
+/* a:hover {
+  text-decoration: none;
+} */

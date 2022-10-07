@@ -32,6 +32,7 @@ import {
   useStateDataQuery,
   useOccupationQuery,
 } from "../../hook/useApi";
+import { ToastContainer } from "react-toastify";
 function PaitentForm({ title, data }) {
   const { postData } = useAuth();
   const [startDate, setStartDate] = useState(new Date());
@@ -742,6 +743,17 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
       ) : (
         <>
           {/* create patient form */}
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <form
             className="w-10/12 m-auto   first-line: "
             type="submit"
@@ -807,7 +819,6 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       />
                     </label>
                   </div>
-
                   {/* Patient id*/}
                   <div className="relative my-2">
                     <input
@@ -1219,7 +1230,6 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       </label>
                     </div>
                   </div>
-
                   {/* Medical History */}
                   <div className="relative  mt-2.5">
                     {/* <input

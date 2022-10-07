@@ -14,6 +14,7 @@ import {
   useStateDataQuery,
   useTherapistTypeQuery,
 } from "../../hook/useApi";
+import { ToastContainer } from "react-toastify/lib";
 
 const schema = yup
   .object()
@@ -43,6 +44,17 @@ function ThForm() {
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <form
         className="w-full m-auto  p-1  "
         onSubmit={handleSubmit(

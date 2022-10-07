@@ -32,6 +32,7 @@ const schema = yup
 import useAuth from "/hook/useAuth";
 import { useQuery } from "react-query";
 import { useRouter } from "next/router";
+import { ToastContainer } from "react-toastify/lib";
 function EditTicket() {
   const { postData, updateData, Statustest, token } = useAuth();
   const [pathId, setId] = useState("");
@@ -101,6 +102,18 @@ function EditTicket() {
 
   return (
     <>
+      {" "}
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {singleTicket?.data ? (
         <form
           className="w-10/12 m-auto p-10  first-line: "

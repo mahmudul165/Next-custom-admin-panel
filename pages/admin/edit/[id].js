@@ -1,20 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import Skeleton from "@mui/material/Skeleton";
-import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
-import {
-  usePatientListQuery,
-  //usePatientQuery,
-  useTherapitListQuery,
-  useAllTicketDepartmentQuery,
-} from "/hook/useApi.js";
-import Loading from "/components/common/Loading.js";
+import { useForm, Controller } from "react-hook-form";
+import useAuth from "/hook/useAuth";
+
+//import DatePicker from "react-multi-date-picker";
+
 const schema = yup
   .object()
   .shape({
@@ -23,421 +16,493 @@ const schema = yup
     //  status
     //  remarks
     // service_category_id: yup.string().required(),
-    // name: yup.string().required(),
+    //name: yup.string().required(),
     // details: yup.string().required(),
     //remarks: yup.string().required(),
-    //status: yup.string().required(),
+    // status: yup.string().required(),
   })
   .required();
-import useAuth from "/hook/useAuth";
-import { useQuery } from "react-query";
+
+//  mui design
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import { Skeleton, Stack } from "@mui/material";
+
+import {
+  useCountyListQuery,
+  useGroupInfo,
+  useBloodGroupQuery,
+  useStateDataQuery,
+  useOccupationQuery,
+} from "/hook/useApi";
+
+import Loading from "/components/common/Loading.js";
 import { useRouter } from "next/router";
-function EditTicket() {
-  const { postData, updateData, Statustest, token } = useAuth();
-  const [pathId, setId] = useState("");
-  const [singleTicket, setRemoteData] = useState({});
-  //console.log("single ticket data  from  ", singleTicket);
-  const [startDate, setStartDate] = useState(new Date());
-  const { register, handleSubmit } = useForm({
+import Image from "next/image";
+import { useQuery } from "react-query";
+function PaitentForm({ title, data }) {
+  const { updateData } = useAuth();
+  const { data: countryList } = useCountyListQuery();
+  const { data: bloodGroup } = useBloodGroupQuery();
+  const { data: stateData } = useStateDataQuery();
+  const { data: occupation } = useOccupationQuery();
+  const { data: groupList } = useGroupInfo();
+  const router = useRouter();
+  const RoutId = router?.query?.id;
+  console.log("router id", RoutId);
+  const fetchSingleGroupUser = async () => {
+    const response = await fetch(
+      `https://misiapi.lamptechs.com/api/v1/admin/show?id=${RoutId}`,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }
+    );
+    return await response.json();
+  };
+  const useGroupUserQuery = () =>
+    useQuery(["fetchSingleGroupUser"], fetchSingleGroupUser);
+  const { data: singleGroupUser } = useGroupUserQuery();
+  console.log("sigle group user", singleGroupUser);
+
+  const { register, handleSubmit, error, control } = useForm({
     resolver: yupResolver(schema),
   });
-  const { data: patientList } = usePatientListQuery();
-  const { data: therapistList } = useTherapitListQuery();
-  const { data: ticketDepartment } = useAllTicketDepartmentQuery();
 
-  // const { data: singlePatient } = usePatientQuery(searchInput);
-  //const { data, error, isError } = useTherapitListQuery();
-  //console.log("All ticket data  from  ", data);
+  const [submittedDate, setSubmittedDate] = useState();
+  //console.log("edit data from patientlist", data);
 
-  //console.log("patient list from ticket from", patientList);
-  //console.log(" single patient list from ticket from", singlePatient);
-  //console.log("therapy list  from ticket from", therapistList);
-  //console.log("ticket department list  from ticket from", ticketDepartment);
+  //  mui data
+  const documents = [
+    { title: "Nid" },
+    { title: "Driving" },
+    { title: "Others" },
+  ];
 
-  // get  single patient data
-  const router = useRouter();
+  //required field
+  // const [id, setId] = React.useState();
+  // const [first_name, setFirst] = React.useState();
+  // const [last_name, setLast] = React.useState();
+  // const [email, setEmail] = React.useState();
+  // const [phone, setPhone] = React.useState();
+  // //const [password, setPassword] = React.useState();
+  // const [status, setStatus] = React.useState();
+  // const [file_type, setFiletype] = React.useState();
+  // const [ShowImage, setShowimage] = useState("");
+  // const [picture, setPicture] = React.useState();
+  // // not required field
+  // const [source, setSource] = React.useState();
+  // const [alternet_phone, setAlternetphone] = React.useState();
+  // const [address, setAddress] = React.useState();
+  // const [state_id, setState] = React.useState();
+  // const [country_id, setCountry] = React.useState();
+  // const [blood_group_id, setBloodgroup] = React.useState();
+  // //const [city, setCity] = React.useState();
+  // const [area, setArea] = React.useState();
+  // const [bsn_number, setBsnnumber] = React.useState();
+  // const [dob_number, setDobnumber] = React.useState();
+  // const [insurance_number, setInsurancenumber] = React.useState();
+  // const [age, setAge] = React.useState();
+  // const [gender, setGender] = React.useState();
+  // const [marital_status, setMaritalstatus] = React.useState();
+  // const [medical_history, setMedical] = React.useState();
+  // const [Occupation, setOccupation] = React.useState();
+  // const [emergency_contact, setEmergencycontact] = React.useState();
+  // const [date_of_birth, setDob] = React.useState();
+  // const [remarks, setRemarks] = React.useState();
 
-  //const { id } = router.query;
-
-  console.log("single ticket id", typeof id);
-  // localStorage.setItem("lastId", router.query?.id);
-  router.query?.id && localStorage.setItem("lastId", router.query?.id);
-  useEffect(() => {
-    setId(router.query?.id || localStorage.getItem("lastId"));
-  }, [pathId]);
-
-  useEffect(() => {
-    setId(router.query?.id);
-    const fetchData = async () => {
-      const response = await fetch(
-        `https://misiapi.lamptechs.com/api/v1/ticket/show?id=${pathId}`,
-
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      const json = await response.json();
-      setRemoteData(json);
-    };
-    fetchData();
-  }, [pathId, singleTicket]);
-
-  // const fetchSingleTicket = async () => {
-  //   const response = await fetch(
-  //     `https://misiapi.lamptechs.com/api/v1/ticket/show?id=${pathId}`,
-  //     {
-  //       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-  //     }
-  //   );
-  //   return await response.json();
+  // console.log(
+  //   "from data",
+  //   status,
+  //   first_name,
+  //   last_name,
+  //   email,
+  //   phone,
+  //   file_type,
+  //   // picture,
+  //   source,
+  //   alternet_phone,
+  //   address,
+  //   state_id,
+  //   country_id,
+  //   blood_group_id,
+  //   area,
+  //   bsn_number,
+  //   dob_number,
+  //   insurance_number,
+  //   age,
+  //   gender,
+  //   marital_status,
+  //   medical_history,
+  //   Occupation,
+  //   emergency_contact,
+  //   date_of_birth,
+  //   remarks
+  // );
+  // const [show, setShow] = React.useState();
+  // var loadFile = (e) => {
+  //   if (e.target.files[0]) {
+  //     setShowimage(URL.createObjectURL(e.target.files[0]));
+  //     setPicture(e.target.files[0]);
+  //     // console.log(URL.createObjectURL(e.target.files[0]));
+  //   }
   // };
-  // const useSingleTicketQuery = () =>
-  //   useQuery(["fetchSingleTicket"], fetchSingleTicket, {
-  //     refetchOnMount: true,
-  //     refetchOnWindowFocus: true,
-  //     refetchInterval: 1000,
-  //   });
-  // const { data: singleTicket } = useSingleTicketQuery();
+  // const handleSubmitForm = (e) => {
+  //   e.preventDefault();
+  //   let formData = new FormData();
+  //   //required field
+  //   //formData.append("id", id);
+  //   formData.append("first_name", first_name);
+  //   formData.append("last_name", last_name);
+  //   formData.append("email", email);
+  //   formData.append("phone", phone);
+  //   //formData.append("password", password);
+  //   formData.append("status", status);
+  //   formData.append("file_type", file_type);
+  //   formData.append("picture", picture);
+  //   // not required field
+  //   formData.append("address", address);
+  //   formData.append("source", source);
+  //   formData.append("country_id", country_id);
+  //   formData.append("state_id", state_id);
+  //   formData.append("country_id", country_id);
+  //   formData.append("blood_group_id", blood_group_id);
+  //   formData.append("area", area);
+  //   //formData.append("city ", city);
+  //   formData.append("bsn_number", bsn_number);
+  //   formData.append("dob_number", dob_number);
+  //   formData.append("insurance_number", insurance_number);
+  //   formData.append("age", age);
+  //   formData.append("gender", gender);
+  //   formData.append("marital_status ", marital_status);
+  //   formData.append("medical_history", medical_history);
+  //   formData.append("occupation", Occupation);
+  //   formData.append("alternet_phone ", alternet_phone);
+  //   formData.append("emergency_contact", emergency_contact);
+  //   formData.append("date_of_birth", date_of_birth);
+  //   formData.append("remarks", remarks);
 
+  //   // the image shoud be same {image,file direction}
+  //   updateData(
+  //     `https://misiapi.lamptechs.com/api/v1/admin/update/${router?.query?.id}`,
+  //     formData
+  //   );
+  // };
   return (
     <>
-      {singleTicket?.data ? (
-        <form
-          className="w-10/12 m-auto p-10  first-line: "
-          onSubmit={handleSubmit(
-            (d) =>
-              postData(`https://misiapi.lamptechs.com/api/v1/ticket/update`, d)
-            //console.log("ticket store data", d)
-          )}
-        >
-          <div className="px-3">
-            <div className=" card d-flex      justify-center ">
-              <h2
-                className="mt-3 text-center text-3xl font-extrabold  "
-                style={{ color: "#01a9ac" }}
-              >
-                Edit ticket details
-              </h2>
-              {/*  form */}
-              <div className=" m-3 p-3 ">
-                {/* ticket Id */}
-                <div className="grid gap-4  mt-2.5">
-                  <div className="relative">
-                    <input
-                      type="text"
-                      id="id"
-                      {...register("id")}
-                      className="hidden block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                      placeholder="  "
-                      value={singleTicket?.data?.id}
-                      required
-                    />
-                    <label
-                      htmlFor="id"
-                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                      {/* {`${singleTicket?.data?.id}`} */}
-                    </label>
-                  </div>
-                </div>
-                {/* Patient Id */}
-                <div className="grid gap-4  mt-2.5">
-                  <div className="relative">
-                    <input
-                      type="text"
-                      id="patient_id"
-                      {...register("patient_id")}
-                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                      placeholder="  "
-                      value={singleTicket?.data?.patient_info?.id}
-                      required
-                    />
-                    <label
-                      htmlFor="patient_id"
-                      className="absolute text-xl text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                      {`${singleTicket?.data?.patient_info?.first_name} ${singleTicket?.data?.patient_info?.last_name}`}
-                    </label>
-                  </div>
-                </div>
-                {/* Assign To therapist and pass department */}
-                <div className="grid gap-4 grid-cols-2 mt-2.5">
-                  {/* Assign To therapist */}
-                  <div className="col-start-1  relative ">
-                    {therapistList?.data ? (
-                      <div className="relative my-3">
-                        <select
-                          id="therapist_id"
-                          {...register("therapist_id")}
-                          className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                        >
-                          <option
-                            selected
-                          >{`${singleTicket?.data?.therapist_info?.id} ${singleTicket?.data?.therapist_info?.first_name} ${singleTicket?.data?.therapist_info?.last_name}`}</option>
-                          {therapistList.data?.map((item) => (
-                            <option key={item.id} value={`${item?.id}`}>
-                              {`${item?.id} ${item?.first_name} ${item?.last_name}`}
-                            </option>
-                          ))}
-                        </select>
-                        <label
-                          htmlFor="therapist_id"
-                          className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                        >
-                          Assign to therapist
-                        </label>
-                      </div>
-                    ) : (
-                      <>
-                        <Stack spacing={1}>
-                          <Skeleton animation="wave" height={40} />
-                        </Stack>
-                      </>
-                    )}
-                  </div>
-                  {/* Pass Department  */}
-                  <div className="col-start-2 relative ">
-                    {ticketDepartment?.data ? (
-                      <div className="relative my-3">
-                        <select
-                          id="ticket_department_id"
-                          {...register("ticket_department_id")}
-                          className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                        >
-                          <option selected>
-                            {singleTicket?.data?.ticket_department_info?.name}
-                          </option>
-                          {ticketDepartment.data?.map((item) => (
-                            <option key={item.id} value={`${item?.id}`}>
-                              {`${item?.name}`}
-                            </option>
-                          ))}
-                        </select>
-                        <label
-                          htmlFor="ticket_department_id"
-                          className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                        >
-                          Pass to department
-                        </label>
-                      </div>
-                    ) : (
-                      <>
-                        <Stack spacing={1}>
-                          <Skeleton animation="wave" height={40} />
-                        </Stack>
-                      </>
-                    )}
-                  </div>
-                </div>
-                {/* call strike  and location*/}
-                <div className="grid gap-4 grid-cols-2 mt-2.5">
-                  {/* call strike  */}
-                  {/*call strike  */}
-                  <div className="col-start-1 relative">
-                    <select
-                      id="strike"
-                      {...register("strike")}
-                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    >
-                      <option selected>{singleTicket?.data?.strike} </option>
-                      <option value="Call Strike 1">Call Strike 1</option>
-                      <option value="Call Strike 2">Call Strike 2</option>
-                      <option value="Call Strike 3">Call Strike 3</option>
-                    </select>
-                    <label
-                      htmlFor="floating_outlined"
-                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                      Call Strike
-                    </label>
-                  </div>
+      {/* create patient form */}
 
-                  {/* <div className="col-start-1  relative  ">
-                    <input
-                      type="text"
-                      id="strike"
-                      {...register("strike")}
-                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                      placeholder={singleTicket?.data?.strike}
-                      required
-                    />
-                    <label
-                      htmlFor="strike"
-                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    ></label>
-                  </div> */}
-                  {/* location  */}
-                  <div className="col-start-2  relative  ">
-                    <input
-                      type="text"
-                      id="location"
-                      {...register("location")}
-                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                      placeholder={singleTicket?.data?.location}
-                      //required
-                    />
-                    <label
-                      htmlFor="location"
-                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                      Location
-                    </label>
-                  </div>
-                </div>
-                {/* strike History */}
-                <div className="relative  mt-2.5">
-                  <textarea
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    id="strike_history"
-                    {...register("strike_history")}
-                    type="text"
-                    placeholder={singleTicket?.data?.strike_history}
-                  />
-                  <label
-                    htmlFor="textarea"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Strike history
-                  </label>
-                </div>
-                {/* ticket History */}
-                <div className="relative  mt-2.5">
-                  <textarea
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    id="strike_history"
-                    {...register("ticket_history")}
-                    type="text"
-                    placeholder={singleTicket?.data?.ticket_history}
-                  />
-                  <label
-                    htmlFor="textarea"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Ticket history
-                  </label>
-                </div>
+      <form
+        className="w-10/12 m-auto   first-line: "
+        type="submit"
+        // onSubmit={handleSubmitForm}
+        onSubmit={handleSubmit(
+          (d) =>
+            updateData(
+              `https://misiapi.lamptechs.com/api/v1/admin/update/${RoutId}`,
+              d
+            )
+          // console.log("ticket store data", d)
+        )}
+        // onSubmit={handleSubmit(
+        //   (d) =>
+        //     updateData(
+        //       `https://misiapi.lamptechs.com/api/v1/admin/update/${RoutId}`,
+        //       d
+        //     )
 
-                {/*  language and status */}
-                <div className="grid grid-cols-2 gap-4 my-2.5">
-                  {/* status */}
-                  <div className="  relative">
-                    <select
-                      id="status"
-                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                      aria-label="Default select example"
-                      {...register("status")}
-                    >
-                      <option selected>
-                        {Statustest(singleTicket?.data?.status)}
-                      </option>
-                      <option value="1">Active</option>
-                      <option value="2">Inactive</option>
-                      <option value="3">Pending</option>
-                      <option value="4">Cancelled</option>
-                      <option value="5">Deleted</option>
-                    </select>
-                    <label
-                      htmlFor="status"
-                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                      Status
-                    </label>
-                  </div>
-                  {/* Language Select  */}
-                  <div className="relative">
-                    <select
-                      id="language"
-                      {...register("language")}
-                      className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    >
-                      <option selected>{singleTicket?.data?.language}</option>
-                      <option value="English">English</option>
-                      <option value="Dutch">Dutch</option>
-                    </select>
-                    <label
-                      htmlFor="language"
-                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                    >
-                      Language
-                    </label>
-                  </div>
-                </div>
-                {/* remarks */}
-                <div className="relative my-2.5 ">
-                  <input
-                    type="text"
-                    id="remarks"
-                    {...register("remarks")}
-                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                    placeholder={singleTicket?.data?.remarks}
-                    // required
-                  />
-                  <label
-                    htmlFor="remarks"
-                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                  >
-                    Remarks
-                  </label>
-                </div>
-
-                {/* select file  and attach file  */}
-                {/* <div className="grid   grid-cols-2  gap-4 mt-2.5">
-              
-              <div className="  relative   ">
-                <select
-                  id="file-type"
-                  {...register("file-type")}
-                  className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+        //   // console.log("ticket store data", d)
+        // )}
+      >
+        {/* mx-4  px-12  */}
+        <div className="container     rounded bg-white mt-5 mb-5 ">
+          <div className="container    rounded bg-white mt-5 mb-5 ">
+            <div className="grid    px-8 grid-cols-2 justify-center  gap-4 mt-2.5 pl-3.5">
+              <div className="flex justify-center items-center">
+                <h2
+                  className="col-start-1  text-center text-3xl   font-extrabold    "
+                  style={{ color: "#01a9ac" }}
                 >
-                  <option selected>Select file type</option>
-                  <option value="male">Nid</option>
-                  <option value="female">Passport</option>
-                  <option value="others">Others</option>
-                </select>
-                <label
-                  htmlFor="file-type"
-                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                >
-                  File Type
-                </label>
+                  Update user info
+                  {/* id: {singleTicket.data?.id} */}
+                </h2>
               </div>
-            
-              <div className=" relative   ">
-                <input
-                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
-                  placeholder="  "
-                  required
-                  type="file"
-                  id="formFileMultiple"
-                  {...register("formFileMultiple")}
-                  multiple
-                />
-                <label
-                  htmlFor="formFileMultiple"
-                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                >
-                  Attach file
-                </label>
-              </div>
-            </div> */}
-                <div className=" flex justify-end">
+              {/* button download and save */}
+              <div className="col-start-2 my-3 px-3 md:flex md:items-center justify-center ">
+                <div className="inline-flex rounded-md shadow-sm" role="group">
                   <button
-                    className="decoration-4 text-xl shadow mt-6   hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-                    type="submit"
+                    onClick={() => router.push(`/admin`)}
                     style={{ backgroundColor: "#01a9ac" }}
+                    type="button"
+                    className="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-transparent rounded-l-lg border border-gray-900 hover:bg-gray-900 hover:text-teal-500 focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-teal-500 dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700 shadow   "
                   >
-                    Update
+                    <svg
+                      aria-hidden="true"
+                      className="mr-2 w-4 h-4 fill-current"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Go back
                   </button>
                 </div>
               </div>
             </div>
+            {/* end button */}
+            {/* edit form start */}
+
+            <div className=" px-2">
+              <div className=" card d-flex      justify-center ">
+                {/* first portion of the form */}
+                <div className=" m-3 p-3 ">
+                  {/* name */}
+                  <div className="grid  gap-4 mt-3">
+                    {/* first Name  */}
+                    <div className="col-start-1 relative   ">
+                      <input
+                        type="text"
+                        id="name"
+                        {...register("name")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        defaultValue={singleGroupUser?.data?.name}
+                      />
+                      <label
+                        htmlFor="name"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Name
+                      </label>
+                    </div>
+                    {/* last Name  */}
+                    {/* <div className="col-start-2  relative   ">
+                  <input
+                    type="text"
+                    id="lastname"
+                    {...register("lastname")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                    placeholder="  "
+                    value={singleGroupUser.last_name}
+                  />
+                  <label
+                    htmlFor="lastname"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Last Name
+                  </label>
+                </div> */}
+                  </div>
+                  {/* email  and phone  */}
+                  <div className="grid  gap-4 mt-3">
+                    {/* email   */}
+                    <div className="col-start-1 relative   ">
+                      <input
+                        type="email"
+                        id="email"
+                        {...register("email")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        defaultValue={singleGroupUser?.data?.email}
+                      />
+                      <label
+                        htmlFor="email"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Email
+                      </label>
+                    </div>
+                    {/* phone  */}
+                  </div>
+                  {/*Address*/}
+                  {/* <div className="relative  mt-3">
+                <textarea
+                  className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  id="address"
+                  {...register("address")}
+                  type="text"
+                  placeholder="  "
+                />
+                <label
+                  htmlFor="textarea"
+                  className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                >
+                  Address
+                </label>
+              </div> */}
+                  {/*Biography */}
+                  <div className="relative  mt-3">
+                    <textarea
+                      className="h-28 block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                      id="bio"
+                      {...register("bio")}
+                      type="text"
+                      placeholder="  "
+                      defaultValue={singleGroupUser?.data?.bio}
+                    />
+                    <label
+                      htmlFor="bio"
+                      className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                    >
+                      Biography
+                    </label>
+                  </div>
+                  {/*  image and group-access */}
+                  <div className="grid grid-cols-2 gap-4 my-3">
+                    {/*attach file  */}
+                    <div className=" relative   ">
+                      <input
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="  "
+                        type="file"
+                        // multiple
+                        id="file"
+                        // onClick={(e) => setPicture(e.target.value)}
+                        //  {...register("file")}
+                      />
+
+                      <label
+                        htmlFor="file"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Attach image
+                      </label>
+                    </div>
+                    {/* group-access  */}
+                    <div className="relative    ">
+                      {groupList?.data ? (
+                        <div className="relative   ">
+                          <select
+                            id="group_id"
+                            {...register("group_id")}
+                            name="group_id"
+                            defaultValue={singleGroupUser?.data?.department?.id}
+                            className="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                          >
+                            {groupList?.data?.map((item) => (
+                              <option key={item.id} value={`${item?.id}`}>
+                                {`${item?.name}`}
+                              </option>
+                            ))}
+                          </select>
+                          <label
+                            htmlFor="group_id"
+                            className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-25 peer-focus:-translate-y-4 left-1"
+                          >
+                            Group access
+                          </label>
+                        </div>
+                      ) : (
+                        <>
+                          <Stack spacing={1}>
+                            <Skeleton animation="wave" height={40} />
+                          </Stack>
+                        </>
+                      )}
+                    </div>
+                    {/* <div className="relative">
+                  <select
+                    id="group-access"
+                    {...register("group-access")}
+                    className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                  >
+                    Group PiT Group(Specialist) PiB Group(Moderate)
+                    Heraanmelding
+                    <option selected>Select group</option>
+                    <option value="English">Screener Group </option>
+                    <option value="Dutch">Waiting for YES Approval </option>
+                    <option value="Dutch"> Waiting for NO Approval</option>
+                    <option value="Dutch">Appointment</option>
+                    <option value="Dutch">PiT Group(Specialist) </option>
+                    <option value="Dutch">PiB Group(Moderate) </option>
+                    <option value="Dutch">Heraanmelding</option>
+                  </select>
+                  <label
+                    htmlFor="group-access"
+                    className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                  >
+                    Group access
+                  </label>
+                </div> */}
+                  </div>
+                  <div className="grid  gap-4 grid-cols-2">
+                    {/* status */}
+                    <div className="  relative  ">
+                      <select
+                        id="status"
+                        defaultValue={singleGroupUser?.data?.status}
+                        className="form-select appearance-none
+block
+w-full
+px-3
+py-1.5
+text-base
+font-normal
+text-gray-700
+bg-white bg-clip-padding bg-no-repeat
+border border-solid border-gray-300
+rounded
+transition
+ease-in-out
+m-0
+focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        aria-label="Default select example"
+                        //  {...register("status")}
+                      >
+                        {/* <option selected>status</option> */}
+                        <option value="1">Active</option>
+                        <option value="2">Inactive</option>
+                        <option value="3">Pending</option>
+                        <option value="4">Cancelled</option>
+                        <option value="5">Deleted</option>
+                      </select>
+                      <label
+                        htmlFor="status"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-25 peer-focus:-translate-y-4 left-1"
+                      >
+                        Status
+                      </label>
+                    </div>
+                    {/* password */}
+                    <div className="relative     ">
+                      <input
+                        type="text"
+                        id="password"
+                        required
+                        // value="1"
+                        {...register("password")}
+                        className="block px-2.5 pb-2 pt-2.5 py-2.5 w-full rows-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-500 peer"
+                        placeholder="••••••••"
+                      />
+                      <label
+                        htmlFor="password"
+                        className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-teal-500 peer-focus:dark:text-teal-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                      >
+                        Password
+                      </label>
+                    </div>
+                  </div>
+                  <div className=" flex justify-end">
+                    <button
+                      className="decoration-4 text-xl shadow mt-6   hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                      type="submit"
+                      style={{ backgroundColor: "#01a9ac" }}
+                    >
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </form>
-      ) : (
-        <Loading />
-      )}
+        </div>
+      </form>
     </>
   );
 }
 
-export default EditTicket;
+export default PaitentForm;

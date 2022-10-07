@@ -6,13 +6,36 @@ import { useTherapitListQuery } from "../../hook/useApi";
 //import PagePatientComponentTitle from "../../components/all-ticket/PageTicketComponentTitle";
 import dynamic from "next/dynamic";
 import { CSVLink } from "react-csv";
+import {
+  MdMode,
+  MdOutlineDelete,
+  MdRemoveRedEye,
+  MdOutlineCreateNewFolder,
+} from "react-icons/md";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { Tooltip } from "@mui/material";
+import { ToastContainer } from "react-toastify";
+import View from "../../components/common/crud-button/View";
+import Edit from "../../components/common/crud-button/Edit";
+import Assigned from "../../components/common/crud-button/Assigned";
+import Cancel from "../../components/common/crud-button/Cancel";
+import Delete from "../../components/common/crud-button/Delete";
 const TicketComponent = dynamic(() =>
   import("../../components/PiTFormula/TicketComponent")
 );
 const Loading = dynamic(() => import("/components/common/Loading"));
 
 function PitGroup() {
-  const { deleteData, Statustest, token, apiRootUrl, apiEndpoint } = useAuth();
+  const {
+    deleteData,
+    Statustest,
+    token,
+    name,
+    group_id,
+    apiRootUrl,
+    apiEndpoint,
+  } = useAuth();
+  console.log("All ticket data  from  ", name, group_id);
   const { data, error, isError } = useTherapitListQuery();
   //console.log("All ticket data  from  ", data);
 
@@ -31,10 +54,14 @@ function PitGroup() {
       );
       const json = await response.json();
       setRemoteData(
-        json.data.filter(
-          (item) =>
-            item?.ticket_department_info?.name === "PiT Group(Specialist)"
-        )
+        json.data.filter((item) => {
+          return (
+            item?.ticket_status !== "Cancelled" &&
+            (item?.department?.name !== "PiT Group(Specialist)"
+              ? item?.ticket_department_info?.name === "PiT Group(Specialist)"
+              : item?.department?.name === "PiT Group(Specialist)")
+          );
+        })
       );
       setIsLoading(false);
     };
@@ -58,11 +85,23 @@ function PitGroup() {
         // date
 
         id: `${userData.id}`,
+        assign_to_user: `${
+          !userData?.assign_to_user ? "Not Assigned" : userData?.assign_to_user
+        }`,
+
+        ticket_department: `${
+          !userData?.department?.name
+            ? userData?.ticket_department_info?.name
+            : userData?.department?.name
+        }`,
+        assign_to_user_status: !userData.assign_to_user_status
+          ? "Open"
+          : userData.assign_to_user_status,
         patient_info: `${userData.patient_info?.id}`,
         patient_name: `${userData.patient_info?.first_name} ${userData.patient_info?.last_name}`,
         // therapist_id: `${userData?.therapist_info?.id}`,
         therapist_name: `${userData.therapist_info?.first_name} ${userData.therapist_info?.last_name}`,
-        ticket_department: userData?.ticket_department_info?.name,
+        //ticket_department: userData?.ticket_department_info?.name,
         location: userData.location,
         status: `${Statustest(userData.status)}`,
         language: userData.language,
@@ -78,13 +117,26 @@ function PitGroup() {
   const columns = useMemo(
     () => [
       {
-        header: "Ticket_id",
+        header: "Ticket id",
         id: "id",
-        // muiTableHeadCellProps: {
-        //   sx: {
-        //     display: "none",
+
+        //   muiTableHeadCellProps: {
+        //     sx: {
+        //       display: "none",
+        //     },
         //   },
-        // },
+      },
+      {
+        header: "Assigned user",
+        id: "assign_to_user",
+      },
+      {
+        header: "User status",
+        id: "assign_to_user_status",
+      },
+      {
+        header: "Department",
+        id: "ticket_department",
       },
       {
         header: "Patient id",
@@ -94,6 +146,10 @@ function PitGroup() {
         header: "Patient name",
         id: "patient_name",
       },
+      {
+        header: "Patient insurance",
+        id: "insurance_number",
+      },
       // {
       //   header: "Therapist_id",
       //   id: "therapist_id",
@@ -102,9 +158,10 @@ function PitGroup() {
         header: "Therapist name",
         id: "therapist_name",
       },
+
       {
-        header: "Department",
-        id: "ticket_department",
+        header: "Own",
+        id: "source",
       },
       {
         header: "Location",
@@ -112,11 +169,7 @@ function PitGroup() {
       },
 
       {
-        header: "Status treatment",
-        id: "status",
-      },
-      {
-        header: "Language",
+        header: "Language treatment",
         id: "language",
       },
       {
@@ -128,6 +181,71 @@ function PitGroup() {
         header: "Strike",
         id: "strike",
       },
+      {
+        header: "Mono/Multi ZD",
+        id: "mono_multi_zd",
+      },
+      {
+        header: "Mono/Multi screening",
+        id: "mono_multi_screeing",
+      },
+      {
+        header: "Intakes/therapist",
+        id: "intakes_therapist",
+      },
+      {
+        header: "Tresonit nummer",
+        id: "tresonit_nummer",
+      },
+      {
+        header: "Datum intake",
+        id: "datum_intake",
+      },
+      {
+        header: "Datum intake 2",
+        id: "datum_intake_2",
+      },
+      {
+        header: "ND account",
+        id: "nd_account",
+      },
+      {
+        header: "AvC/AlfmVm/SBG",
+        id: "avc_alfmvm_sbg",
+      },
+      {
+        header: "HoNOS+",
+        id: "honos",
+      },
+      {
+        header: "Berha intake",
+        id: "berha_intake",
+      },
+      {
+        header: "ROM start",
+        id: "rom_start",
+      },
+      {
+        header: "ROM eind",
+        id: "rom_eind",
+      },
+      {
+        header: "Berha eind",
+        id: "berha_eind",
+      },
+      {
+        header: "VTCB date",
+        id: "vtcb_date",
+      },
+      {
+        header: "Closure",
+        id: "closure",
+      },
+      {
+        header: "Aanm-intake 1",
+        id: "aanm_intake_1",
+      },
+
       {
         header: "Strike history",
         id: "strike_history",
@@ -141,11 +259,26 @@ function PitGroup() {
         header: "Date",
         id: "date",
       },
+      {
+        header: "Status treatment",
+        id: "status",
+      },
     ],
     []
   );
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <main className="p-6  space-y-6">
         <TicketComponent
           title="PiT Group (Specialist)"
@@ -186,6 +319,7 @@ function PitGroup() {
                   initialState={{
                     showGlobalFilter: true,
                     pagination: { pageSize: 5 },
+                    sorting: [{ id: "id", desc: true }],
                   }}
                   positionGlobalFilter="left"
                   muiSearchTextFieldProps={{
@@ -231,40 +365,65 @@ function PitGroup() {
                         gap: "0.5rem",
                       }}
                     >
-                      <Link passHref href={`pit-group/edit/${row.original.id}`}>
-                        <button
-                          className="text-purple-800 hover:underline"
-                          // onClick={() => {
-                          //   console.log("View Profile", row.original.id);
-                          // }}
-                        >
-                          Edit
-                        </button>
+                      {/* <Link passHref href={`pit-group/view/${row.original.id}`}>
+                        <Tooltip title="View">
+                          <button
+                            className="text-black  hover:underline border-solid border-2 border-gray-350  p-1    btn-info"
+                            // onClick={() => {
+                            //   console.log("View Profile", row.original.id);
+                            // }}
+                          >
+                            <MdRemoveRedEye className="text-xl h-4.5 text-white " />
+                          </button>
+                        </Tooltip>
                       </Link>
-                      <button
-                        className="text-purple-800 hover:underline"
-                        onClick={() =>
-                          deleteData(
-                            //`https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`
-                            `${apiRootUrl}${apiEndpoint?.ticket?.delete}/${row?.original?.id}`
-                          )
-                        }
-                      >
-                        Delete
-                      </button>
+                      <Link passHref href={`pit-group/edit/${row.original.id}`}>
+                        <Tooltip title="Edit">
+                          <button
+                            className=" hover:underline border-solid border-2 border-gray-350 p-1   btn-success"
+                            //className=" hover:underline border-solid border-2 border-gray-350      btn-success"
+                            // onClick={() => {
+                            //   console.log("View Profile", row.original.id);
+                            // }}
+                          >
+                            <FaEdit className="text-xl h-3.5" />
+                          </button>
+                        </Tooltip>
+                      </Link> */}
+
+                      <View url={`pit-group/view/${row.original.id}`} />
+                      <Edit url={`pit-group/edit/${row.original.id}`} />
+                      <Assigned
+                        url={`https://misiapi.lamptechs.com/api/v1/ticket/assignedupdate`}
+                        data={{
+                          id: `${row?.original?.id}`,
+                        }}
+                      ></Assigned>
+                      <Cancel
+                        url={`https://misiapi.lamptechs.com/api/v1/ticket/ticketstatus`}
+                        data={{
+                          id: `${row?.original?.id}`,
+                          ticket_status: "Cancelled",
+                        }}
+                      />
                       <Link
                         passHref
                         href={`/pit-group/pit-form/${row?.original?.id}`}
                       >
-                        <button
-                          className="text-purple-800 hover:underline"
-                          // onClick={() => {
-                          //   console.log("View Profile", row.original.id);
-                          // }}
-                        >
-                          Create PiT
-                        </button>
+                        <Tooltip title="Create PiB">
+                          <button className="  hover:underline   border-solid border-3 border-purple-600  p-1    btn-transparent">
+                            <MdOutlineCreateNewFolder className="text-xl h-6" />
+                            {/* <FaEdit className="text-xl h-3.5" /> */}
+                          </button>
+                        </Tooltip>
                       </Link>
+                      <Delete
+                        url={`https://misiapi.lamptechs.com/api/v1/ticket/delete/${row?.original?.id}`}
+                      />
+
+                      {/* <OperationModal modal={modal} setModal={setModal}>
+                      {<TicketForm className="m-auto" />}
+                    </OperationModal> */}
                     </div>
                   )}
                 />
