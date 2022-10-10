@@ -52,6 +52,9 @@ const Nav = ({ sidebarOutsideClick }) => {
     email,
     department,
     patientId,
+    therapistId,
+    therapistName,
+    therapistEmail,
     apiRootUrl,
     apiEndpoint,
   } = useAuth();
@@ -217,6 +220,55 @@ const Nav = ({ sidebarOutsideClick }) => {
             </NavItem>
             <NavItem
               hrefLink="/patient-cancel-appointment"
+              // sidebarStatus={sidebarStatus}
+              menuTitle="Cancel Appointment"
+              subMenu={false}
+              subMenuArray={null}
+            >
+              <MdAppRegistration className=" h-6" />
+            </NavItem>
+          </>
+        )}
+        {therapistId && therapistEmail && (
+          <>
+            <NavItem
+              hrefLink="/theraspist-schedule"
+              // sidebarStatus={sidebarStatus}
+              menuTitle="Therapist Schedule"
+              subMenu={false}
+              subMenuArray={null}
+            >
+              <FaCalendarAlt className=" h-4" />
+            </NavItem>
+            <NavItem
+              hrefLink="/therapist-ticket"
+              // sidebarStatus={sidebarStatus}
+              menuTitle="Therapist Ticket"
+              subMenu={false}
+              subMenuArray={null}
+            >
+              <IoTicketSharp className=" h-6" />
+            </NavItem>
+            <NavItem
+              hrefLink="/therapist-cancel-ticket"
+              // sidebarStatus={sidebarStatus}
+              menuTitle="Cancel Ticket"
+              subMenu={false}
+              subMenuArray={null}
+            >
+              <FcApprove className=" h-6" />
+            </NavItem>
+            <NavItem
+              hrefLink="/therapist-appointment"
+              // sidebarStatus={sidebarStatus}
+              menuTitle="Therapist Appointment"
+              subMenu={false}
+              subMenuArray={null}
+            >
+              <MdOutlineScreenShare className=" h-6" />
+            </NavItem>
+            <NavItem
+              hrefLink="/therapist-cancel-appointment"
               // sidebarStatus={sidebarStatus}
               menuTitle="Cancel Appointment"
               subMenu={false}

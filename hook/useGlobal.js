@@ -148,6 +148,10 @@ const useGlobal = () => {
   const [patientId, setpatientId] = useState("");
   const [patientName, setpatientName] = useState("");
   const [patientEmail, setpatientEmail] = useState("");
+
+  const [therapistId, settherapistId] = useState("");
+  const [therapistName, settherapistName] = useState("");
+  const [therapistEmail, settherapistEmail] = useState("");
   console.log("patient data", patientId, patientName, patientEmail);
 
   const postData = async (url, data) => {
@@ -170,27 +174,17 @@ const useGlobal = () => {
         response?.status === 200
           ? Swal.fire({
               title: "Successfully done!",
-              text: `Create ${response.data?.data.id} Number Data ${response.data?.message}`,
+              text: `Create ${response.data?.data.id} Number Data ${response.data?.message}.`,
               icon: "success",
               timer: 2500,
               // button: "Aww yiss!",
             })
           : Swal.fire({
               title: "Error! Not save your data!!",
-              text: `${response?.message}.`,
+              text: `${response?.response?.data?.message}`,
               icon: "error",
               timer: 3000,
             });
-        // Swal.fire({
-        //   position: "top-center",
-        //   icon: "success",
-        //   title: `Create ${response.data?.data.id} Number Data ${response.data?.message}`,
-        //   showConfirmButton: false,
-        //   timer: 1500,
-        // });
-        // successToast(
-        //   `create ${response.data?.data.id} Number data ${response.data?.message}`
-        // );
       })
       .catch((error) => {
         if (error.response) {
@@ -594,6 +588,9 @@ const useGlobal = () => {
     const patientid = localStorage.getItem("patientId");
     const patientname = localStorage.getItem("patientName");
     const patientemail = localStorage.getItem("patientEmail");
+    const therapistid = localStorage.getItem("therapistId");
+    const therapistname = localStorage.getItem("therapistName");
+    const therapistemail = localStorage.getItem("therapistEmail");
     if (items) {
       setToken(items);
       setGroupId(group_id);
@@ -604,6 +601,9 @@ const useGlobal = () => {
       setpatientId(patientid);
       setpatientName(patientname);
       setpatientEmail(patientemail);
+      settherapistId(therapistid);
+      settherapistName(therapistname);
+      settherapistEmail(therapistemail);
     }
   }, [token, deleteData, updateData, postData]);
   // function deleteData(url) {
@@ -654,7 +654,7 @@ const useGlobal = () => {
     }
   };
 
-  // logout
+  // group user   logout
   const logoutAction = async (url) => {
     //console.log(`postData:${url}  data: ${data}`);
     await axios
@@ -699,12 +699,57 @@ const useGlobal = () => {
         }
       });
   };
-  // logout
+  // patient  logout
   const PatientLogoutAction = async (url) => {
     //console.log(`postData:${url}  data: ${data}`);
     await axios
       .post(
         "https://misiapi.lamptechs.com/api/v1/patient/logout",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "content-type": "multipart/form-data",
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((response) => {
+        localStorage.clear();
+        response?.status === 200
+          ? Swal.fire({
+              title: "Logout Successfully done!",
+              text: `${response.data?.message}`,
+              icon: "success",
+              timer: 2000,
+            })
+          : Swal.fire({
+              title: "Error! Not Logout yet!!",
+              text: `${response?.message}.`,
+              icon: "error",
+              timer: 3000,
+            });
+        // Router.push("/account/patient-login");
+      })
+      .catch((error) => {
+        if (error.response) {
+          Swal.fire({
+            title: "Error!",
+            text: `you are failed to delete data.`,
+            icon: "error",
+            timer: 3000,
+          });
+        }
+      });
+  };
+  // therapist logout
+  const TherapistLogoutAction = async (url) => {
+    //console.log(`postData:${url}  data: ${data}`);
+    await axios
+      .post(
+        "https://misiapi.lamptechs.com/api/v1/therapist/logout",
         {},
         {
           headers: {
@@ -856,6 +901,7 @@ const useGlobal = () => {
     cancelData,
     logoutAction,
     PatientLogoutAction,
+    TherapistLogoutAction,
     token,
     group_id,
     assign_to_user,
@@ -865,6 +911,9 @@ const useGlobal = () => {
     patientId,
     patientName,
     patientEmail,
+    therapistId,
+    therapistName,
+    therapistEmail,
     apiRootUrl,
     apiEndpoint,
     //logout,

@@ -25,6 +25,10 @@ const UserMenu = () => {
     patientEmail,
     logoutAction,
     PatientLogoutAction,
+    therapistId,
+    therapistName,
+    therapistEmail,
+    TherapistLogoutAction,
     loginStatus,
     setLogin,
     apiRootUrl,
@@ -55,8 +59,13 @@ const UserMenu = () => {
   function Logout() {
     //logoutAction() ? Router.push("/") : "";
     //logoutAction() ? Router.push("/") : "";
-    !patientId && logoutAction() && Router.push("/account/login");
+    // !patientId && logoutAction() && Router.push("/account/login");
+    assign_to_user && logoutAction() && Router.push("/account/login");
     patientId && PatientLogoutAction() && Router.push("/account/patient-login");
+
+    therapistId &&
+      TherapistLogoutAction() &&
+      Router.push("/account/therapist-login");
     // !patientId
     //   ? logoutAction() && Router.push("/account/login")
     //   : PatientLogoutAction() && Router.push("/account/patient-login");
@@ -80,12 +89,31 @@ const UserMenu = () => {
     >
       <span className="sr-only">User Menu</span>
       <div className="  hidden     md:flex md:flex-col md:items-end md:leading-tight">
+        {name && (
+          <>
+            <span className="font-semibold text-white">{name}</span>
+            <span className="font-semibold text-white">{department}</span>
+          </>
+        )}
+        {patientName && (
+          <>
+            <span className="font-semibold text-white">{patientName}</span>
+            <span className="font-semibold text-white">{patientEmail}</span>
+          </>
+        )}
+        {therapistName && (
+          <>
+            <span className="font-semibold text-white">{therapistName}</span>
+            <span className="font-semibold text-white">{therapistEmail}</span>
+          </>
+        )}
+        {/* {name && <span className="font-semibold text-white">{name}</span>}
         <span className="font-semibold text-white">
-          {!name ? patientName : name}
+          {!(!name ? patientName : name) && therapistName}
         </span>
         <span className="text-sm text-slate-300">
-          {!department ? patientEmail : department}
-        </span>
+          {!(!department ? patientEmail : department) && therapistEmail}
+        </span> */}
       </div>
       <span className="h-12 w-12 ml-2 sm:ml-3 mr-2 bg-gray-100 rounded-full overflow-hidden">
         <img

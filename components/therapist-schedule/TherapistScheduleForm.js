@@ -43,6 +43,7 @@ function TherapistScheduleForm() {
   const { data: stateData } = useStateDataQuery();
   const { data: therapistType } = useTherapistTypeQuery();
   const { data: therapistList } = useTherapitListQuery();
+  // console.log("therapist list", therapistList?.data);
   return (
     <>
       <ToastContainer
@@ -58,11 +59,13 @@ function TherapistScheduleForm() {
       />
       <form
         className="w-full m-auto  p-1  "
-        onSubmit={handleSubmit(
-          (d) =>
-            postData("https://misiapi.lamptechs.com/api/v1/therapist/store", d)
+        onSubmit={handleSubmit((d) =>
+          // postData(
+          //   "https://misiapi.lamptechs.com/api/v1/therapist_schedule/store",
+          //   d
+          // )
 
-          // console.log("create therapist form data", d)
+          console.log("create therapist  schedule form data", d)
         )}
       >
         <div className=" px-6">
@@ -72,45 +75,6 @@ function TherapistScheduleForm() {
             </h2>
             {/*   form */}
             <div className=" m-3 p-3 ">
-              {/* therapist picture */}
-              {/* <div className="flex justify-center items-center w-full  ">
-                <label
-                  htmlFor="picture"
-                  className="flex flex-col justify-center items-center w-full h-40 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                >
-                  <div className="flex flex-col justify-center items-center pt-5 pb-6">
-                    <svg
-                      className="mb-3 w-10 h-10 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round "
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                      ></path>
-                    </svg>
-                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                      <span className="font-semibold">
-                        Click to upload Picture
-                      </span>{" "}
-                      or drag and drop
-                    </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                      SVG, PNG, JPG or GIF (MAX. 500x500px)
-                    </p>
-                  </div>
-                  <input
-                    id="picture"
-                    type="file"
-                    // {...register("picture")}
-                    className="hidden"
-                  />
-                </label>
-              </div> */}
               {/* therapist id*/}
               <div className="relative  my-2.5">
                 {therapistList?.data ? (
@@ -306,13 +270,14 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       <li className="w-full rounded-t-lg border-b border-gray-200 dark:border-gray-600">
                         <div className="flex items-center pl-3">
                           <input
-                            id="vue-checkbox"
+                            id="scheduleday"
+                            value="Monday"
                             type="checkbox"
-                            defaultValue
+                            {...register("schedule_day")}
                             className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                           />
                           <label
-                            htmlFor="vue-checkbox"
+                            htmlFor="scheduleday"
                             className="py-2  ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300"
                           >
                             Monday
@@ -322,13 +287,14 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       <li className="w-full rounded-t-lg border-b border-gray-200 dark:border-gray-600">
                         <div className="flex items-center pl-3">
                           <input
-                            id="react-checkbox"
+                            id="scheduleday"
+                            {...register("schedule_day")}
                             type="checkbox"
-                            defaultValue
+                            value="Tuesday"
                             className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                           />
                           <label
-                            htmlFor="react-checkbox"
+                            htmlFor="scheduleday"
                             className="py-2  ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300"
                           >
                             Tuesday
@@ -338,13 +304,14 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       <li className="w-full rounded-t-lg border-b border-gray-200 dark:border-gray-600">
                         <div className="flex items-center pl-3">
                           <input
-                            id="angular-checkbox"
+                            id="scheduleday"
+                            {...register("schedule_day")}
                             type="checkbox"
-                            defaultValue
+                            value="Wednesday"
                             className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                           />
                           <label
-                            htmlFor="angular-checkbox"
+                            htmlFor="scheduleday"
                             className="py-2  ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300"
                           >
                             Wednesday
@@ -354,13 +321,14 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       <li className="w-full rounded-t-lg border-b border-gray-200 dark:border-gray-600">
                         <div className="flex items-center pl-3">
                           <input
-                            id="laravel-checkbox"
+                            id="scheduleday"
+                            {...register("schedule_day")}
                             type="checkbox"
-                            defaultValue
+                            value="Thursday"
                             className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                           />
                           <label
-                            htmlFor="laravel-checkbox"
+                            htmlFor="scheduleday"
                             className="py-2  ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300"
                           >
                             Thursday
@@ -370,13 +338,14 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       <li className="w-full rounded-t-lg border-b border-gray-200 dark:border-gray-600">
                         <div className="flex items-center pl-3">
                           <input
-                            id="react-checkbox"
+                            id="scheduleday"
+                            {...register("schedule_day")}
                             type="checkbox"
-                            defaultValue
+                            value="Friday"
                             className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                           />
                           <label
-                            htmlFor="react-checkbox"
+                            htmlFor="scheduleday"
                             className="py-2  ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300"
                           >
                             Friday
@@ -386,13 +355,14 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       <li className="w-full rounded-t-lg border-b border-gray-200 dark:border-gray-600">
                         <div className="flex items-center pl-3">
                           <input
-                            id="angular-checkbox"
+                            id="scheduleday"
+                            {...register("schedule_day")}
                             type="checkbox"
-                            defaultValue
+                            value="Saturday"
                             className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                           />
                           <label
-                            htmlFor="angular-checkbox"
+                            htmlFor="scheduleday"
                             className="py-2  ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300"
                           >
                             Saturday
@@ -402,13 +372,14 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       <li className="w-full rounded-t-lg border-b border-gray-200 dark:border-gray-600">
                         <div className="flex items-center pl-3">
                           <input
-                            id="laravel-checkbox"
+                            id="scheduleday"
+                            {...register("schedule_day")}
                             type="checkbox"
-                            defaultValue
+                            value="Sunday"
                             className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                           />
                           <label
-                            htmlFor="laravel-checkbox"
+                            htmlFor="scheduleday"
                             className="py-2  ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300"
                           >
                             Sunday

@@ -43,7 +43,11 @@ function Dashboard() {
     assign_to_user,
     email,
     patientId,
+
     department,
+    therapistId,
+    therapistName,
+    therapistEmail,
   } = useAuth();
   const allTicket = ticket?.data?.filter(
     (item) => item?.ticket_status !== "Cancelled"
@@ -61,37 +65,50 @@ function Dashboard() {
   // console.log("Accounts", Accounts?.length);
 
   const ScreenerGroup = ticket?.data?.filter(
-    (item) => item?.ticket_department_info?.name === "Screener Group"
+    (item) =>
+      item?.ticket_status !== "Cancelled" &&
+      item?.ticket_department_info?.name === "Screener Group"
   );
   //console.log("screenerGroup", ScreenerGroup?.length);
 
   const PiBGroupModerate = ticket?.data?.filter(
-    (item) => item?.ticket_department_info?.name === "PiB Group(Moderate)"
+    (item) =>
+      item?.ticket_status !== "Cancelled" &&
+      item?.ticket_department_info?.name === "PiB Group(Moderate)"
   );
   // console.log("PiBGroupModerate", PiBGroupModerate?.length);
   const PiBGroupSpecialist = ticket?.data?.filter(
-    (item) => item?.ticket_department_info?.name === "PiT Group(Specialist)"
+    (item) =>
+      item?.ticket_status !== "Cancelled" &&
+      item?.ticket_department_info?.name === "PiT Group(Specialist)"
   );
   //console.log("PiBGroupSpecialist", PiBGroupSpecialist?.length);
 
   const Heraanmelding = ticket?.data?.filter(
-    (item) => item?.ticket_department_info?.name === "Heraanmelding"
+    (item) =>
+      item?.ticket_status !== "Cancelled" &&
+      item?.ticket_department_info?.name === "Heraanmelding"
   );
   // console.log("Heraanmelding", Heraanmelding?.length);
 
   const AppointmentGroup = ticket?.data?.filter(
-    (item) => item?.ticket_department_info?.name === "Appointment Group"
+    (item) =>
+      item?.ticket_status !== "Cancelled" &&
+      item?.ticket_department_info?.name === "Appointment Group"
   );
   //console.log("AppointmentGroup", AppointmentGroup?.length);
 
   const yesApprovalGroup = ticket?.data?.filter(
     (item) =>
+      item?.ticket_status !== "Cancelled" &&
       item?.ticket_department_info?.name === "Waiting for 'YES' Approval"
   );
   // console.log("yesApprovalGroup", yesApprovalGroup?.length);
 
   const noApprovalGroup = ticket?.data?.filter(
-    (item) => item?.ticket_department_info?.name === "Waiting for 'NO' Approval"
+    (item) =>
+      item?.ticket_status !== "Cancelled" &&
+      item?.ticket_department_info?.name === "Waiting for 'NO' Approval"
   );
   const cancelTicket = ticket?.data?.filter(
     (item) => item?.ticket_status === "Cancelled"
@@ -103,19 +120,18 @@ function Dashboard() {
     (item) => item?.appointment_cancel_status !== "Cancelled"
   );
   //console.log("patientTicket", patientTicket);
-  //console.log("patientTicket", ticket?.data);
   const patientTicket = ticket?.data?.filter(
-    (item) => item?.patient_info?.id == patientId
+    (item) =>
+      item?.ticket_status !== "Cancelled" && item?.patient_info?.id == patientId
   );
-  //console.log("patientTicket", patientTicket);
   const patientCancelTicket = ticket?.data?.filter(
     (item) =>
       item?.ticket_status === "Cancelled" && item?.patient_info?.id == patientId
   );
-  // console.log("patientCancelTicket", patientCancelTicket);
-
   const patientAppointment = appointment?.data?.filter(
-    (item) => item?.patient_info?.id == patientId
+    (item) =>
+      item?.appointment_cancel_status !== "Cancelled" &&
+      item?.patient_info?.id == patientId
   );
   console.log("patientAppointment", patientAppointment);
   const patientCancelAppointment = appointment?.data?.filter(
@@ -124,6 +140,31 @@ function Dashboard() {
       item?.patient_info?.id == patientId
   );
   console.log("patientCancelAppointment", patientCancelAppointment);
+  // therapist dashboard
+
+  //console.log("patientTicket", patientTicket);
+  const therapistTicket = ticket?.data?.filter(
+    (item) =>
+      item?.ticket_status !== "Cancelled" &&
+      item?.therapist_info?.id == therapistId
+  );
+  const therapistCancelTicket = ticket?.data?.filter(
+    (item) =>
+      item?.ticket_status === "Cancelled" &&
+      item?.therapist_info?.id == therapistId
+  );
+  const therapistAppointment = appointment?.data?.filter(
+    (item) =>
+      item?.appointment_cancel_status !== "Cancelled" &&
+      item?.therapist_info?.id == therapistId
+  );
+  console.log("therapistAppointment", patientAppointment);
+  const therapistCancelAppointment = appointment?.data?.filter(
+    (item) =>
+      item?.appointment_cancel_status === "Cancelled" &&
+      item?.therapist_info?.id == therapistId
+  );
+  console.log("therapistCancelAppointment", patientCancelAppointment);
   // missing info group
   const missingInfoGroup = allPatient?.data?.filter(
     (item) =>
@@ -203,42 +244,52 @@ function Dashboard() {
               />
             </>
           )}
-          {patientId && (
+
+          {therapistId && therapistEmail && (
             <>
               <Card
                 name="Therapist Ticket"
-                number={patientTicket?.length}
+                number={therapistTicket?.length}
                 path="/therapist-ticket"
                 bgColor="bg-gradient-to-r from-green-500  to-green-400"
               />
               <Card
                 name="Cancel Ticket"
-                number={patientCancelTicket?.length}
+                number={therapistCancelTicket?.length}
                 //number="5"
                 path="/therapist-cancel-ticket"
                 bgColor="bg-gradient-to-b from-sky-500 to-sky-400"
               />
               <Card
                 name="Therapist Appointment"
-                number={patientAppointment?.length}
+                number={therapistAppointment?.length}
                 path="/therapist-appointment"
                 bgColor="bg-gradient-to-l from-pink-500   to-pink-400"
-              />
-
-              <Card
-                name="Cancel Appointment"
-                number={patientCancelAppointment?.length}
-                path="/therapist-cancel-appointment"
-                bgColor="bg-gradient-to-b from-sky-500 to-sky-400"
               />
               <Card
                 name="Create new schedule"
                 // number={patientAppointment?.length}
-                path="/therapist-schedule"
+                path="/theraspist-schedule"
                 bgColor="bg-gradient-to-l from-purple-500   to-purple-400"
+              />
+
+              <Card
+                name="Cancel Appointment"
+                number={therapistCancelAppointment?.length}
+                path="/therapist-cancel-appointment"
+                bgColor="bg-gradient-to-b from-sky-500 to-sky-400"
               />
             </>
           )}
+          {department === "Super Admin" && (
+            <Card
+              name="Create new schedule"
+              // number={patientAppointment?.length}
+              path="/theraspist-schedule"
+              bgColor="bg-gradient-to-l from-purple-500   to-purple-400"
+            />
+          )}
+
           {(department === "PiT Group(Specialist)" ||
             department === "PiB Group(Moderate)" ||
             department === "Heraanmelding" ||

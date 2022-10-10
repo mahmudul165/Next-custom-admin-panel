@@ -92,7 +92,7 @@ export const usePatientListQuery = () =>
   useQuery(["patientList"], fetchPatientList, {
     refetchOnMount: true,
     refetchOnWindowFocus: true,
-    refetchInterval: 10000,
+    refetchInterval: 8000,
   });
 
 // get  All ticket  data
@@ -107,7 +107,7 @@ export const useAllTicketQuery = () =>
   useQuery(["allticket"], fetchAllTicket, {
     refetchOnMount: true,
     refetchOnWindowFocus: true,
-    refetchInterval: 9000,
+    refetchInterval: 5000,
   });
 // get  ticket  history
 const fetchAllTicketHistory = async () => {
